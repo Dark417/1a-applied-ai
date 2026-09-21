@@ -1,0 +1,46 @@
+name: 1.chatbot-nextjs
+
+on:
+  push:
+    branches: [main]
+    paths: ["1.chatbot-nextjs/**", ".github/workflows/1-chatbot-nextjs.yml"]
+  pull_request:
+    paths: ["1.chatbot-nextjs/**", ".github/workflows/1-chatbot-nextjs.yml"]
+
+env:
+  PROJECT: 1.chatbot-nextjs
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 1.chatbot-nextjs/backend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 1.chatbot-nextjs/frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: 1.chatbot-nextjs/frontend/package-lock.json }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+
+  images:
+    # Builds both images to prove the Dockerfiles work. Pushing is left for you to wire up.
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t chatbot-nextjs-backend:ci 1.chatbot-nextjs/backend
+      - run: docker build -t chatbot-nextjs-frontend:ci 1.chatbot-nextjs/frontend
+      # PRODUCTION: docker/login-action + docker/build-push-action, then
+      # `kubectl -n chatbot-nextjs set image deployment/backend backend=<registry>/chatbot-nextjs-backend:${{ github.sha }}`
+      # See 1.chatbot-nextjs/docs/DEPLOY.md.
