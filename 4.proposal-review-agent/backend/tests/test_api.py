@@ -231,3 +231,31 @@ def test_iap_mode_uses_verified_token_not_headers(settings, fake_llm, monkeypatc
         me = tc.get("/api/v1/me", headers={"X-Goog-IAP-JWT-Assertion": "good.jwt"}).json()
         assert me["user_id"] == "admin@example.com" and me["role"] == "admin"
         assert seen["aud"] == settings.iap_audience
+
+
+def test_semantic_search_endpoints(api):
+    seed(api)
+    with open(DOCS / "data-privacy-standard.html", "rb") as f:
+        api.post(
+            "/api/v1/documents", headers=ADMIN, files={"file": ("data-privacy-standard.html", f)}
+        )
+    rules = api.get(
+        "/api/v1/search/rules", params={"q": "parental consent for children"}, headers=ALICE
+    ).json()
+    assert rules[0]["code"] == "PRIV-003" and "score" in rules[0]
+    passages = api.get(
+        "/api/v1/search/documents", params={"q": "verifiable parental consent"}, headers=ALICE
+    ).json()
+    assert passages[0]["source"] == "Data Privacy Standard §3. Children"
+    assert api.get("/api/v1/search/rules", params={"q": "x"}, headers=ALICE).status_code == 422
+
+
+def test_assess_reports_model_failure_as_502(api):
+    seed(api)
+
+    def boom(prompt):
+        raise RuntimeError("No API key was provided")
+
+    api.llm.findings = boom
+    r = api.post("/api/v1/assess", json={"proposal": "anything at all"}, headers=ALICE)
+    assert r.status_code == 502 and "No API key" in r.json()["detail"]

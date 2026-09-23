@@ -44,6 +44,9 @@ Derived from the project brief. Applies to every project in this repo.
   deploy/
     docker-compose.yaml
     k8s/               namespace, configmap, secret example, deployments, services, ingress
+  mcp-server/ ...      optional extra deployables, same shape as backend/ (project 4)
+  infra/terraform/     cloud infrastructure instead of k8s/ (project 4: GCP Cloud Run)
+  docs/design/         multi-file design docs when one page isn't enough (project 4)
 ```
 
 ## Illustration vs production

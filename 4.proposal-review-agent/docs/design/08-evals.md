@@ -5,9 +5,10 @@
 | Layer | Test | Needs a model? | Where |
 |---|---|---|---|
 | Verdict aggregation | Exhaustive table tests of `aggregate()` | no | `tests/test_verdicts.py` |
-| Validation | Hallucinated codes dropped, skipped hard rules ⇒ `unclear`, severity forced from DB | no | `tests/test_assessment.py` |
-| Pipeline wiring | AssessmentService with a scripted LLM | no | `tests/test_assessment.py` |
-| Role gating | Admin tools hidden and denied for users | no | `tests/test_agent.py` |
+| Validation | Hallucinated codes dropped, skipped hard rules ⇒ `unclear`, severity forced from DB | no | `tests/test_verdicts.py` |
+| Pipeline wiring | AssessmentService with a scripted LLM | no | `tests/test_ingestion_assessment.py` |
+| Role gating, memory, history, attachments | Real ADK loop with a scripted model | no | `tests/test_agent.py`, `tests/test_api.py` |
+| Stores | pgvector, ADK sessions on Postgres, MongoDB | no (real servers) | `tests/test_stores.py` (integration) |
 | **Verdict accuracy** | Golden proposals vs seed rules | **yes** | `evals/verdicts.json`, `python -m app.evals.run` |
 | Agent behaviour | "can I…" triggers `assess_proposal`; answer leads with the verdict | yes | same runner, `--via-agent` |
 

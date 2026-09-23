@@ -32,3 +32,10 @@ data/generated/
 .idea/
 .vscode/
 .DS_Store
+
+# terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+crash.log

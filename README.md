@@ -2,7 +2,7 @@
 
 Tutorial projects for applied AI. Primary stack: **Google ADK** (Agent Development Kit) agents behind **FastAPI**, with **Next.js** or **Angular** frontends. Project 3 swaps the agent runtime for the **Claude Agent SDK**.
 
-Each project is a self-contained monorepo slice: independently deployable `backend/` and `frontend/`, with `deploy/` (Docker Compose + Kubernetes), `docs/` (design + deploy), and its own `AGENTS.md`.
+Each project is a self-contained monorepo slice: independently deployable `backend/` and `frontend/`, with `deploy/` (Docker Compose + Kubernetes, or Terraform for Cloud Run in project 4), `docs/` (design + deploy), and its own `AGENTS.md`.
 
 ## Projects
 
@@ -12,6 +12,7 @@ Each project is a self-contained monorepo slice: independently deployable `backe
 | [`1.chatbot-angular/`](./1.chatbot-angular) | Same backend as above, Angular frontend. | Google ADK | Angular |
 | [`2.angular-full/`](./2.angular-full) | Project 1 + MCP, local RAG, local tools, SQLite tools, orchestrator + loop, evals, streaming. | Google ADK | Angular |
 | [`3.claude-sdk-full/`](./3.claude-sdk-full) | Project 2 with the agent runtime replaced by the Claude Agent SDK. | Claude Agent SDK | Angular |
+| [`4.proposal-review-agent/`](./4.proposal-review-agent) | Compliance review agent: hard/flexible rules, multi-format document RAG, roles, per-user history + memory, MCP server, polyglot storage, GCP deploy (Terraform, Cloud Run, IAP). Design docs first. | Google ADK on Vertex AI | Angular + ADK dev UI |
 
 Read them in order. Each project's `README.md` has a quickstart, and `docs/DESIGN.md` explains the *why*.
 

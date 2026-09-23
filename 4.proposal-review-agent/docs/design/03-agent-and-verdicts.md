@@ -20,6 +20,7 @@
 | `get_document_summary(document)` | all | Summary, key points, outline (by id or title) |
 | `search_documents(query)` | all | Passages with source + section |
 | `assess_proposal(proposal, context)` | all | **The verdict pipeline** (below) |
+| `list_attachments()` / `read_attachment(filename)` | all | Files attached in this conversation (e.g. a proposal PDF to assess) |
 | `preload_memory` (ADK built-in) | all | Injects relevant past-conversation memories |
 | `add_rule(...)` | admin | Create a rule |
 | `update_rule(code, ...)` | admin | Edit fields, bumps version |
@@ -33,6 +34,7 @@
 1. **Role source**: `before_agent_callback` sets `state["user:role"]` from the server-side `ADMIN_USERS` list keyed by `user_id`. The client never supplies a role.
 2. **Visibility**: admin tools live in a `RoleGatedToolset`. Its `get_tools(context)` returns them only when `user:role == "admin"`, so a user's model never sees them.
 3. **Enforcement**: `before_tool_callback` denies any admin tool for non-admins, returning `{"status": "forbidden"}` instead of running it.
+   - This layer is load-bearing. A test shows ADK still resolves a hidden tool if the model names it, so hiding alone is not a control.
 4. **API**: REST write endpoints use `require_admin`. The agent is not the only door.
 
 ## Assessment pipeline (`AssessmentService.assess`)
@@ -95,6 +97,10 @@ proposal ─▶ 1. candidate rules ─▶ 2. evidence passages ─▶ 3. LLM fin
   "disclaimer": "Decision support, not legal advice."
 }
 ```
+
+## Loop safety
+
+- `RunConfig.max_llm_calls = 25` per user turn (ADK's default is 500). A model stuck calling tools is cut off with an `error` event instead of burning quota.
 
 ## Agent instruction (shape)
 
