@@ -222,3 +222,13 @@ async def test_stream_emits_session_verdict_and_done(container, fake_llm):
     assert types_[0] == "session" and types_[-1] == "done"
     assert "verdict" in types_ and "tool_call" in types_
     assert events[-1]["reply"] == "**NON-COMPLIANT**"
+
+
+async def test_runaway_tool_loop_is_capped(container):
+    """A model that never stops calling tools is cut off instead of burning quota."""
+    from app.services import chat as chat_mod
+
+    model = ScriptedModel(script=[call("list_rules") for _ in range(chat_mod.MAX_LLM_CALLS + 5)])
+    events = [ev async for ev in make_chat(container, model).stream(user_id=ALICE, session_id=None, message="loop")]
+    assert events[-1]["type"] == "error"
+    assert len(model.requests) <= chat_mod.MAX_LLM_CALLS + 1

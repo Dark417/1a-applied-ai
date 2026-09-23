@@ -19,6 +19,8 @@ from pydantic import BaseModel, Field
 log = logging.getLogger(__name__)
 
 MAX_RESULT_CHARS = 1500
+# Hard cap on model calls per user turn (ADK's default is 500). Stops runaway tool loops.
+MAX_LLM_CALLS = 25
 VERDICT_TOOL = "assess_proposal"
 
 
@@ -145,7 +147,8 @@ class ChatService:
             new_message=self.build_content(message, attachments),
             state_delta=state_delta,
             run_config=RunConfig(
-                streaming_mode=StreamingMode.SSE if streaming else StreamingMode.NONE
+                streaming_mode=StreamingMode.SSE if streaming else StreamingMode.NONE,
+                max_llm_calls=MAX_LLM_CALLS,
             ),
         ):
             for wire in translate_event(event, self._root):

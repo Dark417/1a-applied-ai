@@ -30,6 +30,7 @@ async def me(identity: IdentityDep, c: ContainerDep) -> dict:
         "role": identity.role,
         "kind": identity.kind,
         "adk_web": c.settings.enable_adk_web,
+        "auth_mode": c.settings.auth_mode,
     }
 
 

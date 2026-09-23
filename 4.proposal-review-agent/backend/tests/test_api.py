@@ -43,9 +43,9 @@ def test_health_and_identity(api):
     assert api.get("/readyz").json() == {"status": "ready"}
     assert api.get("/api/v1/me").json()["user_id"] == "user@example.com"  # dev default
     me = api.get("/api/v1/me", headers=ADMIN).json()
-    assert me["role"] == "admin" and me["adk_web"] is False
+    assert me["role"] == "admin" and me["adk_web"] is False and me["auth_mode"] == "dev"
     svc = api.get("/api/v1/me", headers={"X-Service-Token": "svc-token"}).json()
-    assert svc == {"user_id": "svc:mcp", "role": "user", "kind": "service", "adk_web": False}
+    assert svc["user_id"] == "svc:mcp" and svc["role"] == "user" and svc["kind"] == "service"
     assert api.get("/api/v1/me", headers={"X-Service-Token": "wrong"}).status_code == 401
 
 
