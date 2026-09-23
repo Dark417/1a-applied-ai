@@ -1,0 +1,53 @@
+name: 2.angular-full
+
+on:
+  push:
+    branches: [main]
+    paths: ["2.angular-full/**", ".github/workflows/2-angular-full.yml"]
+  pull_request:
+    paths: ["2.angular-full/**", ".github/workflows/2-angular-full.yml"]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 2.angular-full/backend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q          # evals are deselected by default (need a key)
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 2.angular-full/frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: 2.angular-full/frontend/package-lock.json }
+      - run: npm install -g npm@11
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  images:
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t angular-full-backend:ci 2.angular-full/backend
+      - run: docker build -t angular-full-mcp:ci -f 2.angular-full/backend/Dockerfile.mcp 2.angular-full/backend
+      - run: docker build -t angular-full-frontend:ci 2.angular-full/frontend
+
+  # Real-model evals: scheduled, not per-PR. Uncomment and add the secret.
+  # evals:
+  #   if: github.event_name == 'schedule'
+  #   runs-on: ubuntu-latest
+  #   defaults: { run: { working-directory: 2.angular-full/backend } }
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv sync --frozen --extra eval
+  #     - run: uv run pytest -m eval -s
+  #       env: { GOOGLE_API_KEY: "${{ secrets.GOOGLE_API_KEY }}" }

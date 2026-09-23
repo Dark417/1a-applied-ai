@@ -1,0 +1,53 @@
+name: 3.claude-sdk-full
+
+on:
+  push:
+    branches: [main]
+    paths: ["3.claude-sdk-full/**", ".github/workflows/3-claude-sdk-full.yml"]
+  pull_request:
+    paths: ["3.claude-sdk-full/**", ".github/workflows/3-claude-sdk-full.yml"]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 3.claude-sdk-full/backend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q          # evals are deselected by default (need a key)
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 3.claude-sdk-full/frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: 3.claude-sdk-full/frontend/package-lock.json }
+      - run: npm install -g npm@11
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  images:
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t claude-sdk-full-backend:ci 3.claude-sdk-full/backend
+      - run: docker build -t claude-sdk-full-mcp:ci -f 3.claude-sdk-full/backend/Dockerfile.mcp 3.claude-sdk-full/backend
+      - run: docker build -t claude-sdk-full-frontend:ci 3.claude-sdk-full/frontend
+
+  # Real-model evals: scheduled, not per-PR. Uncomment and add the secret.
+  # evals:
+  #   if: github.event_name == 'schedule'
+  #   runs-on: ubuntu-latest
+  #   defaults: { run: { working-directory: 3.claude-sdk-full/backend } }
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv sync --frozen
+  #     - run: uv run python -m app.evals.run
+  #       env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }

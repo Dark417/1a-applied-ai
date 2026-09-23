@@ -1,0 +1,42 @@
+name: 1.chatbot-angular
+
+on:
+  push:
+    branches: [main]
+    paths: ["1.chatbot-angular/**", ".github/workflows/1-chatbot-angular.yml"]
+  pull_request:
+    paths: ["1.chatbot-angular/**", ".github/workflows/1-chatbot-angular.yml"]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 1.chatbot-angular/backend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 1.chatbot-angular/frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: 1.chatbot-angular/frontend/package-lock.json }
+      # npm 10.9 crashes resolving jsdom's optional `canvas` peer ("reading 'edgesOut'"); npm 11 is fixed.
+      - run: npm install -g npm@11
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  images:
+    needs: [backend, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t chatbot-angular-backend:ci 1.chatbot-angular/backend
+      - run: docker build -t chatbot-angular-frontend:ci 1.chatbot-angular/frontend
+      # PRODUCTION: push to a registry and roll out. See 1.chatbot-angular/docs/DEPLOY.md.

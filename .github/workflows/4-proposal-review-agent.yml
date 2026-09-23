@@ -1,0 +1,108 @@
+name: 4.proposal-review-agent
+
+on:
+  push:
+    branches: [main]
+    paths: ["4.proposal-review-agent/**", ".github/workflows/4-proposal-review-agent.yml"]
+  pull_request:
+    paths: ["4.proposal-review-agent/**", ".github/workflows/4-proposal-review-agent.yml"]
+
+env:
+  P: 4.proposal-review-agent
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 4.proposal-review-agent/backend } }
+    services:
+      # Real stores so the integration tests (pgvector, ADK sessions on Postgres, Mongo) run.
+      postgres:
+        image: pgvector/pgvector:pg16
+        env: { POSTGRES_USER: app, POSTGRES_PASSWORD: app, POSTGRES_DB: compliance_test }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U app" --health-interval 5s --health-timeout 5s --health-retries 10
+      mongo:
+        image: mongo:7
+        ports: ["27017:27017"]
+    env:
+      TEST_PG_URL: postgresql+asyncpg://app:app@localhost:5432/compliance_test
+      TEST_MONGO_URL: mongodb://localhost:27017
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pytest -q -rs
+
+  mcp-server:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 4.proposal-review-agent/mcp-server } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 4.proposal-review-agent/frontend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: 4.proposal-review-agent/frontend/package-lock.json }
+      - run: npm install -g npm@11
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+
+  terraform:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 4.proposal-review-agent/infra/terraform } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - run: terraform fmt -check -recursive
+      - run: terraform init -backend=false -input=false
+      - run: terraform validate
+
+  images:
+    needs: [backend, mcp-server, frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t proposal-review-backend:ci $P/backend
+      - run: docker build -t proposal-review-frontend:ci $P/frontend
+      - run: docker build -t proposal-review-mcp:ci $P/mcp-server
+
+  # Deploys on main once you set repo variables GCP_PROJECT_ID, GCP_REGION, GCP_WIF_PROVIDER,
+  # GCP_DEPLOY_SA (Workload Identity Federation; no JSON keys). See docs/DEPLOY.md section 6.
+  deploy:
+    if: github.ref == 'refs/heads/main' && vars.GCP_PROJECT_ID != ''
+    needs: [images, terraform]
+    runs-on: ubuntu-latest
+    permissions: { contents: read, id-token: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_DEPLOY_SA }}
+      - uses: google-github-actions/setup-gcloud@v2
+      - run: >
+          gcloud builds submit $P --project ${{ vars.GCP_PROJECT_ID }}
+          --config $P/cloudbuild.yaml
+          --substitutions _TAG=${{ github.sha }},_REGION=${{ vars.GCP_REGION || 'us-central1' }}
+
+  # Real-model verdict evals: scheduled, not per PR (cost + nondeterminism).
+  # evals:
+  #   if: github.event_name == 'schedule'
+  #   runs-on: ubuntu-latest
+  #   defaults: { run: { working-directory: 4.proposal-review-agent/backend } }
+  #   env: { GOOGLE_API_KEY: "${{ secrets.GOOGLE_API_KEY }}", EMBEDDER: gemini }
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv sync --frozen && uv run python -m app.cli seed && uv run python -m app.evals.run
