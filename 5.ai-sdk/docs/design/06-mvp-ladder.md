@@ -11,6 +11,7 @@ Each rung is a vertical slice you can demo with `curl`. Build in this order.
 | **MVP4** | `"provider": "bedrock"` and `"vertex"` | Provider profiles: models, AgentCore Memory, Bedrock KB, AgentCore Browser and Code Interpreter, Agent Engine Sessions and Memory Bank, RAG Engine, guardrails | Cloud last *within the code*: every pattern already works, so a cloud failure is a config problem, not a design problem |
 | **MVP5** | Trace in Jaeger; eval matrix printed | OTel setup, eval harness, native evaluators | Measurement once behaviour exists |
 | **MVP6** | Same image on k8s; AgentCore Runtime and Agent Engine entrypoints | Dockerfile, compose, k8s, CI, runtime wrappers, provisioning scripts | Deployment last; nothing above depends on it |
+| **MVP7** | Crash a run and recover it; fork from a checkpoint; recall across sessions; two replicas share one Redis | State suites per branch (`diy:loop`, `langgraph:memory`, `adk:memory`), Strands/Claude unique parts, cache servers, state API | State is where agents break in production. It comes after the patterns exist, so each suite can reuse them |
 
 ## Commit plan (one commit per step, pushed)
 
@@ -21,6 +22,7 @@ Each rung is a vertical slice you can demo with `curl`. Build in this order.
 5. Strands adapter: 5 patterns + tests.
 6. Claude adapter: 4 patterns + tests.
 7. Evals, deploy (compose, k8s, runtimes, infra scripts), CI, README / AGENTS / DEPLOY.
+8. State suite: design doc 07, then cache server + state API, then one suite per branch, then the Strands / Claude unique parts.
 
 ## Explicitly deferred
 

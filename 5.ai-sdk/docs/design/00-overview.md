@@ -108,3 +108,4 @@
 | `04-tools-mcp-rag-state.md` | Neutral tools and how each framework wraps them, CLI allowlist, Playwright, MCP, RAG, session lock, memory |
 | `05-evals-and-otel.md` | Eval harness, native evaluators, OTel setup per framework |
 | `06-mvp-ladder.md` | Build order and why |
+| `07-state-and-memory.md` | Checkpoints, recovery, conversation vs context, long-term memory, history, cache servers; one suite per branch |
