@@ -1,0 +1,52 @@
+name: 5.ai-sdk
+
+on:
+  push:
+    branches: [main]
+    paths: ["5.ai-sdk/**", ".github/workflows/5-ai-sdk.yml"]
+  pull_request:
+    paths: ["5.ai-sdk/**", ".github/workflows/5-ai-sdk.yml"]
+
+env:
+  P: 5.ai-sdk
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: 5.ai-sdk/backend } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      # Chromium for the `browse` tool test (it skips when no browser is present).
+      - run: uv run playwright install --with-deps chromium
+      - run: echo "PLAYWRIGHT_CHROMIUM_PATH=$(uv run python -c 'from playwright.sync_api import sync_playwright as s; p=s().start(); print(p.chromium.executable_path); p.stop()')" >> "$GITHUB_ENV"
+      # Real redis-server for the cache-server and state-suite tests (they skip without it).
+      - run: sudo apt-get update -q && sudo apt-get install -y -q redis-server
+      # Keyless: every pattern of every framework runs with scripted models.
+      - run: uv run pytest -q -rs
+
+  image:
+    needs: [backend]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t ai-sdk-backend:ci $P/backend
+      - run: docker compose -f $P/deploy/docker-compose.yaml config -q
+
+  # Deploy is environment-specific: push the image to ECR / Artifact Registry and
+  # `kubectl apply -f 5.ai-sdk/deploy/k8s`, or deploy to AgentCore Runtime / Agent Engine.
+  # See 5.ai-sdk/docs/DEPLOY.md.
+
+  # Real-model eval matrix: scheduled, not per PR (cost + nondeterminism).
+  # evals:
+  #   if: github.event_name == 'schedule'
+  #   runs-on: ubuntu-latest
+  #   defaults: { run: { working-directory: 5.ai-sdk/backend } }
+  #   env: { ANTHROPIC_API_KEY: "${{ secrets.ANTHROPIC_API_KEY }}" }
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv sync --frozen && uv run python -m app.evals.run --judge
