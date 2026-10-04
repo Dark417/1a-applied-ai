@@ -131,3 +131,39 @@ def api_tool_use(id_: str, name: str, **args) -> dict:
 
 def api_text(t: str) -> dict:
     return {"type": "text", "text": t}
+
+
+def routed_messages_client(main: list[dict], summarize: list[str] = (), extract: list[str] = ()):
+    """Like messages_client, but internal calls get their own queues, routed by the marker in the
+    system prompt: summarisation and memory extraction never consume the main script."""
+    from app.adapters.diy.context import SUMMARIZE_MARKER
+    from app.adapters.diy.longterm import EXTRACT_MARKER
+
+    queues = {"main": list(main), "summarize": list(summarize), "extract": list(extract)}
+    captured: dict[str, list[dict]] = {"main": [], "summarize": [], "extract": []}
+
+    def handler(request: httpx2.Request) -> httpx2.Response:
+        body = json.loads(request.content)
+        system = body.get("system", "")
+        text = system if isinstance(system, str) else " ".join(b.get("text", "") for b in system)
+        route = (
+            "summarize"
+            if SUMMARIZE_MARKER in text
+            else "extract"
+            if EXTRACT_MARKER in text
+            else "main"
+        )
+        captured[route].append(body)
+        if route == "main":
+            return httpx2.Response(200, json=queues["main"].pop(0))
+        reply = (
+            queues[route].pop(0)
+            if queues[route]
+            else ('{"facts": []}' if route == "extract" else "summary")
+        )
+        return httpx2.Response(200, json=api_message(api_text(reply)))
+
+    client = AsyncAnthropic(
+        api_key="test", http_client=httpx2.AsyncClient(transport=httpx2.MockTransport(handler))
+    )
+    return (lambda profile: client), captured

@@ -20,6 +20,7 @@ BUILTIN_ADAPTERS: dict[str, str] = {
     "langgraph": "app.adapters.langgraph.adapter:build",
     "strands": "app.adapters.strands.adapter:build",
     "claude": "app.adapters.claude.adapter:build",
+    "diy": "app.adapters.diy.adapter:build",
 }
 
 
