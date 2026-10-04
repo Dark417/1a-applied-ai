@@ -22,6 +22,16 @@ class RunScope:
 
 
 _current: ContextVar[RunScope | None] = ContextVar("run_scope", default=None)
+_default: RunScope | None = None
+
+
+def set_default_scope(scope: RunScope) -> None:
+    """For hosts that run one agent outside RunService (ADK AgentEvaluator, Vertex Agent Engine).
+
+    All callers then share one user identity, so per-user memory is not isolated there.
+    """
+    global _default
+    _default = scope
 
 
 def set_scope(scope: RunScope):
@@ -36,7 +46,7 @@ def reset_scope(token) -> None:
 
 
 def current_scope() -> RunScope:
-    scope = _current.get()
+    scope = _current.get() or _default
     if scope is None:
         raise RuntimeError("tool called outside a run (no RunScope set)")
     return scope

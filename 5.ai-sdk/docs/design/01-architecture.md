@@ -95,36 +95,37 @@ class AgentAdapter(Protocol):
 5.ai-sdk/
   backend/
     app/
-      main.py                 FastAPI app factory, lifespan (telemetry, registry warm-up)
+      main.py                 FastAPI app factory (+ playground at /)
       config.py               Settings (pydantic-settings). Only place that reads env.
-      container.py            Composition root: builds registry, providers, toolkit, services
-      schemas.py              RunRequest, RunResponse, Event, catalog models
-      api/                    routes: runs, catalog, sessions, health, playground
+      container.py            Composition root: providers, registry, sessions, RunService
+      schemas.py              RunRequest, Event, RunResponse, catalog models
+      api/                    routes_runs.py (the entrance), routes_catalog.py (catalog, sessions)
       core/
         adapter.py            AgentAdapter protocol, PatternInfo, RunContext
         registry.py           AdapterRegistry (lazy imports)
         sessions.py           SessionRegistry + per-session lock
-        scope.py              RunScope contextvar
-      providers/              ProviderProfile: raw.py, bedrock.py, vertex.py
-      tools/                  neutral tools: basic.py, cli.py, browser.py, code.py, knowledge.py, memory_tools.py
-      mcp/                    server.py (our MCP server), clients.py (stdio params, external servers)
-      rag/                    corpus loader, LocalRetriever, BedrockKbRetriever, VertexRagRetriever
-      memory/                 LocalMemory, AgentCoreMemory, VertexMemoryBank (long-term)
+        scope.py              RunScope contextvar (+ default scope for single-agent hosts)
+      providers/              ProviderProfile + build_profiles() for raw / bedrock / vertex
+      tools/                  neutral tools: basic.py, knowledge.py, cli.py, browser.py, code.py
+      mcp/                    server.py (workbench MCP server), clients.py (server specs)
+      rag/                    LocalRetriever, BedrockKbRetriever, VertexRagRetriever
+      memory/                 SqliteMemory, AgentCoreMemory, VertexMemoryBank
       guardrails/             LocalGuardrail, BedrockGuardrail, ModelArmorGuardrail
-      telemetry.py            TracerProvider + exporters + instrumentations
+      telemetry.py            TracerProvider + MeterProvider + instrumentors + Claude CLI env
       services/run_service.py The single use case
       adapters/
-        adk/                  patterns.py, models.py, services.py, translate.py
+        adk/                  patterns.py, models.py, services.py, callbacks.py, translate.py
         langgraph/            patterns.py, models.py, persistence.py, translate.py
-        strands/              patterns.py, models.py, sessions.py, hooks.py, translate.py
-        claude/               agent_sdk.py, messages_api.py, translate.py
-      runtimes/               agentcore_app.py (AgentCore Runtime), agent_engine_app.py (Vertex Agent Engine)
-      evals/                  harness, scorers, native evaluators, CLI
+        strands/              patterns.py, models.py, state.py (sessions + hooks), translate.py
+        claude/               agent_sdk.py, messages_api.py, tools.py
+      adk_eval_agent/         `root_agent` module for ADK tooling (adk eval / AgentEvaluator)
+      runtimes/               agentcore_app.py (AgentCore Runtime), agent_engine_app.py (Agent Engine)
+      evals/                  harness.py, scorers.py, run.py (CLI), vertex_eval.py
     data/corpus/              markdown docs the RAG indexes (about these frameworks)
-    evals/                    cases.yaml, ADK evalset
-    tests/
+    evals/                    cases.yaml, adk/ evalset
+    tests/                    keyless tests; tests/fakes/ = scripted models per framework
   deploy/                     docker-compose (backend + otel-collector + jaeger), k8s/
-  infra/                      aws/ and gcp/ provisioning scripts
+  infra/                      aws/ and gcp/ provisioning scripts + steps
   docs/                       design/, DEPLOY.md
 ```
 

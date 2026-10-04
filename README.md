@@ -1,6 +1,6 @@
 # 1a-applied-ai
 
-Tutorial projects for applied AI. Primary stack: **Google ADK** (Agent Development Kit) agents behind **FastAPI**, with **Next.js** or **Angular** frontends. Project 3 swaps the agent runtime for the **Claude Agent SDK**.
+Tutorial projects for applied AI. Primary stack: **Google ADK** (Agent Development Kit) agents behind **FastAPI**, with **Next.js** or **Angular** frontends. Project 3 swaps the agent runtime for the **Claude Agent SDK**. Project 5 puts ADK, LangGraph, Strands, and Claude side by side behind one API, on raw APIs, AWS Bedrock/AgentCore, and GCP Vertex AI.
 
 Each project is a self-contained monorepo slice: independently deployable `backend/` and `frontend/`, with `deploy/` (Docker Compose + Kubernetes, or Terraform for Cloud Run in project 4), `docs/` (design + deploy), and its own `AGENTS.md`.
 
@@ -13,6 +13,7 @@ Each project is a self-contained monorepo slice: independently deployable `backe
 | [`2.angular-full/`](./2.angular-full) | Project 1 + MCP, local RAG, local tools, SQLite tools, orchestrator + loop, evals, streaming. | Google ADK | Angular |
 | [`3.claude-sdk-full/`](./3.claude-sdk-full) | Project 2 with the agent runtime replaced by the Claude Agent SDK. | Claude Agent SDK | Angular |
 | [`4.proposal-review-agent/`](./4.proposal-review-agent) | Compliance review agent: hard/flexible rules, multi-format document RAG, roles, per-user history + memory, MCP server, polyglot storage, GCP deploy (Terraform, Cloud Run, IAP). Design docs first. | Google ADK on Vertex AI | Angular + ADK dev UI |
+| [`5.ai-sdk/`](./5.ai-sdk) | One FastAPI entrance, pluggable adapters for four agent frameworks, each pattern on raw / Bedrock / Vertex branches: multi-agent patterns, tools (CLI, Playwright, MCP), RAG, sessions and memory, guardrails, OpenTelemetry, evals. Design docs first. | ADK, LangGraph, Strands, Claude Agent SDK + Messages API | Playground page (API-first) |
 
 Read them in order. Each project's `README.md` has a quickstart, and `docs/DESIGN.md` explains the *why*.
 
@@ -37,5 +38,5 @@ docker compose -f deploy/docker-compose.yaml up --build
 
 1. [google/adk-python](https://github.com/google/adk-python) and [google/adk-samples](https://github.com/google/adk-samples)
 2. [ADK docs](https://google.github.io/adk-docs/)
-3. [Claude Agent SDK (Python)](https://github.com/anthropics/claude-agent-sdk-python)
+3. [Claude Agent SDK (Python)](https://github.com/anthropics/claude-agent-sdk-python), [LangGraph](https://github.com/langchain-ai/langgraph), [Strands Agents](https://github.com/strands-agents/sdk-python)
 4. [FastAPI docs](https://fastapi.tiangolo.com/)

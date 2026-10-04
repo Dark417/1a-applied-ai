@@ -46,7 +46,7 @@ uv run pytest -m eval   # opt-in; needs keys
 |---|---|---|
 | ADK | `AgentEvaluator.evaluate()` on `.evalset.json` (`tool_trajectory_avg_score`, `response_match_score`) | `evals/adk/research.evalset.json` + `tests/test_eval_adk.py` (`-m eval`) |
 | Vertex | Gen AI evaluation service: `vertexai.evaluation.EvalTask` with pointwise metrics on a dataset of `{prompt, response, reference}` | `app/evals/vertex_eval.py` turns our harness results into an `EvalTask` dataset and runs it |
-| AgentCore | AgentCore Evaluations (`bedrock_agentcore.evaluation`): online/on-demand evaluators over AgentCore Observability traces | `docs/DEPLOY.md` steps; spans from AgentCore Runtime feed it |
+| AgentCore | AgentCore Evaluations: online/on-demand evaluators over AgentCore Observability traces | `infra/aws/README.md` section 6; spans from AgentCore Runtime feed it |
 | LangGraph | LangSmith `evaluate()` / `agentevals` trajectory matchers | Noted only. Our trajectory scorer is the same idea without a SaaS dependency |
 | Strands | `strands-agents-evals` | Noted only, same reason |
 

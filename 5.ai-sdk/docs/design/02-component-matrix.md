@@ -22,7 +22,7 @@ How to read this file:
 
 | Pattern | Components shown | How they work together |
 |---|---|---|
-| `single` | `LlmAgent`, `FunctionTool`, `McpToolset`, `load_memory` / `PreloadMemoryTool`, `before_model_callback`, `before_tool_callback`, `BasePlugin`, `output_key` | One agent with every tool type. Callbacks guard inputs and tools. A plugin logs every model and tool call app-wide. |
+| `single` | `LlmAgent`, `FunctionTool`, `McpToolset`, `PreloadMemoryTool`, `before_model_callback`, `before_tool_callback`, `BasePlugin`, `output_key` | One agent with every tool type. Callbacks guard inputs and tools. A plugin logs every model and tool call app-wide. |
 | `sequential` | `SequentialAgent`, `output_key`, `{state}` templating | researcher writes `state["notes"]` → writer reads `{notes}`. State is the bus. |
 | `parallel` | `ParallelAgent` inside a `SequentialAgent` | docs_researcher ∥ web_researcher write separate keys → synthesizer merges them. Fan-out/fan-in. |
 | `loop` | `LoopAgent`, `max_iterations`, `exit_loop` tool (`tool_context.actions.escalate`) | writer drafts → critic approves or not. Escalate ends the loop. |
@@ -43,7 +43,7 @@ How to read this file:
 
 | Pattern | Components shown | How they work together |
 |---|---|---|
-| `react` | `create_react_agent` (prebuilt), checkpointer, `BaseStore` + `get_store()` in tools | Fastest path: model + tools + memory. The thread id comes from our session id. |
+| `react` | `create_react_agent` (prebuilt), checkpointer, `BaseStore` via `pre_model_hook` / `post_model_hook` + `get_store()`, MCP tools | Fastest path: model + tools + memory. The thread id comes from our session id. The hooks read and write long-term memory around each model call. |
 | `graph` | `StateGraph`, `TypedDict` state with an `add_messages` reducer, `ToolNode`, `tools_condition`, conditional edges | retrieve (RAG node) → agent ⇄ tools loop → END. Everything the prebuilt hides, written out. |
 | `middleware` | `langchain.agents.create_agent` + `PIIMiddleware`, `SummarizationMiddleware`, `ModelCallLimitMiddleware`, `ToolCallLimitMiddleware`, `ToolRetryMiddleware`, custom `@before_model`, `@wrap_tool_call`, `@dynamic_prompt` | Cross-cutting concerns as composable middleware around one agent loop. |
 | `supervisor` | Subgraphs (agents as nodes), `Command(goto=…)` handoff, structured routing output | The supervisor picks `researcher` / `calculator` / `FINISH`. Each worker is its own compiled graph. |
@@ -66,10 +66,10 @@ How to read this file:
 
 | Pattern | Components shown | How they work together |
 |---|---|---|
-| `single` | `Agent`, `@tool`, `MCPClient`, `HookProvider` (Before/AfterToolCall, BeforeModelCall), `SlidingWindowConversationManager`, session manager, `strands_tools` (`current_time`, `calculator`) | Model-driven loop. Hooks audit and guard tools. The conversation manager trims context. The session manager persists it. |
+| `single` | `Agent`, `@tool`, `MCPClient`, `HookProvider` (Before/AfterToolCall, BeforeModelCall), `SlidingWindowConversationManager`, session manager, `strands_tools` AgentCore Browser / Code Interpreter (bedrock) | Model-driven loop. Hooks audit and guard tools. The conversation manager trims context. The session manager persists it. |
 | `agents_as_tools` | Specialist `Agent`s wrapped in `@tool` functions | An orchestrator calls `research_assistant` / `math_assistant` like any tool. |
 | `swarm` | `Swarm`, `handoff_to_agent` (auto-injected), `max_handoffs` | researcher → writer → reviewer hand off to each other autonomously, with shared context. |
-| `graph` | `GraphBuilder`, `add_node`, `add_edge(condition=…)`, entry point | A deterministic DAG: classify → (research ∥ calculate) → report. |
+| `graph` | `GraphBuilder`, `add_node`, `add_edge(condition=…)`, entry point | A deterministic DAG: research → calculate (only if the task has arithmetic) → report. |
 | `structured` | `structured_output_model=<Pydantic>` | Returns a typed `ResearchBrief`, which `done.output` carries as JSON. |
 
 | Slot | raw | bedrock | vertex |

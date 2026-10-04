@@ -10,7 +10,8 @@ Tutorial projects for applied AI, numbered by track. Code must stay **minimal bu
 
 - Top-level project dirs: `<track>.<name>-<variant>/` (e.g. `1.chatbot-nextjs`, `2.angular-full`). See `docs/CONVENTIONS.md`.
 - Inside a project: `backend/`, `frontend/`, `deploy/`, `docs/`, `README.md`, `AGENTS.md`. Extra deployables sit alongside (e.g. `mcp-server/`), and cloud infrastructure goes in `infra/terraform/`.
-- Deploy target: Kubernetes manifests (projects 1-3) or Terraform + Cloud Run (project 4). Either way, every deployable has a Dockerfile and is built in CI.
+- Deploy target: Kubernetes manifests (projects 1-3, 5) or Terraform + Cloud Run (project 4). Either way, every deployable has a Dockerfile and is built in CI.
+- Project 5 is API-first: no `frontend/` (a static playground is served by the backend), and `infra/` holds provisioning scripts for AWS/GCP managed agent services. See `5.ai-sdk/AGENTS.md`.
 - `backend/` and `frontend/` are separate deployables. Never import across them. They talk over HTTP only.
 - CI lives at repo root `.github/workflows/<project>.yml`, path-filtered to that project.
 

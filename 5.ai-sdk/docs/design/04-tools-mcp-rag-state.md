@@ -30,7 +30,7 @@
 ## CLI tool safety (`run_cli`)
 
 - `shlex.split`, then `subprocess.run(argv, shell=False, timeout=10)` in a worker thread.
-- **Allowlist by program**: `date`, `uname`, `whoami`, `echo`, `ls`, `cat` (only under `data/corpus`), `wc`, `python --version`, `git log --oneline`, `curl -I` (HEAD only).
+- **Allowlist by program**, each with an argument validator: `date` (never `-s`), `uname`, `whoami`, `pwd`, `echo`, `ls`, `cat`, `head`, `wc` (file arguments must resolve inside `data/corpus`), `python --version`.
 - Rejected: pipes, redirects, `;`, `&&`, backticks, `$(`. These are rejected *before* splitting, so there is no shell to interpret them anyway. Defense in depth.
 - Output is truncated to 4 KB.
 - On top of this, LangGraph `hitl` asks a human before running it. Claude `agent_sdk` gates it in `can_use_tool`.
@@ -57,7 +57,7 @@
 |---|---|
 | ADK | `McpToolset(connection_params=StdioConnectionParams(...))` |
 | LangGraph | `langchain_mcp_adapters.client.MultiServerMCPClient` → LangChain tools |
-| Strands | `MCPClient(lambda: stdio_client(params))`, used as a context manager; tools come from `list_tools_sync()` |
+| Strands | `MCPClient(lambda: stdio_client(params))`; `start()` / `stop()` on a worker thread; tools come from `list_tools_sync()` |
 | Claude Agent SDK | `mcp_servers={"workbench": {"command": ..., "args": [...]}}` (CLI-managed) |
 | Messages API | `mcp` `ClientSession` + `anthropic.lib.tools.mcp.async_mcp_tool` |
 
@@ -103,4 +103,4 @@
   - ADK `before_model_callback`;
   - LangGraph `PIIMiddleware`;
   - Strands `BedrockModel(guardrail_id=...)`;
-  - Claude `UserPromptSubmit` hook.
+  - Claude `PreToolUse` hook (policy) and `UserPromptSubmit` hook (context).
