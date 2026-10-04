@@ -36,7 +36,12 @@ class TranslateState:
 
 def translate(namespace: tuple, chunk: dict, st: TranslateState) -> list[Event]:
     out: list[Event] = []
+    meta = chunk.get("__metadata__") or {}  # e.g. {"cached": True} when a node-cache hit served it
     for node, update in chunk.items():
+        if node == "__metadata__":
+            continue
+        if meta.get("cached"):
+            out.append(Event(type="state", agent=node, data={"cached": True}))
         if node == "__interrupt__":
             for intr in update:
                 out.append(Event(type="interrupt", data=getattr(intr, "value", intr)))

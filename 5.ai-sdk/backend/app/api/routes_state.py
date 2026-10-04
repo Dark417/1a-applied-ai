@@ -11,6 +11,7 @@ from pydantic import BaseModel
 
 from app.api.deps import get_container
 from app.container import Container
+from app.core.adapter import AdapterError
 from app.core.sessions import SessionRecord
 
 router = APIRouter(prefix="/v1", tags=["state"])
@@ -69,7 +70,10 @@ async def fork(session_id: str, body: ForkIn, c: Container = Depends(get_contain
         pattern=rec.pattern,
         provider=rec.provider,
     )
-    await fn(rec, c.providers[rec.provider], body.checkpoint_id, new)
+    try:
+        await fn(rec, c.providers[rec.provider], body.checkpoint_id, new)
+    except AdapterError as e:
+        raise HTTPException(400, str(e)) from e
     await c.sessions.save(new)
     return {
         "session_id": new.id,

@@ -3,7 +3,14 @@
 Checkpointer (short-term: full graph state per thread_id, after every step)
   raw / vertex  AsyncSqliteSaver                 PRODUCTION (vertex): Postgres saver on Cloud SQL,
                                                  or host the graph on Agent Engine (LanggraphAgent)
-  bedrock       AgentCoreMemorySaver             checkpoints stored as AgentCore Memory events
+  bedrock       LANGGRAPH_CHECKPOINTER picks one:
+                  agentcore  AgentCoreMemorySaver   checkpoints as AgentCore Memory events
+                  dynamodb   DynamoDBSaver          DynamoDB items (PK/SK), >350 KB offloaded to S3, TTL
+                  valkey     AsyncValkeySaver       ElastiCache for Valkey (in-memory, fastest; use
+                                                    MemoryDB or AOF if checkpoints must survive)
+                  sqlite     local fallback
+Node cache (memoised node results, keyed by CachePolicy.key_func)
+  bedrock + VALKEY_URL/REDIS_URL  ValkeyCache (ElastiCache)      otherwise  InMemoryCache
 Store (long-term: across threads)
   raw / vertex  InMemoryStore                    ILLUSTRATION: process memory
   bedrock       AgentCoreMemoryStore             put() writes messages as events; search() reads
@@ -17,6 +24,8 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
 from langchain_core.messages import BaseMessage
+from langgraph.cache.base import BaseCache
+from langgraph.cache.memory import InMemoryCache
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.store.base import BaseStore
 from langgraph.store.memory import InMemoryStore
@@ -24,14 +33,50 @@ from langgraph.store.memory import InMemoryStore
 from app.config import Settings
 
 _in_memory_store = InMemoryStore()
+_in_memory_cache = InMemoryCache()
+
+
+def node_cache(provider: str, s: Settings) -> BaseCache:
+    if provider == "bedrock" and (s.valkey_url or s.redis_url):
+        import valkey
+        from langgraph_checkpoint_aws import ValkeyCache
+
+        return ValkeyCache(valkey.Valkey.from_url(_valkey_url(s)), ttl=300)
+    return _in_memory_cache
+
+
+def _valkey_url(s: Settings) -> str:
+    url = s.valkey_url or s.redis_url
+    return url.replace("redis://", "valkey://", 1).replace("rediss://", "valkeys://", 1)
 
 
 @asynccontextmanager
 async def checkpointer(provider: str, s: Settings) -> AsyncIterator[BaseCheckpointSaver]:
-    if provider == "bedrock" and s.agentcore_memory_id:
+    kind = s.langgraph_checkpointer if provider == "bedrock" else "sqlite"
+    if kind == "agentcore" and s.agentcore_memory_id:
         from langgraph_checkpoint_aws import AgentCoreMemorySaver
 
         yield AgentCoreMemorySaver(s.agentcore_memory_id, region_name=s.aws_region)
+        return
+    if kind == "dynamodb":
+        from langgraph_checkpoint_aws import DynamoDBSaver
+
+        offload = {"bucket_name": s.s3_checkpoint_bucket} if s.s3_checkpoint_bucket else None
+        yield DynamoDBSaver(
+            table_name=s.dynamodb_checkpoint_table,
+            region_name=s.aws_region,
+            ttl_seconds=30 * 24 * 3600,
+            enable_checkpoint_compression=True,
+            s3_offload_config=offload,
+        )
+        return
+    if kind == "valkey" and (s.valkey_url or s.redis_url):
+        from langgraph_checkpoint_aws import AsyncValkeySaver
+
+        async with AsyncValkeySaver.from_conn_string(
+            _valkey_url(s), ttl_seconds=7 * 24 * 3600
+        ) as saver:
+            yield saver
         return
     from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 

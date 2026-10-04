@@ -28,6 +28,7 @@ from langgraph.store.base import BaseStore
 from langgraph.types import Command, Send, interrupt
 from pydantic import BaseModel, Field
 
+from app.adapters.langgraph.memory import memory, memory_input
 from app.adapters.langgraph.persistence import save_message, search_memories
 from app.config import Settings
 from app.core.adapter import PatternInfo
@@ -57,6 +58,7 @@ class LgKit:
     checkpointer: BaseCheckpointSaver
     store: BaseStore
     mcp_tools: list[BaseTool] = field(default_factory=list)
+    cache: Any = None  # LangGraph node cache (InMemoryCache / ValkeyCache)
 
     def model(self, role: str) -> BaseChatModel:
         return self.model_for(role)
@@ -362,7 +364,7 @@ def map_reduce(k: LgKit):
     return builder.compile(checkpointer=k.checkpointer, name="map_reduce")
 
 
-def map_reduce_input(message: str) -> dict:
+def map_reduce_input(message: str, user_id: str) -> dict:
     return {"question": message, "answers": []}
 
 
@@ -419,8 +421,9 @@ def hitl(k: LgKit):
 class Pattern:
     info: PatternInfo
     build: Callable[[LgKit], Any]
-    to_input: Callable[[str], dict] = lambda m: {"messages": [HumanMessage(m)]}
+    to_input: Callable[[str, str], dict] = lambda m, user_id: {"messages": [HumanMessage(m)]}
     uses_mcp: bool = True
+    fork_as_node: str | None = None  # node to record a forked state as (see adapter.fork)
 
 
 PATTERNS: dict[str, Pattern] = {
@@ -517,6 +520,29 @@ PATTERNS: dict[str, Pattern] = {
                 ),
             ),
             hitl,
+        ),
+        Pattern(
+            PatternInfo(
+                "memory",
+                "Bedrock state suite: conversation via checkpointer, long-term via store, compaction, "
+                "trimming, node cache, retries, crash recovery, time travel and fork.",
+                (
+                    "checkpointer: AgentCoreMemorySaver / DynamoDBSaver(+S3) / AsyncValkeySaver",
+                    "AgentCoreMemoryStore (long-term)",
+                    "RemoveMessage + rolling summary (compaction)",
+                    "trim_messages (context view)",
+                    "CachePolicy + ValkeyCache (node cache)",
+                    "RetryPolicy",
+                    "durability modes",
+                    "recover: astream(None)",
+                    "aget_state_history (time travel)",
+                    "aupdate_state (fork)",
+                ),
+            ),
+            memory,
+            to_input=memory_input,
+            uses_mcp=False,
+            fork_as_node="remember",
         ),
     ]
 }

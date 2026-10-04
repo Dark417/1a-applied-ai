@@ -83,7 +83,26 @@ agentcore invoke '{"framework": "strands", "pattern": "single", "message": "What
 - Alternative: build `backend/Dockerfile`, push to ECR, and create the runtime with `CMD ["python", "-m", "app.runtimes.agentcore_app"]`, port 8080.
 - The CLI surface of the starter toolkit changes quickly. Check `agentcore --help` against the [AgentCore docs](https://docs.aws.amazon.com/bedrock-agentcore/).
 
-## 6. Observability
+## 6. State: checkpointers and the cache server
+
+`langgraph:memory` (and every LangGraph pattern) on bedrock picks its checkpointer with `LANGGRAPH_CHECKPOINTER`:
+
+| Value | Needs | Trade-off |
+|---|---|---|
+| `agentcore` | `AGENTCORE_MEMORY_ID` | checkpoints become AgentCore Memory events; one service for short and long term |
+| `dynamodb` | `uv run python ../infra/aws/setup_state.py` (table `PK`/`SK`, TTL `ttl`); optional `S3_CHECKPOINT_BUCKET` | durable, serverless, pay per request; big states offloaded to S3 |
+| `valkey` | an ElastiCache for Valkey endpoint in `VALKEY_URL` (or `REDIS_URL`) | fastest; in-memory, so use MemoryDB or snapshots if checkpoints must survive node loss |
+
+```bash
+aws elasticache create-serverless-cache --serverless-cache-name ai-sdk --engine valkey --region us-east-1
+# endpoint -> REDIS_URL=rediss://<endpoint>:6379/0   (serverless caches require TLS)
+```
+
+- The same `REDIS_URL` also gives every framework the distributed session lock and registry.
+- It also backs the DIY loop's checkpoint and LLM caches, and LangGraph's `ValkeyCache` node cache.
+- Allow the runtime to reach it: same VPC, security group on port 6379.
+
+## 7. Observability
 
 - Point `OTEL_EXPORTER_OTLP_ENDPOINT` at an ADOT collector (`awsxray` + `awsemf` exporters).
 - Or enable **CloudWatch Transaction Search**. AgentCore Runtime agents then appear in the GenAI Observability dashboard.
