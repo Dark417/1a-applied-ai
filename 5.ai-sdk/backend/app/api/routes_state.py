@@ -33,7 +33,14 @@ def _op(c: Container, framework: str, name: str):
     fn = getattr(adapter, name, None)
     if fn is None:
         raise HTTPException(501, f"{framework} does not implement {name}")
-    return fn
+
+    async def call(*args):
+        try:
+            return await fn(*args)
+        except AdapterError as e:
+            raise HTTPException(400, str(e)) from e
+
+    return call
 
 
 @router.get("/sessions")
@@ -70,15 +77,20 @@ async def fork(session_id: str, body: ForkIn, c: Container = Depends(get_contain
         pattern=rec.pattern,
         provider=rec.provider,
     )
-    try:
-        await fn(rec, c.providers[rec.provider], body.checkpoint_id, new)
-    except AdapterError as e:
-        raise HTTPException(400, str(e)) from e
+    await fn(rec, c.providers[rec.provider], body.checkpoint_id, new)
     await c.sessions.save(new)
     return {
         "session_id": new.id,
         "forked_from": {"session_id": rec.id, "checkpoint_id": body.checkpoint_id},
     }
+
+
+@router.post("/sessions/{session_id}/rewind")
+async def rewind(session_id: str, body: ForkIn, c: Container = Depends(get_container)):
+    """Roll the session back to before `checkpoint_id`, in place (ADK: Runner.rewind_async)."""
+    rec = await _session(c, session_id)
+    await _op(c, rec.framework, "rewind")(rec, c.providers[rec.provider], body.checkpoint_id)
+    return {"session_id": rec.id, "rewound_before": body.checkpoint_id}
 
 
 @router.delete("/sessions/{session_id}", status_code=204)

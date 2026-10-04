@@ -25,6 +25,7 @@ from google.adk.tools.preload_memory_tool import PreloadMemoryTool
 from google.adk.workflow import START, Workflow
 
 from app.adapters.adk.callbacks import add_run_context, tool_policy
+from app.adapters.adk.memory import memory_agent, memory_app_config
 from app.config import Settings
 from app.core.adapter import PatternInfo
 from app.mcp.clients import server_specs
@@ -370,6 +371,7 @@ class Pattern:
     info: PatternInfo
     build: Callable[[AdkKit], Any]
     output_key: str | None = None  # read the final answer from session state
+    app_config: Callable[[AdkKit], dict] | None = None  # extra App(...) settings
 
 
 PATTERNS: dict[str, Pattern] = {
@@ -448,6 +450,28 @@ PATTERNS: dict[str, Pattern] = {
                 ("Workflow", "FunctionNode", "routed edges", "START", "agents as graph nodes"),
             ),
             workflow,
+        ),
+        Pattern(
+            PatternInfo(
+                "memory",
+                "Vertex state suite: Agent Engine sessions, state scopes, Memory Bank, compaction, "
+                "resumable invocations, rewind, Gemini context caching.",
+                (
+                    "VertexAiSessionService",
+                    "state scopes: session / user: / app: / temp:",
+                    "ToolContext.state + CallbackContext.state",
+                    "{user:preferences?} templating",
+                    "VertexAiMemoryBankService + PreloadMemoryTool + load_memory",
+                    "EventsCompactionConfig + LlmEventSummarizer",
+                    "ResumabilityConfig (resume by invocation_id)",
+                    "Runner.rewind_async",
+                    "ContextCacheConfig (Gemini)",
+                    "output_key",
+                ),
+            ),
+            memory_agent,
+            "last_answer",
+            app_config=memory_app_config,
         ),
     ]
 }
