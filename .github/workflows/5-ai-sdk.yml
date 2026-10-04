@@ -23,6 +23,8 @@ jobs:
       # Chromium for the `browse` tool test (it skips when no browser is present).
       - run: uv run playwright install --with-deps chromium
       - run: echo "PLAYWRIGHT_CHROMIUM_PATH=$(uv run python -c 'from playwright.sync_api import sync_playwright as s; p=s().start(); print(p.chromium.executable_path); p.stop()')" >> "$GITHUB_ENV"
+      # Real redis-server for the cache-server and state-suite tests (they skip without it).
+      - run: sudo apt-get update -q && sudo apt-get install -y -q redis-server
       # Keyless: every pattern of every framework runs with scripted models.
       - run: uv run pytest -q -rs
 

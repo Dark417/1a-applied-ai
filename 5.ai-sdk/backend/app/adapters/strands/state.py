@@ -3,9 +3,10 @@
 Session managers persist an agent's messages and state between requests:
   raw / vertex  FileSessionManager                  PRODUCTION (vertex): implement SessionRepository
                                                     on Firestore/GCS + RepositorySessionManager
-  bedrock       AgentCoreMemorySessionManager       short-term events + long-term extraction
-                (falls back to FileSessionManager when AGENTCORE_MEMORY_ID is unset;
-                 S3SessionManager is the other AWS-native option)
+  bedrock       S3SessionManager                    if STRANDS_S3_SESSION_BUCKET is set
+                AgentCoreMemorySessionManager       else if AGENTCORE_MEMORY_ID: short-term events +
+                                                    long-term extraction
+                FileSessionManager                  otherwise
 """
 
 import logging
@@ -25,6 +26,17 @@ log = logging.getLogger(__name__)
 
 
 def session_manager(provider: str, s: Settings, session_id: str, user_id: str) -> Any:
+    if provider == "bedrock" and s.strands_s3_session_bucket:
+        # S3SessionManager: the same file layout as FileSessionManager, in a bucket. Durable and
+        # cheap; no extraction (that is what AgentCore Memory adds).
+        from strands.session.s3_session_manager import S3SessionManager
+
+        return S3SessionManager(
+            session_id=session_id,
+            bucket=s.strands_s3_session_bucket,
+            prefix="strands/",
+            region_name=s.aws_region,
+        )
     if provider == "bedrock" and s.agentcore_memory_id:
         from bedrock_agentcore.memory.integrations.strands.config import AgentCoreMemoryConfig
         from bedrock_agentcore.memory.integrations.strands.session_manager import (

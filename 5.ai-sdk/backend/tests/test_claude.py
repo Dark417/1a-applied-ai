@@ -1,6 +1,7 @@
 """Claude adapter: Agent SDK wiring (CLI replaced by a fake) and the real Messages API tool runner."""
 
 import uuid
+from contextlib import ExitStack
 
 import pytest
 from fastapi.testclient import TestClient
@@ -26,6 +27,8 @@ from tests.fakes.claude import (
 
 @pytest.fixture
 def cl(container):
+    stack = ExitStack()
+
     def make(script: CliScript | None = None, messages=None) -> TestClient:
         script = script or CliScript()
         container.registry.register(
@@ -36,9 +39,10 @@ def cl(container):
                 messages_client=messages or (lambda p: None),
             )
         )
-        return TestClient(create_app(container))
+        return stack.enter_context(TestClient(create_app(container)))  # one event loop
 
-    return make
+    yield make
+    stack.close()
 
 
 def run(client, pattern, message="", provider="raw", ok=True, **kw):
@@ -86,7 +90,7 @@ def test_agent_sdk_options_events_and_session_resume(cl):
     assert "mcp__tools__calculator" in opts.allowed_tools
     assert "mcp__tools__run_cli" not in opts.allowed_tools  # sensitive -> can_use_tool decides
     assert opts.tools == [] and opts.can_use_tool is not None
-    assert set(opts.hooks) == {"UserPromptSubmit", "PreToolUse", "PostToolUse"}
+    assert set(opts.hooks) == {"UserPromptSubmit", "PreToolUse", "PostToolUse", "PreCompact"}
     assert opts.env["ANTHROPIC_API_KEY"] == "test-key" and opts.session_id == str(
         uuid.UUID(data["session_id"])
     )
@@ -224,3 +228,92 @@ def test_messages_api_client_per_provider(settings):
     assert type(default_client(p["bedrock"])).__name__ == "AsyncAnthropicBedrockMantle"
     assert model_for(p["bedrock"]) == "anthropic.claude-opus-5"
     assert type(default_client(p["vertex"])).__name__ == "AsyncAnthropicVertex"
+
+
+async def test_redis_session_store_protocol(redis_url):
+    from app.adapters.claude.session_store import RedisSessionStore
+    from app.state.cache import redis_client
+
+    redis = redis_client(redis_url)
+    await redis.flushdb()
+    store = RedisSessionStore(redis, ttl_s=60)
+    key = {"project_key": "-data-claude_workdir", "session_id": "s1"}
+    assert await store.load(key) is None
+    await store.append(key, [{"type": "user", "uuid": "u1", "timestamp": "t1"}])
+    await store.append(key, [{"type": "assistant", "uuid": "a1", "timestamp": "t2"}])
+    await store.append(
+        {**key, "subpath": "subagents/agent-1"}, [{"type": "user", "uuid": "x", "timestamp": "t"}]
+    )
+    assert [e["uuid"] for e in await store.load(key)] == ["u1", "a1"]  # append-only, ordered
+    assert [s["session_id"] for s in await store.list_sessions("-data-claude_workdir")] == ["s1"]
+    assert await store.list_subkeys(key) == ["subagents/agent-1"]
+    assert 0 < await redis.ttl("claude:-data-claude_workdir/s1") <= 60  # retention is ours
+    await store.delete(key)  # cascades to subagent transcripts
+    assert await store.load(key) is None and await redis.keys("claude:*") == []
+    await redis.aclose()
+
+
+def test_session_store_wired_when_redis_configured(cl, container, redis_url):
+    container.settings.redis_url = redis_url
+    script = CliScript([text("ok"), result("ok")])
+    run(cl(script), "agent_sdk", "hi")
+    assert type(script.options[0].session_store).__name__ == "RedisSessionStore"
+
+
+def _transcript(session_id: str, cwd: str) -> list[dict]:
+    """Entries shaped like the real Claude Code CLI transcript (captured from a live run)."""
+    turns = [
+        ("user", "I'm Ada."),
+        ("assistant", "Hi Ada."),
+        ("user", "Rust or Go?"),
+        ("assistant", "Rust."),
+    ]
+    out, parent = [], None
+    for i, (role, said) in enumerate(turns):
+        uuid_ = f"00000000-0000-4000-8000-00000000000{i}"
+        content = said if role == "user" else [{"type": "text", "text": said}]
+        out.append(
+            {"type": role, "uuid": uuid_, "parentUuid": parent, "sessionId": session_id, "isSidechain": False,
+             "timestamp": f"2026-10-04T08:00:0{i}.000Z", "cwd": cwd, "userType": "external",
+             "message": {"role": role, "content": content}}
+        )  # fmt: skip
+        parent = uuid_
+    return out
+
+
+def test_history_checkpoints_and_fork_through_session_store(cl, container, redis_url):
+    import asyncio
+
+    from claude_agent_sdk._internal.session_mutations import project_key_for_directory
+
+    from app.state.cache import redis_client
+
+    container.settings.redis_url = redis_url
+    sid = "11111111-1111-4111-8111-111111111111"
+    client = cl(CliScript([text("Rust."), result("Rust.", session_id=sid)]))
+    ours = run(client, "agent_sdk", "Rust or Go?")["session_id"]
+
+    adapter = container.registry.get("claude")
+    key = {"project_key": project_key_for_directory(adapter.workdir), "session_id": sid}
+
+    async def seed():
+        redis = redis_client(redis_url)
+        from app.adapters.claude.session_store import RedisSessionStore
+
+        await RedisSessionStore(redis).append(key, _transcript(sid, adapter.workdir))
+        await redis.aclose()
+
+    asyncio.run(seed())  # what the SDK mirrors during a real run
+
+    history = client.get(f"/v1/sessions/{ours}/history").json()
+    assert [(h["role"], h["text"]) for h in history] == [
+        ("user", "I'm Ada."), ("assistant", "Hi Ada."), ("user", "Rust or Go?"), ("assistant", "Rust.")
+    ]  # fmt: skip
+    checkpoints = client.get(f"/v1/sessions/{ours}/checkpoints").json()
+    assert checkpoints[0]["text"] == "Rust."  # newest first; every message uuid is a fork point
+    after_hi = next(c for c in checkpoints if c["text"] == "Hi Ada.")
+    fork = client.post(
+        f"/v1/sessions/{ours}/fork", json={"checkpoint_id": after_hi["checkpoint_id"]}
+    ).json()
+    forked = client.get(f"/v1/sessions/{fork['session_id']}/history").json()
+    assert [h["text"] for h in forked] == ["I'm Ada.", "Hi Ada."]  # fork_session_via_store

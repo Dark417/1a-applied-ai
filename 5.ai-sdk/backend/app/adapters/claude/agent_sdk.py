@@ -109,10 +109,18 @@ def make_hooks(deny: set[str]) -> dict[str, list[HookMatcher]]:
         log.info("claude tool %s done", input_data.get("tool_name"))
         return {}
 
+    async def before_compaction(input_data: dict, tool_use_id: str | None, context: Any) -> dict:
+        # PreCompact: the CLI is about to summarise the conversation (trigger "auto" when the
+        # context window fills, "manual" for /compact). Last chance to archive the full transcript;
+        # with a session_store it is already mirrored, so we only record that it happened.
+        log.info("claude compaction (%s)", input_data.get("trigger"))
+        return {}
+
     return {
         "UserPromptSubmit": [HookMatcher(hooks=[add_context])],
         "PreToolUse": [HookMatcher(matcher="^mcp__", hooks=[policy])],
         "PostToolUse": [HookMatcher(hooks=[audit])],
+        "PreCompact": [HookMatcher(hooks=[before_compaction])],
     }
 
 
@@ -144,6 +152,8 @@ def _base_options(ctx: RunContext, settings: Settings) -> dict[str, Any]:
         "cwd": str(workdir),
         "setting_sources": [],  # ignore ~/.claude settings on a server
         "max_turns": settings.max_llm_calls,
+        # Mirror transcripts to a shared store so any replica can resume (see session_store.py).
+        "session_store": ctx.extras.get("session_store"),
         **session,
     }
 

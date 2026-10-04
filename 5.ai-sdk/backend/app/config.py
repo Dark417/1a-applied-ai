@@ -82,6 +82,7 @@ class Settings(BaseSettings):
     dynamodb_checkpoint_table: str = "ai-sdk-checkpoints"
     s3_checkpoint_bucket: str = ""  # DynamoDBSaver offloads large checkpoints here
     valkey_url: str = ""  # ElastiCache for Valkey endpoint for ValkeySaver; defaults to REDIS_URL
+    strands_s3_session_bucket: str = ""  # strands on bedrock: S3SessionManager
 
     # --- runs ---
     max_llm_calls: int = 20

@@ -49,6 +49,13 @@ Repo-wide rules are in `../AGENTS.md`. This file adds what is specific to this p
 - `-m eval`: real models. Opt-in.
 - Cloud SDK clients are stubbed (`botocore.Stubber`, fake `vertexai` clients). Tests never call AWS or GCP.
 
+## State (docs/design/07-state-and-memory.md)
+
+- Conversation ≠ context. Persist the whole conversation; send a view (window / summary / compaction).
+- A cache is never the source of truth. Caches fail open; the session lock fails closed (503).
+- A new state feature goes into the suite for its branch (`diy`, `langgraph:memory`, `adk:memory`). Add to other frameworks only what is unique to them.
+- State routes are generic. Adapters opt in by implementing `StateOps` methods.
+
 ## Gotchas found while building
 
 - ADK `AgentTool` runs the inner agent in its own runner. Its tool calls do not appear in the parent event stream.
@@ -57,3 +64,10 @@ Repo-wide rules are in `../AGENTS.md`. This file adds what is specific to this p
 - `langchain-mcp-adapters` 0.3 needs `mcp<2`.
 - `strands-agents[anthropic]` pins `anthropic<1`. We install `anthropic` directly instead.
 - Gemini rejects built-in retrieval mixed with function tools in one request. `VertexAiRagRetrieval` sits in its own agent behind `AgentTool`.
+- `redis.asyncio` pools bind to the event loop that first uses them.
+  - In tests, use `with TestClient(...)`: one loop per client.
+  - Never cache a client across loops.
+- LangGraph reports node-cache hits as a `__metadata__: {"cached": true}` entry in the `updates` chunk.
+- Strands proactive compression needs the model's token estimates (a scripted model has none). `strands:memory` triggers `reduce_context` from a hook.
+- ADK `rewind_async` appends a rewind event; it does not delete history. ADK has no fork, so we replay events into a new session.
+- `redis-py`'s `ConnectionError` is not the builtin one. Catch `app.state.cache.CACHE_ERRORS`.

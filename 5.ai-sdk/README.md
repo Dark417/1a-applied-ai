@@ -4,10 +4,11 @@ One FastAPI service. One endpoint (`POST /v1/runs`). Pluggable adapters:
 
 | Framework | Patterns (each shows a set of the framework's main components) |
 |---|---|
-| **Google ADK** (`adk`) | `single` · `sequential` · `parallel` · `loop` · `coordinator` · `custom` · `workflow` |
-| **LangGraph** (`langgraph`) | `react` · `graph` · `middleware` · `supervisor` · `map_reduce` · `hitl` |
-| **Strands Agents** (`strands`) | `single` · `agents_as_tools` · `swarm` · `graph` · `structured` |
+| **Google ADK** (`adk`) | `single` · `sequential` · `parallel` · `loop` · `coordinator` · `custom` · `workflow` · `memory` |
+| **LangGraph** (`langgraph`) | `react` · `graph` · `middleware` · `supervisor` · `map_reduce` · `hitl` · `memory` |
+| **Strands Agents** (`strands`) | `single` · `agents_as_tools` · `swarm` · `graph` · `structured` · `memory` |
 | **Claude** (`claude`) | `agent_sdk` · `subagents` · `external_mcp` · `messages_api` |
+| **No framework** (`diy`) | `loop`: the agent loop and all its state, built by hand |
 
 Every pattern runs on three **provider branches**:
 
@@ -67,6 +68,36 @@ curl -s localhost:8000/v1/runs -H 'content-type: application/json' \
 
 - With tracing: `docker compose -f deploy/docker-compose.yaml up --build`. Traces appear at <http://localhost:16686>.
 
+## State and memory (one suite per branch)
+
+The `memory` patterns and `diy:loop` show every layer of agent state. Details: [`docs/design/07-state-and-memory.md`](docs/design/07-state-and-memory.md).
+
+| Layer | `raw` · `diy:loop` | `bedrock` · `langgraph:memory` | `vertex` · `adk:memory` |
+|---|---|---|---|
+| Checkpoint per step | SQLite + Redis write-through | AgentCore / DynamoDB + S3 / ElastiCache Valkey | resumable invocations on Agent Engine Sessions |
+| Recover after a crash | `resume: {"recover": true}` | same → `astream(None)` | same → `run_async(invocation_id=…)` |
+| Time travel | checkpoints + fork | `aget_state_history` + fork | invocations + `rewind_async` + fork |
+| Context | window / token budget / summary / Anthropic compaction | `trim_messages` + `RemoveMessage` summary | `EventsCompactionConfig` |
+| Long-term | LLM extract → consolidate → recall | `AgentCoreMemoryStore` | Memory Bank + `PreloadMemoryTool` |
+| Cache server | Redis: lock, checkpoint, LLM cache; prompt caching | Valkey checkpoints, `ValkeyCache` node cache | Memorystore lock; Gemini context cache |
+
+- Strands adds `agent.state` and summarising conversation management.
+- The Claude Agent SDK adds a `RedisSessionStore`, so CLI sessions resume on any replica.
+- With `REDIS_URL` set, every framework shares a distributed session lock.
+
+```bash
+# crash a turn on purpose, then recover it: finished tool calls are not re-run
+curl -s localhost:8000/v1/runs -H 'content-type: application/json' -d '{"framework":"diy","pattern":"loop",
+  "message":"17% of 2340 and the UTC time?","options":{"crash_after_step":3}}' | jq '.session_id, .events[-1]'
+curl -s localhost:8000/v1/runs -H 'content-type: application/json' \
+  -d '{"framework":"diy","pattern":"loop","session_id":"<id>","resume":{"recover":true}}' | jq .output
+# time travel
+curl -s localhost:8000/v1/sessions/<id>/checkpoints | jq '.[] | {checkpoint_id, label}'
+curl -s localhost:8000/v1/sessions/<id>/fork -H 'content-type: application/json' -d '{"checkpoint_id":"<cid>"}'
+curl -s localhost:8000/v1/sessions/<id>/history
+curl -s "localhost:8000/v1/users/demo-user/memories?framework=diy"
+```
+
 ## Request and events
 
 ```jsonc
@@ -105,7 +136,8 @@ uv run pytest -m eval tests/test_eval_adk.py   # ADK's own AgentEvaluator on an 
 5.ai-sdk/
   backend/            FastAPI + all four frameworks (one deployable)
     app/core          adapter contract, registry, session lock, RunScope
-    app/adapters      adk/ langgraph/ strands/ claude/  (patterns, models, persistence, translation)
+    app/adapters      adk/ langgraph/ strands/ claude/ diy/  (patterns, models, persistence, translation)
+    app/state         cache-server client, LLM response cache
     app/providers     raw / bedrock / vertex profiles
     app/tools app/rag app/memory app/guardrails app/mcp   neutral capabilities
     app/runtimes      AgentCore Runtime + Agent Engine entrypoints

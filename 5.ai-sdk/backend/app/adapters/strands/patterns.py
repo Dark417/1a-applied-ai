@@ -19,6 +19,7 @@ from strands.agent.conversation_manager import SlidingWindowConversationManager
 from strands.models import Model
 from strands.multiagent import GraphBuilder, Swarm
 
+from app.adapters.strands.memory import memory
 from app.adapters.strands.state import ToolPolicyHooks, session_manager
 from app.config import Settings
 from app.core.adapter import PatternInfo
@@ -59,13 +60,13 @@ class StrandsKit:
             self.profile.name, self.settings, self.session_id + suffix, self.user_id
         )
 
-    def agent(self, name: str, prompt: str, tools: list[Any], **kw) -> Agent:
+    def agent(self, name: str, prompt: str, tools: list[Any], extra_hooks=(), **kw) -> Agent:
         return Agent(
             name=name,
             model=self.model(name),
             system_prompt=prompt,
             tools=tools,
-            hooks=self.hooks(),
+            hooks=[*self.hooks(), *extra_hooks],
             callback_handler=None,  # we consume stream_async instead of printing
             trace_attributes={"session.id": self.session_id, "user.id": self.user_id},
             **kw,
@@ -297,6 +298,20 @@ PATTERNS: dict[str, Pattern] = {
                 ("structured_output_model", "Pydantic", "forced structured-output tool"),
             ),
             structured,
+        ),
+        Pattern(
+            PatternInfo(
+                "memory",
+                "Strands-specific state: agent.state, summarising conversation manager, session "
+                "managers (File / S3 / AgentCore Memory) restoring a fresh Agent each request.",
+                (
+                    "agent.state via ToolContext",
+                    "SummarizingConversationManager + summarization_agent",
+                    "reduce_context hook (CompactWhenLong)",
+                    "FileSessionManager / S3SessionManager / AgentCoreMemorySessionManager",
+                ),
+            ),
+            memory,
         ),
     ]
 }

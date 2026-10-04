@@ -65,7 +65,19 @@ uv run python -m app.runtimes.agent_engine_app --local "What is 17% of 2340?"   
 uv run python -m app.runtimes.agent_engine_app --staging-bucket gs://<bucket>    # deploy
 ```
 
-## 4. Observability and evals
+## 4. Cache server (Memorystore)
+
+```bash
+gcloud memorystore instances create ai-sdk --location=us-central1 --engine=valkey \
+  --shard-count=1 --node-type=shared-core-nano   # flags vary by version; the console works too
+```
+
+- Set `REDIS_URL=redis://<private-ip>:6379/0`. Cloud Run reaches it through Direct VPC egress.
+- It gives every framework the distributed session lock and registry, the DIY caches, and the Claude `RedisSessionStore`.
+- Vertex-native state stays in Agent Engine: Sessions, Memory Bank, and resumable ADK invocations (`adk:memory`).
+- Gemini context caching (`ContextCacheConfig`) is a *server-side* prompt cache. It needs no cache server.
+
+## 5. Observability and evals
 
 - `OTEL_EXPORTER=gcp` sends spans to Cloud Trace from every framework.
 - `uv run python -m app.evals.run --targets adk:single:vertex,langgraph:react:vertex --vertex` scores outputs with the Gen AI evaluation service.

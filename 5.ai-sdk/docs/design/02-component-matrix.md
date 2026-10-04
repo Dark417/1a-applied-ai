@@ -29,6 +29,7 @@ How to read this file:
 | `coordinator` | `sub_agents` (LLM-driven transfer), `AgentTool` (agent as a tool) | The coordinator transfers control to `researcher`. It calls `math_agent` as a tool and keeps control. Both delegation styles appear side by side. |
 | `custom` | `BaseAgent._run_async_impl`, `ctx.session.state`, deterministic routing | Code decides which sub-agent runs (keyword → route), as in `0.learn`'s code-first orchestrator. No LLM call for routing. |
 | `workflow` | ADK 2 `Workflow` graph: `FunctionNode`, agent nodes, routed `Edge`s, `START` | classify (function) → route edge → `researcher` or `calculator` agent → format (function). Explicit graph, not LLM transfer. |
+| `memory` | state scopes (`user:`/`app:`/`temp:`), `ToolContext.state`, `EventsCompactionConfig`, `ResumabilityConfig`, `rewind_async`, `ContextCacheConfig`, Memory Bank | The vertex-branch state suite. See `07-state-and-memory.md`. |
 
 | Slot | raw | bedrock | vertex |
 |---|---|---|---|
@@ -49,6 +50,7 @@ How to read this file:
 | `supervisor` | Subgraphs (agents as nodes), `Command(goto=…)` handoff, structured routing output | The supervisor picks `researcher` / `calculator` / `FINISH`. Each worker is its own compiled graph. |
 | `map_reduce` | `Send` API, `Annotated[list, operator.add]` reducer | plan sub-questions → `Send` one branch per question in parallel → reduce into an answer. |
 | `hitl` | `interrupt()`, `Command(resume=…)`, checkpointer-backed pause | Before `run_cli` executes, the graph pauses and returns an `interrupt` event. The next request with `resume: {"approve": true}` continues it. |
+| `memory` | AWS checkpointers (AgentCore / DynamoDB+S3 / Valkey), `AgentCoreMemoryStore`, `RemoveMessage` compaction, `trim_messages`, `CachePolicy` + `ValkeyCache`, `RetryPolicy`, durability, `aget_state_history`, `aupdate_state` | The bedrock-branch state suite. See `07-state-and-memory.md`. |
 
 | Slot | raw | bedrock | vertex |
 |---|---|---|---|
@@ -71,6 +73,7 @@ How to read this file:
 | `swarm` | `Swarm`, `handoff_to_agent` (auto-injected), `max_handoffs` | researcher → writer → reviewer hand off to each other autonomously, with shared context. |
 | `graph` | `GraphBuilder`, `add_node`, `add_edge(condition=…)`, entry point | A deterministic DAG: research → calculate (only if the task has arithmetic) → report. |
 | `structured` | `structured_output_model=<Pydantic>` | Returns a typed `ResearchBrief`, which `done.output` carries as JSON. |
+| `memory` | `agent.state`, `SummarizingConversationManager`, `reduce_context` hook, `S3SessionManager` | Only the Strands-specific state features. See `07-state-and-memory.md`. |
 
 | Slot | raw | bedrock | vertex |
 |---|---|---|---|
@@ -104,11 +107,17 @@ How to read this file:
   - The Agent SDK keeps sessions on the local disk of the CLI.
   - Running more than one replica needs sticky routing, or copying `~/.claude/projects/...` to shared storage.
 
+## No framework (`framework=diy`)
+
+| Pattern | Components shown | How they work together |
+|---|---|---|
+| `loop` | hand-written state machine, checkpoint per step (SQLite + Redis write-through), recovery, fork, context strategies (`window` / `token_budget` / `summary` / `server`), long-term extraction + consolidation, Redis LLM cache, prompt caching | The raw-branch state suite: everything the frameworks do, written out. Runs on Claude via any branch's client. See `07-state-and-memory.md`. |
+
 ## Cross-cutting components (all frameworks)
 
 | Component | Where | raw | bedrock | vertex |
 |---|---|---|---|---|
-| Session lock | `core/sessions.py` | in-process lock | same (PRODUCTION: DynamoDB conditional write) | same (PRODUCTION: Memorystore Redis) |
+| Session lock + registry | `core/sessions.py` | in-process; with `REDIS_URL` a leased Redis lock | ElastiCache (Valkey/Redis) via `REDIS_URL` | Memorystore via `REDIS_URL` |
 | Long-term memory tools | `tools/memory_tools.py` | SQLite keyword store | AgentCore Memory (`create_event` / `retrieve_memories`) | Agent Engine Memory Bank |
 | RAG tool `search_docs` | `rag/` | hashing-vector store over the corpus | Bedrock KB `Retrieve` | Vertex RAG Engine `retrieval_query` |
 | Browser tool `browse` | `tools/browser.py` | local Playwright Chromium | AgentCore Browser over CDP (Playwright `connect_over_cdp`) | local Playwright |

@@ -75,6 +75,32 @@ class StrandsAdapter:
                     yield event
             yield Event(type="done", output=final_output(st.result), data=_usage(st.result))
 
+    # ------------------------------------------------------------------ StateOps
+
+    async def history(self, rec, profile) -> list[dict]:
+        """Read straight from the session repository (File / S3 / AgentCore), as a new Agent would."""
+        from app.adapters.strands.memory import AGENT_ID
+        from app.adapters.strands.state import session_manager
+
+        sm = session_manager(profile.name, self.settings, rec.id, rec.user_id)
+        agent_id = AGENT_ID if rec.pattern == "memory" else "default"
+        messages = await asyncio.to_thread(sm.list_messages, rec.id, agent_id)
+        stored = await asyncio.to_thread(sm.read_agent, rec.id, agent_id)
+        out = []
+        for m in messages:
+            for block in m.message.get("content", []):
+                if "text" in block:
+                    out.append({"role": m.message["role"], "text": block["text"]})
+                elif "toolUse" in block:
+                    out.append({"role": "assistant", "tool_call": block["toolUse"]["name"]})
+        return out + [{"role": "state", "state": dict(stored.state) if stored else {}}]
+
+    async def forget(self, rec, profile) -> None:
+        from app.adapters.strands.state import session_manager
+
+        sm = session_manager(profile.name, self.settings, rec.id, rec.user_id)
+        await asyncio.to_thread(sm.delete_session, rec.id)
+
 
 def _usage(result) -> dict | None:
     usage = getattr(result, "accumulated_usage", None)

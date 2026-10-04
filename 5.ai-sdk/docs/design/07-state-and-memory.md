@@ -87,8 +87,8 @@ This doc covers everything an agent *remembers* and how it *recovers*:
 
 | Framework | Unique state feature | Where |
 |---|---|---|
-| Strands | `SummarizingConversationManager` (summarise instead of drop); `agent.state` (persisted, never sent to the model); `S3SessionManager` on bedrock | `strands:memory` |
-| Claude Agent SDK | `SessionStore` protocol: we implement `RedisSessionStore`, so CLI sessions survive replicas (closes the gap in `03-cloud-branches.md`); `fork_session`; `list_sessions` / `get_session_messages` for history; `PreCompact` hook on auto-compaction | `claude:memory` |
+| Strands | `SummarizingConversationManager` (summarise instead of drop), triggered by a `reduce_context` hook; `agent.state` (persisted, never sent to the model); `S3SessionManager` on bedrock (`STRANDS_S3_SESSION_BUCKET`) | `strands:memory` |
+| Claude Agent SDK | `SessionStore` protocol: we implement `RedisSessionStore`, so CLI sessions survive replicas (closes the gap in `03-cloud-branches.md`); `fork_session` (every message uuid is a fork point); `get_session_messages` for history; `PreCompact` hook on auto-compaction | every `claude` Agent SDK pattern when `REDIS_URL` is set (`app/adapters/claude/session_store.py`) |
 | Claude Messages API | server-side context management: compaction (`compact_20260112`) and context editing (`clear_tool_uses_20250919`); prompt caching (`cache_control`) | the `server` strategy and prompt caching inside `diy:loop` |
 | ADK, LangGraph | covered by their suites | — |
 
@@ -124,9 +124,21 @@ Generic endpoints. Adapters opt in by implementing `StateOps`. Unsupported opera
 | `GET /v1/sessions/{id}/history` | transcript as `[{role, text, ...}]` from the framework's own store |
 | `GET /v1/sessions/{id}/checkpoints` | checkpoints / invocations, newest first |
 | `POST /v1/sessions/{id}/fork` `{"checkpoint_id"}` | new session that continues from that checkpoint |
+| `POST /v1/sessions/{id}/rewind` `{"checkpoint_id"}` | roll back in place to before that checkpoint (ADK `rewind_async`) |
 | `GET /v1/users/{user_id}/memories?framework=&provider=&query=` | long-term memories as the framework sees them |
 | `DELETE /v1/sessions/{id}` | forget: the durable store, caches, and the registry |
 | `POST /v1/runs` with `resume: {"recover": true}` | continue a run that crashed mid-turn |
+
+## Where it lives
+
+| Suite / part | Code | Tests |
+|---|---|---|
+| cache server, lock, registry, LLM cache, state API | `app/core/sessions.py`, `app/state/cache.py`, `app/api/routes_state.py` | `tests/test_state_cache.py` |
+| `diy:loop` (raw) | `app/adapters/diy/` (`state.py`, `context.py`, `longterm.py`, `loop.py`) | `tests/test_diy.py` |
+| `langgraph:memory` (bedrock) | `app/adapters/langgraph/memory.py`, `persistence.py` | `tests/test_langgraph_memory.py` (Valkey on redis-server, DynamoDB on moto) |
+| `adk:memory` (vertex) | `app/adapters/adk/memory.py`, `adapter.py` (StateOps) | `tests/test_adk_memory.py` |
+| `strands:memory` | `app/adapters/strands/memory.py`, `state.py` | `tests/test_strands_memory.py` (S3 on moto) |
+| Claude `RedisSessionStore` | `app/adapters/claude/session_store.py` | `tests/test_claude.py` |
 
 ## Demo script (what the tests prove)
 
