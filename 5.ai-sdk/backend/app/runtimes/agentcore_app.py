@@ -28,7 +28,7 @@ async def invoke(payload: dict, context=None):
         # AgentCore's runtime session id doubles as our session id.
         req.session_id = context.session_id.replace("-", "")[:32]
     try:
-        _container.runs.preflight(req)
+        await _container.runs.preflight(req)
     except Exception as e:
         yield {"type": "error", "message": str(e)}
         return

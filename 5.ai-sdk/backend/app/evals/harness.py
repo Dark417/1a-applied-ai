@@ -31,7 +31,7 @@ async def run_case(service: RunService, target: str, case: Case) -> RunResult:
     )
     started = time.perf_counter()
     try:
-        service.preflight(req)
+        await service.preflight(req)
         resp = await service.run(req)
     except Exception as e:  # a broken target is a result, not a crash of the whole suite
         return RunResult(

@@ -1,6 +1,6 @@
 """Discovery: which frameworks, patterns, providers, tools, and MCP servers exist right now."""
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from app.api.deps import get_container
 from app.container import Container
@@ -52,16 +52,3 @@ async def catalog(c: Container = Depends(get_container)) -> CatalogOut:
         tools=describe(),
         mcp_servers=[s.name for s in server_specs(c.settings)],
     )
-
-
-@router.get("/sessions", tags=["sessions"])
-async def list_sessions(user_id: str | None = None, c: Container = Depends(get_container)):
-    return [r.summary() for r in c.sessions.list(user_id)]
-
-
-@router.get("/sessions/{session_id}", tags=["sessions"])
-async def get_session(session_id: str, c: Container = Depends(get_container)):
-    rec = c.sessions.get(session_id)
-    if rec is None:
-        raise HTTPException(404, "session not found")
-    return {**rec.summary(), "last_output": rec.last_output}

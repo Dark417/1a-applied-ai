@@ -19,6 +19,35 @@ from app.schemas import Event
 CHROMIUM = os.environ.get("PLAYWRIGHT_CHROMIUM_PATH", "/opt/pw-browsers/chromium")
 
 
+@pytest.fixture(scope="session")
+def redis_url():
+    """A real redis-server on a free port (Valkey/ElastiCache/Memorystore speak the same protocol)."""
+    import shutil
+    import socket
+    import subprocess
+    import time
+
+    binary = shutil.which("redis-server") or shutil.which("valkey-server")
+    if not binary:
+        pytest.skip("redis-server not installed")
+    with socket.socket() as s:
+        s.bind(("127.0.0.1", 0))
+        port = s.getsockname()[1]
+    proc = subprocess.Popen(
+        [binary, "--port", str(port), "--save", "", "--appendonly", "no"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    for _ in range(50):
+        with socket.socket() as s:
+            if s.connect_ex(("127.0.0.1", port)) == 0:
+                break
+        time.sleep(0.05)
+    yield f"redis://127.0.0.1:{port}/0"
+    proc.terminate()
+    proc.wait(5)
+
+
 @pytest.fixture
 def settings(tmp_path: Path) -> Settings:
     return Settings(

@@ -14,3 +14,5 @@ data:
   OTEL_EXPORTER: otlp
   OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector.observability:4318
   MAX_LLM_CALLS: "20"
+  # In-cluster Valkey (redis.yaml) for dev; in production point at ElastiCache / Memorystore.
+  REDIS_URL: redis://valkey.ai-sdk:6379/0

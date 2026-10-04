@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
-from app.api import routes_catalog, routes_runs
+from app.api import routes_catalog, routes_runs, routes_state
 from app.container import Container, build_container
 from app.telemetry import instrument_app, setup_telemetry
 
@@ -43,6 +43,7 @@ def create_app(container: Container | None = None) -> FastAPI:
     )
     app.include_router(routes_runs.router)
     app.include_router(routes_catalog.router)
+    app.include_router(routes_state.router)
 
     @app.get("/healthz", tags=["ops"])
     async def healthz() -> dict:

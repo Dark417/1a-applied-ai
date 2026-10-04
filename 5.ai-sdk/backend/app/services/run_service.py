@@ -16,7 +16,7 @@ from app.config import Settings
 from app.core.adapter import AdapterError, RunContext
 from app.core.registry import AdapterRegistry, UnknownTarget
 from app.core.scope import RunScope, reset_scope, set_scope
-from app.core.sessions import SessionBusy, SessionMismatch, SessionRegistry
+from app.core.sessions import LockUnavailable, SessionBusy, SessionMismatch, SessionRegistry
 from app.providers.profile import ProviderProfile
 from app.schemas import Event, RunRequest, RunResponse
 from app.telemetry import run_duration, runs_counter, tracer
@@ -29,7 +29,8 @@ class ProviderUnavailable(ValueError):
 
 
 __all__ = [
-    "ProviderUnavailable", "RunService", "SessionBusy", "SessionMismatch", "UnknownTarget",
+    "LockUnavailable", "ProviderUnavailable", "RunService", "SessionBusy", "SessionMismatch",
+    "UnknownTarget",
 ]  # fmt: skip
 
 
@@ -46,7 +47,7 @@ class RunService:
         self.sessions = sessions
         self.settings = settings
 
-    def preflight(self, req: RunRequest) -> None:
+    async def preflight(self, req: RunRequest) -> None:
         if req.provider not in self.providers:
             raise UnknownTarget(
                 f"unknown provider {req.provider!r}; known: {', '.join(self.providers)}"
@@ -59,7 +60,7 @@ class RunService:
             )
         if not req.message and not req.resume:
             raise AdapterError("message is required (or resume, to continue a paused run)")
-        self.sessions.check(req)
+        await self.sessions.check(req)
 
     async def stream(self, req: RunRequest) -> AsyncIterator[Event]:
         """Yield the run's events. Call `preflight` first to turn errors into HTTP statuses."""
@@ -87,7 +88,7 @@ class RunService:
                         elif event.type == "interrupt":
                             outcome = "interrupted"
                         yield event
-        except (SessionBusy, SessionMismatch) as e:
+        except (SessionBusy, SessionMismatch, LockUnavailable) as e:
             outcome = "rejected"
             yield Event(type="error", message=str(e))
         finally:

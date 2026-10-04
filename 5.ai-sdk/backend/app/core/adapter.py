@@ -46,3 +46,29 @@ class AgentAdapter(Protocol):
 
 class AdapterError(Exception):
     """Raised by an adapter for a user-facing problem (bad pattern options, missing config)."""
+
+
+class StateOps(Protocol):
+    """Optional adapter capabilities behind the state API (docs/design/07-state-and-memory.md).
+
+    An adapter implements any subset; the API returns 501 for the rest. Each method reads the
+    framework's *own* store, so the answer shows how that framework models state.
+    """
+
+    async def history(self, rec: "SessionRecord", profile: "ProviderProfile") -> list[dict]: ...
+
+    async def checkpoints(self, rec: "SessionRecord", profile: "ProviderProfile") -> list[dict]: ...
+
+    async def fork(
+        self,
+        rec: "SessionRecord",
+        profile: "ProviderProfile",
+        checkpoint_id: str,
+        new: "SessionRecord",
+    ) -> None: ...
+
+    async def memories(
+        self, user_id: str, profile: "ProviderProfile", query: str
+    ) -> list[dict]: ...
+
+    async def forget(self, rec: "SessionRecord", profile: "ProviderProfile") -> None: ...

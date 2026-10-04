@@ -71,6 +71,18 @@ class Settings(BaseSettings):
     playwright_mcp_enabled: bool = False  # external MCP server via `npx @playwright/mcp`
     cli_timeout_s: float = 10.0
 
+    # --- state / cache server (docs/design/07-state-and-memory.md) ---
+    # redis://, rediss:// (TLS: ElastiCache in-transit encryption), Valkey, Memorystore. Empty = the
+    # in-process session registry and lock (one replica only).
+    redis_url: str = ""
+    session_lock_ttl_s: int = 300
+    llm_cache_ttl_s: int = 3600
+    # langgraph:memory checkpointer on bedrock: agentcore | dynamodb | valkey | sqlite
+    langgraph_checkpointer: str = "agentcore"
+    dynamodb_checkpoint_table: str = "ai-sdk-checkpoints"
+    s3_checkpoint_bucket: str = ""  # DynamoDBSaver offloads large checkpoints here
+    valkey_url: str = ""  # ElastiCache for Valkey endpoint for ValkeySaver; defaults to REDIS_URL
+
     # --- runs ---
     max_llm_calls: int = 20
     guardrails_enabled: bool = True

@@ -1,4 +1,4 @@
-# Local stack: backend + OpenTelemetry Collector + Jaeger.
+# Local stack: backend + Valkey (cache server) + OpenTelemetry Collector + Jaeger.
 #   docker compose -f deploy/docker-compose.yaml up --build
 #   playground  http://localhost:8000      traces  http://localhost:16686
 services:
@@ -11,9 +11,18 @@ services:
       OTEL_EXPORTER: otlp
       OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
       DATA_DIR: /app/data/generated
+      REDIS_URL: redis://valkey:6379/0   # distributed session lock, registry, DIY caches
     ports: ["8000:8000"]
     volumes: ["backend-data:/app/data/generated"]
-    depends_on: [otel-collector]
+    depends_on: [otel-collector, valkey]
+
+  # Cache server. Valkey is the Redis-protocol fork that ElastiCache and Memorystore offer;
+  # `image: redis:7` works the same.
+  valkey:
+    image: valkey/valkey:8.0
+    command: ["valkey-server", "--appendonly", "yes"]   # keep checkpoints across restarts
+    ports: ["6379:6379"]
+    volumes: ["valkey-data:/data"]
 
   otel-collector:
     image: otel/opentelemetry-collector-contrib:0.115.1
@@ -35,3 +44,4 @@ services:
 
 volumes:
   backend-data:
+  valkey-data:
