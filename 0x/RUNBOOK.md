@@ -90,11 +90,12 @@ git push origin HEAD:main
 
 ## 7. 同步本地文件夹
 
-在 device_bash 里执行（只覆盖文件，不删除；`raw/` 保留）：
+先在容器里取 `SHA=$(git rev-parse HEAD)`（第 6 步 push 之后的那个 commit），再在 device_bash 里执行（只覆盖文件，不删除；`raw/` 保留）：
 
 ```bash
-curl -sL https://codeload.github.com/Dark417/1a-applied-ai/tar.gz/main \
-  | tar -xz --overwrite --strip-components=2 -C "$HOME/mnt/x-twitter" 1a-applied-ai-main/0x
+# 必须用 commit SHA；codeload 上的 tar.gz/main 有缓存，可能拿到旧版本
+curl -sL https://codeload.github.com/Dark417/1a-applied-ai/tar.gz/<SHA> \
+  | tar -xz --overwrite --wildcards --strip-components=2 -C "$HOME/mnt/x-twitter" "*/0x/*"
 ```
 
 ## 8. 汇报（SendUserMessage）
