@@ -1,0 +1,54 @@
+{
+ "id": "2028854979805790269",
+ "handle": "cholf5",
+ "name": "周尔复",
+ "url": "https://x.com/cholf5/status/2028854979805790269",
+ "created_at": "2026-03-03T15:28:16.000Z",
+ "text": "这个头脑风暴的 SKILL 非常强，身边的同事用过都说好。用了这个才知道 Prompt Engineering 的厉害，也才知道 SKILL 的重要性，鸟枪换炮的感觉。看着都是大白话，但一般人就是总结不出来。这些话就像咒语一样让 Agent 以更高效的方式为人类工作。\nhttps://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md",
+ "media": [
+  "https://pbs.twimg.com/media/HCfv2rnbgAAjlMA?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 36,
+ "thread": [
+  {
+   "id": "2028855402126086233",
+   "handle": "cholf5",
+   "name": "周尔复",
+   "url": "https://x.com/cholf5/status/2028855402126086233",
+   "created_at": "2026-03-03T15:29:56.000Z",
+   "text": "将想法头脑风暴成设计\n概述\n通过自然的协作式对话，帮助把想法转化为完整的设计和规格说明。\n\n先理解当前项目的上下文，然后一次只提出一个问题来逐步细化想法。当你清楚要构建什么之后，提出设计方案并获得用户批准。",
+   "has_video": false
+  },
+  {
+   "id": "2028874463257981319",
+   "handle": "cholf5",
+   "name": "周尔复",
+   "url": "https://x.com/cholf5/status/2028874463257981319",
+   "created_at": "2026-03-03T16:45:41.000Z",
+   "text": "这个有多强呢？强到我现在没有它拒绝 Vibe Coding。\n\n这个 Plan 是纯英文的，用的时候没必要翻译成中文，AI 看什么指令都一样，英文准确还省 Token。你用中文跟它聊，它一样用中文跟你回复。\n\n不过原版有个坑要注意，里面说：每次生成计划都 git commit，这个建议去掉。\n\n不多说了看效果吧👇",
+   "media": [
+    "https://pbs.twimg.com/media/HCgBmonagAAL9WB?format=jpg&name=large",
+    "https://pbs.twimg.com/media/HCgBsRAb0AERUrc?format=jpg&name=large",
+    "https://pbs.twimg.com/media/HCgB8TMbcAAnwoH?format=jpg&name=large",
+    "https://pbs.twimg.com/media/HCgCFrHaAAAjSEe?format=jpg&name=large"
+   ],
+   "has_video": false
+  },
+  {
+   "id": "2028874745333350724",
+   "handle": "cholf5",
+   "name": "周尔复",
+   "url": "https://x.com/cholf5/status/2028874745333350724",
+   "created_at": "2026-03-03T16:46:48.000Z",
+   "text": "勘误：「这个 Plan」应是「这个 SKILL」",
+   "has_video": false
+  }
+ ],
+ "title": "obra/superpowers 的 brainstorming SKILL",
+ "category": "Skills & Prompt",
+ "kind": "工具推荐 + 使用心得",
+ "summary": "推荐 obra/superpowers 里的 brainstorming SKILL.md：先理解项目上下文，每次只问一个问题，逐步把想法细化成设计和规格，确认后再动手。作者的体会：英文原版不用翻译，更准也更省 token；原版里「每次生成计划都 git commit」建议去掉。是「好 skill 的写法」的范例，可以对照学习。"
+}

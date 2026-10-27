@@ -1,0 +1,22 @@
+{
+ "id": "2071649423042412597",
+ "handle": "AnatoliKopadze",
+ "name": "Anatoli Kopadze",
+ "url": "https://x.com/AnatoliKopadze/status/2071649423042412597",
+ "created_at": "2026-06-29T17:38:06.000Z",
+ "text": "Spotify Chief Architect, Niklas Gustavsson:\n\n\"Once we implemented loops in our workflow, our agent success rate went from 20-30% to 80%.\"\n\n26 minutes with Claude Code creator Boris Cherny on how Spotify runs AI agents across 20 million lines of code.\n\nToday 73% of their code is written by AI, most merged without a human ever seeing it.\n\nThe model matters less than the loop you build around it.\n\nWatch it, then read the full guide on building loops below.",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 13,
+ "keywords": [
+  "Spotify",
+  "Boris Cherny",
+  "agent loops",
+  "Claude Code"
+ ],
+ "gist": "Spotify 首席架构师：引入 loop 后 agent 成功率从 20–30% 提到 80%；Spotify 73% 的代码由 AI 写。核心观点：模型不如外围的 loop 重要。",
+ "title": "Spotify：引入 loop 后 agent 成功率 20–30% → 80%",
+ "category": "Harness & Loop Engineering",
+ "kind": "案例分享",
+ "summary": "Spotify 首席架构师和 Boris Cherny 的 26 分钟对谈要点：Spotify 在 2000 万行代码上运行 agent，引入 loop 后成功率从 20–30% 提升到 80%，现在 73% 的代码由 AI 写，大部分没经过人工审查就合并了。核心论点：模型不如外围的 loop 重要。是「loop engineering 在大规模生产中有效」的一手案例。"
+}

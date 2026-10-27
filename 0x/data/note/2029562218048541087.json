@@ -1,0 +1,82 @@
+{
+ "id": "2029562218048541087",
+ "handle": "EHuanglu",
+ "name": "el.cine",
+ "url": "https://x.com/EHuanglu/status/2029562218048541087",
+ "created_at": "2026-03-05T14:18:34.000Z",
+ "text": "AI ending interior design\n\nNano banana 2 now can turn sketch floor plan into 4K 3D rendering with accurate dimension, take photos for each room, and 1-click furniture change\n\nused to cost $100k and months.. now cents and mins\n\nstep by step tutorial on OpenArt:",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 33,
+ "thread": [
+  {
+   "id": "2029562220401533058",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029562220401533058",
+   "created_at": "2026-03-05T14:18:35.000Z",
+   "text": "nano banana 2's understanding of dimension and 3D space is so crazy now, its like a personal designer in your pocket\n\nstep 1:\n\ngo to http://openart.ai -> edit image -> select nano banana 2 -> upload floor plan -> type prompt (reply here if you want my prompt)",
+   "has_video": true
+  },
+  {
+   "id": "2029562223320842637",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029562223320842637",
+   "created_at": "2026-03-05T14:18:36.000Z",
+   "text": "step 2: take realistic photo - living room\n\nhighlight the room that you want to take photo, draw a camera to let AI know the camera angle, upload it as ref image and use prompt below\n\nprompt:\n\nrealistic interior render of a modern wooden cabin living room, viewed from the camera",
+   "has_video": false
+  },
+  {
+   "id": "2029562227951313222",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029562227951313222",
+   "created_at": "2026-03-05T14:18:37.000Z",
+   "text": "step 3: take realistic photo - kitchen\n\nprompt:\n\nUltra-realistic interior render of a small modern wooden cabin kitchen, viewed from kitchen entry area, looking towards the sink side as indicated in the floor plan.\n\nThe layout and furniture placement must match the floor plan",
+   "has_video": false
+  },
+  {
+   "id": "2029562233731027345",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029562233731027345",
+   "created_at": "2026-03-05T14:18:38.000Z",
+   "text": "step 4: change furnitures\n\nupload both the living room photo and your sofa as ref image and prompt 'change the sofa'\n\nyou can also highlight certain area to make precise edit",
+   "has_video": false
+  },
+  {
+   "id": "2029562237954691532",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029562237954691532",
+   "created_at": "2026-03-05T14:18:39.000Z",
+   "text": "step 5: make video\n\nuse the living room and kitchen photo as start and end frame to generate video",
+   "has_video": true
+  },
+  {
+   "id": "2029563107991760948",
+   "handle": "EHuanglu",
+   "name": "el.cine",
+   "url": "https://x.com/EHuanglu/status/2029563107991760948",
+   "created_at": "2026-03-05T14:22:07.000Z",
+   "text": "if you found this inspiring,\n\nfollow @EHuanglu to survive AI\n\nlike & repost so more people see this 👇",
+   "quote": {
+    "name": "el.cine @EHuanglu · Mar 5",
+    "text": "AI ending interior design\n\nNano banana 2 now can turn sketch floor plan into 4K 3D rendering with accurate dimension, take photos for each room, and 1-click furniture change\n\nused to cost $100k and months.. now cents and mins\n\nstep by step tutorial on OpenArt:"
+   },
+   "has_video": true
+  }
+ ],
+ "keywords": [
+  "Nano Banana 2",
+  "室内设计",
+  "floor plan → 3D"
+ ],
+ "gist": "Nano Banana 2 能把手绘户型图变成 4K 3D 渲染，还能一键换家具；附 OpenArt 教程。",
+ "title": "Nano Banana 2：手绘户型图 → 4K 3D 室内渲染",
+ "category": "其他应用",
+ "kind": "教程",
+ "summary": "图像模型应用教程：在 OpenArt 里用 Nano Banana 2，把手绘户型图转成尺寸准确的 4K 3D 渲染；再在图上标出房间和相机角度，生成各房间的写实照片；还能一键换家具。thread 里给出分步操作和 prompt。和 agent 主题无关，属于 AI 应用案例。"
+}

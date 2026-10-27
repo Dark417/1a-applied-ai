@@ -1,0 +1,20 @@
+{
+ "id": "2055978135246807138",
+ "handle": "rohanpaul_ai",
+ "name": "Rohan Paul",
+ "url": "https://x.com/rohanpaul_ai/status/2055978135246807138",
+ "created_at": "2026-05-17T11:46:00.000Z",
+ "text": "New Google paper: A forecast needs context, not just history.\n\nSome patterns are caused by events, not time. Nexus reframes forecasting as a reasoning problem, where events and numbers have to explain each other.\n\nNexus argues that forecasting improves when models read the world around the numbers, not just the numbers themselves.\n\nIn the Zillow tests, one Claude-based version cut average MAPE by 86.6% versus direct chain-of-thought prompting.\n\nThat matters because most time series models are fluent in pattern, but mute about cause.\n\nA housing inventory curve can reflect seasonality, mortgage pressure, migration, layoffs, and local supply, while a stock price can be bent by earnings, regulation, hype, and fear.\n\nNexus separates those jobs instead of asking one prompt to do everything.\n\nOne agent turns messy historical text into a clean event timeline, one reads the broad regime, another tracks local shocks, and a synthesizer reconciles them with calibration from past errors.\n\nThe interesting result is not merely that context helps, but that structure helps the language model use context without losing the time series.\n\nThe evidence is still narrow: Zillow counts, seven equities, post-cutoff data, and single-run evaluations, so this is not a universal law of forecasting.\n\nBut the direction is clear: future forecasters will not only extrapolate curves; they will argue about what made the curve move.\n\n----\n\nPaper Link – arxiv. org/abs/2605.14389\n\nPaper Title: \"Nexus : An Agentic Framework for Time Series Forecasting\"",
+ "media": [
+  "https://pbs.twimg.com/media/HIgjZQoaQAAJ9xw?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 18,
+ "thread": [],
+ "title": "Google Nexus：把预测变成推理问题",
+ "category": "Evals & 研究",
+ "kind": "论文解读",
+ "summary": "解读 Google 的 Nexus 论文。观点：时间序列预测需要的是「上下文」，不只是历史数据；很多模式由事件驱动，而不是由时间驱动。Nexus 把任务拆给多个 agent：一个把杂乱文本整理成事件时间线，一个判断宏观状态，其他做数值推理，让事件和数字互相解释。在 Zillow 数据上，基于 Claude 的版本 MAPE 比直接 CoT 降低 86.6%。是多 agent 用于分析类任务的例子。"
+}

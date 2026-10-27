@@ -1,0 +1,20 @@
+{
+ "id": "2029459404710658307",
+ "handle": "NextBullReady",
+ "name": "董币哥",
+ "url": "https://x.com/NextBullReady/status/2029459404710658307",
+ "created_at": "2026-03-05T07:30:02.000Z",
+ "text": "OpenClaw 现在可以抓取任何网站而不被屏蔽——零机器人检测，原生绕过 Cloudflare，比 BeautifulSoup 快 774 倍。\n\n无需维护选择器。无需变通方案。只需数据。\n\n这是不公平的优势，而且完全开源。\nhttps://github.com/D4Vinci/Scrapling",
+ "media": [
+  "https://pbs.twimg.com/media/HCoWkW3a4AAEiMM?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 35,
+ "thread": [],
+ "title": "Scrapling：绕过反爬的开源抓取库",
+ "category": "其他",
+ "kind": "工具推荐",
+ "summary": "推荐开源抓取库 Scrapling（D4Vinci/Scrapling），号称能绕过 Cloudflare 等反机器人检测，比 BeautifulSoup 快 774 倍，不用维护选择器。帖子把它和 OpenClaw 绑在一起宣传。注意：绕过网站反爬可能违反目标网站条款。"
+}

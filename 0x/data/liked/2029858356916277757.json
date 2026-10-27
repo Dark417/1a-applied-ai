@@ -1,0 +1,29 @@
+{
+ "id": "2029858356916277757",
+ "handle": "nopinduoduo",
+ "name": "我真的没有拼多多",
+ "url": "https://x.com/nopinduoduo/status/2029858356916277757",
+ "created_at": "2026-03-06T09:55:19.000Z",
+ "media": [
+  "https://pbs.twimg.com/media/HCuAMbtbwAAl29X?format=jpg&name=large",
+  "https://pbs.twimg.com/media/HCuBMqibcAA62eV?format=png&name=large",
+  "https://pbs.twimg.com/media/HCuAcCxaEAAAimX?format=png&name=large",
+  "https://pbs.twimg.com/media/HCuAfTXaUAM1zac?format=png&name=large",
+  "https://pbs.twimg.com/media/HCuAuXxaUAI4DwL?format=png&name=large",
+  "https://pbs.twimg.com/media/HCuA2fmbgAAuieX?format=png&name=large"
+ ],
+ "has_video": false,
+ "x_article": {
+  "title": "Google最新论文：目前只有2.5%的skills可用，大多数是垃圾，以及如何优化skills？",
+  "body": "由 Google 的开发者和研究团队今年 2 月份发布的论文《SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks》对目前 skills 进行了综述性的研究。\n其中有几个看似反常又很有意思的点：\n目前有 4 万多个 skills，只有 1k 个左右是有用的\nAgent/LLM 写的 skills 都是垃圾，高级的 skills 都是手写的\n60%-80% 的 skills 都集中在软件工程领域\n不同任务skills的数量\n一、三大核心发现\n1. \"4 万个 Skills 中只有 1k 个有用\"\n论文调研了目前社区（如开源项目、Agent 平台）中存在的庞大 Skills 生态。\n研究指出，虽然各种仓库里托管了成千上万个（约 40,000+）由用户贡献的 Skills，但经过测试发现，其中绝大多数是冗余、低质或由于环境失效而不可用的。\n论文最终通过严格筛选和人工校验，精选出了约 1,000 个左右的高质量、确定性强（Curated Skills）作为 Benchmark 的核心。\n2. \"Agent 写的 Skills 是垃圾，高级 Skills 必须手写\"\n这是该论文最扎心的结论之一。\n研究对比了三种情况：\nNo Skills（无技能补充）\nCurated Skills（人工编写/筛选的优质技能）\nSelf-generated Skills（LLM 自动生成的技能）\n实验结果显示，人工精心编写的技能能将任务成功率提高约 16.2%（在医疗等复杂领域甚至能提高 51.9%）。\n而 LLM 自动生成的技能几乎没有任何正面贡献，有时甚至会因为引入错误的 API 调用或逻辑而产生负面影响。\n论文指出，目前的模型还没有能力\"自我编写\"出它们真正受益的高质量程序化知识。\n（模型在垂直领域的能力还欠缺，需要专业的知识技能来弥补）\n3. \"60%-80% 的 Skills 集中在软件工程\"\n论文在分析现有的 Skills 分布时提到，目前的 Agent 技能生态极度不平衡。\n大约 60% 到 80% 的现有技能都集中在软件工程（Software Engineering）和数据分析（Data Analysis）领域，而其他垂直行业（如法律、医疗、制造业）的高质量技能非常匮乏。\n二、我的思考\n其实倒也符合我们的常识和认知印象了，AI 直接创建的 skills 都是垃圾。\n因为真正有价值的 SOP，AI 是无法直接创建的，这是个人经验的积累。\n其次呢，真正有价值的 skills，大家大概也不想完全开源出来的。\n这包括创作的风格、思路等等。\n以及，为何主要集中在软件工程领域？\n似乎也不难理解，程序员真是一群天生爱开源的人，再加上 skills 本身从 Claude Code、从技术圈诞生的，目前量最多也好理解了。\n我想一个启发是，教会非技术圈，其它垂直领域的人（如法律、医疗、制造业）沉淀形成自己的 skills，将是一件很有价值的事情。\n三、五个优化方向\n最后论文通过实验发现了多个优化方向：\n优化一：控制 Skills 数量\n    结论：Skills 不是越多越好，过多的内容会造成认知负担或互相冲突的建议。\n优化二：控制 Skills 复杂度\n  结论：Focused 的、分步骤的指导 + 至少一个工作示例 > 冗长的 exhaustive 文档。智能体很难从长篇大论中提取有用信息。\n优化三：匹配领域需求\n不同领域获益差异巨大：\n  结论：在模型预训练中缺乏专业知识的领域（如医疗数据协调、制造工作流），Skills 帮助最大；而模型本来就很强的领域，Skills 反而可能引入噪音。\n优化四：利用 Skills 弥补模型规模\n论文发现：\nClaude Haiku（有 Skills）：27.7%\nClaude Opus（无 Skills）：22.0%\n结论：小模型 + 好 Skills 可以超越大模型。这对于成本敏感的场景很有价值。\n启示：用好 skills，完全可以实现小模型的弯道超车。\n优化五：针对 Harness 做适配\n论文发现不同智能体框架对 Skills 的利用能力不同：\n  结论：选择合适的 agent harness 很重要，有些框架更善于检索和使用 Skills。\n四、实践建议\n在论文的 Discussion 部分，作者总结了关于 Skills 编写的建议：\n1. 简洁优先：简洁、分步骤的指导 + 至少一个工作示例，往往比冗长的 exhaustive 文档更有效\n2. 模块化：模块化的 Skills 在多部分任务上组合效果更好\n3. 适配 Harness：Skills 应该明确匹配 harness 的约束（如 JSON-only 协议的重复格式提醒）\n4. 避免过度：确保 Skills 提供的是\"如何做\"的程序性指导，而不是\"答案是什么\"的声明性内容\n论文原文：\nhttps://arxiv.org/html/2602.12670v1"
+ },
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 27,
+ "keywords": [
+  "SkillsBench",
+  "Google",
+  "agent skills",
+  "skills 质量"
+ ],
+ "gist": "解读 Google 的 SkillsBench 论文：4 万多个 skills 里只有约 1k 个可用，LLM 写的 skill 基本不行，好的 skill 都是手写的。"
+}

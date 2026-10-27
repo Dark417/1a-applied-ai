@@ -1,0 +1,12 @@
+{
+ "Harness & Loop Engineering": "agent 外壳（工具/上下文/权限/记忆）、循环与自我改进",
+ "Graph & Multi-Agent": "graph engineering、多 agent 编排与流水线",
+ "Agent Memory & RAG": "agent 记忆分层、RAG、知识库",
+ "Coding Agent 实践": "Claude Code / Codex 的用法、工作流与配套工具",
+ "Skills & Prompt": "Skills 设计、可复用 prompt 与技能库",
+ "OpenClaw & 个人 Agent": "OpenClaw 生态、常驻个人助理、一人公司",
+ "Evals & 研究": "评测方法、论文与综述",
+ "LLM 基础 & 课程": "LLM 原理与系统课程",
+ "其他应用": "agent 之外的 AI 应用（GNN 量化、图像生成等）",
+ "其他": "推广、资源链接、信息量低的帖子"
+}

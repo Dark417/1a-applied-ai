@@ -1,0 +1,17 @@
+{
+ "id": "2029350130261082429",
+ "handle": "sodawhite_dev",
+ "name": "苏打白.Dev",
+ "url": "https://x.com/sodawhite_dev/status/2029350130261082429",
+ "created_at": "2026-03-05T00:15:49.000Z",
+ "text": "刚看到一个硬核案例：用30个AI Agent替换30个工程师，12天交付完整代码库（44K行TS、175 PR、1500+测试、CI挂了还能自己修。。。）。",
+ "has_video": true,
+ "source": "liked-reply-root",
+ "via_id": "2029350223575920769",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 28,
+ "title": "30 个 Agent 替代 30 个工程师，12 天交付完整代码库",
+ "category": "Graph & Multi-Agent",
+ "kind": "案例分享",
+ "summary": "一个多 agent 落地案例：用 30 个 AI agent 替代 30 个工程师，12 天交付 4.4 万行 TypeScript、175 个 PR、1500+ 个测试，CI 挂掉时 agent 还能自己修。帖子本身只有数据，没有讲架构细节。价值在于给「大规模并行 agent 能不能交付真实代码库」提供了一个量级参考。"
+}

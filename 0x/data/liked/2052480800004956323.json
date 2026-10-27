@@ -1,0 +1,18 @@
+{
+ "id": "2052480800004956323",
+ "handle": "OpenAI",
+ "name": "OpenAI",
+ "url": "https://x.com/OpenAI/status/2052480800004956323",
+ "created_at": "2026-05-07T20:08:50.000Z",
+ "text": "Codex now works directly in Chrome on macOS and Windows.\n\nIt’s even better at working with apps and sites in Chrome, and now works in parallel across tabs in the background without taking over your browser.\n\nTo get started, install the Chrome plugin in the Codex app.",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 21,
+ "keywords": [
+  "OpenAI",
+  "Codex",
+  "Chrome plugin",
+  "browser agent"
+ ],
+ "gist": "OpenAI：Codex 现在能直接在 Chrome 里工作，可以在后台多标签页并行操作，不会抢占你的浏览器。"
+}

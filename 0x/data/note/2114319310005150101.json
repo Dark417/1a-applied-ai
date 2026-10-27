@@ -1,0 +1,17 @@
+{
+ "id": "2114319310005150101",
+ "handle": "AnnatarXBT",
+ "name": "Annatar.md",
+ "url": "https://x.com/AnnatarXBT/status/2114319310005150101",
+ "created_at": "2026-10-25T11:33:00.000Z",
+ "text": "agent memory, in 13 pages\n\nthe fix that took one setup from 26,000 tokens per query down to 1,800\n\nyour agent reads the same 12 files every morning, reaches the same conclusions and bills you again for both\n\nthe 5 layers that stop it:\n> working memory - what it sees right now, gone once the window fills\n> episodic memory - a timestamped log, so the deploy that died at 3am gets explained once\n> semantic memory - facts in a knowledge graph, like \"this user prefers TypeScript\"\n> procedural memory - three approaches tried, the one that worked saved as a skill\n> forgetting - what to delete before contradictions pile up\n\nthe numbers:\n> Mem0 - 1,800 tokens per query instead of 26,000, with 91% lower latency\n> Snowflake - one ontology layer, 20% more accuracy, 39% fewer tool calls\n\nthe forgetting engine is the layer almost nobody builds, and it decides whether the other four stay worth trusting\n\nmemory cuts what your agent reads. Jev cuts what it pays to decide, and on the decision side that took one Claude bill from $765 to $3 a month 👇",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 0,
+ "thread": [],
+ "title": "Agent 记忆的 5 层架构（13 页）",
+ "category": "Agent Memory & RAG",
+ "kind": "概念介绍 + 数据",
+ "summary": "介绍 agent 记忆的五层：working（当前窗口）、episodic（带时间戳的日志）、semantic（知识图谱里的事实）、procedural（把有效做法沉淀成 skill）、forgetting（删除过时或矛盾的信息）。用数据说明收益：Mem0 每次查询从 2.6 万 token 降到 1800，延迟降 91%；Snowflake 加一层 ontology，准确率 +20%，tool call −39%。核心观点：几乎没人做的「遗忘」层，决定了其余四层还值不值得信任。"
+}

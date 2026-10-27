@@ -1,0 +1,21 @@
+{
+ "id": "2046454424806343139",
+ "handle": "KengGuangLong",
+ "name": "非著名程序员",
+ "url": "https://x.com/KengGuangLong/status/2046454424806343139",
+ "created_at": "2026-04-21T05:02:10.000Z",
+ "text": "谷歌 Gemini 团队主管 Addy Osmani 最近开源了一个叫 Agent Skills 的项目，短时间内在 GitHub 上拿到了 18000 多个 Star，热度很高。\n\n这个项目做的事情说起来也不复杂：把资深工程师多年积累的工作流程和开发规范，整理成一套标准化的技能库，让 AI 编程助手在写代码的每个环节都能按照统一的高标准来执行。你可以理解为，它给 AI 配了一本老工程师的操作手册。\n\n整套技能库围绕软件开发的完整生命周期来设计，从最早的需求定义，到规划、构建、验证、评审，一直到最后的发布上线，六个阶段总共包含 20 个核心技能。每个阶段该做什么、该注意什么，都有对应的规范。\n\n用起来也很直观，项目提供了 7 个触发命令。比如输入 /spec 就开始写需求文档，/plan 自动拆解任务，/build 进入编码阶段，/test 跑测试，/ship 走部署流程。每个命令背后会自动调用相关的技能组合，不需要你手动一个个去配置。\n\n兼容性方面，目前支持 Claude Code、Gemini CLI、Codex、Cursor 这些主流的 AI 编程工具，覆盖面已经很广了。\n\n如果你已经在日常开发中用上了 AI 辅助工具，可以试试把这套 Skills 接进去，看看交付质量能不能再上一个台阶。\n\n传送门：",
+ "card": {
+  "text": "GitHub - addyosmani/agent-skills: Production-grade engineering skills for AI coding agents.",
+  "href": "https://t.co/8pMhW2Xjod"
+ },
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 28,
+ "thread": [],
+ "title": "Addy Osmani 开源 Agent Skills：老工程师的操作手册",
+ "category": "Skills & Prompt",
+ "kind": "工具介绍",
+ "summary": "介绍 Google 的 Addy Osmani 开源的 Agent Skills（1.8 万+ star）：把资深工程师的工作流和规范做成标准化技能库，覆盖需求、规划、构建、验证、评审、发布 6 个阶段，共 20 个核心 skill，用 /spec、/plan、/build、/test、/ship 等 7 个命令触发。支持 Claude Code、Gemini CLI、Codex、Cursor。思路是把工程规范显式编码进 agent。"
+}

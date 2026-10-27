@@ -1,0 +1,21 @@
+{
+ "id": "2113719510985269442",
+ "handle": "hayatomaruu",
+ "name": "hayato",
+ "url": "https://x.com/hayatomaruu/status/2113719510985269442",
+ "created_at": "2026-10-23T19:49:37.000Z",
+ "text": "Anthropic engineer:\n\n“Anthropic hired me at $350K–$950K because I know how to build harnesses.\n\n99% of people still hand-roll multi-agent systems and wonder why they break.\n\nI build systems that run loops + sandbox tools + turn yesterday’s logs into new skills — same model, 10x more reliable agents that keep improving overnight.”\n\nOpus 5.5 → Agents → Harness → Loops → Graphs\n\nIn a short workshop, he shows exactly how to build one from scratch.\n\nstep 1 → harness handles loops, context, and sandboxing\n\nstep 2 → brain and hands separated — 60% faster to first token\n\nstep 3 → runs server-side, resumes from the log after crashes\n\nstep 4 → failure is cheap — retry and replay instead of starting over\n\nstep 5 → yesterday’s logs become new memory — the system wakes up smarter  \n\nAnthropic calls this “dreaming”.\n\nMost people spend weeks building this by hand.  \nYou don’t have to.\n\nBookmark and watch it.\n\nThen read the full Opus 5.5 harness engineering guide below ↓",
+ "quote": {
+  "name": "beamnxw ./ @beamnxw · Oct 6",
+  "text": "Stop letting unfinished Opus 5.5 runs eat your budget\n\nSet up the harness before your next long task\n\nSave progress, verify results, reuse the workflow\n\nThe full 7-layer setup below ↓"
+ },
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 2,
+ "thread": [],
+ "title": "Anthropic 工程师：用 harness 搭会自我改进的 agent",
+ "category": "Harness & Loop Engineering",
+ "kind": "搭建思路 / 视频推荐",
+ "summary": "转述一位 Anthropic 工程师的 workshop，给出搭 harness 的五步：①harness 负责 loop、上下文和沙箱；②「大脑」和「手」分离，首 token 快 60%；③服务端运行，崩溃后从日志恢复；④失败代价低，可以 retry/replay；⑤把昨天的日志变成新记忆（Anthropic 称为 dreaming）。主张：同一个模型，靠 harness 能让 agent 可靠 10 倍、越跑越好。偏营销口吻，但五步框架可用。"
+}

@@ -1,0 +1,30 @@
+{
+ "id": "2029350223575920769",
+ "handle": "sodawhite_dev",
+ "name": "苏打白.Dev",
+ "url": "https://x.com/sodawhite_dev/status/2029350223575920769",
+ "created_at": "2026-03-05T00:16:11.000Z",
+ "text": "地址在这：",
+ "card": {
+  "text": "GitHub - OrchestratorInc/agent-orchestrator: Open-source (Apache-2.0) orchestrator for Claude Code,...",
+  "href": "https://t.co/ys8LyplisL"
+ },
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 32,
+ "thread": [],
+ "parent": {
+  "id": "2029350130261082429",
+  "handle": "sodawhite_dev",
+  "name": "苏打白.Dev",
+  "url": "https://x.com/sodawhite_dev/status/2029350130261082429",
+  "created_at": "2026-03-05T00:15:49.000Z",
+  "text": "刚看到一个硬核案例：用30个AI Agent替换30个工程师，12天交付完整代码库（44K行TS、175 PR、1500+测试、CI挂了还能自己修。。。）。",
+  "has_video": true
+ },
+ "title": "30 个 agent 案例的开源地址：agent-orchestrator",
+ "category": "Graph & Multi-Agent",
+ "kind": "工具 / 案例",
+ "summary": "这是对上文案例（30 个 agent 替代 30 个工程师、12 天交付）的补充，给出开源地址：OrchestratorInc/agent-orchestrator，一个 Apache-2.0 的 Claude Code 编排器。上文是案例数据，这条是可以直接去读的代码，两者合起来看。"
+}

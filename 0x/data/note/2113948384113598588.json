@@ -1,0 +1,42 @@
+{
+ "id": "2113948384113598588",
+ "handle": "Sumanth_077",
+ "name": "Sumanth",
+ "url": "https://x.com/Sumanth_077/status/2113948384113598588",
+ "created_at": "2026-10-24T10:59:04.000Z",
+ "text": "Google open-sourced Harness²!\n\nHarness² is a framework for recursively improving the harness around an agent while keeping the underlying model weights fixed.\n\nThe interesting part is that it does this at two different levels.\n\nFor the current task, Harness² uses a Propose → Probe → Compose loop. It proposes changes to the harness, runs those variants on the same task, compares how the executions behave, and then composes a better harness from that evidence.\n\nThat is the task-level recursion.\n\nBut the process does not reset after every task.\n\nHarness² also keeps the harnesses it adopted and the lessons supported by execution evidence, then uses those to guide how future harnesses should be improved on new tasks.\n\nThat is the harnessing-level recursion.\n\nSo one loop improves the harness for the task in front of the agent.\n\nThe second loop improves how the system learns to build better harnesses over time.\n\nThe editable harness itself can include the system prompt, guardrails, memory, tool guidance, subagents, skills, scripts, and plugins.\n\nYou can also run the recursion in two ways:\n\nParallel recursion explores more candidate harnesses.\n\nSequential recursion carries the refined harness and accumulated evidence through multiple Propose → Probe → Compose steps.\n\nGoogle reports that even a single Harness² step improved GLM-5 and Gemini 3.5 Flash across JobBench, LAB, and WorkBuddy-Bench, with larger task-level recursion budgets bringing further gains.\n\nThat is what makes Harness² more interesting than just another agent framework.\n\nIt is treating the harness itself as something that can be iteratively improved from execution evidence, both within a task and across tasks.\n\n100% open source.\n\nI’ve shared the GitHub repo in the comments!",
+ "media": [
+  "https://pbs.twimg.com/media/HVZAbCYasAAAe6R?format=png&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 1,
+ "thread": [
+  {
+   "id": "2113948387884294503",
+   "handle": "Sumanth_077",
+   "name": "Sumanth",
+   "url": "https://x.com/Sumanth_077/status/2113948387884294503",
+   "created_at": "2026-10-24T10:59:05.000Z",
+   "text": "Github Repo:",
+   "card": {
+    "text": "GitHub - google-research/harness2",
+    "href": "https://t.co/TLI4wGRKWB"
+   },
+   "has_video": false
+  }
+ ],
+ "keywords": [
+  "Harness²",
+  "Google",
+  "harness engineering",
+  "Propose→Probe→Compose",
+  "self-improving"
+ ],
+ "gist": "Google 开源 Harness²：模型权重不动，递归改进 agent 外围的 harness。任务内用 Propose→Probe→Compose 循环，跨任务保留已验证的 harness 和经验。",
+ "title": "Google 开源 Harness²：递归改进 agent harness",
+ "category": "Harness & Loop Engineering",
+ "kind": "工具发布 / 方法介绍",
+ "summary": "介绍 Google 开源的 Harness²：不改模型权重，只递归改进 agent 外围的 harness。分两层递归：任务内用 Propose→Probe→Compose，提出 harness 变体、在同一任务上试跑、比较执行轨迹，再组合出更好的版本；跨任务保留已采用的 harness 和有执行证据支撑的经验，用来指导以后怎么改。重点是「harness 本身也可以被自动优化」，是 self-improving agent 的一条工程路线。"
+}

@@ -1,0 +1,22 @@
+{
+ "id": "2022530044434825310",
+ "handle": "openclaw",
+ "name": "OpenClaw",
+ "url": "https://x.com/openclaw/status/2022530044434825310",
+ "created_at": "2026-02-14T04:35:14.000Z",
+ "text": "🦞 OpenClaw 2026.2.13\n\n🤗 HuggingFace support\n✉️ Messages survive crashes (write-ahead queue)\n🎙️ Discord voice messages + custom presence\n🧵 Threading that actually works\n🔒 Massive security hardening pass\n🤖 gpt-5.3-codex-spark support\n\n337 commits. The community never sleeps 🫡",
+ "card": {
+  "text": "Release openclaw 2026.2.13 · openclaw/openclaw",
+  "href": "https://t.co/EdqQRoYorZ"
+ },
+ "has_video": false,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 37,
+ "keywords": [
+  "OpenClaw 2026.2.13",
+  "HuggingFace",
+  "write-ahead queue",
+  "release"
+ ],
+ "gist": "OpenClaw 2026.2.13 发布：支持 HuggingFace，消息崩溃后可恢复（write-ahead queue），线程功能修好，支持 codex-spark。"
+}

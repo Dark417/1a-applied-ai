@@ -1,0 +1,21 @@
+{
+ "id": "2029562218048541087",
+ "handle": "EHuanglu",
+ "name": "el.cine",
+ "url": "https://x.com/EHuanglu/status/2029562218048541087",
+ "created_at": "2026-03-05T14:18:34.000Z",
+ "text": "AI ending interior design\n\nNano banana 2 now can turn sketch floor plan into 4K 3D rendering with accurate dimension, take photos for each room, and 1-click furniture change\n\nused to cost $100k and months.. now cents and mins\n\nstep by step tutorial on OpenArt:",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 29,
+ "keywords": [
+  "Nano Banana 2",
+  "室内设计",
+  "floor plan → 3D"
+ ],
+ "gist": "Nano Banana 2 能把手绘户型图变成 4K 3D 渲染，还能一键换家具；附 OpenArt 教程。",
+ "title": "Nano Banana 2：手绘户型图 → 4K 3D 室内渲染",
+ "category": "其他应用",
+ "kind": "教程",
+ "summary": "图像模型应用教程：在 OpenArt 里用 Nano Banana 2，把手绘户型图转成尺寸准确的 4K 3D 渲染；再在图上标出房间和相机角度，生成各房间的写实照片；还能一键换家具。thread 里给出分步操作和 prompt。和 agent 主题无关，属于 AI 应用案例。"
+}

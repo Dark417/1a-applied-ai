@@ -1,0 +1,34 @@
+{
+ "id": "2024602668258517440",
+ "handle": "hasantoxr",
+ "name": "Hasan Toor",
+ "url": "https://x.com/hasantoxr/status/2024602668258517440",
+ "created_at": "2026-02-19T21:51:06.000Z",
+ "text": "🚨 Google DeepMind + Meta + Amazon just dropped a 100 page roadmap that redefines what AI agents actually are.\n\nThey analyzed every major agentic reasoning framework across planning, tool use, memory, and multi-agent coordination.\n\nSingle-agent in stable environments: works great.\nMulti-agent in dynamic environments: falls apart.\n\nThe problem isn't intelligence. It's how agents reason under uncertainty.\n\nThree layers they found that actually matter:\n\n→ Foundational reasoning (planning + tool use in stable settings)\n→ Self-evolving reasoning (agents that adapt through feedback and memory)\n→ Collective reasoning (multiple agents coordinating toward shared goals)\n\nEven the best models struggle in open-ended environments.\nClosed-world benchmarks are lying to you.\n\nReinforcement learning helps post-training. But in-context reasoning at test time? Still broken for long-horizon tasks.\n\nThe real finding: most AI agent tutorials you've seen are built on single-task, static benchmarks.\n\nReal-world deployment robotics, healthcare, autonomous research breaks every framework on the market.\n\nAnd almost nobody is building for that gap.\n\nThe future isn't smarter models. It's agents that plan, act, and learn across dynamic environments without falling apart mid-task.\n\nThis survey is the closest thing to a unified blueprint for that.\n\n100% free on arXiv.",
+ "media": [
+  "https://pbs.twimg.com/media/HBjVZZnbUAAKjGd?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 41,
+ "thread": [
+  {
+   "id": "2024602680849732055",
+   "handle": "hasantoxr",
+   "name": "Hasan Toor",
+   "url": "https://x.com/hasantoxr/status/2024602680849732055",
+   "created_at": "2026-02-19T21:51:09.000Z",
+   "text": "Paper Link:",
+   "card": {
+    "text": "arxiv.org\nA Survey of Agentic Reasoning for Large Language Models: Towards...\nReasoning is a fundamental cognitive process underlying inference, problem-solving, and decision-making. While large language models (LLMs) demonstrate strong reasoning capabilities in...",
+    "href": "https://t.co/q1mDD8uaA4"
+   },
+   "has_video": false
+  }
+ ],
+ "title": "DeepMind + Meta + Amazon：100 页 agentic reasoning 路线图",
+ "category": "Evals & 研究",
+ "kind": "综述解读",
+ "summary": "解读一篇 100 页的 agentic reasoning 综述，覆盖规划、工具使用、记忆、多 agent 协作。结论：单 agent 在稳定环境下表现好，多 agent 在动态环境下会崩；问题不在智能，而在不确定性下怎么推理。分三层：基础推理（稳定环境中规划 + 用工具）、自我演化推理（靠反馈和记忆适应）、集体推理（多 agent 协作）。警告：封闭世界的 benchmark 会高估能力。"
+}

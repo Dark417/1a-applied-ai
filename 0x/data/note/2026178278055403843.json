@@ -1,0 +1,24 @@
+{
+ "id": "2026178278055403843",
+ "handle": "GitHub_Daily",
+ "name": "GitHubDaily",
+ "url": "https://x.com/GitHub_Daily/status/2026178278055403843",
+ "created_at": "2026-02-24T06:12:00.000Z",
+ "text": "用 AI 写代码最怕的情况，就是修好了一个 Bug，却在不知名的地方引爆了三个新 Bug。\n\n目前的 AI 编程助手大多只是指哪改哪，无法深入了解代码之间的深层依赖。\n\nGitHub 上最近开源的 GitNexus，试图解决这个问题。给项目代码建立了一张知识图谱，让 AI 能够理解整个项目的架构、依赖和调用链。\n\n通过 MCP 服务器协议接入到 Cursor 或 Claude Code，让 AI 在修改代码前，先看清函数间的上下游关系。\n\n甚至能生成架构图，或者在 Web 端可视化查看整个代码库的逻辑脉络。\n\nGitHub：http://github.com/abhigyanpatwari/GitNexus\n\n提供 CLI 和 Web 两种模式，支持 TypeScript、Python、Java 等主流编程语言。\n\n所有索引和分析都在本地完成，数据不上传服务器，隐私性做得不错。\n\n如果你习惯用 AI 辅助编程，又担心它的改动破外原代码，这个增强上下文的工具值得试下整合进工作流。",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 38,
+ "thread": [],
+ "keywords": [
+  "GitNexus",
+  "代码知识图谱",
+  "MCP",
+  "依赖分析"
+ ],
+ "gist": "GitNexus 开源：给代码库建知识图谱，通过 MCP 接入 Cursor / Claude Code，让 AI 改代码前先看清调用链。完全本地运行。",
+ "title": "GitNexus：给代码库建知识图谱，经 MCP 喂给 AI",
+ "category": "Coding Agent 实践",
+ "kind": "工具介绍",
+ "summary": "GitNexus 解决「AI 修一个 bug 引出三个新 bug」的问题：给代码库建知识图谱，让 AI 理解架构、依赖和调用链；通过 MCP 接入 Cursor 或 Claude Code，改代码前先查上下游；能生成架构图，也能在 Web 端可视化。支持 TS、Python、Java，索引完全本地。属于给 coding agent 补上下文的工具。"
+}

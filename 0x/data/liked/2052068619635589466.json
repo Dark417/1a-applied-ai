@@ -1,0 +1,18 @@
+{
+ "id": "2052068619635589466",
+ "handle": "unusual_whales",
+ "name": "unusual_whales",
+ "url": "https://x.com/unusual_whales/status/2052068619635589466",
+ "created_at": "2026-05-06T16:50:59.000Z",
+ "text": "BREAKING: Anthropic has released a feature called \"dreaming\" which allows AI agents to self-improve",
+ "has_video": false,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 22,
+ "keywords": [
+  "Anthropic",
+  "dreaming",
+  "self-improving agents",
+  "新闻"
+ ],
+ "gist": "快讯：Anthropic 发布「dreaming」功能，让 agent 能自我改进。"
+}

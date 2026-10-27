@@ -1,0 +1,28 @@
+{
+ "id": "2050228936270037068",
+ "handle": "Suryanshti777",
+ "name": "Suryansh Tiwari",
+ "url": "https://x.com/Suryanshti777/status/2050228936270037068",
+ "created_at": "2026-05-01T15:00:44.000Z",
+ "media": [
+  "https://pbs.twimg.com/media/HHPgU7KbQAA1oUv?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "x_article": {
+  "title": "RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki Changes Everything",
+  "body": "Most people's AI + knowledge workflow has a dirty secret: it doesn't actually accumulate anything.\n\nYou upload your documents, ask a question, and the LLM scans raw chunks to assemble an answer. It feels productive—until you close the tab. Everything the system figured out disappears. Next session, it starts from zero again. Forever.\n\nThis is RAG. It powers NotebookLM, ChatGPT file uploads, and almost every “chat with your docs” product. It works—but it has a hard ceiling: there is no compounding. The system doesn’t get smarter about your knowledge; it just keeps re-deriving the same insights again and again.\n\nAndrej Karpathy proposes a pattern that breaks this ceiling: LLM Wiki.\n\nCore Idea\n\nInstead of retrieving from raw documents every time, the LLM builds and maintains a persistent wiki—a structured, interlinked set of markdown files sitting between you and your sources.\n\nWhen you add a document, the LLM doesn’t just index it. It reads, extracts, and integrates it into the wiki—updating entity pages, refining summaries, flagging contradictions, and strengthening the overall synthesis.\n\nThe key shift: knowledge is compiled once and continuously updated, not recreated on every query.\n\nThis makes the wiki a compounding system. Cross-references already exist. Contradictions are already surfaced. Insights evolve over time. Even your questions can become new pages—so exploration compounds too.\n\nArchitecture\n\nRaw Sources\nYour documents, papers, and transcripts remain unchanged. This is the ground truth layer.\n\nThe Wiki\nA structured collection of LLM-generated markdown pages—summaries, entities, concepts, comparisons, and a running synthesis. The LLM maintains this layer.\n\nThe Schema\nA guiding configuration (like CLAUDE.md or AGENTS.md) that defines structure, conventions, and workflows. This turns the LLM into a disciplined knowledge maintainer.\n\nHow It Works in Practice\n\nIngestion\nAdding a source triggers deep integration, not storage. The LLM reads it, extracts insights, writes summaries, updates multiple pages, and links everything together. One document can impact 10–15 pages.\n\nQuerying\nQuestions are answered from the wiki, not raw files. The LLM navigates structured knowledge, synthesizes responses, and can store valuable answers back into the system as new pages.\n\nLinting\nThe system self-checks: detecting contradictions, outdated claims, missing links, and underdeveloped concepts. It actively improves itself over time.\n\nWhy This Actually Works\n\nThe real bottleneck in knowledge systems isn’t thinking—it’s maintenance. Updating links, resolving contradictions, and keeping everything consistent is tedious.\n\nHumans abandon systems because upkeep becomes overwhelming.\n\nLLMs don’t.\nThey don’t forget, get bored, or avoid repetitive work. They can update dozens of pages instantly and consistently. This drops maintenance cost to near zero—so the system stays alive and reliable.\n\nYour role becomes clear: curate inputs, guide thinking, ask better questions.\nThe LLM handles everything else.\n\nUse Cases\n\nThis pattern applies far beyond research:\n\nPersonal development: structured tracking of goals, habits, and insights\nDeep research: evolving thesis built across papers and reports\nReading: chapter-by-chapter breakdowns forming a rich companion wiki\nTeam knowledge: internal systems built from meetings, chats, and calls\nAny domain where knowledge accumulates over time and needs structure\n\nThe Memex Moment\n\nThe idea echoes Vannevar Bush’s 1945 vision of the Memex—a personal knowledge system with linked ideas and associative trails.\n\nThat vision failed on one problem: maintenance.\n\nNow, that problem is solved.\n\nTakeaway\n\nRAG is useful, but limited. It retrieves—it doesn’t learn or evolve.\n\nLLM Wiki is different. It’s a knowledge system that compounds, improves over time, and maintains itself.\n\nIt’s not a finished product—it’s a pattern. You design the structure, schema, and workflow with the LLM.\n\nThat’s the real shift:\n\nStop retrieving. Start compiling.\n\nKarpathy’s original gist with full implementation details is available on GitHub."
+ },
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 25,
+ "keywords": [
+  "RAG",
+  "Karpathy",
+  "LLM Wiki",
+  "知识积累"
+ ],
+ "gist": "观点：RAG 每次都从零开始、不积累任何东西；Karpathy 的 LLM Wiki 让 LLM 持续维护一份知识库，才是真正的累积。",
+ "title": "RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki",
+ "category": "Agent Memory & RAG",
+ "kind": "概念对比",
+ "summary": "对比 RAG 和 Karpathy 提出的 LLM Wiki。RAG 每次都从原始 chunk 重新拼答案，关掉会话就什么都没积累，没有复利。LLM Wiki 让 LLM 维护一份持久的、相互链接的 markdown wiki：每加一份文档，就读取、抽取并整合进去，更新实体页、修订摘要、标记矛盾，让知识越用越多。和你现在做的「X 收藏 → 知识库」思路直接相关。"
+}

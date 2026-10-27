@@ -1,0 +1,21 @@
+{
+ "id": "2010720188686348593",
+ "handle": "dair_ai",
+ "name": "DAIR.AI",
+ "url": "https://x.com/dair_ai/status/2010720188686348593",
+ "created_at": "2026-01-12T14:27:05.000Z",
+ "text": "Efficient Lifelong Memory for LLM Agents\n\nLLM agents need memory to handle long conversations. The way this is handled today is that memory either retains full interaction histories, leading to massive redundancy, or relies on iterative reasoning to filter noise, consuming excessive tokens.\n\nThis new research introduces SimpleMem, an efficient memory framework based on semantic lossless compression that maximizes information density while minimizing token consumption.\n\nThe framework operates through a three-stage pipeline.\n\n1) First, Semantic Structured Compression applies entropy-aware filtering to distill raw dialogue into compact memory units, resolving coreferences and converting relative time expressions (\"last Friday\") into absolute timestamps.\n\n2) Second, Recursive Memory Consolidation incrementally integrates related memories into higher-level abstractions, turning repetitive entries like \"ordered a latte at 8 AM\" into patterns like \"regularly drinks coffee in the morning.\"\n\n3) Third, Adaptive Query-Aware Retrieval dynamically adjusts the retrieval scope based on query complexity.\n\nThe results: On the LoCoMo benchmark with GPT-4.1-mini, SimpleMem achieves 43.24 F1, outperforming the strongest baseline Mem0 (34.20) by 26.4%, while reducing token consumption to just 531 tokens per query compared to 16,910 for full-context approaches, a 30x reduction.\n\nThey claim that memory construction is 14x faster than Mem0 (92.6s vs 1350.9s per sample) and 50x faster than A-Mem. Even a 3B parameter model with SimpleMem outperforms larger models using inferior memory strategies.\n\nThis work shows that structured semantic compression and adaptive retrieval enable LLM agents to maintain reliable long-term memory without drowning in tokens or sacrificing accuracy.",
+ "media": [
+  "https://pbs.twimg.com/media/G-eDWs3bQAEMAzs?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 45,
+ "keywords": [
+  "SimpleMem",
+  "agent memory",
+  "语义无损压缩",
+  "论文"
+ ],
+ "gist": "SimpleMem 论文：用语义无损压缩做 agent 长期记忆，三阶段流水线，在提高信息密度的同时降低 token 消耗。"
+}

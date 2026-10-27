@@ -1,0 +1,18 @@
+{
+ "id": "2010804702313652647",
+ "handle": "ChrisGPT",
+ "name": "Chris",
+ "url": "https://x.com/ChrisGPT/status/2010804702313652647",
+ "created_at": "2026-01-12T20:02:54.000Z",
+ "text": "BREAKING 🚨 Anthropic just unveiled \"Cowork,\" a major feature that turns Claude into a fully autonomous virtual assistant for everyone. It brings the deep agentic capabilities previously reserved for coders to general users, allowing Claude to perform complex tasks directly on your computer.\n\nThe tool was built after Anthropic noticed developers using \"Claude Code\" for everyday admin tasks. Cowork now lets anyone grant Claude access to folders to manage files, research, and complete multi-step workflows independently acting as a digital employee that \"does\" instead of just chats.\n\nCowork is available today as a research preview for Claude Max subscribers on the macOS app 😡. Claude is releasing new coding/desktop agents much faster than all of there competitors. \n\nThis launch exposes a massive gap in the current AI landscape: in 2026, Google still explicitly lacks a consumer browser agent, and xAI has yet to release a native CLI or agentic interface. While OpenAI has \"Operator\" and Google has the developer-focused \"Antigravity,\" Anthropic is now the only other major lab providing a true \"do-it-for-me\" experience for general users.",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 44,
+ "keywords": [
+  "Anthropic",
+  "Cowork",
+  "Claude",
+  "新闻"
+ ],
+ "gist": "快讯：Anthropic 推出 Cowork，把 Claude Code 的 agent 能力带给普通用户，可授权访问文件夹并完成多步任务（研究预览）。"
+}

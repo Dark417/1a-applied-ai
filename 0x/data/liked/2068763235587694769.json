@@ -1,0 +1,17 @@
+{
+ "id": "2068763235587694769",
+ "handle": "0xMovez",
+ "name": "Movez",
+ "url": "https://x.com/0xMovez/status/2068763235587694769",
+ "created_at": "2026-06-21T18:29:25.000Z",
+ "text": "Andrew Ng:\n\n\"100% of my tasks are now done by AI agents - hype has exceeded my expectations. Loops is next step.\n\nin 3-6 months, everyone will be using self-improving loops. No more prompting.\"\n\nIn a 30-minute talk, Andrew Ng explains how to build self-improving agentic systems from scratch.\n\nWorth more than a $500 agentic course.",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 16,
+ "keywords": [
+  "Andrew Ng",
+  "self-improving loops",
+  "agentic systems"
+ ],
+ "gist": "Andrew Ng 30 分钟演讲：他的任务已全部交给 agent，下一步是 self-improving loops。"
+}

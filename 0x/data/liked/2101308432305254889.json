@@ -1,0 +1,25 @@
+{
+ "id": "2101308432305254889",
+ "handle": "0xMortyx",
+ "name": "Morty",
+ "url": "https://x.com/0xMortyx/status/2101308432305254889",
+ "created_at": "2026-09-19T13:52:25.000Z",
+ "text": "Jev doesn’t make the LLM smarter. it makes 193x faster. 444x cheaperand testable\n\nJev could be the missing decision layer between LLM reasoning and real-world agent execution.\n\nwithout a decision layer, you usually solve that with:\n\nmore prompting\n→ more context\n→ more retries\n→ more tokens\n\nJev makes the fork explicit.\n\nfor every state:\n\nChoice → which route wins?\nScore → how good is each option?\nNoul → how likely is the condition true?\n\nthen execution stays outside the model.\n\nfull Jev Engineering breakdown below ↓",
+ "quote": {
+  "name": "Ricker @0xRicker · Sep 19",
+  "text": "Jev could become the control layer AI agents have been missing.\n\nInstead of spending 5–20 seconds and expensive LLM calls deciding every next step, it can route actions in milliseconds at near-zero cost.\n\nIn this article, I break down how"
+ },
+ "media": [
+  "https://pbs.twimg.com/media/HSlT6boWQAIypkN?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 6,
+ "keywords": [
+  "Jev",
+  "decision layer",
+  "routing",
+  "agent execution"
+ ],
+ "gist": "Jev 被定位为 LLM 推理和 agent 执行之间的「决策层」：用 Choice / Score / Noul 显式路由，决策放在模型之外，号称快 193 倍、便宜 444 倍。"
+}

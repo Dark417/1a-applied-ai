@@ -1,0 +1,37 @@
+{
+ "id": "2104453599367770287",
+ "handle": "shao__meng",
+ "name": "meng shao",
+ "url": "https://x.com/shao__meng/status/2104453599367770287",
+ "created_at": "2026-09-28T06:10:11.000Z",
+ "text": "斯坦福大学课程 CS329A: Self-Improving AI Agents  \n\n斯坦福大学 @achowdhery @Azaliamirh 两位老师主讲，他们在 Google Brain / Deepmind 有过合作经历，现在合作连续两年讲授 AI Agents 课程。\n \n分享这门课程后，类似获得了超过 5K+ 点赞和收藏，看到很多朋友喜欢，我也把 9 个视频做了一个预告视频，让大家对课程可以更快有更直观的感受。\n\n虽然 AI Agent 已经强大到很多人觉得不需要再学习，什么问题都可以直接问，到顶级大学的基础课程，系统学习下来，还是会很有收获，全局认知的提升。 马上长假了，收藏学起来！ \n\n课程主页： https://cs329a.stanford.edu\n视频列表： https://youtube.com/playlist?list=PLangBM27OtEA&si=khxaTCYv_ARHBgBl",
+ "quote": {
+  "name": "meng shao @shao__meng · Sep 27",
+  "text": "斯坦福大学课程 CS329A: Self-Improving AI Agents\n\n课程 9 讲视频都已发布在 Youtube，第 1 讲 52 万观看，第 9 讲 1.5 万。趁假期坚持看完 9 讲视频，你就超过了中间的 50 多万人，和连第 1 讲都没看过的无数人 😂\n\n开玩笑，虽然 AI Agent  x.com/shao__meng/sta…"
+ },
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 5,
+ "thread": [
+  {
+   "id": "2104782406767260019",
+   "handle": "shao__meng",
+   "name": "meng shao",
+   "url": "https://x.com/shao__meng/status/2104782406767260019",
+   "created_at": "2026-09-29T03:56:45.000Z",
+   "text": "斯坦福大学 CS329Z「Engineering AI Agents」第二讲 LLMs for Builders：Agent 工程师必修的大模型底层原理",
+   "has_video": false
+  }
+ ],
+ "keywords": [
+  "Stanford CS329A",
+  "Self-Improving AI Agents",
+  "课程"
+ ],
+ "gist": "推荐斯坦福 CS329A《Self-Improving AI Agents》，9 讲视频已全部上线，附课程主页和 YouTube 播放列表。",
+ "title": "Stanford CS329A：Self-Improving AI Agents 课程",
+ "category": "LLM 基础 & 课程",
+ "kind": "课程推荐",
+ "summary": "推荐斯坦福 CS329A《Self-Improving AI Agents》，由 Aakanksha Chowdhery 和 Azalia Mirhoseini 主讲，9 讲视频都在 YouTube 上；作者另做了一个预告视频。thread 里还补充了 CS329Z《Engineering AI Agents》第二讲（LLMs for Builders）。观点：即使 agent 已经很强，系统学一遍大学课程对建立全局认知仍然有价值。附课程主页和播放列表。"
+}

@@ -1,0 +1,22 @@
+{
+ "id": "2022346776679006516",
+ "handle": "aigclink",
+ "name": "AIGCLINK",
+ "url": "https://x.com/aigclink/status/2022346776679006516",
+ "created_at": "2026-02-13T16:26:59.000Z",
+ "text": "openclaw的mac桌面版发布了，桌面版可以聊天，做权限管理、skill管理、channel管理、定时任务管理等，越来越方便了，下载地址：https://github.com/openclaw/openclaw/releases/tag/v2026.2.12\n#openclaw",
+ "media": [
+  "https://pbs.twimg.com/media/HBDRFLgacAA-fSf?format=jpg&name=large",
+  "https://pbs.twimg.com/media/HBDRHUdaYAARGvI?format=jpg&name=large",
+  "https://pbs.twimg.com/media/HBDRP4nbEAAhjHT?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 43,
+ "thread": [],
+ "title": "OpenClaw Mac 桌面版发布",
+ "category": "OpenClaw & 个人 Agent",
+ "kind": "版本发布",
+ "summary": "OpenClaw 发布 Mac 桌面版（v2026.2.12）：支持聊天、权限管理、skill 管理、channel 管理和定时任务管理，附下载地址。是 OpenClaw 生态的进展记录。"
+}

@@ -1,0 +1,22 @@
+{
+ "id": "2085421662447468758",
+ "handle": "AnatoliKopadze",
+ "name": "Anatoli Kopadze",
+ "url": "https://x.com/AnatoliKopadze/status/2085421662447468758",
+ "created_at": "2026-08-06T17:44:04.000Z",
+ "text": "Anthropic engineer:\n\n\"You're not supposed to prompt Claude. You're supposed to build a system that prompts itself.\"\n\nIn 45 minutes she shows exactly how Anthropic builds agents that remember, fix their own mistakes and get smarter with every run.\n\nThis beats any paid course on agents I've seen.\n\nWatch it, then read the guide on building loops below.",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 9,
+ "keywords": [
+  "Anthropic",
+  "self-prompting system",
+  "agent loops",
+  "memory"
+ ],
+ "gist": "Anthropic 工程师 45 分钟演讲：不要手动 prompt Claude，而要搭一个能自我 prompt、自我纠错、越跑越好的系统。",
+ "title": "Anthropic：让系统自己 prompt 自己",
+ "category": "Harness & Loop Engineering",
+ "kind": "视频推荐 + 观点",
+ "summary": "推荐 Anthropic 工程师的 45 分钟演讲。核心观点：不要手动 prompt Claude，而是搭一个能自我 prompt 的系统，让 agent 有记忆、能修正自己的错误、每次运行都变得更好。帖子只给出方向，具体做法在视频和附带的 loop 指南里。"
+}

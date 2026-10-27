@@ -1,0 +1,22 @@
+{
+ "id": "2008576712695836685",
+ "handle": "james_y_zou",
+ "name": "James Zou",
+ "url": "https://x.com/james_y_zou/status/2008576712695836685",
+ "created_at": "2026-01-06T16:29:40.000Z",
+ "text": "Today in @NatureMedicine we report that AI can predict 130 diseases from 1 night of sleep🛌\n\nWe trained a foundation model (#SleepFM) on 585K hours of sleep recordings from 65K people—brain, heart, muscle & breathing signals combined.\n\nAI learns the language of sleep🧵",
+ "media": [
+  "https://pbs.twimg.com/media/G9_ldwnWkAAevjh?format=jpg&name=large",
+  "https://pbs.twimg.com/media/G9_le27W0AElCBV?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 49,
+ "keywords": [
+  "SleepFM",
+  "Nature Medicine",
+  "foundation model",
+  "医疗 AI"
+ ],
+ "gist": "Nature Medicine 论文：SleepFM 用 58.5 万小时的睡眠数据训练基础模型，能从一晚的睡眠记录预测 130 种疾病。"
+}

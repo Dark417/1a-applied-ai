@@ -1,0 +1,38 @@
+{
+ "id": "2071214176526049739",
+ "handle": "0xMovez",
+ "name": "Movez",
+ "url": "https://x.com/0xMovez/status/2071214176526049739",
+ "created_at": "2026-06-28T12:48:35.000Z",
+ "text": "Ex-Google engineer explained AI agent loops, harness, evals in 20 minutes - better than 500$ courses.\n\ntrace every run → judge it with an LLM → diagnose → fix → ship.\n\nThat loop is how agents self-improve over time.\n\nAgent loops + memory + harness  + evals - thats the stack. \n\nWatch it, then save the framework below.",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 17,
+ "thread": [
+  {
+   "id": "2071313101731836399",
+   "handle": "0xMovez",
+   "name": "Movez",
+   "url": "https://x.com/0xMovez/status/2071313101731836399",
+   "created_at": "2026-06-28T19:21:41.000Z",
+   "text": "Original video:",
+   "card": {
+    "text": "You Can Learn AI Agent Harness & Loop Engineering In 19 Min | LLM Ops, Eval, Tracing, RAG",
+    "href": "https://t.co/1Bzp4MZOst"
+   },
+   "has_video": false
+  }
+ ],
+ "keywords": [
+  "agent loops",
+  "harness",
+  "evals",
+  "LLM-as-judge"
+ ],
+ "gist": "前 Google 工程师 20 分钟讲 agent 自我改进的循环：trace → LLM judge → diagnose → fix → ship。",
+ "title": "前 Google 工程师：agent loop + harness + evals 技术栈",
+ "category": "Harness & Loop Engineering",
+ "kind": "视频推荐 / 框架",
+ "summary": "推荐一个 20 分钟视频，讲 agent 自我改进的闭环：trace 每次运行 → LLM 打分 → 诊断 → 修复 → 发布。总结出技术栈：agent loops + memory + harness + evals。thread 里附了原视频。是对 self-improving 工作流的简洁概括。"
+}

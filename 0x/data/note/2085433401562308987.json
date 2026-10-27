@@ -1,0 +1,17 @@
+{
+ "id": "2085433401562308987",
+ "handle": "Mahaximus_",
+ "name": "Mahax",
+ "url": "https://x.com/Mahaximus_/status/2085433401562308987",
+ "created_at": "2026-08-06T18:30:43.000Z",
+ "text": "Google just dropped a 1-hour course on Graph Engineering: from agents to Loops to full automation\n\n00:00 – Build your first AI agent \n08:24 – Build agent memory \n28:34 – Agentic loops \n40:04 – How to build MCP \n1:00:22 – Graph engineering \n\nThis 1-hour watch replaces any $500 course you could pay for.\n\nWatch it, then try your first graph with the step-by-step guide below",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 7,
+ "thread": [],
+ "title": "Google 1 小时课程：从 agent 到 loop 到 graph",
+ "category": "Graph & Multi-Agent",
+ "kind": "课程推荐",
+ "summary": "推荐 Google 的 1 小时 graph engineering 课程，附章节时间戳：第一个 agent → agent 记忆 → agentic loops → 构建 MCP → graph engineering。是一条从单 agent 到图编排的入门路径，适合快速建立整体概念。帖子本身没有技术细节。"
+}

@@ -1,0 +1,36 @@
+{
+ "id": "2026224275192193465",
+ "handle": "AYi_AInotes",
+ "name": "AYi",
+ "url": "https://x.com/AYi_AInotes/status/2026224275192193465",
+ "created_at": "2026-02-24T09:14:47.000Z",
+ "text": "这个太牛逼了，目前看到的\n对 Open Claw 部署理解最深刻的一篇文章，建议务必收藏和阅读！建议务必收藏和阅读！建议务必收藏和阅读！\n\n看的我兴奋不已，\n一人公司、超级个体的时代真的要来了，文章里有作者 4 周的实测数据，94 commits/天、7 PRs/30分钟、commit→MRR 闭环），证明直接用单 Agent 上下文零和 → 效率天花板极低\n\n老哥说直接用 Claude Code / Codex 已经过时🥹\n真正的杠杆是构建个人「AI Orchestrator」（如 Zoe/OpenClaw），让它持有全部业务/认知上下文、动态 spawn 专用 agents、自动化监控与 review，\n\n把一个人变成一支「永不睡觉的 dev 团队」，从而实现一人即公司、每日出产、递归自进化，\n\n几个核心要点总结如下👇",
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 40,
+ "thread": [
+  {
+   "id": "2026224288278429715",
+   "handle": "AYi_AInotes",
+   "name": "AYi",
+   "url": "https://x.com/AYi_AInotes/status/2026224288278429715",
+   "created_at": "2026-02-24T09:14:50.000Z",
+   "text": "1️⃣Context window 是根本瓶颈（代码 vs 业务历史不可兼得）→ 必须两层架构：Orchestrator（持 Obsidian 全部上下文）+ 专用 Coding Agents（只看代码）\n\n2️⃣8步闭环工作流（Zoe scoping → spawn tmux worktree → cron 监控 → 多模型 review → Telegram 通知）+ Ralph Loop",
+   "media": [
+    "https://pbs.twimg.com/media/HB6YP2gagAAEsel?format=jpg&name=large"
+   ],
+   "has_video": false
+  }
+ ],
+ "keywords": [
+  "OpenClaw",
+  "AI Orchestrator",
+  "一人公司"
+ ],
+ "gist": "推荐上面那篇 OpenClaw 文章：单个 agent 的上下文是零和的，真正的杠杆是个人 AI Orchestrator 动态派生专用 agent。",
+ "title": "OpenClaw 编排文章的要点总结",
+ "category": "OpenClaw & 个人 Agent",
+ "kind": "文章解读",
+ "summary": "对上面那篇 OpenClaw agent swarm 文章的中文要点总结：①上下文窗口是根本瓶颈，代码和业务历史不能同时装下，所以要两层架构：Orchestrator 持有全部上下文（Obsidian），coding agent 只看代码；②8 步闭环：界定范围 → worktree 派生 → cron 监控 → 多模型 review → 通知，配合 Ralph Loop。观点：直接用 CC/Codex 已经过时，杠杆在个人 AI Orchestrator。"
+}

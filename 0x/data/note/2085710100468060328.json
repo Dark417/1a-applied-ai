@@ -1,0 +1,17 @@
+{
+ "id": "2085710100468060328",
+ "handle": "hanakoxbt",
+ "name": "Hanako",
+ "url": "https://x.com/hanakoxbt/status/2085710100468060328",
+ "created_at": "2026-08-07T12:50:13.000Z",
+ "text": "Don't waste 2 years learning to build self-improving AI agents.\n\nStanford just dropped a 3.5 hour course on building them from scratch.\n\n0:00 - self-improving agent basics\n1:06:29 - multi-step reasoning in agents\n2:20:08 - agents learning from feedback\n\nlook at the third one, because that is where the whole thing turns.\n\nAttempt → Signal → Correction → Better attempt\n\nan agent cannot improve from its own opinion of its work. the signal has to come from outside it, or the loop just reinforces whatever it already believed.\n\nself-review is the old workflow. external correction is the new one.\n\nthat is the difference between a system that gets better every week and one that gets more confident every week.\n\nAnthropic pays $750,000 a year to engineers who can build this.\n\nbookmark and watch it today, then read the eval setup below",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 6,
+ "thread": [],
+ "title": "Stanford 3.5 小时课程：从零构建 self-improving agent",
+ "category": "Harness & Loop Engineering",
+ "kind": "课程推荐 + 观点",
+ "summary": "推荐斯坦福 3.5 小时课程（自我改进基础、多步推理、从反馈中学习），并提炼核心：Attempt → Signal → Correction → Better attempt。关键论点：agent 不能靠自评改进，信号必须来自外部（测试、eval、人），否则 loop 只会强化它原来的看法。「自审」是旧工作流，「外部纠错」是新工作流。这一点对设计 eval 驱动的 loop 很重要。"
+}

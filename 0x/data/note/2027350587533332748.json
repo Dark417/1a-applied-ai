@@ -1,0 +1,27 @@
+{
+ "id": "2027350587533332748",
+ "handle": "heyrimsha",
+ "name": "Rimsha Bhardwaj",
+ "url": "https://x.com/heyrimsha/status/2027350587533332748",
+ "created_at": "2026-02-27T11:50:21.000Z",
+ "text": "Prompt engineering is dead.\n\nAnthropic recently released the real playbook for building AI agents that actually work.\n\nIt’s a 30+ page deep dive called The Complete Guide to Building Skills for Claude and it quietly shifts the conversation from “prompt engineering” to real execution design.\n\nHere’s the big idea:\n\nA Skill isn’t just a prompt.\nIt’s a structured system.\n\nYou package instructions inside a SKILL .md file, optionally add scripts, references, and assets, and teach Claude a repeatable workflow once instead of re-explaining it every chat.\n\nBut the real unlock is something they call progressive disclosure.\n\nInstead of dumping everything into context:\n\n• A lightweight YAML frontmatter tells Claude when to use the skill\n• Full instructions load only when relevant\n• Extra files are accessed only if needed\n\nLess context bloat. More precision.\n\nThey also introduce a powerful analogy:\n\nMCP gives Claude the kitchen.\nSkills give it the recipe.\n\nWithout skills: users connect tools and don’t know what to do next.\nWith skills: workflows trigger automatically, best practices are embedded, API calls become consistent.\n\nThey outline 3 major patterns:\n\n1) Document & asset creation\n2) Workflow automation\n3) MCP enhancement\n\nAnd they emphasize something most builders ignore: testing.\n\nTrigger accuracy.\nTool call efficiency.\nFailure rate.\nToken usage.\n\nThis isn’t about clever wording.\n\nIt’s about designing an execution layer on top of LLMs.\n\nSkills work across Claude, Claude Code, and the API. Build once, deploy everywhere.\n\nThe era of “just write a better prompt” is ending.\n\nAnthropic just handed everyone a blueprint for turning chat into infrastructure.\n\nDownload the guide here: https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf",
+ "media": [
+  "https://pbs.twimg.com/media/HCKYnWta8AAh0wU?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 37,
+ "thread": [],
+ "keywords": [
+  "Anthropic",
+  "Claude Skills",
+  "SKILL.md",
+  "progressive disclosure"
+ ],
+ "gist": "解读 Anthropic 的《The Complete Guide to Building Skills for Claude》：skill 是结构化系统，不只是 prompt，关键机制是 progressive disclosure。",
+ "title": "Anthropic《The Complete Guide to Building Skills for Claude》解读",
+ "category": "Skills & Prompt",
+ "kind": "概念介绍",
+ "summary": "解读 Anthropic 30+ 页的 Skills 指南。核心：skill 不是 prompt，而是一个结构化系统。把指令打包进 SKILL.md，可以附带脚本、参考资料和素材，一次教会，反复使用。关键机制是 progressive disclosure：先只加载轻量的 YAML frontmatter，让 Claude 判断何时用；相关时才加载完整指令；附加文件按需读取。观点是从「prompt engineering」转向「执行设计」。"
+}

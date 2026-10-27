@@ -1,0 +1,19 @@
+{
+ "id": "2114099234001600931",
+ "handle": "0xsmerkzz",
+ "name": "smerkzz",
+ "url": "https://x.com/0xsmerkzz/status/2114099234001600931",
+ "created_at": "2026-10-24T20:58:30.000Z",
+ "text": "holy sh*t . SpaceXAI engineer, Lauren Tan:\n\n\"I'm running 35+ GrokBot agents with /loop, /goal, inside pstack. My bots shipping code even when I sleep\n\nat SpaceXAI, 85% of our engineers running 11+ GrokBot agents as a team. I have a Chief of Staff agent, it knows other agents and manages everything\"\n\nin a 1-hour workshop, a SpaceXAI engineer revealed how to build a team of GrokBot agents from scratch\n\nworth more than a $800 agentic engineering course\n\nwatch today, then read the article on how to build a team of GrokBot agents from scratch",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 1,
+ "keywords": [
+  "SpaceXAI",
+  "GrokBot",
+  "multi-agent team",
+  "Chief of Staff agent",
+  "/loop"
+ ],
+ "gist": "SpaceXAI 工程师分享：同时跑 35+ 个 GrokBot agent，由一个 Chief of Staff agent 统一管理；附 1 小时 workshop 视频。"
+}

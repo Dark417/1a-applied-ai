@@ -1,0 +1,17 @@
+{
+ "id": "2050341770609750297",
+ "handle": "code",
+ "name": "Visual Studio Code",
+ "url": "https://x.com/code/status/2050341770609750297",
+ "created_at": "2026-05-01T22:29:06.000Z",
+ "text": "Want to see what happens behind each prompt?\n\n🔍 Agent Debug Logs lets you inspect chat interactions, tool calls, model requests, prompt discovery, agent flows, and more.\n\nhttps://code.visualstudio.com/docs/copilot/chat/chat-debug-view",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 21,
+ "thread": [],
+ "title": "VS Code Agent Debug Logs：看清每次 prompt 背后发生了什么",
+ "category": "Coding Agent 实践",
+ "kind": "工具发布",
+ "summary": "VS Code 官方介绍 Copilot 的 Agent Debug Logs 视图：可以检查对话交互、tool call、模型请求、prompt 发现过程和 agent 流程。对调试 agent 行为、理解 harness 实际往上下文里放了什么很有用。附官方文档链接。"
+}

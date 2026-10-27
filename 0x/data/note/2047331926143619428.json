@@ -1,0 +1,27 @@
+{
+ "id": "2047331926143619428",
+ "handle": "eng_khairallah1",
+ "name": "Khairallah AL-Awady",
+ "url": "https://x.com/eng_khairallah1/status/2047331926143619428",
+ "created_at": "2026-04-23T15:09:03.000Z",
+ "text": "🚨 Anthropic's own team just showed how they actually use Claude Code.\n\nthe head of Claude Code hasn't written code by hand in months.\n\n30 minutes. free. from the people who built it.\n\nwatch the workshop. bookmark it.\n\nyou used Claude Code today and spent 3 hours on one feature.\n\nbecause nobody taught you how to use it properly.\n\nThen read the guide below.",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 25,
+ "thread": [
+  {
+   "id": "2047617672154853715",
+   "handle": "eng_khairallah1",
+   "name": "Khairallah AL-Awady",
+   "url": "https://x.com/eng_khairallah1/status/2047617672154853715",
+   "created_at": "2026-04-24T10:04:30.000Z",
+   "text": "40 Claude Cowork Commands, Workflows & Automations Most Users Don't Know:\nhttps://x.com/eng_khairallah1/status/2047609433489035739?s=46",
+   "has_video": false
+  }
+ ],
+ "title": "Anthropic 团队演示他们如何用 Claude Code",
+ "category": "Coding Agent 实践",
+ "kind": "视频推荐",
+ "summary": "推荐 Anthropic 团队 30 分钟的 Claude Code workshop，提到 Claude Code 负责人已经好几个月没手写代码。thread 里附了另一篇《40 个 Claude Cowork 命令、工作流和自动化》的链接。帖子本身没有技术细节，价值在视频。"
+}

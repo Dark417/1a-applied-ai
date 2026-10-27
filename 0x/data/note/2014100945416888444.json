@@ -1,0 +1,17 @@
+{
+ "id": "2014100945416888444",
+ "handle": "gkxspace",
+ "name": "余温",
+ "url": "https://x.com/gkxspace/status/2014100945416888444",
+ "created_at": "2026-01-21T22:21:00.000Z",
+ "text": "AI时代，真的不一样了。\n\n以前 GitHub 上那些牛逼的开源项目，对编程小白来说就是“看得到用不了”。\n\n就比如这个 yt-dlp，143k star 的视频下载神器。你知道它很强，但光是看到部署、命令行、环境配置，就有点劝退了。\n\n现在不一样了。\n\n有了 Skills ，你可以直接跟 Claude Code 说：“帮我把 yt-dlp 打包成 Skill”，然后它就自己去分析项目、写封装、处理依赖。\n\n几分钟后，你就有了一个能用的视频下载工具。以后想下载 YouTube 视频，就直接扔个链接。\n\n而且，不只是视频下载。格式转化、网页转 APP、密码破译……GitHub 上那些经过无数人验证的项目，现在都能变成一个Skill。\n\n这些开源项目，稳定性和成功率，也远超 AI 临时写的代码。",
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 48,
+ "thread": [],
+ "title": "把 GitHub 开源项目打包成 Skill",
+ "category": "Skills & Prompt",
+ "kind": "观点 / 用法",
+ "summary": "观点：有了 Skills 以后，可以让 Claude Code 把成熟的开源项目（比如 yt-dlp）分析并封装成 skill，几分钟就得到可用工具，以后扔个链接就能下载视频。经过大量验证的开源项目，稳定性远超 AI 临时写的代码。这是「skill 作为开源能力的封装层」的思路。"
+}

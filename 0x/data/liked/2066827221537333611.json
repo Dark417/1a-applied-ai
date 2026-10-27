@@ -1,0 +1,19 @@
+{
+ "id": "2066827221537333611",
+ "handle": "eng_khairallah1",
+ "name": "Khairallah AL-Awady",
+ "url": "https://x.com/eng_khairallah1/status/2066827221537333611",
+ "created_at": "2026-06-16T10:16:24.000Z",
+ "text": "Anthropic pays $750,000+ a year for engineers who can build LLMs from scratch.\n\nNot how to prompt them.\nNot how to fine-tune them.\nNot how to build RAG pipelines.\n\nBut how to build them from scratch.\n\nThis 2-hour Stanford lecture teaches you everything.\n\nScaling laws.\nData collection.\nArchitecture design.\nPost-training alignment.\n\nFree. From Stanford.\n\nWatch first. Then read this.\n\nThe lecture is the theory.\n\nfull guide in the article below",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 18,
+ "keywords": [
+  "Stanford",
+  "LLM from scratch",
+  "scaling laws",
+  "pretraining",
+  "课程"
+ ],
+ "gist": "推荐斯坦福 2 小时讲座：从零构建 LLM，覆盖 scaling laws、数据、架构和后训练对齐。"
+}

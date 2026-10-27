@@ -1,0 +1,18 @@
+{
+ "id": "2010579279789387929",
+ "handle": "discountifu",
+ "name": "大梦想家迪士尼",
+ "url": "https://x.com/discountifu/status/2010579279789387929",
+ "created_at": "2026-01-12T05:07:09.000Z",
+ "text": "周末 Vibe 了一个 Multi-Agent AI Trading 终端\n还用 Textual 加了一套 TUI，这方面 Python 的生态建设真的是太好了\n我把我毕生所学都“传功”给了 AI\n支持 K线走势/技术指标/订单流/资金费率/开仓量 多因子分析\n如果朋友们喜欢的话，点赞过100，我就直接把它开源了",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 46,
+ "keywords": [
+  "multi-agent",
+  "trading terminal",
+  "Textual TUI",
+  "Python"
+ ],
+ "gist": "周末 vibe 出来的多 agent 交易终端，用 Textual 做 TUI，支持多因子分析。"
+}

@@ -1,0 +1,20 @@
+{
+ "id": "2047525971742597195",
+ "handle": "GitHub_Daily",
+ "name": "GitHubDaily",
+ "url": "https://x.com/GitHub_Daily/status/2047525971742597195",
+ "created_at": "2026-04-24T04:00:07.000Z",
+ "text": "用 AI 写技术文档，当需要生成流程图、架构图等这些可视化内容，往往需要用切换到其他的画图工具来制作。\n\n偶然看到 Markdown Viewer 这个技能，可以让 AI 编程助手直接在 Markdown 里生成各种专业图表。\n\n内置 14 个专业绘图技能，可以生成架构图、流程图、工作流图、状态图、部署图、类图、用例图等等上百种类型图表。\n\nGitHub：http://github.com/markdown-viewer/skills\n\n支持 PlantUML 和 Vega 等五大主流渲染引擎，还能直接输出带有精美排版的 HTML 信息卡片。\n\n提供了一键安装指令，支持 Claude Code、Codex、Cursor 等主流 AI 编程工具。\n\n适合经常需要编写技术文档，或者想让 AI 帮我们自动生成高质量配图的开发者收藏备用。",
+ "media": [
+  "https://pbs.twimg.com/media/HGpGBCfaQAA9RzW?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 26,
+ "thread": [],
+ "title": "Markdown Viewer Skills：让 AI 在 Markdown 里直接画图",
+ "category": "Skills & Prompt",
+ "kind": "工具推荐",
+ "summary": "介绍开源的 Markdown Viewer skills：内置 14 个绘图技能，可以在 Markdown 里生成架构图、流程图、状态图、部署图、类图等，支持 PlantUML、Vega 等 5 种渲染引擎，还能输出 HTML 信息卡。可以一键装到 Claude Code、Codex、Cursor。适合写技术文档时自动生成配图。"
+}

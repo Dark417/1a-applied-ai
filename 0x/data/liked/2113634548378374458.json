@@ -1,0 +1,23 @@
+{
+ "id": "2113634548378374458",
+ "handle": "AnnatarXBT",
+ "name": "Annatar.md",
+ "url": "https://x.com/AnnatarXBT/status/2113634548378374458",
+ "created_at": "2026-10-23T14:12:00.000Z",
+ "text": "this harness engineering paper is required reading if you run Claude Code\n\nWavestone AI Lab read the source code of 11 coding agents, Claude Code and Codex included, and found the same 7-part harness inside every good one\n\nagent = model + harness\n\nthe 7 parts, smallest version to largest:\n> loop - a plain while loop up to fully replayable runs\n> LLM layer - one prompt template up to 29 provider profiles\n> tools - bash alone up to 43 typed tools loaded on demand\n> memory - raw history up to notes that survive between sessions\n> safety - a step limit up to rules, a reviewer model and a sandbox\n> orchestration - Aider skips sub-agents, the rest fork them\n> extensions - SKILL. md in 9 of the 11, MCP in 8\n\nthe pages to open first:\n> p.4 - the full 7-part map\n> p.12 - three loop types, with Claude Code and Codex as examples\n> p.67 - 18 design rules\n> p.71 - a 90-line harness that covers all 7 parts\n\nthe model gets the headlines\nthe harness decides whether the agent finishes the job\n\nengineers who can draw these 7 parts on a whiteboard are the ones getting hired to build agents\n\nthe complete guide to harnesses that hold up under real work is below 👇",
+ "has_video": true,
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 3,
+ "keywords": [
+  "harness engineering",
+  "Wavestone",
+  "Claude Code",
+  "Codex",
+  "7-part harness"
+ ],
+ "gist": "Wavestone 读了 11 个 coding agent 的源码，总结出共同的 7 部分 harness：loop、LLM 层、tools、memory、safety、orchestration、extensions。核心观点：agent = model + harness。",
+ "title": "Wavestone：11 个 coding agent 共有的 7 部分 harness",
+ "category": "Harness & Loop Engineering",
+ "kind": "论文解读 / 方法对比",
+ "summary": "解读 Wavestone AI Lab 的报告：读了 Claude Code、Codex 等 11 个 coding agent 的源码，总结出共同的 7 部分 harness（loop、LLM 层、tools、memory、safety、orchestration、extensions），并给出每部分从最简到最完整的光谱。比如 tools 从只有 bash 到 43 个按需加载的 typed tools；9/11 用 SKILL.md，8/11 用 MCP。推荐先读 p.4 全图、p.12 三种 loop、p.67 的 18 条设计规则、p.71 的 90 行最小 harness。是对比型参考资料。"
+}

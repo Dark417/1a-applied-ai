@@ -1,0 +1,21 @@
+{
+ "id": "2029741601975849132",
+ "handle": "chenchengpro",
+ "name": "陈成",
+ "url": "https://x.com/chenchengpro/status/2029741601975849132",
+ "created_at": "2026-03-06T02:11:23.000Z",
+ "text": "OpenAI 昨天低调开源了一个框架，叫 Symphony 🎵\n\n它能把你的 Linear 看板变成一条全自动的研发流水线。\n我扒了一遍代码，说说它到底怎么运作的 👇\n\n1/ 核心逻辑只有一句话：\n监控 Issue → 分配 Agent → 写代码 → 提 PR → 循环\n\n2/ 技术栈是 Elixir，OTP 架构，天然支持多 Agent 并发。\n每个 Issue 对应一个独立 Workspace，互不干扰。\n\n3/ 最有意思的设计是 WORKFLOW.md：\n把 Agent 的行为策略写进项目仓库，随代码一起提交、review、回滚。\nAgent 怎么干活，团队说了算。\n\n4/ 开源地址：http://github.com/openai/symphony\n\n你们团队用 Linear 吗？这东西值得试试。",
+ "card": {
+  "text": "GitHub - openai/symphony: Symphony turns project work into isolated, autonomous implementation...",
+  "href": "https://t.co/kSf9Ns9eUz"
+ },
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-27T17-30",
+ "rank": 30,
+ "thread": [],
+ "title": "OpenAI Symphony：把 Linear 看板变成自动研发流水线",
+ "category": "Graph & Multi-Agent",
+ "kind": "源码解读",
+ "summary": "读完 OpenAI 开源的 Symphony 代码后的要点：核心循环是监控 Issue → 分配 agent → 写代码 → 提 PR → 循环；用 Elixir/OTP 天然支持多 agent 并发，每个 Issue 一个独立 workspace；最有意思的设计是 WORKFLOW.md，把 agent 的行为策略写进仓库，可以跟代码一起 review 和回滚。是「看板驱动的 agent 编排」的参考实现。"
+}
