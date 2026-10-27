@@ -11,6 +11,10 @@
   "slug": "memory-rag",
   "desc": "agent 记忆分层、RAG、知识库"
  },
+ "Evals & 研究": {
+  "slug": "evals-research",
+  "desc": "评测方法、论文与综述"
+ },
  "Coding Agent 实践": {
   "slug": "coding-agent",
   "desc": "Claude Code / Codex 的用法、工作流与配套工具"
@@ -22,10 +26,6 @@
  "OpenClaw & 个人 Agent": {
   "slug": "openclaw-personal-agent",
   "desc": "OpenClaw 生态、常驻个人助理、一人公司"
- },
- "Evals & 研究": {
-  "slug": "evals-research",
-  "desc": "评测方法、论文与综述"
  },
  "LLM 基础 & 课程": {
   "slug": "llm-courses",

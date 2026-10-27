@@ -1,6 +1,6 @@
 # Graph & Multi-Agent
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - graph engineering、多 agent 编排与流水线
 - 共 9 篇，按收藏顺序倒序（最新在上）
 

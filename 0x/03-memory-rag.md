@@ -1,6 +1,6 @@
 # Agent Memory & RAG
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - agent 记忆分层、RAG、知识库
 - 共 3 篇，按收藏顺序倒序（最新在上）
 

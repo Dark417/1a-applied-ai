@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Render the reading views from data/. Stdlib only.
 
-Outputs
+Layout: pipeline lives in 0x/_sync/ (this script, data/, categories.json); the reading
+views are written one level up, straight into 0x/:
   x-new.md              ❤️ Likes: Part 1 keywords, Part 2 content
-  x-note.md             🔖 Notes master index only: topic → notes/<slug>.md, title → notes/<slug>.md#x-<id>
-  notes/<slug>.md       one file per topic: Part 1 index, Part 2 details
+  x-note.md             🔖 Notes master index only: topic → NN-<slug>.md, title → NN-<slug>.md#x-<id>
+  NN-<slug>.md          one file per topic, NN = importance order in categories.json
 
 Content source per post
   data/readable/<id>.md  bulleted readable version (LLM-written, see RUNBOOK §5)
@@ -23,12 +24,14 @@ Anchors: detail headings are `### x-<id>`, valid anchors on both GitHub and Obsi
 from __future__ import annotations
 
 import json
+import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent   # 0x/_sync
 DATA = ROOT / "data"
-NOTES_DIR = ROOT / "notes"
+OUT = ROOT.parent                                # 0x
+TOPIC_FILE = re.compile(r"^\d{2}-[\w-]+\.md$")
 
 
 def load(kind: str) -> list[dict]:
@@ -126,12 +129,12 @@ def group_notes(notes: list[dict], cats: dict[str, dict]):
     return names, groups
 
 
-# ---------------------------------------------------------------- notes/<slug>.md
+# ---------------------------------------------------------------- NN-<slug>.md
 def render_topic(name: str, items: list[dict], meta: dict) -> str:
     L = [
         f"# {name}",
         "",
-        f"- [← 返回总目录](../x-note.md)",
+        f"- [← 返回总目录](x-note.md)",
         f"- {meta.get('desc', '')}" if meta.get("desc") else "",
         f"- 共 {len(items)} 篇，按收藏顺序倒序（最新在上）",
         "",
@@ -176,10 +179,10 @@ def render_note_index(names, groups, cats) -> str:
         "",
     ]
     for c in names:
-        slug, desc = cats[c]["slug"], cats[c].get("desc", "")
-        L.append(f"- **[{c}](notes/{slug}.md)**（{len(groups[c])}）" + (f" — {desc}" if desc else ""))
+        fname, desc = cats[c]["file"], cats[c].get("desc", "")
+        L.append(f"- **[{fname[:2]} · {c}]({fname})**（{len(groups[c])}）" + (f" — {desc}" if desc else ""))
         for t in groups[c]:
-            L.append(f"  - [{t.get('title') or t['id']}](notes/{slug}.md#x-{t['id']}) · @{t['handle']} · {day(t['created_at'])}")
+            L.append(f"  - [{t.get('title') or t['id']}]({fname}#x-{t['id']}) · @{t['handle']} · {day(t['created_at'])}")
     return "\n".join(L).rstrip() + "\n"
 
 
@@ -205,8 +208,8 @@ def render_new(items: list[dict], note_loc: dict[str, tuple[str, str]]) -> str:
     for t in items:
         L += [f"### x-{t['id']}", "", f"**{author(t)}** · 发帖 {day(t['created_at'])} · [原帖]({t['url']})", ""]
         if t["id"] in note_loc:
-            slug, title = note_loc[t["id"]]
-            L += [f"- 🔖 也在 Notes 里，全文见：[{title}](notes/{slug}.md#x-{t['id']})", ""]
+            fname, title = note_loc[t["id"]]
+            L += [f"- 🔖 也在 Notes 里，全文见：[{title}]({fname}#x-{t['id']})", ""]
         else:
             L += [*body(t), "", *extras(t), ""]
         L += ["[↑ 回到目录](#part-1--keywords)", ""]
@@ -217,20 +220,22 @@ def main() -> int:
     cats = load_categories()
     liked, notes = load("liked"), load("note")
     names, groups = group_notes(notes, cats)
-    NOTES_DIR.mkdir(exist_ok=True)
+    order = list(cats)  # importance order = key order in categories.json
+    for c in names:
+        cats[c]["file"] = f"{order.index(c) + 1:02d}-{cats[c]['slug']}.md"
     wanted = set()
     note_loc = {}
     for c in names:
-        slug = cats[c]["slug"]
-        wanted.add(f"{slug}.md")
-        (NOTES_DIR / f"{slug}.md").write_text(render_topic(c, groups[c], cats[c]), encoding="utf-8")
+        fname = cats[c]["file"]
+        wanted.add(fname)
+        (OUT / fname).write_text(render_topic(c, groups[c], cats[c]), encoding="utf-8")
         for t in groups[c]:
-            note_loc[t["id"]] = (slug, t.get("title") or t["id"])
-    for stale in NOTES_DIR.glob("*.md"):  # topic renamed/merged → drop its old file
-        if stale.name not in wanted:
+            note_loc[t["id"]] = (fname, t.get("title") or t["id"])
+    for stale in OUT.glob("*.md"):  # topic renamed/reordered → drop its old file
+        if TOPIC_FILE.match(stale.name) and stale.name not in wanted:
             stale.unlink()
-    (ROOT / "x-note.md").write_text(render_note_index(names, groups, cats), encoding="utf-8")
-    (ROOT / "x-new.md").write_text(render_new(liked, note_loc), encoding="utf-8")
+    (OUT / "x-note.md").write_text(render_note_index(names, groups, cats), encoding="utf-8")
+    (OUT / "x-new.md").write_text(render_new(liked, note_loc), encoding="utf-8")
     missing = [t["id"] for t in liked + notes if not readable(t)]
     print(f"x-new.md: {len(liked)} · notes: {len(notes)} in {len(names)} topic files · readable missing: {len(set(missing))}")
     return 0

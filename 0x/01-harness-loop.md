@@ -1,6 +1,6 @@
 # Harness & Loop Engineering
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - agent 外壳（工具/上下文/权限/记忆）、循环与自我改进
 - 共 8 篇，按收藏顺序倒序（最新在上）
 

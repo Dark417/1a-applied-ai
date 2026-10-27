@@ -8,8 +8,12 @@
   - 内置浏览器：`mcp__remote-devices__Claude_Browser__*`
   - Windows PowerShell：`mcp__remote-devices__Windows-MCP__PowerShell`
 - 内置浏览器里 X 已登录（账号 `@whoheremains`）
-- 本地文件夹：`D:\2Alfred\x-twitter`（device_bash 里是 `$HOME/mnt/x-twitter`）
 - 仓库：`Dark417/1a-applied-ai`，目录 `0x/`
+  - `0x/` 下只放阅读内容：`NN-<主题>.md`、`x-new.md`、`x-note.md`、`README.md`
+  - 流水线（脚本、数据、本文件）放在 `0x/_sync/`
+- 本地 repo clone：`D:\1AL\1a-applied-ai`；它的 `0x\` 是用户看的本地副本
+  - 只用 `sync_local.ps1` 同步 `0x\`，**不要对这个 repo 做 git pull**（用户要求时才 pull）
+- 原始抓取数据：`D:\2Alfred\x-twitter\raw\`（device_bash 里是 `$HOME/mnt/x-twitter/raw`；不进 git）
 - 回复用户时用中文
 - 任意一步失败：
   - 不要重试超过 2 次
@@ -19,14 +23,14 @@
 ## 1. 准备
 
 1. `add_repo Dark417/1a-applied-ai`（access: push），浅克隆到 `/home/claude/1a-applied-ai`
-2. 读 `0x/state.json`，拿到 `likes` 和 `bookmarks` 两个 watermark ID 列表
+2. 读 `0x/_sync/state.json`，拿到 `likes` 和 `bookmarks` 两个 watermark ID 列表
 3. 运行 ID：`RUN=$(date -u +%Y-%m-%dT%H-%M)`
 
 ## 2. 拉列表（内置浏览器）
 
 1. 用 `Claude_Browser__navigate` 打开 `https://x.com/i/history/likes`（完整加载）
    - 如果跳到登录页：停止，告诉用户「X 登录已失效，请在 Claude 桌面 app 的浏览器面板里重新登录」
-2. 用 `javascript_tool` 粘贴执行 `0x/scripts/x_dom.js` 的全部内容（应返回 `x_dom ready`）
+2. 用 `javascript_tool` 粘贴执行 `0x/_sync/scripts/x_dom.js` 的全部内容（应返回 `x_dom ready`）
 3. Likes：
    - 执行 `__xdom.collectList(50, <state.likes>).then(r => window.__likes = r)`
    - 每 ~40 秒查一次 `window.__likes`，直到有值（单次 tool call 超过 45 秒会超时）
@@ -50,7 +54,7 @@
 1. 浏览器：`__xdom.download('<name>', <obj>)`
 2. 紧接着 PowerShell：
    ```powershell
-   powershell -NoProfile -ExecutionPolicy Bypass -File "D:\2Alfred\x-twitter\scripts\save_dialog.ps1" -Path "D:\2Alfred\x-twitter\raw\<RUN>\<name>"
+   powershell -NoProfile -ExecutionPolicy Bypass -File "D:\1AL\1a-applied-ai\0x\_sync\scripts\save_dialog.ps1" -Path "D:\2Alfred\x-twitter\raw\<RUN>\<name>"
    ```
    - 应输出 `SAVED <bytes>`
    - 如果输出 `NO_DIALOG` / `NO_EDIT`：检查有没有残留的 `blob:` 对话框，关掉后重试一次
@@ -59,7 +63,7 @@
 
 ## 5. LLM 加工
 
-1. `python3 0x/scripts/build.py plan /home/claude/work/raw/<RUN> > plan.json`
+1. `python3 0x/_sync/scripts/build.py plan /home/claude/work/raw/<RUN> > plan.json`
    - 只列出还没处理过的帖子
 2. 读 `plan.json`，写 `/home/claude/work/raw/<RUN>/enrich.json`（`{id: {...}}`）：
    - **liked**
@@ -67,23 +71,24 @@
      - `gist`：中文；原帖短就一句，原帖长就 2–3 句
    - **note**
      - `title`：原标题够用就用原标题，不够就简短改写
-     - `category`：优先用 `0x/categories.json` 里已有的分类
+     - `category`：优先用 `0x/_sync/categories.json` 里已有的分类
        - 都不合适时新建一个，同时加进 `categories.json`（附一句描述）
-       - 某个分类超过 15 篇时，考虑拆分：改相关 `data/note/*.json` 的 `category`，再更新 `categories.json`
+       - 某个分类超过 15 篇时，考虑拆分：改相关 `_sync/data/note/*.json` 的 `category`，再更新 `categories.json`
      - `kind`：概念介绍 / 搭建教程 / 方法对比 / 工具发布 / 课程推荐 / 案例分享 / 论文解读 / 观点 / 推广
      - `summary`：中文 100–200 字，说清这篇是在讲概念、讲怎么搭建，还是在比较或评价方法，再写特点和重点
    - 原文中英文都保留原样，只有总结用中文
-3. `python3 0x/scripts/build.py apply /home/claude/work/raw/<RUN>`（写 `data/`，更新 `state.json`）
-4. **可读版正文**：每篇新帖子（liked 和 note 去重后按 id 算）都要按 `0x/STYLE.md` 写一份 `0x/data/readable/<id>.md`
+3. `python3 0x/_sync/scripts/build.py apply /home/claude/work/raw/<RUN>`（写 `data/`，更新 `state.json`）
+4. **可读版正文**：每篇新帖子（liked 和 note 去重后按 id 算）都要按 `0x/_sync/STYLE.md` 写一份 `0x/_sync/data/readable/<id>.md`
    - 使用 strong bullet style，保留原语言；不是摘要，是重新排版
    - 已经存在的不要重写
    - 新的长文超过 3 篇时，按篇拆给并行 subagent，每个 subagent 都先读 `STYLE.md`
-5. `python3 0x/scripts/render.py`
-   - 输出 `x-new.md`、`x-note.md`（只有总目录）、`notes/<slug>.md`（每个主题一个文件）
+5. `python3 0x/_sync/scripts/render.py`
+   - 输出到 `0x/`：`x-new.md`、`x-note.md`（只有总目录）、`NN-<slug>.md`（每个主题一个文件）
+     - `NN` 是 `categories.json` 里的重要性顺序；新分类要按重要性插到合适的位置
    - 结尾打印的 `readable missing` 应该是 0
 6. 自检：
-   - `x-new.md` 和每个 `notes/*.md` 里的每个 `](#x-<id>)` 都有对应的 `### x-<id>` 标题
-   - `x-note.md` 里的每个 `notes/<slug>.md#x-<id>` 都能在对应文件里找到
+   - `x-new.md` 和每个 `NN-*.md` 里的每个 `](#x-<id>)` 都有对应的 `### x-<id>` 标题
+   - `x-note.md` 里的每个 `NN-<slug>.md#x-<id>` 都能在对应文件里找到
    - 新增条数和第 2 步拉到的条数一致
 
 ## 6. 推送 GitHub
@@ -97,16 +102,19 @@ git push origin HEAD:main
 
 ## 7. 同步本地文件夹（尽力而为）
 
-- **source of truth 是云端会话 push 到 GitHub 的内容**；本地文件夹只是镜像
-- 用户的电脑在线时才做这一步，省得他再从 GitHub pull；电脑离线就跳过，不算失败
+- 用户电脑在线时才做这一步；离线就跳过，不算失败（用户之后自己从 GitHub pull）
+- 先在容器里取 `SHA=$(git rev-parse HEAD)`，也就是第 6 步 push 后的那个 commit
+- 再用 Windows PowerShell 执行：
 
-先在容器里取 `SHA=$(git rev-parse HEAD)`（第 6 步 push 之后的那个 commit），再在 device_bash 里执行（只覆盖文件，不删除；`raw/` 保留）：
-
-```bash
-# 必须用 commit SHA；codeload 上的 tar.gz/main 有缓存，可能拿到旧版本
-curl -sL https://codeload.github.com/Dark417/1a-applied-ai/tar.gz/<SHA> \
-  | tar -xz --overwrite --wildcards --strip-components=2 -C "$HOME/mnt/x-twitter" "*/0x/*"
+```powershell
+# 把那个 commit 的 0x/ 镜像到本地 repo 的 0x\（会删掉已改名的旧主题文件）
+# 用固定的 SHA，不用 main：codeload 上 main 的压缩包有缓存
+$s = "$env:TEMP\sync_local.ps1"
+Invoke-WebRequest -UseBasicParsing "https://raw.githubusercontent.com/Dark417/1a-applied-ai/<SHA>/0x/_sync/scripts/sync_local.ps1" -OutFile $s
+powershell -NoProfile -ExecutionPolicy Bypass -File $s -Sha <SHA>
 ```
+
+- 输出应该是 `SYNCED <sha7> -> D:\1AL\1a-applied-ai\0x`
 
 ## 8. 汇报（SendUserMessage）
 

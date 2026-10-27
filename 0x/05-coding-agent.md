@@ -1,6 +1,6 @@
 # Coding Agent 实践
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - Claude Code / Codex 的用法、工作流与配套工具
 - 共 8 篇，按收藏顺序倒序（最新在上）
 

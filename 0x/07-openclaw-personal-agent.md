@@ -1,6 +1,6 @@
 # OpenClaw & 个人 Agent
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - OpenClaw 生态、常驻个人助理、一人公司
 - 共 6 篇，按收藏顺序倒序（最新在上）
 

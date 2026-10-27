@@ -1,6 +1,6 @@
 # Skills & Prompt
 
-- [← 返回总目录](../x-note.md)
+- [← 返回总目录](x-note.md)
 - Skills 设计、可复用 prompt 与技能库
 - 共 6 篇，按收藏顺序倒序（最新在上）
 

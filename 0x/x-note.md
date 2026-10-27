@@ -4,65 +4,65 @@
 - 点主题名 → 打开主题文件；点标题 → 直接跳到那篇的详情
 - 自动生成，勿手改
 
-- **[Harness & Loop Engineering](notes/harness-loop.md)**（8） — agent 外壳（工具/上下文/权限/记忆）、循环与自我改进
-  - [Google 开源 Harness²：递归改进 agent harness](notes/harness-loop.md#x-2113948384113598588) · @Sumanth_077 · 2026-10-24
-  - [Anthropic 工程师：用 harness 搭会自我改进的 agent](notes/harness-loop.md#x-2113719510985269442) · @hayatomaruu · 2026-10-23
-  - [Wavestone：11 个 coding agent 共有的 7 部分 harness](notes/harness-loop.md#x-2113634548378374458) · @AnnatarXBT · 2026-10-23
-  - [Stanford 3.5 小时课程：从零构建 self-improving agent](notes/harness-loop.md#x-2085710100468060328) · @hanakoxbt · 2026-08-07
-  - [Harness vs Loop vs Graph Engineering：三层别混](notes/harness-loop.md#x-2082076425465762082) · @LunarResearcher · 2026-07-28
-  - [Anthropic：让系统自己 prompt 自己](notes/harness-loop.md#x-2085421662447468758) · @AnatoliKopadze · 2026-08-06
-  - [Spotify：引入 loop 后 agent 成功率 20–30% → 80%](notes/harness-loop.md#x-2071649423042412597) · @AnatoliKopadze · 2026-06-29
-  - [前 Google 工程师：agent loop + harness + evals 技术栈](notes/harness-loop.md#x-2071214176526049739) · @0xMovez · 2026-06-28
-- **[Graph & Multi-Agent](notes/graph-multi-agent.md)**（9） — graph engineering、多 agent 编排与流水线
-  - [Google 1 小时课程：从 agent 到 loop 到 graph](notes/graph-multi-agent.md#x-2085433401562308987) · @Mahaximus_ · 2026-08-06
-  - [How to Become a Graph Architect With Zero Experience (Full Course)](notes/graph-multi-agent.md#x-2083131009986396282) · @eng_khairallah1 · 2026-07-31
-  - [Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](notes/graph-multi-agent.md#x-2079636027736457707) · @0xCarnagee · 2026-07-21
-  - [Google 2 小时课程：1 prompt → 100 agents → loops → graphs](notes/graph-multi-agent.md#x-2083602508807569560) · @0xCodila · 2026-08-01
-  - [30 个 Agent 替代 30 个工程师，12 天交付完整代码库](notes/graph-multi-agent.md#x-2029350130261082429) · @sodawhite_dev · 2026-03-05
-  - [OpenAI Symphony：把 Linear 看板变成自动研发流水线](notes/graph-multi-agent.md#x-2029741601975849132) · @chenchengpro · 2026-03-06
-  - [30 个 agent 案例的开源地址：agent-orchestrator](notes/graph-multi-agent.md#x-2029350223575920769) · @sodawhite_dev · 2026-03-05
-  - [OpenAI Symphony：让 agent 自主完成整个开发流程](notes/graph-multi-agent.md#x-2029497156554342760) · @GitHub_Daily · 2026-03-05
-  - [Shubham Saboo：7×24 运行的 AI Agent 团队蓝图](notes/graph-multi-agent.md#x-2022374455989932409) · @Saboo_Shubham_ · 2026-02-13
-- **[Agent Memory & RAG](notes/memory-rag.md)**（3） — agent 记忆分层、RAG、知识库
-  - [Agent 记忆的 5 层架构（13 页）](notes/memory-rag.md#x-2114319310005150101) · @AnnatarXBT · 2026-10-25
-  - [RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](notes/memory-rag.md#x-2050228936270037068) · @Suryanshti777 · 2026-05-01
-  - [How to Master RAG and Build AI Agents That Remember Everything](notes/memory-rag.md#x-2050145400204783631) · @eng_khairallah1 · 2026-05-01
-- **[Coding Agent 实践](notes/coding-agent.md)**（8） — Claude Code / Codex 的用法、工作流与配套工具
-  - [VS Code Agent Debug Logs：看清每次 prompt 背后发生了什么](notes/coding-agent.md#x-2050341770609750297) · @code · 2026-05-01
-  - [How to Become a Claude Code Power User (Full Course)](notes/coding-agent.md#x-2047245243503050997) · @eng_khairallah1 · 2026-04-23
-  - [Anthropic 团队演示他们如何用 Claude Code](notes/coding-agent.md#x-2047331926143619428) · @eng_khairallah1 · 2026-04-23
-  - [Google 发布全栈 vibe coding 系统](notes/coding-agent.md#x-2034718045550051489) · @__Inty__ · 2026-03-19
-  - [Boris Cherny 30 分钟分享 Claude Code 技巧](notes/coding-agent.md#x-2046264877703102753) · @cnyzgkc · 2026-04-20
-  - [OpenAI 用 Codex 维护 Agents SDK 的四层结构](notes/coding-agent.md#x-2031347640630165525) · @chenchengpro · 2026-03-10
-  - [GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](notes/coding-agent.md#x-2026178278055403843) · @GitHub_Daily · 2026-02-24
-  - [离不开 Claude Code 的三个场景](notes/coding-agent.md#x-2022157972613300368) · @yanhua1010 · 2026-02-13
-- **[Skills & Prompt](notes/skills-prompt.md)**（6） — Skills 设计、可复用 prompt 与技能库
-  - [Markdown Viewer Skills：让 AI 在 Markdown 里直接画图](notes/skills-prompt.md#x-2047525971742597195) · @GitHub_Daily · 2026-04-24
-  - [Addy Osmani 开源 Agent Skills：老工程师的操作手册](notes/skills-prompt.md#x-2046454424806343139) · @KengGuangLong · 2026-04-21
-  - [obra/superpowers 的 brainstorming SKILL](notes/skills-prompt.md#x-2028854979805790269) · @cholf5 · 2026-03-03
-  - [Anthropic《The Complete Guide to Building Skills for Claude》解读](notes/skills-prompt.md#x-2027350587533332748) · @heyrimsha · 2026-02-27
-  - [把 GitHub 开源项目打包成 Skill](notes/skills-prompt.md#x-2014100945416888444) · @gkxspace · 2026-01-21
-  - [OpenAI 官方 Prompt Packs：300+ 岗位提示词](notes/skills-prompt.md#x-2014252422806536614) · @zstmfhy · 2026-01-22
-- **[OpenClaw & 个人 Agent](notes/openclaw-personal-agent.md)**（6） — OpenClaw 生态、常驻个人助理、一人公司
-  - [OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](notes/openclaw-personal-agent.md#x-2025920521871716562) · @elvissun · 2026-02-23
-  - [OpenClaw 编排文章的要点总结](notes/openclaw-personal-agent.md#x-2026224275192193465) · @AYi_AInotes · 2026-02-24
-  - [ClawWork：给 agent 加经济激励](notes/openclaw-personal-agent.md#x-2023308910883664070) · @blackanger · 2026-02-16
-  - [OpenClaw Mac 桌面版发布](notes/openclaw-personal-agent.md#x-2022346776679006516) · @aigclink · 2026-02-13
-  - [爆肝 2 天，开发 OpenClaw 接入微信 bot，已开源](notes/openclaw-personal-agent.md#x-2022356917948166506) · @canghe · 2026-02-13
-  - [OpenClaw agent Larry 一周拿下百万 TikTok 播放](notes/openclaw-personal-agent.md#x-2022011925903667547) · @oliverhenry · 2026-02-12
-- **[Evals & 研究](notes/evals-research.md)**（5） — 评测方法、论文与综述
-  - [Evals：如何判断一个 AI 系统真的可用](notes/evals-research.md#x-2106453816757354947) · @sermakarevich · 2026-10-03
-  - [Google Nexus：把预测变成推理问题](notes/evals-research.md#x-2055978135246807138) · @rohanpaul_ai · 2026-05-17
-  - [DAIR.AI 每周论文（4/26–5/3）](notes/evals-research.md#x-2050956647909015788) · @dair_ai · 2026-05-03
-  - [论文：Recursive Multi-Agent Systems](notes/evals-research.md#x-2050261909690097671) · @dair_ai · 2026-05-01
-  - [DeepMind + Meta + Amazon：100 页 agentic reasoning 路线图](notes/evals-research.md#x-2024602668258517440) · @hasantoxr · 2026-02-19
-- **[LLM 基础 & 课程](notes/llm-courses.md)**（2） — LLM 原理与系统课程
-  - [Stanford CS329A：Self-Improving AI Agents 课程](notes/llm-courses.md#x-2104453599367770287) · @shao__meng · 2026-09-28
-  - [Karpathy 3 小时：从零构建 LLM](notes/llm-courses.md#x-2078533887383556335) · @RohOnChain · 2026-07-18
-- **[其他应用](notes/other-applications.md)**（2） — agent 之外的 AI 应用（GNN 量化、图像生成等）
-  - [Graph Engineering for Quants：GNN 量化大师课](notes/other-applications.md#x-2081656879886012676) · @RitOnchain · 2026-07-27
-  - [Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](notes/other-applications.md#x-2029562218048541087) · @EHuanglu · 2026-03-05
-- **[其他](notes/misc.md)**（3） — 推广、资源链接、信息量低的帖子
-  - [The Code newsletter 推广](notes/misc.md#x-2082413202353406091) · @CodeNewsletter · 2026-07-29
-  - [NotebookLM 深度解析推荐](notes/misc.md#x-2029598376321585332) · @nicebabycat · 2026-03-05
-  - [Scrapling：绕过反爬的开源抓取库](notes/misc.md#x-2029459404710658307) · @NextBullReady · 2026-03-05
+- **[01 · Harness & Loop Engineering](01-harness-loop.md)**（8） — agent 外壳（工具/上下文/权限/记忆）、循环与自我改进
+  - [Google 开源 Harness²：递归改进 agent harness](01-harness-loop.md#x-2113948384113598588) · @Sumanth_077 · 2026-10-24
+  - [Anthropic 工程师：用 harness 搭会自我改进的 agent](01-harness-loop.md#x-2113719510985269442) · @hayatomaruu · 2026-10-23
+  - [Wavestone：11 个 coding agent 共有的 7 部分 harness](01-harness-loop.md#x-2113634548378374458) · @AnnatarXBT · 2026-10-23
+  - [Stanford 3.5 小时课程：从零构建 self-improving agent](01-harness-loop.md#x-2085710100468060328) · @hanakoxbt · 2026-08-07
+  - [Harness vs Loop vs Graph Engineering：三层别混](01-harness-loop.md#x-2082076425465762082) · @LunarResearcher · 2026-07-28
+  - [Anthropic：让系统自己 prompt 自己](01-harness-loop.md#x-2085421662447468758) · @AnatoliKopadze · 2026-08-06
+  - [Spotify：引入 loop 后 agent 成功率 20–30% → 80%](01-harness-loop.md#x-2071649423042412597) · @AnatoliKopadze · 2026-06-29
+  - [前 Google 工程师：agent loop + harness + evals 技术栈](01-harness-loop.md#x-2071214176526049739) · @0xMovez · 2026-06-28
+- **[02 · Graph & Multi-Agent](02-graph-multi-agent.md)**（9） — graph engineering、多 agent 编排与流水线
+  - [Google 1 小时课程：从 agent 到 loop 到 graph](02-graph-multi-agent.md#x-2085433401562308987) · @Mahaximus_ · 2026-08-06
+  - [How to Become a Graph Architect With Zero Experience (Full Course)](02-graph-multi-agent.md#x-2083131009986396282) · @eng_khairallah1 · 2026-07-31
+  - [Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](02-graph-multi-agent.md#x-2079636027736457707) · @0xCarnagee · 2026-07-21
+  - [Google 2 小时课程：1 prompt → 100 agents → loops → graphs](02-graph-multi-agent.md#x-2083602508807569560) · @0xCodila · 2026-08-01
+  - [30 个 Agent 替代 30 个工程师，12 天交付完整代码库](02-graph-multi-agent.md#x-2029350130261082429) · @sodawhite_dev · 2026-03-05
+  - [OpenAI Symphony：把 Linear 看板变成自动研发流水线](02-graph-multi-agent.md#x-2029741601975849132) · @chenchengpro · 2026-03-06
+  - [30 个 agent 案例的开源地址：agent-orchestrator](02-graph-multi-agent.md#x-2029350223575920769) · @sodawhite_dev · 2026-03-05
+  - [OpenAI Symphony：让 agent 自主完成整个开发流程](02-graph-multi-agent.md#x-2029497156554342760) · @GitHub_Daily · 2026-03-05
+  - [Shubham Saboo：7×24 运行的 AI Agent 团队蓝图](02-graph-multi-agent.md#x-2022374455989932409) · @Saboo_Shubham_ · 2026-02-13
+- **[03 · Agent Memory & RAG](03-memory-rag.md)**（3） — agent 记忆分层、RAG、知识库
+  - [Agent 记忆的 5 层架构（13 页）](03-memory-rag.md#x-2114319310005150101) · @AnnatarXBT · 2026-10-25
+  - [RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](03-memory-rag.md#x-2050228936270037068) · @Suryanshti777 · 2026-05-01
+  - [How to Master RAG and Build AI Agents That Remember Everything](03-memory-rag.md#x-2050145400204783631) · @eng_khairallah1 · 2026-05-01
+- **[04 · Evals & 研究](04-evals-research.md)**（5） — 评测方法、论文与综述
+  - [Evals：如何判断一个 AI 系统真的可用](04-evals-research.md#x-2106453816757354947) · @sermakarevich · 2026-10-03
+  - [Google Nexus：把预测变成推理问题](04-evals-research.md#x-2055978135246807138) · @rohanpaul_ai · 2026-05-17
+  - [DAIR.AI 每周论文（4/26–5/3）](04-evals-research.md#x-2050956647909015788) · @dair_ai · 2026-05-03
+  - [论文：Recursive Multi-Agent Systems](04-evals-research.md#x-2050261909690097671) · @dair_ai · 2026-05-01
+  - [DeepMind + Meta + Amazon：100 页 agentic reasoning 路线图](04-evals-research.md#x-2024602668258517440) · @hasantoxr · 2026-02-19
+- **[05 · Coding Agent 实践](05-coding-agent.md)**（8） — Claude Code / Codex 的用法、工作流与配套工具
+  - [VS Code Agent Debug Logs：看清每次 prompt 背后发生了什么](05-coding-agent.md#x-2050341770609750297) · @code · 2026-05-01
+  - [How to Become a Claude Code Power User (Full Course)](05-coding-agent.md#x-2047245243503050997) · @eng_khairallah1 · 2026-04-23
+  - [Anthropic 团队演示他们如何用 Claude Code](05-coding-agent.md#x-2047331926143619428) · @eng_khairallah1 · 2026-04-23
+  - [Google 发布全栈 vibe coding 系统](05-coding-agent.md#x-2034718045550051489) · @__Inty__ · 2026-03-19
+  - [Boris Cherny 30 分钟分享 Claude Code 技巧](05-coding-agent.md#x-2046264877703102753) · @cnyzgkc · 2026-04-20
+  - [OpenAI 用 Codex 维护 Agents SDK 的四层结构](05-coding-agent.md#x-2031347640630165525) · @chenchengpro · 2026-03-10
+  - [GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](05-coding-agent.md#x-2026178278055403843) · @GitHub_Daily · 2026-02-24
+  - [离不开 Claude Code 的三个场景](05-coding-agent.md#x-2022157972613300368) · @yanhua1010 · 2026-02-13
+- **[06 · Skills & Prompt](06-skills-prompt.md)**（6） — Skills 设计、可复用 prompt 与技能库
+  - [Markdown Viewer Skills：让 AI 在 Markdown 里直接画图](06-skills-prompt.md#x-2047525971742597195) · @GitHub_Daily · 2026-04-24
+  - [Addy Osmani 开源 Agent Skills：老工程师的操作手册](06-skills-prompt.md#x-2046454424806343139) · @KengGuangLong · 2026-04-21
+  - [obra/superpowers 的 brainstorming SKILL](06-skills-prompt.md#x-2028854979805790269) · @cholf5 · 2026-03-03
+  - [Anthropic《The Complete Guide to Building Skills for Claude》解读](06-skills-prompt.md#x-2027350587533332748) · @heyrimsha · 2026-02-27
+  - [把 GitHub 开源项目打包成 Skill](06-skills-prompt.md#x-2014100945416888444) · @gkxspace · 2026-01-21
+  - [OpenAI 官方 Prompt Packs：300+ 岗位提示词](06-skills-prompt.md#x-2014252422806536614) · @zstmfhy · 2026-01-22
+- **[07 · OpenClaw & 个人 Agent](07-openclaw-personal-agent.md)**（6） — OpenClaw 生态、常驻个人助理、一人公司
+  - [OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](07-openclaw-personal-agent.md#x-2025920521871716562) · @elvissun · 2026-02-23
+  - [OpenClaw 编排文章的要点总结](07-openclaw-personal-agent.md#x-2026224275192193465) · @AYi_AInotes · 2026-02-24
+  - [ClawWork：给 agent 加经济激励](07-openclaw-personal-agent.md#x-2023308910883664070) · @blackanger · 2026-02-16
+  - [OpenClaw Mac 桌面版发布](07-openclaw-personal-agent.md#x-2022346776679006516) · @aigclink · 2026-02-13
+  - [爆肝 2 天，开发 OpenClaw 接入微信 bot，已开源](07-openclaw-personal-agent.md#x-2022356917948166506) · @canghe · 2026-02-13
+  - [OpenClaw agent Larry 一周拿下百万 TikTok 播放](07-openclaw-personal-agent.md#x-2022011925903667547) · @oliverhenry · 2026-02-12
+- **[08 · LLM 基础 & 课程](08-llm-courses.md)**（2） — LLM 原理与系统课程
+  - [Stanford CS329A：Self-Improving AI Agents 课程](08-llm-courses.md#x-2104453599367770287) · @shao__meng · 2026-09-28
+  - [Karpathy 3 小时：从零构建 LLM](08-llm-courses.md#x-2078533887383556335) · @RohOnChain · 2026-07-18
+- **[09 · 其他应用](09-other-applications.md)**（2） — agent 之外的 AI 应用（GNN 量化、图像生成等）
+  - [Graph Engineering for Quants：GNN 量化大师课](09-other-applications.md#x-2081656879886012676) · @RitOnchain · 2026-07-27
+  - [Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](09-other-applications.md#x-2029562218048541087) · @EHuanglu · 2026-03-05
+- **[10 · 其他](10-misc.md)**（3） — 推广、资源链接、信息量低的帖子
+  - [The Code newsletter 推广](10-misc.md#x-2082413202353406091) · @CodeNewsletter · 2026-07-29
+  - [NotebookLM 深度解析推荐](10-misc.md#x-2029598376321585332) · @nicebabycat · 2026-03-05
+  - [Scrapling：绕过反爬的开源抓取库](10-misc.md#x-2029459404710658307) · @NextBullReady · 2026-03-05

@@ -1,55 +1,65 @@
-# 0x · X (Twitter) 收藏 → 笔记
+# 0x · X (Twitter) 收藏 → 学习笔记
 
-把 X 上 ❤️ Likes 和 🔖 Bookmarks 增量拉下来，生成两份可读文档。
+这是一个用 AI 自动化学习的 demo：把我在 X 上 ❤️ 和 🔖 的帖子增量拉下来，整理成可以直接读的笔记。
 
-- [`x-new.md`](./x-new.md)：❤️ Likes
+## 怎么读
+
+- [`x-note.md`](./x-note.md)：🔖 精读总目录
+  - 按主题分组，编号就是重要性顺序
+  - 点主题名 → 打开主题文件；点标题 → 跳到那篇的详情
+- `01-…md` ~ `10-…md`：每个主题一个文件
+  - 上半部分：Index
+  - 下半部分：总结 + strong bullet 版正文 + 折叠的原文
+- [`x-new.md`](./x-new.md)：❤️ 速览
   - 上半部分：关键词 + 简述
-  - 下半部分：bullet 版正文（同时在 Notes 里的帖子只给链接）
-- [`x-note.md`](./x-note.md)：🔖 Bookmarks，加上 ❤️ 过的评论所对应的原帖
-  - 只是总目录：主题链接到 `notes/<主题>.md`，标题链接到那篇的详情
-  - 每个主题文件也分两部分：上面是 Index，下面是详情（总结 + bullet 版正文 + 折叠的原文）
+  - 下半部分：正文；同时在精读里的帖子只给链接
+
+| 编号 | 主题 |
+|---|---|
+| 01 | Harness & Loop Engineering |
+| 02 | Graph & Multi-Agent |
+| 03 | Agent Memory & RAG |
+| 04 | Evals & 研究 |
+| 05 | Coding Agent 实践 |
+| 06 | Skills & Prompt |
+| 07 | OpenClaw & 个人 Agent |
+| 08 | LLM 基础 & 课程 |
+| 09 | 其他应用 |
+| 10 | 其他 |
 
 ## 规则
 
-- 同一条帖子既 ❤️ 又 🔖：两份文档各算一次，是独立的两个任务
-  - 去重：`x-new.md` 只保留它的关键词，正文链接到 Notes，不重复贴全文
-  - 每篇帖子按 id 只存一份，多次运行不会重复
-- ❤️ 的是一条评论：取它的原帖（conversation root），放进 `x-note.md`
-- 🔖 的是作者自己的连续 thread：整个 thread 一起拉
-- 排序：按你点 ❤️ / 🔖 的顺序，最新在上
-  - X 不提供点击时间，所以用「拉取批次 + 列表位置」来排
-- 增量：`state.json` 记录每个列表最近 30 个 ID，下次拉到其中任意一个就停
+- ❤️ 进 `x-new.md`；🔖 进精读
+- 既 ❤️ 又 🔖：两边都算，但 `x-new.md` 不重复贴全文
+- ❤️ 的是一条评论：取它的原帖，放进精读
+- 只收作者本人的内容：原帖和作者自己连续发的 thread，不收评论
+- 排序：按我点 ❤️ / 🔖 的顺序，最新在上
+- 每篇帖子按 id 只存一份，多次运行不会重复
 
-## 目录
+## 流水线（`_sync/`）
 
 ```
-0x/
-├── x-new.md, x-note.md     # 生成的文档（不要手改）
-├── notes/<slug>.md         # 每个主题一个文件
-├── STYLE.md                # 正文改写成 strong bullet 的规则
-├── data/readable/<id>.md   # 每篇帖子的 bullet 版正文
-├── categories.json         # x-note 的分类和顺序（由 LLM 维护）
-├── state.json              # watermark
-├── data/liked/<id>.json    # 每条 Like：原文 + keywords + gist
-├── data/note/<id>.json     # 每条 Note：原文 + title + category + kind + summary
-├── RUNBOOK.md              # 每次运行的步骤（给定时任务读）
+_sync/
+├── RUNBOOK.md            # 每次运行的步骤（定时任务读这份）
+├── STYLE.md              # 正文改写成 strong bullet 的规则
+├── categories.json       # 主题、顺序（= 文件编号）、描述
+├── state.json            # 增量 watermark：每个列表最近 30 个 id
+├── data/liked|note/      # 每篇帖子一个 JSON（原文 + LLM 字段）
+├── data/readable/        # 每篇帖子的 bullet 版正文
 └── scripts/
-    ├── x_dom.js            # 注入 x.com 页面：滚动列表、读状态页
-    ├── save_dialog.ps1     # 自动填写浏览器下载的「另存为」对话框
-    ├── build.py            # raw 数据 + LLM 结果 → data/*.json + state.json
-    └── render.py           # data/*.json → 两份 .md
+    ├── x_dom.js          # 注入 x.com：滚动列表、读状态页
+    ├── save_dialog.ps1   # 自动填写浏览器下载的「另存为」对话框
+    ├── build.py          # 原始数据 + LLM 字段 → data/
+    ├── render.py         # data/ → 0x/*.md
+    └── sync_local.ps1    # 把某个 commit 的 0x/ 镜像到本地 clone
 ```
 
-## 设计取舍
+## 同步流程
 
-- **数据和展示分开**
-  - LLM 只产出字段（summary、category…），`render.py` 负责排版
-  - 重新分组 = 改 `category` 字段再 render，不用重写整份文档
-- **为什么读 DOM，不拦截 GraphQL**
-  - X 在页面启动时就保存了 `fetch` / `XHR` 的引用，加载后再挂 hook 拦不到请求
-  - MVP1 改用 Playwright 后，可以用 `page.on('response')` 拿完整 JSON
-- **source of truth**：云端会话 push 到 GitHub 的内容
-  - 本地文件夹只是镜像；电脑在线时顺手同步，省得再从 GitHub pull 一次
-- **为什么经过下载对话框**
-  - 浏览器面板里的数据要落到磁盘，又不能整段经过 LLM 复述（每次几百 KB）
-  - 所以页面触发下载，`save_dialog.ps1` 直接把文件名框填成目标路径
+- **现在（本地流程）**
+  - Cowork 抓取并生成内容 → push 到 GitHub → 用 `sync_local.ps1` 把同一个 commit 的 `0x/` 镜像到 `D:\1AL\1a-applied-ai\0x`
+  - 本地 `0x\` 是生成内容，不要手改，改动都通过 Cowork 做
+  - 本地 repo 的其他部分不动；需要时我会自己 `git pull`
+- **以后（云端流程）**
+  - 云端抓取并生成 → push 到 GitHub（source of truth）→ 本地从 GitHub 同步
+  - 从 GitHub 拿，不从 Cowork 沙箱拿：沙箱是临时的，会话结束就没了

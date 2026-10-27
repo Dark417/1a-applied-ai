@@ -175,7 +175,7 @@
 
 **Sumanth (@Sumanth_077)** · 发帖 2026-10-24 · [原帖](https://x.com/Sumanth_077/status/2113948384113598588)
 
-- 🔖 也在 Notes 里，全文见：[Google 开源 Harness²：递归改进 agent harness](notes/harness-loop.md#x-2113948384113598588)
+- 🔖 也在 Notes 里，全文见：[Google 开源 Harness²：递归改进 agent harness](01-harness-loop.md#x-2113948384113598588)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -183,7 +183,7 @@
 
 **Annatar.md (@AnnatarXBT)** · 发帖 2026-10-23 · [原帖](https://x.com/AnnatarXBT/status/2113634548378374458)
 
-- 🔖 也在 Notes 里，全文见：[Wavestone：11 个 coding agent 共有的 7 部分 harness](notes/harness-loop.md#x-2113634548378374458)
+- 🔖 也在 Notes 里，全文见：[Wavestone：11 个 coding agent 共有的 7 部分 harness](01-harness-loop.md#x-2113634548378374458)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -191,7 +191,7 @@
 
 **Sergii Makarevych (@sermakarevich)** · 发帖 2026-10-03 · [原帖](https://x.com/sermakarevich/status/2106453816757354947)
 
-- 🔖 也在 Notes 里，全文见：[Evals：如何判断一个 AI 系统真的可用](notes/evals-research.md#x-2106453816757354947)
+- 🔖 也在 Notes 里，全文见：[Evals：如何判断一个 AI 系统真的可用](04-evals-research.md#x-2106453816757354947)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -199,7 +199,7 @@
 
 **meng shao (@shao__meng)** · 发帖 2026-09-28 · [原帖](https://x.com/shao__meng/status/2104453599367770287)
 
-- 🔖 也在 Notes 里，全文见：[Stanford CS329A：Self-Improving AI Agents 课程](notes/llm-courses.md#x-2104453599367770287)
+- 🔖 也在 Notes 里，全文见：[Stanford CS329A：Self-Improving AI Agents 课程](08-llm-courses.md#x-2104453599367770287)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -254,7 +254,7 @@
 
 **Khairallah AL-Awady (@eng_khairallah1)** · 发帖 2026-07-31 · [原帖](https://x.com/eng_khairallah1/status/2083131009986396282)
 
-- 🔖 也在 Notes 里，全文见：[How to Become a Graph Architect With Zero Experience (Full Course)](notes/graph-multi-agent.md#x-2083131009986396282)
+- 🔖 也在 Notes 里，全文见：[How to Become a Graph Architect With Zero Experience (Full Course)](02-graph-multi-agent.md#x-2083131009986396282)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -262,7 +262,7 @@
 
 **The Code Newsletter (@CodeNewsletter)** · 发帖 2026-07-29 · [原帖](https://x.com/CodeNewsletter/status/2082413202353406091)
 
-- 🔖 也在 Notes 里，全文见：[The Code newsletter 推广](notes/misc.md#x-2082413202353406091)
+- 🔖 也在 Notes 里，全文见：[The Code newsletter 推广](10-misc.md#x-2082413202353406091)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -270,7 +270,7 @@
 
 **Anatoli Kopadze (@AnatoliKopadze)** · 发帖 2026-08-06 · [原帖](https://x.com/AnatoliKopadze/status/2085421662447468758)
 
-- 🔖 也在 Notes 里，全文见：[Anthropic：让系统自己 prompt 自己](notes/harness-loop.md#x-2085421662447468758)
+- 🔖 也在 Notes 里，全文见：[Anthropic：让系统自己 prompt 自己](01-harness-loop.md#x-2085421662447468758)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -278,7 +278,7 @@
 
 **Carnage (@0xCarnagee)** · 发帖 2026-07-21 · [原帖](https://x.com/0xCarnagee/status/2079636027736457707)
 
-- 🔖 也在 Notes 里，全文见：[Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](notes/graph-multi-agent.md#x-2079636027736457707)
+- 🔖 也在 Notes 里，全文见：[Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](02-graph-multi-agent.md#x-2079636027736457707)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -1022,7 +1022,7 @@
 
 **codila (@0xCodila)** · 发帖 2026-08-01 · [原帖](https://x.com/0xCodila/status/2083602508807569560)
 
-- 🔖 也在 Notes 里，全文见：[Google 2 小时课程：1 prompt → 100 agents → loops → graphs](notes/graph-multi-agent.md#x-2083602508807569560)
+- 🔖 也在 Notes 里，全文见：[Google 2 小时课程：1 prompt → 100 agents → loops → graphs](02-graph-multi-agent.md#x-2083602508807569560)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -1030,7 +1030,7 @@
 
 **Anatoli Kopadze (@AnatoliKopadze)** · 发帖 2026-06-29 · [原帖](https://x.com/AnatoliKopadze/status/2071649423042412597)
 
-- 🔖 也在 Notes 里，全文见：[Spotify：引入 loop 后 agent 成功率 20–30% → 80%](notes/harness-loop.md#x-2071649423042412597)
+- 🔖 也在 Notes 里，全文见：[Spotify：引入 loop 后 agent 成功率 20–30% → 80%](01-harness-loop.md#x-2071649423042412597)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -1038,7 +1038,7 @@
 
 **Movez (@0xMovez)** · 发帖 2026-06-28 · [原帖](https://x.com/0xMovez/status/2071214176526049739)
 
-- 🔖 也在 Notes 里，全文见：[前 Google 工程师：agent loop + harness + evals 技术栈](notes/harness-loop.md#x-2071214176526049739)
+- 🔖 也在 Notes 里，全文见：[前 Google 工程师：agent loop + harness + evals 技术栈](01-harness-loop.md#x-2071214176526049739)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2267,7 +2267,7 @@
 
 **DAIR.AI (@dair_ai)** · 发帖 2026-05-03 · [原帖](https://x.com/dair_ai/status/2050956647909015788)
 
-- 🔖 也在 Notes 里，全文见：[DAIR.AI 每周论文（4/26–5/3）](notes/evals-research.md#x-2050956647909015788)
+- 🔖 也在 Notes 里，全文见：[DAIR.AI 每周论文（4/26–5/3）](04-evals-research.md#x-2050956647909015788)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2275,7 +2275,7 @@
 
 **Suryansh Tiwari (@Suryanshti777)** · 发帖 2026-05-01 · [原帖](https://x.com/Suryanshti777/status/2050228936270037068)
 
-- 🔖 也在 Notes 里，全文见：[RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](notes/memory-rag.md#x-2050228936270037068)
+- 🔖 也在 Notes 里，全文见：[RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](03-memory-rag.md#x-2050228936270037068)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2411,7 +2411,7 @@
 
 **el.cine (@EHuanglu)** · 发帖 2026-03-05 · [原帖](https://x.com/EHuanglu/status/2029562218048541087)
 
-- 🔖 也在 Notes 里，全文见：[Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](notes/other-applications.md#x-2029562218048541087)
+- 🔖 也在 Notes 里，全文见：[Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](09-other-applications.md#x-2029562218048541087)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2562,7 +2562,7 @@
 
 **Rimsha Bhardwaj (@heyrimsha)** · 发帖 2026-02-27 · [原帖](https://x.com/heyrimsha/status/2027350587533332748)
 
-- 🔖 也在 Notes 里，全文见：[Anthropic《The Complete Guide to Building Skills for Claude》解读](notes/skills-prompt.md#x-2027350587533332748)
+- 🔖 也在 Notes 里，全文见：[Anthropic《The Complete Guide to Building Skills for Claude》解读](06-skills-prompt.md#x-2027350587533332748)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2582,7 +2582,7 @@
 
 **GitHubDaily (@GitHub_Daily)** · 发帖 2026-02-24 · [原帖](https://x.com/GitHub_Daily/status/2026178278055403843)
 
-- 🔖 也在 Notes 里，全文见：[GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](notes/coding-agent.md#x-2026178278055403843)
+- 🔖 也在 Notes 里，全文见：[GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](05-coding-agent.md#x-2026178278055403843)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2590,7 +2590,7 @@
 
 **Elvis (@elvissun)** · 发帖 2026-02-23 · [原帖](https://x.com/elvissun/status/2025920521871716562)
 
-- 🔖 也在 Notes 里，全文见：[OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](notes/openclaw-personal-agent.md#x-2025920521871716562)
+- 🔖 也在 Notes 里，全文见：[OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](07-openclaw-personal-agent.md#x-2025920521871716562)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -2598,7 +2598,7 @@
 
 **AYi (@AYi_AInotes)** · 发帖 2026-02-24 · [原帖](https://x.com/AYi_AInotes/status/2026224275192193465)
 
-- 🔖 也在 Notes 里，全文见：[OpenClaw 编排文章的要点总结](notes/openclaw-personal-agent.md#x-2026224275192193465)
+- 🔖 也在 Notes 里，全文见：[OpenClaw 编排文章的要点总结](07-openclaw-personal-agent.md#x-2026224275192193465)
 
 [↑ 回到目录](#part-1--keywords)
 

@@ -3,7 +3,7 @@
 You are turning one X (Twitter) post, thread, or long-form X Article into a **readable, bulleted version** for a personal study notebook. The reader wants to study the full content quickly. This is NOT a summary — every substantive point must survive — but it is restructured, not copied.
 
 ## Output
-- Write exactly one file per post: `0x/data/readable/<ID>.md`
+- Write exactly one file per post: `0x/_sync/data/readable/<ID>.md`
 - Markdown fragment only. No `#` headings of any level (the fragment is embedded under an existing heading). No front matter. No intro/outro from you.
 - UTF-8. Nested bullets use **2 spaces** per level. Max 3 levels deep.
 
