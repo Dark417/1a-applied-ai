@@ -23,10 +23,23 @@ $src = Get-ChildItem $tmp -Directory | Where-Object { $_.Name -like "*-$Sha" } |
 $src0x = Join-Path $src.FullName "0x"
 if (-not (Test-Path $src0x)) { Write-Output "NO_0X_IN_COMMIT"; exit 2 }
 
+# Match what a git checkout would write: with core.autocrlf=true, text files get CRLF.
+# Otherwise git status shows every synced file as modified (content is identical).
+$repoRoot = Split-Path $Dest -Parent
+$autocrlf = (& git -C $repoRoot config core.autocrlf 2>$null)
+if ($autocrlf -eq "true") {
+  $utf8 = New-Object System.Text.UTF8Encoding($false)
+  Get-ChildItem $src0x -Recurse -File -Include *.md, *.json, *.py, *.js, *.ps1, *.txt, .gitignore | ForEach-Object {
+    $t = [System.IO.File]::ReadAllText($_.FullName, $utf8)
+    [System.IO.File]::WriteAllText($_.FullName, ($t -replace "`r`n", "`n") -replace "`n", "`r`n", $utf8)
+  }
+}
+
 $args = @($src0x, $Dest, "/MIR", "/XD", "raw", "/NJH", "/NP", "/NDL")
 if ($DryRun) { $args += "/L" }
 & robocopy @args | Where-Object { $_ -match '\S' } | Select-Object -Last 25
 $code = $LASTEXITCODE
 Remove-Item $tmp -Recurse -Force
+if (-not $DryRun) { & git -C $repoRoot update-index -q --refresh 2>$null | Out-Null }
 if ($code -ge 8) { Write-Output "ROBOCOPY_FAILED $code"; exit 3 }
 Write-Output ("SYNCED " + $Sha.Substring(0, 7) + " -> " + $Dest + $(if ($DryRun) { " (dry run)" } else { "" }))
