@@ -411,6 +411,197 @@
   - Grade each stage separately; the finder and the writer fail differently
   - For agents: final state and path, several runs, pass^k, cost per success, and reliability as its own number
   - Graders used for optimisation get gamed. Keep one they never see
+- **Level 7: public benchmarks**
+  - Zooms into: Level 1's distinction between eval and benchmark. Question: what do leaderboard numbers tell you, and what do they hide?
+  - **A benchmark is a fixed public task set used to compare models** — how you pick an engine
+    - **MMLU** (academic multiple choice), **GSM8K** (grade-school maths), **HumanEval** (code)
+    - **MT-Bench** and **Chatbot Arena** (conversation quality)
+    - **SWE-bench** (fixing real GitHub issues), **τ-bench** (customer-service agents)
+    - **GPQA** and **HLE** (expert questions)
+  - Four things to know before quoting one:
+  - **1. The number depends on the harness as much as the model**
+    - GSM8K on the same open-weight model with two prompt formats gave **0.686 and 0.746**
+    - The lm-evaluation-harness paper (Biderman et al., 2024) documents double-digit swings from prompt formatting, few-shot examples, and the regex that extracts the answer
+    - **A score is a (model, prompt, harness, version) tuple**
+    - **Schaeffer et al. (2023)**: apparent "emergent" jumps in capability were largely artefacts of all-or-nothing metrics, and vanished under smooth ones
+    - The metric you choose can create or erase a phenomenon
+  - **2. Contamination** — if the test questions were in the training data, the score measures memory
+    - **GSM1k** (Zhang et al., 2024) rebuilt GSM8K with fresh questions of matched difficulty
+    - Some model families dropped up to **8 points**, correlated with how likely the model was to have memorised the original
+    - Other families did not drop
+    - Contamination is real, measurable, and uneven
+  - **3. Saturation** — benchmarks have a shelf life
+    - A 2026 study of 60 widely used benchmarks found about half highly saturated; older ones saturate faster
+    - SWE-bench Verified went from roughly **40% to over 80%** solved in about two years; its curator stated it no longer separates frontier models
+    - MMLU, GSM8K, and HumanEval have effectively been retired by frontier labs in favour of HLE, GPQA Diamond, SWE-bench Verified, LiveCodeBench, and τ²-bench — each of which will saturate in turn
+    - On Chatbot Arena the top models now sit within about **20 Elo points**, which is inside the noise
+  - **4. Redundancy** — Zeng and Papailiopoulos (2026)
+    - Matrix of **84 models × 133 benchmarks** is approximately **rank two**: two underlying factors explain over 90% of the variation
+    - **Five well-chosen benchmarks predict the other 128 to within about 4 points**
+    - For choosing an engine: good news — you don't need to run forty benchmarks
+    - For discovering a specific failure mode: it says nothing; that still needs your own eval
+  - **Important: a leaderboard ranks engines on last year's exam, under one harness, and the top entries are usually within noise of each other**
+    - What it means for us: use benchmarks to shortlist two or three models, then decide with your own eval on your own data
+    - Why it matters: switching models on a 2-point benchmark gain can cost you 10 points on your actual task
+  - **Two frontier uses of evals worth knowing**
+    - **Google's Paper Assistant Tool** (Jayaram et al., 2026): an agent pipeline to review scientific papers. Caught **89.7%** of known proof errors vs **55.2%** for a single model call. Over 90% of 850 surveyed authors found it helpful; 31% ran new experiments because of it
+    - **CUSP** (Wu et al., 2026): asked models to forecast which research directions will succeed. Near chance (**0.519**), with strong yes-bias or no-bias depending on the model; fixable only with explicit bias correction
+    - Both are reminders: an eval of a model's judgment needs its own ground truth, and models are badly calibrated about the future and about themselves
+  - **Carry forward from Level 7**
+    - A benchmark score is a tuple, not a property of the model. Record the harness
+    - Benchmarks get contaminated and saturate; check the date
+    - Five benchmarks tell you almost everything a leaderboard can. Your eval tells you the rest
+- **Level 8: making it a habit**
+  - Zooms into: the "when" of the quick grasp. Question: how does this run every week without a research team?
+  - **Hamel Husain's three-level model (2024) sets the cadence**
+
+    | Level | What | When | Cost |
+    |---|---|---|---|
+    | 1 | Code graders, schema checks, required facts | Every commit | Free |
+    | 2 | Model judges and detectors on the test set, human review of a sample | Every change to prompt, model, or retrieval | Cents to dollars |
+    | 3 | A/B test on real traffic | After a change ships | Real users |
+
+  - **The merge gate**
+    - The tutorial's CI gate reruns Levels 1 and 2 and fails the build if the pass rate drops more than **3 points** against the recorded baseline of **0.70**
+    - It is a tripwire for big regressions, not a guarantee: with a 12-point detection floor, a 5-point regression walks through
+    - Say so in the dashboard
+  - **Monitoring**
+    - After launch, sample real traffic, run the cheap graders on all of it and the expensive ones on a slice, and plot the trend
+  - **"Calibrate then trust"** (Bodhwani et al., 2026) — the right pattern for the expensive gate
+    - Run a full audit once against verifiable ground truth to learn where the cheap judge-based gate agrees with reality
+    - Use the cheap gate in CI only inside that region
+    - Re-audit when the model, the judge, the simulator, or the domain changes
+    - They also found a zero-cost "did the conversation complete" bit caught budget-starvation regressions on its own
+  - **Caching and cost**
+    - Cache every model call keyed on the prompt, the data version, and the recipe — a rerun becomes a file read
+    - The full A/B on 60 tickets costs **121 judge calls, about four cents**; the entire tutorial reran from cache with zero calls
+    - **Cost is not the reason to skip evals**
+  - **What a leader should ask for — four numbers on one page**
+    - The product's pass rate with its interval
+    - The grader's agreement with human labels
+    - The detection floor
+    - The share of cases that got worse in the last change
+    - If any of the four is missing, the other three are not yet meaningful
+  - **Carry forward from Level 8**
+    - Three cadences: every commit, every change, after shipping
+    - A gate is a floor, not a ceiling. State its detection floor
+    - Calibrate the cheap gate against ground truth once, then trust it only inside that region
+- **The tools and approaches, observed**
+  - An observation, not a recommendation list
+  - All were run or reviewed while building the tutorial; the practitioner and tooling notes in the author's knowledge base hold the details
+- **Frameworks**
+
+  | Tool | Best at | What to watch |
+  |---|---|---|
+  | Inspect AI (UK AI Security Institute, MIT) | One coherent pipeline: dataset, solver, scorer, log viewer; agents and sandboxes; used for frontier safety evals | Code-first; the most complete, and the most to learn |
+  | lm-evaluation-harness (EleutherAI, MIT) | Running public benchmarks (GSM8K, MMLU, IFEval) reproducibly against any model | Benchmarks only; the harness paper is the reason it exists |
+  | promptfoo (MIT, Node.js) | Declarative YAML test suites, red-teaming, CI regression | Not a Python package; acquired by OpenAI in 2026 |
+  | DeepEval (Apache-2.0) | pytest-style unit tests with ready metrics (faithfulness, relevance) | Headline metrics are blends; look inside before trusting |
+  | RAGAS (Apache-2.0) | The standard RAG triad, reference-free | Flaky with local models (NaNs, executor errors); numbers are blends |
+  | Langfuse (MIT self-host) | Tracing, datasets, experiment runs, judge evaluators in one self-hosted stack | Version 4 changes evaluator semantics; plan the migration |
+  | Phoenix (Arize) | Tracing plus evals with a strong UI | Elastic License 2.0, source-available rather than open source |
+  | LangSmith, Braintrust | Hosted platforms: trace capture, sampling, judge bootstrap, human refinement | Commercial; Braintrust's autoevals library works standalone |
+  | Opik (Comet), MLflow genai, Weave (W&B) | Self-hostable observability with eval hooks; good if you already run the platform | Heavy footprints for a from-scratch team |
+  | HELM (Stanford) | Multi-metric philosophy: accuracy, calibration, robustness, fairness, efficiency together | Research-oriented, least turnkey |
+  | evalica | Turning pairwise judgments into Bradley-Terry or Elo leaderboards with intervals | Statistics only; pair with a judge |
+  | Jev / TypeSafe | Typed judge questions with calibrated probabilities, ~100x cheaper than a generative judge | No text, no explanations; you supply the labels |
+  | HHEM, LettuceDetect, MiniCheck, SelfCheckGPT | "Is this claim supported" at CPU speed and zero marginal cost | One question only; not a general grader |
+  | Selene-Mini, Prometheus 2, Flow-Judge | Open-weight judge models you can self-host and audit | Still judges; still need calibration |
+
+- **Approaches, compared**
+
+  | Approach | Answers | Cost | Blind spot |
+  |---|---|---|---|
+  | Code rules | Is the form right, are the facts present | Free | Meaning |
+  | Similarity (ROUGE, embeddings) | Did the output change | Free | Correctness |
+  | Specialised detector / NLI | Is this claim supported by this text | Near free | Anything else |
+  | Typed judge (Jev) | This label, this yes/no, with a probability | Cents per thousand | Cannot explain or propose |
+  | Generative judge, binary with evidence | Any readable criterion | Cents per call | The five biases; must be calibrated |
+  | Panel of judges, robust combination | Same, with fewer single-judge failures | Three times a judge | Correlated errors cap the benefit at ~3 judges |
+  | Human labels | Ground truth | Expensive, slow | Needs two raters and an agreement statistic |
+  | A/B on traffic | Real business impact | Real users at risk | Slow; needs the earlier levels to be safe |
+
+  - **Pattern seen in every source and in the author's own run**: read the hand-rolled grader and the framework number against each other
+    - Agreement is evidence
+    - Disagreement is a question, and usually a good one
+- **A decision guide**
+
+  | Question | Use | Then check |
+  |---|---|---|
+  | Is the output well-formed and complete? | Code rules | Nothing, it is exact |
+  | Did the new version change the outputs? | Similarity | Why, by reading a sample |
+  | Is this claim supported by this document? | Detector or typed judge | Its precision and recall on a labelled sample |
+  | Does the reply fail in way X? | Binary generative judge with evidence | Kappa against human labels on dev |
+  | Which of two versions is better? | Paired comparison with interval | The per-case regressions |
+  | Can we detect a 5-point regression? | Power calculation | Add cases until you can |
+  | Is the agent reliable? | pass^k over several runs, perturbed tasks | Consistency across runs as its own number |
+  | Which model should we use? | Five public benchmarks to shortlist | Your own eval to decide |
+  | Is it still working in production? | Sampled traffic, cheap graders on all, judge on a slice | Re-audit the judge gate when anything changes |
+
+- **Fifteen things to carry away**
+  1. An eval is input, system, grader, number. **Build the gold inputs first; they are the asset**
+  2. Evals measure your product. Benchmarks measure engines. Do not confuse them
+  3. **Read a hundred outputs before writing a grader.** The failure list is the plan
+  4. Code graders for everything with a definite answer. They see form, not meaning
+  5. Judges get binary questions with evidence and context. Holistic scores miss planted errors
+  6. **Measure the judge against humans.** Report kappa or catch rate. Sixty percent agreement can mean nothing
+  7. Judges prefer first, longer, familiar, and pleasant. Mitigations are cheap; apply them
+  8. **Satisfaction is not success.** Give the judge the tool calls and the final state
+  9. For "is this supported", a small detector or typed judge beats a general judge on cost and often on accuracy
+  10. **Every rate gets an interval. Every comparison is paired.** Know the detection floor
+  11. Grade each stage of a pipeline separately
+  12. Agents: final state and path, several runs, pass^k, cost per success, reliability on its own axis
+  13. **A grader used for optimisation gets gamed.** Keep one the system never sees
+  14. Benchmark scores are harness-dependent, contaminated unevenly, and saturate. Record the tuple
+  15. Three cadences, a gate with a stated floor, a monitor, and a re-audit when anything changes
+- **References — from the author's knowledge base** (summaries in sibling folders)
+  - Acharya, Pan, Verkhovsky (2026). RoPoLL: Robust Panel of LLM Judges. arXiv:2606.30931. — `RoPoLLRobustPanelOfLLMJudges/`
+  - Asawa et al. (2026). Continual Learning Bench. arXiv:2606.05661. — `ContinualLearningBench/`
+  - Bai et al. (2026). How Do AI Agents Spend Your Money? arXiv:2604.22750. — `HowAiAgentsSpendYourMoney/`
+  - Bodhwani, Tran, Wei (2026). GAUGE: When Not to Trust LLM-as-a-Judge in User-Simulated Evaluation of Task-Oriented Agents. arXiv:2609.12191. — `GaugeWhenNotToTrustLlmAsAJudge…/`
+  - Cho et al. (2026). Ask, Don't Judge / BinEval. arXiv:2606.27226. — `AskDontJudge/`, `BinEval/`
+  - Fiddler (2026). The Evaluation Trust Tax: agent evals TCO. — `AgentEvalsTCO/`
+  - Grace, Hadfield, Olivares, De Jonghe (Anthropic, 2026). Demystifying Evals for AI Agents. — `DemystifyingEvalsForAIAgents/`
+  - Gulati et al. (2026). Ask Early, Ask Late, Ask Right. arXiv:2605.07937. — `AskEarlyAskLateAskRight/`
+  - HKUDS (2026). ClawWork (economic-accountability agent benchmark, code analysis). — `ClawWork/`
+  - Jayaram et al. (Google, 2026). Towards Automating Scientific Review with the Paper Assistant Tool. arXiv:2606.28277. — `PaperAssistantTool/`, `TowardsAutomatingScientificReview/`
+  - Lu et al. (2026). The Meta-Agent Challenge. arXiv:2606.04455. — `MetaAgentChallenge/`
+  - Menaged et al. (2026). Can LLM Agents Infer World Models? arXiv:2606.16576. — `CanLLMAgentsInferWorldModels/`
+  - Pan et al. (2026). The Tasteful Agent. arXiv:2609.25804. — `TastefulAgent/`
+  - Parikh (2026). Structured Output Collapses Answer Diversity Across 44 Language Models. arXiv:2607.18476. — `StructuredOutputCollapsesAnswerDiversity/`
+  - Rabanser, Kapoor, Kirgis, Liu, Utpala, Narayanan (2026). Towards a Science of AI Agent Reliability. arXiv:2602.16666, ICML 2026. — `TowardsAScienceOfAIAgentReliability/`
+  - Wang et al. (Qwen, 2026). The Verification Horizon: No Silver Bullet for Coding Agent Rewards. arXiv:2606.26300. — `VerificationHorizon/`
+  - Wu et al. (2026). CUSP: Forecasting Scientific Progress with AI. arXiv:2605.22681. — `ForecastingScientificProgressWithAI/`
+  - Zeng, Papailiopoulos (2026). You Don't Need to Run Every Eval. arXiv:2606.24020. — `YouDontNeedToRunEveryEval/`
+  - Zhang et al. (2026). SWE-Explore. arXiv:2606.07297. — `SWEExplore/`
+  - The evals tutorial (`tutorials/evals/`, chapters 00–14, `Q&A.md`, `research/SOURCES_*.md`) and its primer notebook — source of every running-example number. The jev tutorial (`tutorials/jev/`)
+- **References — foundational and practitioner sources**
+  - Biderman et al. (2024). Lessons from the Trenches on Reproducible Evaluation of Language Models. arXiv:2405.14782
+  - Chiang et al. (2024). Chatbot Arena. arXiv:2403.04132
+  - Dubois, Galambosi, Liang, Hashimoto (2024). Length-Controlled AlpacaEval. arXiv:2404.04475
+  - Es, James, Espinosa-Anke, Schockaert (2024). RAGAS. arXiv:2309.15217
+  - Gu et al. (2024). A Survey on LLM-as-a-Judge. arXiv:2411.15594
+  - Han et al. (2025). RAG vs GraphRAG: A Systematic Evaluation. arXiv:2502.11371
+  - JEV-as-a-Judge (2026). arXiv:2609.26550. — `research_topics/coding_agents/JevAsAJudge/`
+  - Panickssery, Bowman, Feng (2024). LLM Evaluators Recognize and Favor Their Own Generations. arXiv:2404.13076
+  - Husain (2024). Your AI Product Needs Evals. hamel.dev. Husain (2025). A Field Guide to Rapidly Improving AI Products. Husain & Shankar (2025). AI Evals FAQ
+  - Jimenez et al. (2024). SWE-bench. arXiv:2310.06770. OpenAI (2024). SWE-bench Verified
+  - Kovács, Recski (2025). LettuceDetect. arXiv:2502.17125. Tang, Laban, Durrett (2024). MiniCheck. arXiv:2404.10774. Manakul, Liusie, Gales (2023). SelfCheckGPT. arXiv:2303.08896
+  - Liang et al. (2022). HELM. arXiv:2211.09110
+  - Liu et al. (2023). G-Eval. arXiv:2303.16634
+  - Miller (2024). Adding Error Bars to Evals. arXiv:2411.00640
+  - Saad-Falcon, Khattab, Potts, Zaharia (2024). ARES. arXiv:2311.09476
+  - Schaeffer, Miranda, Koyejo (2023). Are Emergent Abilities of Large Language Models a Mirage? arXiv:2304.15004
+  - Shankar, Zamfirescu-Pereira, Hartmann, Parameswaran, Arawjo (2024). Who Validates the Validators? arXiv:2404.12272
+  - Tan et al. (2025). JudgeBench. arXiv:2410.12784
+  - Verga et al. (2024). Replacing Judges with Juries (PoLL). arXiv:2404.18796
+  - Wang et al. (2024). Large Language Models are not Fair Evaluators. arXiv:2305.17926
+  - Yan (2024). Task-Specific LLM Evals that Do & Don't Work; Evaluating the Effectiveness of LLM-Evaluators. eugeneyan.com
+  - Yao, Shinn, Razavi, Narasimhan (2024). τ-bench. arXiv:2406.12045. Sierra (2025). τ²-bench. arXiv:2506.07982
+  - Zhang et al. (2024). GSM1k. arXiv:2405.00332
+  - Zheng et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv:2306.05685
+  - Zhou et al. (2023). IFEval. arXiv:2311.07911
+  - 2026 audits: When AI Benchmarks Plateau (arXiv:2602.16763); When the Judge Changes, So Does the Measurement (arXiv:2607.08535); Reliability without Validity (arXiv:2606.19544); AgentLens (arXiv:2605.12925)
 
 <details><summary>原文</summary>
 
