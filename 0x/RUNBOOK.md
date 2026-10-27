@@ -33,7 +33,7 @@
 4. Bookmarks：
    - 执行 `await __xdom.go('/i/history')`（SPA 跳转，脚本不会丢）
    - 然后 `__xdom.collectList(50, <state.bookmarks>).then(r => window.__bm = r)`，同样轮询
-5. 两个列表都是 0 条新内容：直接跳到第 7 步，汇报「今天没有新收藏」
+5. 两个列表都是 0 条新内容：直接跳到第 8 步，汇报「今天没有新收藏」
 
 ## 3. 补全详情
 
@@ -74,9 +74,16 @@
      - `summary`：中文 100–200 字，说清这篇是在讲概念、讲怎么搭建，还是在比较或评价方法，再写特点和重点
    - 原文中英文都保留原样，只有总结用中文
 3. `python3 0x/scripts/build.py apply /home/claude/work/raw/<RUN>`（写 `data/`，更新 `state.json`）
-4. `python3 0x/scripts/render.py`
-5. 自检：
-   - 两份 md 里每个 `](#x-<id>)` 都有对应的 `x-<id>` 标题
+4. **可读版正文**：每篇新帖子（liked 和 note 去重后按 id 算）都要按 `0x/STYLE.md` 写一份 `0x/data/readable/<id>.md`
+   - 使用 strong bullet style，保留原语言；不是摘要，是重新排版
+   - 已经存在的不要重写
+   - 新的长文超过 3 篇时，按篇拆给并行 subagent，每个 subagent 都先读 `STYLE.md`
+5. `python3 0x/scripts/render.py`
+   - 输出 `x-new.md`、`x-note.md`（只有总目录）、`notes/<slug>.md`（每个主题一个文件）
+   - 结尾打印的 `readable missing` 应该是 0
+6. 自检：
+   - `x-new.md` 和每个 `notes/*.md` 里的每个 `](#x-<id>)` 都有对应的 `### x-<id>` 标题
+   - `x-note.md` 里的每个 `notes/<slug>.md#x-<id>` 都能在对应文件里找到
    - 新增条数和第 2 步拉到的条数一致
 
 ## 6. 推送 GitHub
@@ -88,7 +95,10 @@ git add 0x && git commit -m "chore(0x): sync X likes/bookmarks <RUN> (+N liked, 
 git push origin HEAD:main
 ```
 
-## 7. 同步本地文件夹
+## 7. 同步本地文件夹（尽力而为）
+
+- **source of truth 是云端会话 push 到 GitHub 的内容**；本地文件夹只是镜像
+- 用户的电脑在线时才做这一步，省得他再从 GitHub pull；电脑离线就跳过，不算失败
 
 先在容器里取 `SHA=$(git rev-parse HEAD)`（第 6 步 push 之后的那个 commit），再在 device_bash 里执行（只覆盖文件，不删除；`raw/` 保留）：
 

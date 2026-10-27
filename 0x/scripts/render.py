@@ -1,23 +1,34 @@
 #!/usr/bin/env python3
-"""Render x-new.md (Likes) and x-note.md (Bookmarks + roots of liked replies)
-from the per-post JSON files in data/. Stdlib only.
+"""Render the reading views from data/. Stdlib only.
 
-Ordering = "the order you liked/saved it", newest first:
-  sort by pulled_at desc (run time), then rank asc (position in X's list).
+Outputs
+  x-new.md              ❤️ Likes: Part 1 keywords, Part 2 content
+  x-note.md             🔖 Notes master index only: topic → notes/<slug>.md, title → notes/<slug>.md#x-<id>
+  notes/<slug>.md       one file per topic: Part 1 index, Part 2 details
 
-Anchors: every detail heading is `### x-<tweetId>`. That exact text is a valid
-anchor on both GitHub (slug) and Obsidian (heading link), so index links
-`[title](#x-<id>)` jump in both.
+Content source per post
+  data/readable/<id>.md  bulleted readable version (LLM-written, see RUNBOOK §5)
+  raw text               kept verbatim inside a collapsed <details> block
+
+Dedup
+  - one data file per post id → a post never appears twice in the same view, across runs
+  - a post that is both liked and noted: x-new.md keeps its keywords but links to the
+    note instead of repeating the full content
+
+Ordering = the order you liked/saved it, newest first
+  (pulled_at desc, then rank = position in X's list asc)
+
+Anchors: detail headings are `### x-<id>`, valid anchors on both GitHub and Obsidian.
 """
 from __future__ import annotations
 
 import json
 import sys
-from collections import OrderedDict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
+NOTES_DIR = ROOT / "notes"
 
 
 def load(kind: str) -> list[dict]:
@@ -26,31 +37,57 @@ def load(kind: str) -> list[dict]:
     return items
 
 
+def load_categories() -> dict[str, dict]:
+    p = ROOT / "categories.json"
+    raw = json.loads(p.read_text(encoding="utf-8")) if p.exists() else {}
+    out = {}
+    for name, v in raw.items():
+        v = v if isinstance(v, dict) else {"desc": v}
+        v.setdefault("slug", "".join(c if c.isascii() and c.isalnum() else "-" for c in name.lower()).strip("-") or "misc")
+        out[name] = v
+    return out
+
+
 def day(iso: str | None) -> str:
     return (iso or "")[:10]
 
 
-def quote_block(text: str) -> list[str]:
+def quote_block(text: str, indent: str = "") -> list[str]:
     if not text:
-        return ["> _(无正文)_"]
-    return ["> " + line if line.strip() else ">" for line in text.splitlines()]
+        return [indent + "> _(无正文)_"]
+    return [indent + ("> " + line if line.strip() else ">") for line in text.splitlines()]
 
 
-def full_text(t: dict) -> str:
-    """Post text + self-thread + X Article body."""
+def raw_text(t: dict) -> str:
     parts = []
     if t.get("text"):
         parts.append(t["text"])
     for i, th in enumerate(t.get("thread") or [], 2):
         if th.get("text"):
             parts.append(f"[{i}] {th['text']}")
-    art = t.get("x_article")
-    if art:
-        if art.get("title"):
-            parts.append(f"《{art['title']}》")
-        if art.get("body"):
-            parts.append(art["body"])
+    art = t.get("x_article") or {}
+    if art.get("title"):
+        parts.append(f"《{art['title']}》")
+    if art.get("body"):
+        parts.append(art["body"])
     return "\n\n".join(parts)
+
+
+def readable(t: dict) -> str | None:
+    p = DATA / "readable" / f"{t['id']}.md"
+    return p.read_text(encoding="utf-8").strip() if p.exists() else None
+
+
+def body(t: dict) -> list[str]:
+    """Readable bullets + collapsed original. Falls back to the quote if no readable yet."""
+    r = readable(t)
+    raw = raw_text(t)
+    if not r:
+        return quote_block(raw)
+    out = [r, ""]
+    if raw and len(raw) > 280:  # short posts: the bullets already carry everything
+        out += ["<details><summary>原文</summary>", "", *quote_block(raw), "", "</details>"]
+    return out
 
 
 def extras(t: dict) -> list[str]:
@@ -58,14 +95,15 @@ def extras(t: dict) -> list[str]:
     par = t.get("parent")
     if par and par.get("text"):
         out.append(f"- 上文（作者原帖 @{par.get('handle', '')}）：")
-        out += ["  " + l for l in quote_block(par["text"])]
+        out += quote_block(par["text"], "  ")
     q = t.get("quote")
-    if q and q.get("text"):
+    if q and q.get("text") and not readable(t):
         out.append(f"- 引用 {q.get('name', '')}:")
-        out += ["  " + l for l in quote_block(q["text"])]
+        out += quote_block(q["text"], "  ")
     c = t.get("card")
     if c and c.get("href"):
-        out.append(f"- 链接卡片：[{c.get('text', '').splitlines()[0][:80] or c['href']}]({c['href']})")
+        label = (c.get("text") or "").splitlines()[0][:80] if c.get("text") else c["href"]
+        out.append(f"- 链接卡片：[{label}]({c['href']})")
     if t.get("media"):
         out.append("- 图片：" + " ".join(f"[img{i}]({m})" for i, m in enumerate(t["media"], 1)))
     if t.get("has_video"):
@@ -77,92 +115,124 @@ def author(t: dict) -> str:
     return f"{t.get('name') or t['handle']} (@{t['handle']})"
 
 
+def group_notes(notes: list[dict], cats: dict[str, dict]):
+    groups: dict[str, list[dict]] = {}
+    for t in notes:
+        groups.setdefault(t.get("category") or "其他", []).append(t)
+    order = list(cats)
+    names = sorted(groups, key=lambda c: (order.index(c) if c in order else len(order), c))
+    for c in names:
+        cats.setdefault(c, {"slug": "".join(ch if ch.isascii() and ch.isalnum() else "-" for ch in c.lower()).strip("-") or "misc", "desc": ""})
+    return names, groups
+
+
+# ---------------------------------------------------------------- notes/<slug>.md
+def render_topic(name: str, items: list[dict], meta: dict) -> str:
+    L = [
+        f"# {name}",
+        "",
+        f"- [← 返回总目录](../x-note.md)",
+        f"- {meta.get('desc', '')}" if meta.get("desc") else "",
+        f"- 共 {len(items)} 篇，按收藏顺序倒序（最新在上）",
+        "",
+        "## Part 1 · Index",
+        "",
+    ]
+    for t in items:
+        L.append(f"- [{t.get('title') or t['id']}](#x-{t['id']}) · @{t['handle']} · {day(t['created_at'])} · {t.get('kind', '')}")
+    L += ["", "## Part 2 · Details", ""]
+    for t in items:
+        src = "🔖 收藏" if t.get("source") == "bookmark" else f"❤️ 点赞的评论 → 原帖（via [{t.get('via_id')}](https://x.com/i/status/{t.get('via_id')})）"
+        L += [
+            f"### x-{t['id']}",
+            "",
+            f"**{t.get('title') or ''}**",
+            "",
+            f"- 作者：{author(t)} · 发帖 {day(t['created_at'])} · [原帖]({t['url']})",
+            f"- 来源：{src} · 拉取 {day(t.get('pulled_at'))} · 类型：{t.get('kind', '')}",
+            f"- **总结**：{t.get('summary', '')}",
+            "",
+            "**正文**",
+            "",
+            *body(t),
+            "",
+            *extras(t),
+            "",
+            "[↑ 回到本页目录](#part-1--index)",
+            "",
+        ]
+    return "\n".join(l for l in L if l is not None).rstrip() + "\n"
+
+
+# ---------------------------------------------------------------- x-note.md
+def render_note_index(names, groups, cats) -> str:
+    total = sum(len(v) for v in groups.values())
+    L = [
+        "# X Notes · 精读总目录",
+        "",
+        f"- 共 {total} 篇，{len(names)} 个主题；每个主题一个文件，主题内按收藏顺序倒序",
+        "- 点主题名 → 打开主题文件；点标题 → 直接跳到那篇的详情",
+        "- 自动生成，勿手改",
+        "",
+    ]
+    for c in names:
+        slug, desc = cats[c]["slug"], cats[c].get("desc", "")
+        L.append(f"- **[{c}](notes/{slug}.md)**（{len(groups[c])}）" + (f" — {desc}" if desc else ""))
+        for t in groups[c]:
+            L.append(f"  - [{t.get('title') or t['id']}](notes/{slug}.md#x-{t['id']}) · @{t['handle']} · {day(t['created_at'])}")
+    return "\n".join(L).rstrip() + "\n"
+
+
 # ---------------------------------------------------------------- x-new.md
-def render_new(items: list[dict]) -> str:
+def render_new(items: list[dict], note_loc: dict[str, tuple[str, str]]) -> str:
     L = [
         "# X Likes · 关键词速览",
         "",
         f"- 共 {len(items)} 条，按点赞顺序倒序（最新在上）",
-        "- 上半部分：关键词 + 简述；下半部分：原帖全文",
-        "- 自动生成，勿手改：改 `data/liked/*.json` 后跑 `scripts/render.py`",
+        "- Part 1：关键词 + 简述；Part 2：正文（同时在 Notes 里的帖子只给链接，不重复全文）",
+        "- 自动生成，勿手改",
         "",
         "## Part 1 · Keywords",
         "",
     ]
     for t in items:
         kw = ", ".join(f"`{k}`" for k in t.get("keywords", []))
-        L.append(f"- [{day(t['created_at'])} · @{t['handle']}](#x-{t['id']})：{kw}")
+        mark = " 🔖" if t["id"] in note_loc else ""
+        L.append(f"- [{day(t['created_at'])} · @{t['handle']}](#x-{t['id']}){mark}：{kw}")
         if t.get("gist"):
             L.append(f"  - {t['gist']}")
-    L += ["", "## Part 2 · 原帖", ""]
+    L += ["", "## Part 2 · 正文", ""]
     for t in items:
-        L += [
-            f"### x-{t['id']}",
-            "",
-            f"**{author(t)}** · 发帖 {day(t['created_at'])} · [原帖]({t['url']})",
-            "",
-            *quote_block(full_text(t)),
-            "",
-            *extras(t),
-            "",
-        ]
-    return "\n".join(L).rstrip() + "\n"
-
-
-# ---------------------------------------------------------------- x-note.md
-def render_note(items: list[dict], categories: dict) -> str:
-    groups: "OrderedDict[str, list[dict]]" = OrderedDict()
-    order = list(categories.keys())
-    for t in items:
-        groups.setdefault(t.get("category") or "Uncategorized", []).append(t)
-    names = sorted(groups, key=lambda c: (order.index(c) if c in order else len(order), c))
-
-    L = [
-        "# X Notes · 精读",
-        "",
-        f"- 共 {len(items)} 篇，{len(names)} 个分类；组内按收藏顺序倒序（最新在上）",
-        "- 上半部分：Index（点击跳到详情）；下半部分：总结 + 原文",
-        "- 自动生成，勿手改：改 `data/note/*.json` 或 `categories.json` 后跑 `scripts/render.py`",
-        "",
-        "## Part 1 · Index",
-        "",
-    ]
-    for c in names:
-        desc = categories.get(c, "")
-        L.append(f"- **{c}**（{len(groups[c])}）" + (f" — {desc}" if desc else ""))
-        for t in groups[c]:
-            L.append(f"  - [{t.get('title') or t['id']}](#x-{t['id']}) · @{t['handle']} · {day(t['created_at'])}")
-    L += ["", "## Part 2 · Details", ""]
-    for c in names:
-        L += [f"### 📂 {c}", ""]
-        for t in groups[c]:
-            src = "🔖 收藏" if t.get("source") == "bookmark" else f"❤️ 点赞的评论 → 原帖（via [{t.get('via_id')}](https://x.com/i/status/{t.get('via_id')})）"
-            L += [
-                f"#### x-{t['id']}",
-                "",
-                f"**{t.get('title') or ''}**",
-                "",
-                f"- 作者：{author(t)} · 发帖 {day(t['created_at'])} · [原帖]({t['url']})",
-                f"- 来源：{src} · 拉取 {day(t.get('pulled_at'))}",
-                f"- 类型：{t.get('kind', '')}",
-                f"- **总结**：{t.get('summary', '')}",
-                "- **原文**：",
-                "",
-                *quote_block(full_text(t)),
-                "",
-                *extras(t),
-                "",
-            ]
+        L += [f"### x-{t['id']}", "", f"**{author(t)}** · 发帖 {day(t['created_at'])} · [原帖]({t['url']})", ""]
+        if t["id"] in note_loc:
+            slug, title = note_loc[t["id"]]
+            L += [f"- 🔖 也在 Notes 里，全文见：[{title}](notes/{slug}.md#x-{t['id']})", ""]
+        else:
+            L += [*body(t), "", *extras(t), ""]
+        L += ["[↑ 回到目录](#part-1--keywords)", ""]
     return "\n".join(L).rstrip() + "\n"
 
 
 def main() -> int:
-    cats_path = ROOT / "categories.json"
-    categories = json.loads(cats_path.read_text(encoding="utf-8")) if cats_path.exists() else {}
+    cats = load_categories()
     liked, notes = load("liked"), load("note")
-    (ROOT / "x-new.md").write_text(render_new(liked), encoding="utf-8")
-    (ROOT / "x-note.md").write_text(render_note(notes, categories), encoding="utf-8")
-    print(f"x-new.md: {len(liked)} · x-note.md: {len(notes)}")
+    names, groups = group_notes(notes, cats)
+    NOTES_DIR.mkdir(exist_ok=True)
+    wanted = set()
+    note_loc = {}
+    for c in names:
+        slug = cats[c]["slug"]
+        wanted.add(f"{slug}.md")
+        (NOTES_DIR / f"{slug}.md").write_text(render_topic(c, groups[c], cats[c]), encoding="utf-8")
+        for t in groups[c]:
+            note_loc[t["id"]] = (slug, t.get("title") or t["id"])
+    for stale in NOTES_DIR.glob("*.md"):  # topic renamed/merged → drop its old file
+        if stale.name not in wanted:
+            stale.unlink()
+    (ROOT / "x-note.md").write_text(render_note_index(names, groups, cats), encoding="utf-8")
+    (ROOT / "x-new.md").write_text(render_new(liked, note_loc), encoding="utf-8")
+    missing = [t["id"] for t in liked + notes if not readable(t)]
+    print(f"x-new.md: {len(liked)} · notes: {len(notes)} in {len(names)} topic files · readable missing: {len(set(missing))}")
     return 0
 
 

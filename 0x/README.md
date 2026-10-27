@@ -4,14 +4,16 @@
 
 - [`x-new.md`](./x-new.md)：❤️ Likes
   - 上半部分：关键词 + 简述
-  - 下半部分：原帖全文
+  - 下半部分：bullet 版正文（同时在 Notes 里的帖子只给链接）
 - [`x-note.md`](./x-note.md)：🔖 Bookmarks，加上 ❤️ 过的评论所对应的原帖
-  - 上半部分：Index，按分类分组，组内最新在上
-  - 下半部分：总结 + 原文
+  - 只是总目录：主题链接到 `notes/<主题>.md`，标题链接到那篇的详情
+  - 每个主题文件也分两部分：上面是 Index，下面是详情（总结 + bullet 版正文 + 折叠的原文）
 
 ## 规则
 
 - 同一条帖子既 ❤️ 又 🔖：两份文档各算一次，是独立的两个任务
+  - 去重：`x-new.md` 只保留它的关键词，正文链接到 Notes，不重复贴全文
+  - 每篇帖子按 id 只存一份，多次运行不会重复
 - ❤️ 的是一条评论：取它的原帖（conversation root），放进 `x-note.md`
 - 🔖 的是作者自己的连续 thread：整个 thread 一起拉
 - 排序：按你点 ❤️ / 🔖 的顺序，最新在上
@@ -23,6 +25,9 @@
 ```
 0x/
 ├── x-new.md, x-note.md     # 生成的文档（不要手改）
+├── notes/<slug>.md         # 每个主题一个文件
+├── STYLE.md                # 正文改写成 strong bullet 的规则
+├── data/readable/<id>.md   # 每篇帖子的 bullet 版正文
 ├── categories.json         # x-note 的分类和顺序（由 LLM 维护）
 ├── state.json              # watermark
 ├── data/liked/<id>.json    # 每条 Like：原文 + keywords + gist
@@ -43,6 +48,8 @@
 - **为什么读 DOM，不拦截 GraphQL**
   - X 在页面启动时就保存了 `fetch` / `XHR` 的引用，加载后再挂 hook 拦不到请求
   - MVP1 改用 Playwright 后，可以用 `page.on('response')` 拿完整 JSON
+- **source of truth**：云端会话 push 到 GitHub 的内容
+  - 本地文件夹只是镜像；电脑在线时顺手同步，省得再从 GitHub pull 一次
 - **为什么经过下载对话框**
   - 浏览器面板里的数据要落到磁盘，又不能整段经过 LLM 复述（每次几百 KB）
   - 所以页面触发下载，`save_dialog.ps1` 直接把文件名框填成目标路径
