@@ -181,6 +181,20 @@
 
 **Morty (@0xMortyx)** · 发帖 2026-09-19 · [原帖](https://x.com/0xMortyx/status/2101308432305254889)
 
+- **Jev doesn't make the LLM smarter** — it makes decisions 193x faster, 444x cheaper, and testable
+  - Pitched as the missing **decision layer** between LLM reasoning and real-world agent execution
+- **Without a decision layer**, you usually solve it with more prompting → more context → more retries → more tokens
+- **Jev makes the fork explicit — for every state:**
+  - **Choice** → which route wins?
+  - **Score** → how good is each option?
+  - **Noul** → how likely is the condition true?
+- Execution then stays **outside the model**
+- **引用 / Quoted:** @0xRicker
+  - Jev could become the control layer AI agents have been missing
+  - Instead of 5–20 seconds and expensive LLM calls to decide every next step, it routes actions in milliseconds at near-zero cost
+
+<details><summary>原文</summary>
+
 > Jev doesn’t make the LLM smarter. it makes 193x faster. 444x cheaperand testable
 >
 > Jev could be the missing decision layer between LLM reasoning and real-world agent execution.
@@ -204,12 +218,8 @@
 >
 > full Jev Engineering breakdown below ↓
 
-- 引用 Ricker @0xRicker · Sep 19:
-  > Jev could become the control layer AI agents have been missing.
-  >
-  > Instead of spending 5–20 seconds and expensive LLM calls deciding every next step, it can route actions in milliseconds at near-zero cost.
-  >
-  > In this article, I break down how
+</details>
+
 - 图片：[img1](https://pbs.twimg.com/media/HSlT6boWQAIypkN?format=jpg&name=large)
 
 [↑ 回到目录](#part-1--keywords)
@@ -1094,6 +1104,320 @@
 
 **Anatoli Kopadze (@AnatoliKopadze)** · 发帖 2026-06-08 · [原帖](https://x.com/AnatoliKopadze/status/2063985608381362576)
 
+- **Everyone is talking about AI agents, but most definitions are vague** ("AI that does things autonomously")
+  - The more useful picture: **agents are not a category — they are a spectrum**
+- **This guide covers**
+  - Where different AI tools sit on that spectrum
+  - What separates a basic LLM interaction from a true agentic workflow
+  - How to build your own agent with **Claude Code** and connect it to **Telegram** — without writing code yourself
+- **What Makes Something an Agent**
+  - Asking Claude "what should I post today?" is **not an agent** — that's a chat
+  - Telling Claude "find the three topics trending in AI right now, pick the one with the most engagement potential, draft a post in my style, and save it to a file" — and it does all of it without you touching anything — **that is an agent**
+  - **The difference is not the model. It is the structure around it.**
+  - **An agent has three things a regular chat does not**
+    - **Tools** it can call on its own — search, file systems, code execution, external APIs
+    - **Memory** that persists across tasks, not just within one session
+    - **A loop** that keeps running until the task is finished, not until it generates one response
+  - The more of these three you add, the less you are involved — that is the idea
+- **The Spectrum: From Chat to Agent**
+  - **Basic chat** — you ask, Claude answers, the session ends
+    - No tools, no ongoing goal, no ability to act in the world
+  - **Claude with tools enabled** — already slightly agentic
+    - When it searches the web before answering, reads an attached file, or generates an image, it decided on its own that it needed to
+  - **Multi-step workflows** — you give a goal; Claude breaks it into steps, executes each, checks the result, delivers a finished output
+    - You are not involved between steps
+  - **Fully autonomous agents** — runs on a schedule, monitors inputs, calls external services, completes complex tasks with no human in the loop
+    - You set the goal once and check the output
+  - **Bottom vs. top is not a different model** — it's what surrounds the model: tools, memory that carries context, and a loop that runs until done
+- **Types of Agents You Can Build Today**
+  - Examples only — not limits; build whatever fits your situation
+  - **Research agent** — gathers information on a topic, reads multiple sources, pulls out what matters, delivers a structured summary
+    - You give it a question; it gives an answer that would have taken hours to compile manually
+  - **Writing agent** — writes content according to a system you define
+    - Give it your tone, format, audience, topic; it handles drafts, rewrites, edits without you managing every sentence
+  - **Code agent** — writes code, runs it, reads the errors, fixes them, keeps going
+    - You describe what the code should do; the agent handles implementation and the debugging loop
+  - **Business agent** — handles repetitive business tasks: drafting emails, processing customer requests, qualifying leads, generating reports
+    - Runs on autopilot once you define the rules
+  - **Personal agent** — manages your schedule, organizes tasks, prepares briefings, handles daily planning work
+- **Building Your First Agent — Start Here**
+  - You'll use Claude Code to build a **Telegram bot that runs on a remote server and uses Claude as its brain**
+  - Claude Code writes all the code; you describe what you want in plain English
+  - Once set up, all communication with the bot happens through Telegram
+  - Takes about **10–20 minutes**; no coding knowledge needed
+- **System Prompt Templates — Paste Into Prompt 2**
+  - When you run Prompt 2 from the setup below, you describe what kind of agent you want
+  - Copy the template that fits, paste it into Prompt 2 where it says "The agent should be:", and Claude Code builds that agent
+  - Adjust details to match your situation
+  - **Research Agent**
+  ```text
+  You are a research agent. Your job is to gather, analyze, and synthesize information on any topic I give you.
+
+  When given a research task:
+  1. Identify the 3-5 most important sub-questions to answer
+  2. Search for information on each one
+  3. Evaluate the quality and relevance of each source
+  4. Extract only what directly answers the question
+  5. Deliver a structured summary with: key findings, supporting evidence, and gaps you could not fill
+
+  Format: Use headers, bullet points, and clear sections.
+  If you are uncertain about something, say so explicitly.
+  Do not add filler. Every sentence should contain information.
+  ```
+  - **Writing Agent**
+  ```text
+  You are a writing agent. You write content in my voice and style.
+
+  My style:
+  - Conversational, direct, no corporate language
+  - Short sentences and paragraphs
+  - Specific numbers and examples over vague claims
+  - Always end with something the reader should do or think about
+
+  When given a writing task:
+  1. Ask for the topic, audience, and desired length if not provided
+  2. Write a first draft
+  3. Review it against my style rules
+  4. Deliver the final version ready to publish
+
+  Never add unnecessary introductions. Start with the most important point.
+  ```
+  - **Code Agent**
+  ```text
+  You are a code agent. Your job is to write, debug, and improve code.
+
+  When given a coding task:
+  1. Confirm your understanding of what the code should do
+  2. Write the solution with clear comments
+  3. Identify any edge cases or potential failures
+  4. If there are errors, debug them systematically before asking for help
+
+  Rules:
+  - Write clean, readable code with meaningful variable names
+  - Always include error handling
+  - Explain what each major section does in plain language
+  - If you are unsure about requirements, ask one clarifying question before proceeding
+  ```
+  - **Business Email Agent**
+  ```text
+  You are a business email agent. You write professional emails on my behalf.
+
+  My communication style:
+  - Direct and respectful
+  - No unnecessary formalities
+  - Gets to the point in the first sentence
+  - Closes with a clear next step
+
+  When given an email task:
+  1. Identify the goal of the email (inform, request, follow up, confirm)
+  2. Write a subject line that reflects the email's purpose
+  3. Draft the email in 3-5 short paragraphs maximum
+  4. End with one clear action item or next step
+
+  Always write ready-to-send emails, not templates with blanks to fill in.
+  ```
+  - **Personal Planning Agent**
+  ```text
+  You are my personal planning agent. You help me organize my work, prioritize tasks, and plan my week.
+
+  When I share my tasks or goals:
+  1. Identify what is urgent vs. important
+  2. Suggest a realistic sequence based on dependencies
+  3. Estimate time required for each task
+  4. Flag anything that could be delegated or eliminated
+
+  When I describe a project:
+  - Break it into concrete next actions
+  - Identify the single most important thing to do first
+  - Create a simple checklist I can follow
+
+  Keep everything practical. No motivational filler. Just the plan.
+  ```
+- **What You Need Before Starting**
+  1. **A Claude API key** from `console.anthropic.com`
+     - A developer key: you pay per usage, not a fixed monthly fee
+     - A personal bot sending 50 messages a day costs **$1–5/month**, depending on model
+  2. **A Telegram bot token** from **BotFather**
+  3. **A VPS running Linux**
+     - A personal bot needs little: **1 CPU, 1GB RAM, 20GB storage** is more than enough
+     - Any basic plan from **DigitalOcean, Hetzner, or Vultr** works — around **$4–6/month**
+     - Once you have the server, install Claude Code:
+     ```bash
+     npm i -g @anthropic-ai/claude-code
+     ```
+- **Which Claude model to use for your bot**
+  - **Sonnet 4.6** — the right choice for most personal bots; strong enough for any task, affordable for daily use
+  - **Haiku 4.5** — if you want to minimize cost
+  - **Opus 4.8** — only for a complex analytical agent where answer quality is critical
+- **Building Your First Agent — Step 1**
+  - Open your VPS terminal, launch Claude Code, paste the prompt, and let it build everything
+  - **Give the agent a personality**
+  ```text
+  Build me a Telegram bot that uses the Claude API as its brain.
+
+  Requirements:
+  - Language: Python
+  - Library for Telegram: python-telegram-bot
+  - Claude model: claude-sonnet-4-6
+  - The bot receives a message, sends it to Claude API, and returns Claude's response to Telegram
+  - Maintain conversation history per user — each user has their own context within the session
+  - Add a /start command that introduces the bot
+  - Add a /clear command that resets conversation history for that user
+
+  Create all necessary files: main bot file, requirements.txt, and a .env file template for API keys.
+  Do not hardcode any API keys — read them from environment variables.
+  ```
+  - **Deploy as a background service**
+  ```text
+  Create a systemd service file so this bot runs automatically on my Linux VPS and restarts if it crashes.
+
+  The service should:
+  - Start automatically when the server boots
+  - Restart automatically if it crashes
+  - Load environment variables from the .env file in the project folder
+  - Save logs to a file I can check later
+
+  Also write me the exact terminal commands to install the service, start it, check if it is running, and view the logs.
+  ```
+  - **Add persistent memory between sessions**
+  ```text
+  The bot loses conversation history when it restarts. Fix this.
+
+  Save each user's conversation history to a JSON file on disk after every message. Load it back automatically when the bot starts.
+
+  Add a maximum history length — keep only the last 20 messages per user so the context window never gets too long.
+  ```
+- **Adding Skills to Your Claude Code Bot**
+  - **Skills** are capabilities you add over time
+  - Each one is a new prompt you give Claude Code; it writes the code to make it work
+  - **Skill: Web search** — the agent looks up real-time information instead of answering from memory only
+  ```text
+  Add web search capability to the bot using the Tavily API.
+
+  When the user asks something that requires current information — news, prices, recent events — the bot automatically searches the web and includes the results in its response.
+
+  The bot should decide on its own when to search and when to answer from memory. Add TAVILY_API_KEY to the .env file template.
+
+  Use Claude's tool use feature to implement this cleanly.
+  ```
+  - **Skill: Save notes** — the agent saves anything you tell it (ideas, tasks, research findings) to a file and retrieves it later
+  ```text
+  Add a note-saving feature to the bot.
+
+  When the user says "save this", "remember this", or "note:", the bot saves the content to a notes.txt file with a timestamp.
+
+  Add a /notes command that returns the last 10 saved notes.
+  Add a /clearnotes command that deletes all saved notes.
+  ```
+  - **Skill: Restrict to your account only**
+    - By default anyone who finds your bot can use it and consume your API credits; this locks it to you
+  ```text
+  Add user restriction to the bot so only I can use it.
+
+  Add my Telegram user ID to the .env file as ALLOWED_USER_ID.
+  If anyone else messages the bot, it responds with "This bot is private." and ignores all further messages from that user.
+
+  Also add how I can find my own Telegram user ID — either through the bot itself or another method.
+  ```
+  - **Skill: Track API costs**
+    - Claude API charges per token; this adds a simple tracker so you always know what you're spending
+  ```text
+  Add basic cost tracking to the bot.
+
+  After each Claude API response, log the number of input tokens and output tokens used.
+  Keep a running total in a costs.json file.
+
+  Add a /costs command that shows: total tokens used today, total tokens used all time, and an estimated cost in USD based on claude-sonnet-4-6 pricing.
+  ```
+  - **Skill: Scheduled daily briefing** — the agent messages you every morning without being asked
+  ```text
+  Add a scheduled daily briefing to the bot.
+
+  Every day at 8:00am, the bot sends me a message with:
+  1. A motivational one-liner (short, not cheesy)
+  2. A reminder to check my top priority for the day
+  3. One random useful fact about productivity or AI
+
+  Send it to my Telegram user ID from the .env file.
+  Use the schedule or APScheduler library to implement this.
+  ```
+- **Useful Things to Know After Setup**
+  - **Update your agent's personality**
+    - Open the main bot file, find the system prompt variable at the top, change it, save
+    - Restart the service: `sudo systemctl restart your-bot-name`
+    - The new personality is live immediately
+  - **Check if the bot is running**
+    - Run `sudo systemctl status your-bot-name`
+    - "active (running)" → it's working; "failed" → check the logs
+  - **Read logs**
+    - Run `journalctl -u your-bot-name -n 50` to see the last 50 lines
+    - This is where you find error messages if something breaks
+  - **Add a new skill**
+    - Open Claude Code in your project folder and describe it: "Add X feature to the bot."
+    - Claude Code reads your existing code, adds the feature cleanly, and tells you if a restart is needed
+- **The Memory Problem Every Agent Has**
+  - **The most common problem**: the agent loses context — between sessions, across long tasks, after too many messages — and starts making mistakes or repeating work
+  - **Three ways it happens**
+    1. **Long tasks exceed Claude's context limit** — the agent loses the beginning: the original goal, decisions already made, constraints you set
+    2. **New session = start from zero** — closing a session and opening a new one wipes context
+    3. **Interrupted mid-task** — the agent has no way to know where it stopped
+  - **Four fixes**
+    1. **Progress notes** — tell the agent to write a note after every major step: what was done, what was decided, what still needs to happen
+       - Paste that note at the start of the next session to restore full context
+    2. **Periodic summaries** — every 10–15 messages, ask the agent to summarize where it is
+       - Forces it to compress context before it overflows
+    3. **Compress before it's too long** — ask the agent to compress everything into a short summary and continue from there
+       - The thread stays intact
+    4. **Put key facts in the system prompt** in your bot code
+       - Claude reads it at the start of every conversation, so that information is always in context no matter how long things get
+  - **Checkpoint Prompt**
+  ```text
+  Before we continue, write a brief checkpoint:
+  1. What have you completed so far?
+  2. What are the key decisions or findings from this session?
+  3. What still needs to be done?
+  4. What context would you need to continue this task in a new session?
+
+  Keep it under 200 words.
+  ```
+  - **Memory File Prompt**
+  ```text
+  After completing each major step, write a memory note in this format:
+
+  STEP COMPLETED: [what was done]
+  KEY DECISIONS: [choices made and why]
+  CURRENT STATE: [where the task stands now]
+  NEXT STEP: [what should happen next]
+
+  This note will be used to resume the task in a new session without losing context.
+  ```
+  - **Context Recovery Prompt**
+  ```text
+  We are resuming a task from a previous session. Here is the context:
+
+  [paste your memory note here]
+
+  Based on this:
+  1. Confirm your understanding of where we are
+  2. Identify the next step
+  3. Ask any questions needed to continue
+
+  Do not repeat work that has already been completed.
+  ```
+  - **Rolling Summary Prompt**
+  ```text
+  The conversation is getting long. Compress everything important into a summary:
+
+  1. Original goal
+  2. What has been done and what was found
+  3. Key decisions made
+  4. What still needs to happen
+
+  After writing the summary, continue from there. Treat this summary as the new starting point.
+  ```
+
+<details><summary>原文</summary>
+
 > 《AI Agents. What they are and how to Build Your Own Step by Step.》
 >
 > Everyone is talking about AI agents. But if you ask most people what an agent actually is, you get a vague answer about "AI that does things autonomously."
@@ -1363,6 +1687,8 @@
 >
 > X - https://x.com/AnatoliKopadze
 > Telegram - https://t.me/kopadzemp
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HKS0qaGXoAAElVM?format=jpg&name=large) [img2](https://pbs.twimg.com/media/HKSnn-sXEAAL9fu?format=jpg&name=large)
 
@@ -2002,6 +2328,928 @@
 ### x-2021387483364151451
 
 **nader dabit (@dabit3)** · 发帖 2026-02-11 · [原帖](https://x.com/dabit3/status/2021387483364151451)
+
+- **Goal of the post**: start from scratch and build up to **OpenClaw's architecture** step by step
+  - Shows how you could have invented it from first principles
+  - Ingredients: a messaging API, an LLM, and the desire to make AI useful *outside* the chat window
+  - End goal: understand how persistent AI assistants work, so you can build your own (or become an OpenClaw power user)
+  - The tutorial is code-heavy and is also available as markdown
+- **First, the problem** — ChatGPT or Claude in a browser has four limits:
+  - **Stateless** — every conversation starts from zero
+    - It doesn't know your name, preferences, what you asked yesterday, or your current project
+    - You keep re-explaining context
+  - **Passive** — you go to it; it never comes to you
+    - It can't wake at 7am to brief you on your calendar, monitor email, or run recurring tasks
+    - It only works while you sit in front of it
+  - **Isolated** — it can't run commands on your machine, browse the web, control your apps, or message on your behalf
+    - It lives in a text box with no hands
+  - **Single-channel** — your life is on WhatsApp, Telegram, Discord, Slack, iMessage, but the AI is in its own tab
+    - You can't text it where you already are, let alone keep one continuous memory across those surfaces
+- **What if instead you had an AI that:**
+  - Lived in the messaging apps you already use — all of them, with shared memory
+  - Remembered your preferences, projects, and past conversations across sessions
+  - Could run commands on your computer, browse the web, and control a real browser
+  - Woke up on a schedule to handle recurring tasks without being asked
+  - Ran on your own hardware (laptop, VPS, Mac Mini) — always on, under your control
+- **That is OpenClaw**: not a chatbot, but a personal AI assistant with a persistent identity, tools, and presence on every channel you use
+- **The Simplest Possible Bot**
+  - Absolute minimum: an AI that responds to messages on Telegram
+  ```python
+  import os
+  import anthropic
+  from telegram import Update
+  from telegram.ext import Application, MessageHandler, filters
+
+  client = anthropic.Anthropic()
+
+  async def handle_message(update: Update, context):
+      user_message = update.message.text
+
+      response = client.messages.create(
+          model="claude-sonnet-4-5-20250929",
+          max_tokens=1024,
+          messages=[{"role": "user", "content": user_message}]
+      )
+
+      await update.message.reply_text(response.content[0].text)
+
+  app = Application.builder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
+  app.add_handler(MessageHandler(filters.TEXT, handle_message))
+  app.run_polling()
+  ```
+  - Run it, send a Telegram message, and the AI responds
+  - But it is basically a worse Claude web interface: every message independent, no memory, no tools, no personality
+- **Goal: Persistent Sessions**
+  - Problem: **statelessness** — every message is a fresh conversation; "what did I say earlier?" gets no answer
+  - **Fix: sessions** — keep a conversation history per user
+  ```python
+  import json
+  import os
+  import anthropic
+  from telegram import Update
+  from telegram.ext import Application, MessageHandler, filters
+
+  client = anthropic.Anthropic()
+  SESSIONS_DIR = "./sessions"
+  os.makedirs(SESSIONS_DIR, exist_ok=True)
+
+  def get_session_path(user_id):
+      return os.path.join(SESSIONS_DIR, f"{user_id}.jsonl")
+
+  def load_session(user_id):
+      """Load conversation history from disk."""
+      path = get_session_path(user_id)
+      messages = []
+      if os.path.exists(path):
+          with open(path, "r") as f:
+              for line in f:
+                  if line.strip():
+                      messages.append(json.loads(line))
+      return messages
+
+  def append_to_session(user_id, message):
+      """Append a single message to the session file."""
+      path = get_session_path(user_id)
+      with open(path, "a") as f:
+          f.write(json.dumps(message) + "\n")
+
+  def save_session(user_id, messages):
+      """Overwrite the session file with the full message list."""
+      path = get_session_path(user_id)
+      with open(path, "w") as f:
+          for message in messages:
+              f.write(json.dumps(message) + "\n")
+
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+      user_message = update.message.text
+
+      # Load existing conversation
+      messages = load_session(user_id)
+
+      # Add new user message
+      user_msg = {"role": "user", "content": user_message}
+      messages.append(user_msg)
+      append_to_session(user_id, user_msg)
+
+      # Call the AI with full history
+      response = client.messages.create(
+          model="claude-sonnet-4-5-20250929",
+          max_tokens=4096,
+          messages=messages
+      )
+
+      # Save assistant response
+      assistant_msg = {"role": "assistant", "content": response.content[0].text}
+      append_to_session(user_id, assistant_msg)
+
+      await update.message.reply_text(response.content[0].text)
+
+  app = Application.builder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
+  app.add_handler(MessageHandler(filters.TEXT, handle_message))
+  app.run_polling()
+  ```
+  - Now you can have a real conversation:
+  ```text
+  You: My name is Nader
+  Bot: Nice to meet you, Nader!
+
+  [hours later...]
+
+  You: What's my name?
+  Bot: Your name is Nader!
+  ```
+  - **Key insight: the JSONL format**
+    - Each line is one message; append-only
+    - If the process crashes mid-write, you lose at most one line
+    - This is exactly what OpenClaw uses for session transcripts:
+    ```text
+    ~/.openclaw/agents/<agentId>/sessions/<sessionId>.jsonl
+    ```
+    - Each session maps to a file; each file is a conversation
+    - Restart the process and everything is still there
+  - Problem to come back to: conversations grow and will eventually exceed the model's context window
+- **Goal: Adding a Personality (`SOUL.md`)**
+  - The bot works but has no personality — a generic assistant. What if it should be *someone*?
+  - OpenClaw's answer: **`SOUL.md`**, a markdown file defining the agent's identity, behavior, and boundaries
+  ```python
+  SOUL = """
+  # Who You Are
+
+  **Name:** Jarvis
+  **Role:** Personal AI assistant
+
+  ## Personality
+  - Be genuinely helpful, not performatively helpful
+  - Skip the "Great question!" - just help
+  - Have opinions. You're allowed to disagree
+  - Be concise when needed, thorough when it matters
+
+  ## Boundaries
+  - Private things stay private
+  - When in doubt, ask before acting externally
+  - You're not the user's voice - be careful about sending messages on their behalf
+
+  ## Memory
+  Remember important details from conversations.
+  Write them down if they matter.
+  """
+
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+      messages = load_session(user_id)
+
+      user_msg = {"role": "user", "content": update.message.text}
+      messages.append(user_msg)
+      append_to_session(user_id, user_msg)
+
+      response = client.messages.create(
+          model="claude-sonnet-4-5-20250929",
+          max_tokens=4096,
+          system=SOUL,  # <-- personality injected here
+          messages=messages
+      )
+
+      assistant_msg = {"role": "assistant", "content": response.content[0].text}
+      append_to_session(user_id, assistant_msg)
+
+      await update.message.reply_text(response.content[0].text)
+  ```
+  - Now you're talking to Jarvis: **the SOUL is injected as the system prompt on every API call**
+  - In OpenClaw, `SOUL.md` lives in the agent's workspace:
+    ```text
+    ~/.openclaw/workspace/SOUL.md
+    ```
+    - Loaded at session start and injected into the system prompt
+    - Write anything: an origin story, a core philosophy, behavioral rules
+  - **The more specific the SOUL, the more consistent the behavior**
+    - "Be helpful" is vague
+    - "Be the assistant you'd actually want to talk to. Concise when needed, thorough when it matters. Not a corporate drone. Not a sycophant. Just... good." gives the model something to work with
+- **Goal: Adding Tools**
+  - A bot that can only talk is limited — what if it could *do things*?
+  - **Core idea: give the AI structured tools and let it decide when to use them**
+  ```python
+  import subprocess
+
+  TOOLS = [
+      {
+          "name": "run_command",
+          "description": "Run a shell command on the user's computer",
+          "input_schema": {
+              "type": "object",
+              "properties": {
+                  "command": {"type": "string", "description": "The command to run"}
+              },
+              "required": ["command"]
+          }
+      },
+      {
+          "name": "read_file",
+          "description": "Read a file from the filesystem",
+          "input_schema": {
+              "type": "object",
+              "properties": {
+                  "path": {"type": "string", "description": "Path to the file"}
+              },
+              "required": ["path"]
+          }
+      },
+      {
+          "name": "write_file",
+          "description": "Write content to a file",
+          "input_schema": {
+              "type": "object",
+              "properties": {
+                  "path": {"type": "string", "description": "Path to the file"},
+                  "content": {"type": "string", "description": "Content to write"}
+              },
+              "required": ["path", "content"]
+          }
+      },
+      {
+          "name": "web_search",
+          "description": "Search the web for information",
+          "input_schema": {
+              "type": "object",
+              "properties": {
+                  "query": {"type": "string", "description": "Search query"}
+              },
+              "required": ["query"]
+          }
+      }
+  ]
+
+  def execute_tool(name, input):
+      if name == "run_command":
+          result = subprocess.run(
+              input["command"], shell=True,
+              capture_output=True, text=True, timeout=30
+          )
+          return result.stdout + result.stderr
+
+      elif name == "read_file":
+          with open(input["path"], "r") as f:
+              return f.read()
+
+      elif name == "write_file":
+          with open(input["path"], "w") as f:
+              f.write(input["content"])
+          return f"Wrote to {input['path']}"
+
+      elif name == "web_search":
+          # Simplified - use a real search API in practice
+          return f"Search results for: {input['query']}"
+
+      return f"Unknown tool: {name}"
+  ```
+  - **The agent loop**: when the AI wants a tool, execute it and feed the result back
+  ```python
+  def serialize_content(content):
+      """Convert API response content blocks to JSON-serializable dicts."""
+      serialized = []
+      for block in content:
+          if hasattr(block, "text"):
+              serialized.append({"type": "text", "text": block.text})
+          elif block.type == "tool_use":
+              serialized.append({
+                  "type": "tool_use",
+                  "id": block.id,
+                  "name": block.name,
+                  "input": block.input
+              })
+      return serialized
+
+  def run_agent_turn(messages, system_prompt):
+      """Run one full agent turn (may involve multiple tool calls)."""
+      while True:
+          response = client.messages.create(
+              model="claude-sonnet-4-5-20250929",
+              max_tokens=4096,
+              system=system_prompt,
+              tools=TOOLS,
+              messages=messages
+          )
+
+          content = serialize_content(response.content)
+
+          # If the AI is done (no tool use), return the text
+          if response.stop_reason == "end_turn":
+              text = ""
+              for block in response.content:
+                  if hasattr(block, "text"):
+                      text += block.text
+              messages.append({"role": "assistant", "content": content})
+              return text, messages
+
+          # Process tool calls
+          if response.stop_reason == "tool_use":
+              messages.append({"role": "assistant", "content": content})
+
+              tool_results = []
+              for block in response.content:
+                  if block.type == "tool_use":
+                      print(f"  Tool: {block.name}({json.dumps(block.input)})")
+                      result = execute_tool(block.name, block.input)
+                      tool_results.append({
+                          "type": "tool_result",
+                          "tool_use_id": block.id,
+                          "content": str(result)
+                      })
+
+              messages.append({"role": "user", "content": tool_results})
+  ```
+  - Update `handle_message` to use the agent loop instead of calling the API directly:
+  ```python
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+      messages = load_session(user_id)
+      messages.append({"role": "user", "content": update.message.text})
+
+      response_text, messages = run_agent_turn(messages, SOUL)
+
+      save_session(user_id, messages)
+      await update.message.reply_text(response_text)
+  ```
+  - Now you can text your bot:
+  ```text
+  You: Create a file called hello.py that prints hello world, then run it
+
+  Bot: [uses write_file to create hello.py]
+      [uses run_command to execute it]
+      Done! I created hello.py and ran it. Output: "hello world"
+  ```
+  - The AI chose which tools to use, in what order, and turned the results into a natural reply — all through a Telegram message
+  - OpenClaw's production tool catalog is much larger (browser automation, inter-agent messaging, sub-agent spawning, and more)
+    - **Every tool follows the same pattern: a schema, a description, and an execution function**
+- **Goal: Permission Controls**
+  - Executing commands from Telegram messages is terrifying
+    - What if someone gets into your Telegram account and tells the bot to `rm -rf /`?
+  - OpenClaw's approach: **an approval allowlist that remembers what you've approved**
+  - Add these helpers alongside the existing code:
+  ```python
+  import re
+
+  SAFE_COMMANDS = {"ls", "cat", "head", "tail", "wc", "date", "whoami", "echo"}
+  DANGEROUS_PATTERNS = [r"\brm\b", r"\bsudo\b", r"\bchmod\b", r"\bcurl.*\|.*sh"]
+
+  # Persistent allowlist
+  APPROVALS_FILE = "./exec-approvals.json"
+
+  def load_approvals():
+      if os.path.exists(APPROVALS_FILE):
+          with open(APPROVALS_FILE) as f:
+              return json.load(f)
+      return {"allowed": [], "denied": []}
+
+  def save_approval(command, approved):
+      approvals = load_approvals()
+      key = "allowed" if approved else "denied"
+      if command not in approvals[key]:
+          approvals[key].append(command)
+      with open(APPROVALS_FILE, "w") as f:
+          json.dump(approvals, f, indent=2)
+
+  def check_command_safety(command):
+      """Returns 'safe', 'approved', or 'needs_approval'."""
+      base_cmd = command.strip().split()[0] if command.strip() else ""
+      if base_cmd in SAFE_COMMANDS:
+          return "safe"
+
+      approvals = load_approvals()
+      if command in approvals["allowed"]:
+          return "approved"
+
+      for pattern in DANGEROUS_PATTERNS:
+          if re.search(pattern, command):
+              return "needs_approval"
+
+      return "needs_approval"
+  ```
+  - Then update the `run_command` case in `execute_tool` to check permissions before executing:
+  ```python
+      if name == "run_command":
+          cmd = input["command"]
+          safety = check_command_safety(cmd)
+
+          if safety == "needs_approval":
+              # In a real bot, you'd prompt the user via Telegram
+              # and wait for their response. For simplicity, we log and deny.
+              print(f"  ⚠️  Blocked: {cmd} (needs approval)")
+              return "Permission denied. Command requires approval."
+
+          result = subprocess.run(
+              cmd, shell=True, capture_output=True,
+              text=True, timeout=30
+          )
+          return result.stdout + result.stderr
+  ```
+  - Safe or previously approved commands run immediately
+  - Otherwise the agent is told "permission denied" and can try a different approach
+  - Approvals persist to `exec-approvals.json`, so you're never asked twice for the same command
+  - OpenClaw extends this with:
+    - **Glob patterns** (approve `git *` once)
+    - **A three-tier model**: "ask" (prompt user), "record" (log but allow), "ignore" (auto-allow)
+- **Goal: The Gateway**
+  - What if you also want the AI on Discord, WhatsApp, and Slack?
+  - Separate bots per platform → separate sessions, memory, and configs
+    - The Telegram AI wouldn't know what you discussed on Discord
+  - **Solution: a gateway** — one central process that manages all channels
+  - **Key point: the agent logic is already decoupled from the channel**
+    - `run_agent_turn` knows nothing about Telegram; it takes messages and returns text
+  - To prove it, add a second interface: a simple HTTP API next to the Telegram bot, sharing the same agent and sessions
+  ```python
+  from flask import Flask, request, jsonify
+  import threading
+
+  flask_app = Flask(__name__)
+
+  @flask_app.route("/chat", methods=["POST"])
+  def chat():
+      data = request.json
+      user_id = data["user_id"]
+      messages = load_session(user_id)
+      messages.append({"role": "user", "content": data["message"]})
+
+      response_text, messages = run_agent_turn(messages, SOUL)
+
+      save_session(user_id, messages)
+      return jsonify({"response": response_text})
+
+  # Run the HTTP API in a background thread
+  threading.Thread(target=lambda: flask_app.run(port=5000), daemon=True).start()
+
+  # Telegram bot runs as before
+  app = Application.builder().token(os.getenv("TELEGRAM_BOT_TOKEN")).build()
+  app.add_handler(MessageHandler(filters.TEXT, handle_message))
+  app.run_polling()
+  ```
+  - Try it: tell the bot your name on Telegram, then query over HTTP with the same user ID (your Telegram user ID)
+  ```text
+  # Via Telegram
+  You: My name is Nader
+  Bot: Nice to meet you, Nader!
+
+  # Via HTTP — use your Telegram user ID so it hits the same session
+  curl -X POST http://127.0.0.1:5000/chat \
+    -H "Content-Type: application/json" \
+    -d '{"user_id": "YOUR_TELEGRAM_USER_ID", "message": "What is my name?"}'
+
+  {"response": "Your name is Nader!"}
+  ```
+  - **Same agent, same sessions, same memory, two interfaces — that's the gateway pattern**
+  - Next step: make it config-driven — a JSON file listing which channels to start and how to authenticate them
+  - OpenClaw's gateway does this:
+    - Manages Telegram, Discord, WhatsApp, Slack, Signal, iMessage, and more through a single config file
+    - Supports configurable **session scoping**: per-user, per-channel, or a single shared session
+    - So the same person gets a unified experience across channels
+  - The tutorial keeps the simple user-ID-as-session-key approach for now
+- **Goal: Context Compaction**
+  - The growing-session problem: after weeks of chat the session file has thousands of messages and exceeds the context window
+  - **Fix: summarize old messages, keep recent ones** — add two functions:
+  ```python
+  def estimate_tokens(messages):
+      """Rough token estimate: ~4 chars per token."""
+      return sum(len(json.dumps(m)) for m in messages) // 4
+
+  def compact_session(user_id, messages):
+      """Summarize old messages when context gets too long."""
+      if estimate_tokens(messages) < 100_000:  # ~80% of a 128k window
+          return messages  # No compaction needed
+
+      split = len(messages) // 2
+      old, recent = messages[:split], messages[split:]
+
+      print("  Compacting session history...")
+
+      summary = client.messages.create(
+          model="claude-sonnet-4-5-20250929",
+          max_tokens=2000,
+          messages=[{
+              "role": "user",
+              "content": (
+                  "Summarize this conversation concisely. Preserve:\n"
+                  "- Key facts about the user (name, preferences)\n"
+                  "- Important decisions made\n"
+                  "- Open tasks or TODOs\n\n"
+                  f"{json.dumps(old, indent=2)}"
+              )
+          }]
+      )
+
+      compacted = [{
+          "role": "user",
+          "content": f"[Previous conversation summary]\n{summary.content[0].text}"
+      }] + recent
+
+      save_session(user_id, compacted)
+      return compacted
+  ```
+  - Add the compaction check at the top of `handle_message`, right after loading the session:
+  ```python
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+      messages = load_session(user_id)
+      messages = compact_session(user_id, messages)  # <-- add this line
+      messages.append({"role": "user", "content": update.message.text})
+
+      response_text, messages = run_agent_turn(messages, SOUL)
+
+      save_session(user_id, messages)
+      await update.message.reply_text(response_text)
+  ```
+  - To test without chatting for hours, temporarily lower the threshold:
+  ```python
+  if estimate_tokens(messages) < 1000:  # lowered for testing
+  ```
+    - Have 10–15 messages of conversation and watch old messages get replaced by a summary
+    - The bot still remembers key facts, but the session file is much smaller
+  - OpenClaw's compaction is more sophisticated, but the core idea is the same:
+    - Splits messages into chunks by token count
+    - Summarizes each chunk separately
+    - Includes a safety margin for estimation inaccuracy
+- **Goal: Long-Term Memory**
+  - Session history is conversation memory — reset the session and it's gone
+  - Need a **separate memory system** that survives session resets
+  - Approach: **give the agent tools to save and search memories stored as files**
+  - Add two tools to the `TOOLS` list:
+  ```python
+  {
+      "name": "save_memory",
+      "description": "Save important information to long-term memory. Use for user preferences, key facts, and anything worth remembering across sessions.",
+      "input_schema": {
+          "type": "object",
+          "properties": {
+              "key": {
+                  "type": "string",
+                  "description": "Short label, e.g. 'user-preferences', 'project-notes'"
+              },
+              "content": {
+                  "type": "string",
+                  "description": "The information to remember"
+              }
+          },
+          "required": ["key", "content"]
+      }
+  },
+  {
+      "name": "memory_search",
+      "description": "Search long-term memory for relevant information. Use at the start of conversations to recall context.",
+      "input_schema": {
+          "type": "object",
+          "properties": {
+              "query": {
+                  "type": "string",
+                  "description": "What to search for"
+              }
+          },
+          "required": ["query"]
+      }
+  }
+  ```
+  - Add their cases to `execute_tool`:
+  ```python
+  MEMORY_DIR = "./memory"
+
+  # Add these cases to execute_tool:
+
+      elif name == "save_memory":
+          os.makedirs(MEMORY_DIR, exist_ok=True)
+          filepath = os.path.join(MEMORY_DIR, f"{input['key']}.md")
+          with open(filepath, "w") as f:
+              f.write(input["content"])
+          return f"Saved to memory: {input['key']}"
+
+      elif name == "memory_search":
+          query = input["query"].lower()
+          results = []
+          if os.path.exists(MEMORY_DIR):
+              for fname in os.listdir(MEMORY_DIR):
+                  if fname.endswith(".md"):
+                      with open(os.path.join(MEMORY_DIR, fname), "r") as f:
+                          content = f.read()
+                      if any(word in content.lower() for word in query.split()):
+                          results.append(f"--- {fname} ---\n{content}")
+          return "\n\n".join(results) if results else "No matching memories found."
+  ```
+  - Update the SOUL so the agent knows about memory:
+  ```python
+  SOUL = """
+  # Who You Are
+  ...existing personality...
+
+  ## Memory
+  You have a long-term memory system.
+  - Use save_memory to store important information (user preferences, key facts, project details).
+  - Use memory_search at the start of conversations to recall context from previous sessions.
+  Memory files are stored in ./memory/ as markdown files.
+  """
+  ```
+  - Try it:
+  ```text
+  You: Remember that my favorite restaurant is Elvies and I prefer to go on weekends.
+
+  Bot: [uses save_memory to write nader-profile.md]
+       Got it — saved your restaurant preference.
+
+  [Reset the session or restart the bot]
+
+  You: Where should we go for dinner?
+
+  Bot: [uses memory_search for "restaurant dinner favorite"]
+       How about Elvies? I know it's your favorite. Want to go this weekend?
+  ```
+  - **Memory persists because it's stored in files, not in the session** — reset the session or restart the bot, memories remain
+  - OpenClaw's production memory uses **vector search with embeddings** for semantic matching ("auth bug" matches "authentication issues")
+    - Keyword search is good enough to start
+- **Goal: Command Queue**
+  - Subtle but critical problem: two messages arriving at the same time
+    - E.g. "check my calendar" on Telegram and "what's the weather" via HTTP at once
+    - Both load the same session, both append to it → corrupted data
+  - **Fix: a per-session lock**
+    - Only one message processes at a time per session
+    - Different sessions still run in parallel
+  ```python
+  # Add to your bot
+  from collections import defaultdict
+
+  session_locks = defaultdict(threading.Lock)
+  ```
+  - Wrap the body of `handle_message` with the lock:
+  ```python
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+
+      with session_locks[user_id]:
+          messages = load_session(user_id)
+          messages = compact_session(user_id, messages)
+          messages.append({"role": "user", "content": update.message.text})
+
+          response_text, messages = run_agent_turn(messages, SOUL)
+
+          save_session(user_id, messages)
+
+      await update.message.reply_text(response_text)
+  ```
+  - Do the same for the `/chat` HTTP endpoint:
+  ```python
+  @flask_app.route("/chat", methods=["POST"])
+  def chat():
+      data = request.json
+      user_id = data["user_id"]
+
+      with session_locks[user_id]:
+          messages = load_session(user_id)
+          messages = compact_session(user_id, messages)
+          messages.append({"role": "user", "content": data["message"]})
+
+          response_text, messages = run_agent_turn(messages, SOUL)
+
+          save_session(user_id, messages)
+
+      return jsonify({"response": response_text})
+  ```
+  - Five lines of setup: same-user messages queue up, different users run in parallel, no race conditions
+  - OpenClaw extends this with **lane-based queues** — separate lanes for messages, cron jobs, and sub-agents — so heartbeats never block real-time conversations
+- **Goal: Cron Jobs (Heartbeats)**
+  - So far the agent only responds when spoken to
+    - What about checking your email every morning, or summarizing your calendar before meetings?
+  - You need scheduled execution: **heartbeats** — recurring tasks that trigger the agent on a timer
+  ```python
+  import schedule
+  import time
+
+  def setup_heartbeats():
+      """Configure recurring agent tasks."""
+
+      def morning_briefing():
+          print("\n⏰ Heartbeat: morning briefing")
+          # Use an isolated session key so cron doesn't pollute main chat
+          session_key = "cron:morning-briefing"
+
+          with session_locks[session_key]:
+              messages = load_session(session_key)
+              messages.append({
+                  "role": "user",
+                  "content": "Good morning! Check today's date and give me a motivational quote."
+              })
+
+              response_text, messages = run_agent_turn(messages, SOUL)
+              save_session(session_key, messages)
+
+          print(f"🤖 {response_text}\n")
+          # In production, you'd send this to Telegram/Discord too
+
+      schedule.every().day.at("07:30").do(morning_briefing)
+
+      # Run the scheduler in a background thread
+      def scheduler_loop():
+          while True:
+              schedule.run_pending()
+              time.sleep(60)
+
+      threading.Thread(target=scheduler_loop, daemon=True).start()
+
+  # Call during startup, before run_polling()
+  setup_heartbeats()
+  ```
+  - **Key insight: each heartbeat uses its own session key** (`cron:morning-briefing`)
+    - Keeps scheduled tasks out of your main conversation history
+    - It calls the same `run_agent_turn` — just another message, triggered by a timer instead of a human
+  - To test, run every minute (change it back to daily when done):
+  ```python
+  schedule.every(1).minutes.do(morning_briefing)
+  ```
+    - You'll see the heartbeat fire in the terminal and the agent respond
+  - OpenClaw supports full cron expressions (`30 7 * * *`) and routes heartbeats through a separate command-queue lane so they never block real-time messages
+- **Goal: Multi-Agent**
+  - As tasks grow, one personality and toolset can't cover everything well
+    - A research assistant needs different instructions than a general assistant
+  - **Fix: multiple agent configurations with routing**
+    - Each agent has its own SOUL and its own session; you switch between them based on the message
+  ```python
+  AGENTS = {
+      "main": {
+          "name": "Jarvis",
+          "soul": SOUL,  # our existing SOUL
+          "session_prefix": "agent:main",
+      },
+      "researcher": {
+          "name": "Scout",
+          "soul": """You are Scout, a research specialist.
+  Your job: find information and cite sources. Every claim needs evidence.
+  Use tools to gather data. Be thorough but concise.
+  Save important findings to memory for other agents to reference.""",
+          "session_prefix": "agent:researcher",
+      },
+  }
+
+  def resolve_agent(message_text):
+      """Route messages to the right agent based on prefix commands."""
+      if message_text.startswith("/research "):
+          return "researcher", message_text[len("/research "):]
+      return "main", message_text
+  ```
+  - Update `handle_message` to route to the right agent:
+  ```python
+  async def handle_message(update: Update, context):
+      user_id = str(update.effective_user.id)
+      agent_id, message_text = resolve_agent(update.message.text)
+      agent = AGENTS[agent_id]
+      session_key = f"{agent['session_prefix']}:{user_id}"
+
+      with session_locks[session_key]:
+          messages = load_session(session_key)
+          messages = compact_session(session_key, messages)
+          messages.append({"role": "user", "content": message_text})
+
+          response_text, messages = run_agent_turn(messages, agent["soul"])
+
+          save_session(session_key, messages)
+
+      await update.message.reply_text(f"[{agent['name']}] {response_text}")
+  ```
+  - Try it:
+  ```text
+  You: What's the weather like?
+  [Jarvis] It's a nice day! I'd check a weather service for exact details.
+
+  You: /research What are the best practices for Python async programming?
+  [Scout] Here's what I found...
+      [uses web_search, save_memory to gather and store findings]
+      The key practices are: 1) Use asyncio.gather for concurrent tasks...
+
+  You: What did Scout find about Python async?
+  [Jarvis] [uses memory_search]
+      Scout's research found that the key async best practices are...
+  ```
+  - Each agent has its own conversation history, but **they share the same memory directory**
+    - Scout saves research findings; Jarvis can search them later
+    - They collaborate through shared files, no direct messaging needed
+  - OpenClaw adds sub-agent spawning (a parent spawns a child for a focused task) and inter-agent messaging
+  - **Core pattern: each agent is just a SOUL + session + tools**
+- **Putting It All Together**
+  - One runnable script: a clean standalone REPL with every feature — sessions, SOUL, tools, permissions, compaction, memory, command queue, cron, and multi-agent routing
+  - A mini-openclaw in ~400 lines: https://gist.github.com/dabit3/86ee04a1c02c839409a02b20fe99a492
+  - Save it as `mini-openclaw.py` and run:
+  ```bash
+  uv run --with anthropic --with schedule python mini-openclaw.py
+  ```
+  - What a session looks like:
+  ```text
+  Mini OpenClaw
+    Agents: Jarvis, Scout
+    Workspace: ~/.mini-openclaw
+    Commands: /new (reset), /research <query>, /quit
+
+  You: Remember that my favorite restaurant is Hai Cenato and I prefer 7pm reservations
+
+    🔧 save_memory: {"key": "user-preferences", "content": "Favorite restaurant...
+       → Saved to memory: user-preferences
+
+  🤖 [Jarvis] Got it. Saved your restaurant preference - Hai Cenato, 7pm reservations.
+
+  You: What's in my project directory?
+
+    🔧 run_command: {"command": "ls"}
+       → src, package.json, README.md, node_modules, ...
+
+  🤖 [Jarvis] Your project has a standard Node.js structure with src/, package.json,
+     and the usual suspects.
+
+  You: /new
+    Session reset.
+
+  You: Where do I like to eat?
+
+    🔧 memory_search: {"query": "restaurant favorite food"}
+       → --- user-preferences.md ---
+          Favorite restaurant: Hai Cenato...
+
+  🤖 [Jarvis] You like Hai Cenato, and you prefer 7pm reservations.
+
+  You: /research What are the latest trends in AI agents?
+
+    🔧 web_search: {"query": "AI agent trends 2025"}
+       → Search results for: AI agent trends 2025
+    🔧 save_memory: {"key": "research-ai-agents", ...}
+       → Saved to memory: research-ai-agents
+
+  🤖 [Scout] Here's what I found on current AI agent trends...
+  ```
+  - Memory persists across sessions; agents collaborate through shared memory files; commands need approval; heartbeats run in the background — all in ~400 lines
+- **What We've Learned** — every major component of a persistent AI assistant, built from a simple Telegram bot:
+  - **Persistent sessions (JSONL files)** — crash-safe conversation memory
+    - One file per session, one line per message; restart and everything is still there
+  - **SOUL.md (system prompt)** — a personality file that turns a generic AI into a specific agent with consistent behavior, boundaries, and style
+  - **Tools + agent loop** — structured tool definitions let the AI decide when to act
+    - The loop calls the LLM, executes requested tools, feeds results back, and repeats until done
+  - **Permission controls** — an allowlist of safe commands plus persistent approvals; dangerous operations need explicit consent
+  - **The gateway pattern** — one central agent, many interfaces (Telegram, HTTP, any channel), same sessions and memory
+  - **Context compaction** — when conversations outgrow the context window, summarize old messages and keep recent ones
+  - **Long-term memory** — file-based storage with save and search tools; survives session resets; accessible to any agent
+  - **Command queue** — per-session locking to prevent race conditions when messages arrive at once
+  - **Heartbeats** — scheduled agent runs on a timer, each with its own isolated session; wake up, do the task, go back to sleep
+  - **Multi-agent routing** — multiple configs with different SOULs and session keys, routed by message content; collaborate through shared memory files
+- **Each component came from a practical problem**
+
+  | Problem | Solution |
+  | --- | --- |
+  | "The AI can't remember anything" | Sessions |
+  | "It responds like a generic chatbot" | SOUL.md |
+  | "It can only talk, not act" | Tools + Agent loop |
+  | "It runs dangerous commands without asking" | Permission controls |
+  | "I want it on all my messaging apps" | Gateway |
+  | "The conversation got too long" | Compaction |
+  | "It forgets things between sessions" | Memory |
+  | "Two messages at once corrupt the data" | Command queue |
+  | "I want it to do things automatically" | Heartbeats |
+  | "One agent can't do everything well" | Multi-agent |
+
+  - **This is how you could have invented OpenClaw**
+- **Going Further** — how OpenClaw extends each idea for production
+  - **Browser with semantic snapshots**
+    - OpenClaw gives the agent a browser via **Playwright**
+    - Instead of screenshots (5MB each, expensive in tokens), it uses **semantic snapshots** — a text version of the page's accessibility tree
+    ```python
+    snapshot = page.accessibility.snapshot()
+    # Output:
+    # - heading "Welcome to GitHub"
+    # - button "Sign In" [ref=1]
+    # - textbox "Email" [ref=2]
+    # - link "Forgot password?" [ref=3]
+    ```
+    - Each interactive element gets a numbered `ref` ID
+    - To click, the agent says "click ref=1", which maps to exactly one element — no guessing, no "click the blue button near the top"
+    - Text instead of an image → **~100x smaller than a screenshot**, far fewer tokens per page
+  - **Session scoping and identity links**
+    - The prototype uses user ID as the session key; OpenClaw supports configurable scoping:
+      - `main` (default): all DMs share one session — simple, great for single-user setups
+      - `per-peer`: each person gets one session across all channels
+      - `per-channel-peer`: each person per channel gets their own session
+    - **Identity links** merge sessions across channels for the same person (Alice's Telegram and Discord conversations share history)
+  - **Channel plugin system**
+    - The prototype hardcodes Telegram + HTTP
+    - OpenClaw uses a plugin architecture: each channel (Telegram, Discord, WhatsApp, Slack, Signal, iMessage) is a separate adapter that normalizes messages into a common format
+    - Adding a channel means writing one adapter, without touching agent logic
+  - **Vector memory search**
+    - Keyword search misses semantic matches ("auth bug" won't match "authentication issues")
+    - OpenClaw uses a **hybrid approach**:
+      - Vector search via SQLite with embedding extensions for semantic similarity
+      - Plus **FTS5** for exact keyword matches
+    - Configurable embedding providers: OpenAI, local models, Gemini, Voyage
+  - **Sub-agent spawning**
+    - The prototype uses manual routing; OpenClaw lets agents spawn sub-agents programmatically
+    - A parent calls `sessions_spawn`; the child runs in its own context with a timeout and returns results to the parent
+    - Enables "research this topic in depth": the main agent delegates to a specialist and continues when it's done
+- **Next Steps** — if you want to build your own:
+  1. **Start with one channel** — get a Telegram or Discord bot working with sessions
+  2. **Add tools incrementally** — file read/write first, then shell execution
+  3. **Add memory when you need it** — once sessions reset, you'll want persistent memory
+  4. **Add channels when you outgrow one** — the gateway pattern emerges naturally
+  5. **Add agents when tasks specialize** — don't start with 10 agents, start with 2
+  - Or just use OpenClaw: it's open source and handles the edge cases glossed over here — but now you know how it works under the hood
+
+<details><summary>原文</summary>
 
 > 《You Could've Invented OpenClaw》
 >
@@ -2841,6 +4089,8 @@
 > Add agents when tasks specialize: don't start with 10 agents, start with 2
 > Or just use OpenClaw. It's open source and handles all the edge cases we glossed over. But now you know how it works under the hood.
 
+</details>
+
 - 图片：[img1](https://pbs.twimg.com/media/HA1FTA1aAAIziKK?format=jpg&name=large)
 
 [↑ 回到目录](#part-1--keywords)
@@ -2915,6 +4165,22 @@
 
 **Chris (@ChrisGPT)** · 发帖 2026-01-12 · [原帖](https://x.com/ChrisGPT/status/2010804702313652647)
 
+- **Anthropic unveiled "Cowork"** — turns Claude into an autonomous virtual assistant for everyone
+  - Brings agentic capabilities previously reserved for coders to general users
+  - Claude performs complex tasks directly on your computer
+- **Origin**: Anthropic noticed developers using **Claude Code** for everyday admin tasks
+- **What it does**
+  - Grant Claude access to folders to manage files, research, and complete multi-step workflows independently
+  - Acts as a digital employee that "does" instead of just chats
+- **Availability**: research preview for **Claude Max** subscribers on the **macOS app**
+- **Competitive gap (per the author)**
+  - Claude is shipping coding/desktop agents faster than competitors
+  - Google still lacks a consumer browser agent; xAI has no native CLI or agentic interface
+  - OpenAI has "Operator", Google has the developer-focused "Antigravity"
+  - Anthropic is now the only other major lab with a true "do-it-for-me" experience for general users
+
+<details><summary>原文</summary>
+
 > BREAKING 🚨 Anthropic just unveiled "Cowork," a major feature that turns Claude into a fully autonomous virtual assistant for everyone. It brings the deep agentic capabilities previously reserved for coders to general users, allowing Claude to perform complex tasks directly on your computer.
 >
 > The tool was built after Anthropic noticed developers using "Claude Code" for everyday admin tasks. Cowork now lets anyone grant Claude access to folders to manage files, research, and complete multi-step workflows independently acting as a digital employee that "does" instead of just chats.
@@ -2922,6 +4188,8 @@
 > Cowork is available today as a research preview for Claude Max subscribers on the macOS app 😡. Claude is releasing new coding/desktop agents much faster than all of there competitors. 
 >
 > This launch exposes a massive gap in the current AI landscape: in 2026, Google still explicitly lacks a consumer browser agent, and xAI has yet to release a native CLI or agentic interface. While OpenAI has "Operator" and Google has the developer-focused "Antigravity," Anthropic is now the only other major lab providing a true "do-it-for-me" experience for general users.
+
+</details>
 
 - 含视频（未转写）
 

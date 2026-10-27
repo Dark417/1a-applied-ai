@@ -24,6 +24,177 @@
 
 **正文**
 
+- **Who this is for**: everyone who ships, buys, or signs off on software built on large language models (LLMs) — engineers, product managers, and the CEO
+  - Plain language, from the big picture down to the details
+  - Every number comes from a source listed at the end: the author's own runnable tutorial on one small support assistant, or a published paper
+- **The quick grasp (read this if you read nothing else)**
+  - **An eval (short for evaluation) is a repeatable test that tells you, with a number you can trust, whether an AI system does what you want — and whether a change made it better or worse**
+  - **Why it exists: a language model does not fail like normal software**
+    - Normal software either works or crashes
+    - A language model produces a fluent, confident, well-formatted answer that may be wrong
+    - Reading one good answer tells you nothing about the next hundred
+    - Evals replace "it looked fine in the demo" with "it passes 70% of the cases we care about, give or take 12 points, and the new version is not measurably better"
+  - **How it works, in four steps**
+    1. **Collect inputs that matter**, with the right answer written down next to each one — running example: 80 customer-support tickets for a bike shop, each with the correct category and the facts a good reply must contain
+    2. **Run the system** on every input and keep the output
+    3. **Grade every output with a grader** — a rule in code, a second model acting as a judge, or a human
+    4. **Turn the grades into one number with an error bar**, and compare it to the last version
+  - **When you use it**
+    - Before launch — does it work at all?
+    - Before every change — did we break something?
+    - After launch — is it still working on real traffic?
+  - **Important: the grader is part of the system you must test**
+    - A judge model that agrees with humans only 60% of the time will tell you your product is fine when it is not
+    - What it means for us: every eval has two numbers to check — how good the product is, and how good the grader is. Ask for both
+    - Why it matters: the most common way an AI team fools itself is **a confident number from an unchecked grader**
+- **Roadmap** — each level answers one question about the level above it
+  - **Level 0** · The whole loop, once, on one ticket
+  - **Level 1** · What exactly do we measure? (inputs, gold answers, the number)
+  - **Level 2** · What goes wrong? (look at the data first)
+  - **Level 3** · Graders made of code (cheap, exact, blind to meaning)
+  - **Level 4** · A model as grader (flexible, biased, must be checked)
+  - **Level 5** · Honest numbers (error bars, A/B, how many cases)
+  - **Level 6** · Grading systems with parts (retrieval, agents, cost, reliability)
+  - **Level 7** · Public benchmarks (what leaderboards do and do not tell you)
+  - **Level 8** · Making it a habit (gates, monitoring, when to re-check)
+  - **Then** · The tools and approaches, a decision guide, and the references
+- **Level 0: the whole loop, once, on one ticket**
+  - Zooms into: everything. Question: what does an eval look like when it runs?
+  - **Running example**: a small customer-support assistant for a fictional online bike and camping shop, with three parts (each graded differently later)
+    - **triage** — reads a ticket and sorts it into one of 12 categories (returns, shipping, warranty, …) with a priority
+    - **answer** — finds the relevant pages of the shop's policy handbook and writes a reply that cites them
+    - **agent** — looks up orders, issues refunds, and escalates, by calling tools against a mock database under policy rules
+  - **One ticket through the loop**
+    - Input: "I'm running late for work and need this sorted immediately. I returned my bike last week, but I still haven't seen the refund. Your policy clearly states refunds are processed within 5 business days…"
+    - Triage output: returns. Gold answer: returns. **Score: 1 out of 1**
+    - Answer output: a polite four-paragraph reply that cites the returns section and mentions both required facts
+      - Refunds take 5 business days
+      - A 15% restocking fee applies to used items
+  - **Three graders look at that reply**
+
+    | Grader | Question it asks | Verdict |
+    |---|---|---|
+    | Code rule | Does the reply cite a handbook section? | Yes |
+    | Code rule | Does it mention both required facts? | Yes, none missing |
+    | Model judge | Does it claim anything the handbook does not say? | **Fail**: it invented "a total allowance of up to 15 business days" |
+
+  - **That is the whole idea**
+    - Two cheap code checks said the reply was fine
+    - The judge found an invented number that would have gone to a customer
+    - Every later level is about making that loop trustworthy at scale
+  - **Carry forward from Level 0**
+    - An eval is **input, system, grader, number**. Nothing more
+    - Different graders answer different questions: "cites a section" and "invents nothing" are not the same check
+    - A fluent reply can pass every surface check and still be wrong
+- **Level 1: what exactly do we measure?**
+  - Zooms into: steps 1 and 4 of the loop. Question: where do the inputs and the "right answers" come from, and what is the number?
+  - **Inputs** — should look like real traffic, including the awkward ones
+    - The 80 tickets were generated from a grid of **customer persona × topic × scenario**
+    - So angry customers, vague questions, and multi-issue tickets all appear
+    - Anthropic's guide for agent evals suggests starting with **20 to 50 tasks taken from real failures**, not imagined happy paths (Grace et al., 2026)
+  - **Gold answers** — for each input, write down what "right" means
+    - The correct category, the handbook sections a reply must draw on, and the two or three facts it must state
+    - Here the tickets were generated from the handbook, so gold answers are correct by construction
+    - In a real product they come from domain experts
+  - **Two piles**
+    - **Dev set** (20 tickets) — used for tuning prompts and graders
+    - **Test set** (60 tickets) — used only for reporting
+    - If you tune on the cases you report on, the number flatters you
+  - **The number**
+    - Triage → **accuracy** (share of tickets sorted correctly)
+    - Replies → **pass rate** (share of replies with no failure)
+    - Agent → share of tasks that end in **the right database state**
+    - One number per experiment, always reported on the test set, always with an error bar (Level 5)
+  - **Four words that get confused**
+
+    | Term | Measures | Example |
+    |---|---|---|
+    | Eval | Your system on your data | Our assistant on 60 tickets |
+    | Benchmark | A model on a public task | GSM8K math, SWE-bench coding |
+    | Test (software) | A function returns the expected value | JSON parses, no crash |
+    | Monitoring | Live traffic after launch | Sampled real tickets graded daily |
+
+  - A model that scores high on a public benchmark can still answer your customers wrongly
+    - **The benchmark measures the engine; the eval measures the car on your road** (Husain & Shankar, 2025)
+  - **Carry forward from Level 1**
+    - Inputs with gold answers are the most valuable asset in the whole process — expensive, and the thing that makes everything else possible
+    - Keep a dev pile for tuning and a test pile for reporting
+    - Benchmarks are about models. Evals are about your product
+- **Level 2: what goes wrong? Look at the data first**
+  - Zooms into: the grading step. Question: what should the graders even look for?
+  - **Before building any automatic grader, read the outputs**
+    - Every experienced practitioner says the same (Husain, 2024; Husain, 2025; Shankar et al., 2024)
+    - Read a hundred or two hundred outputs one by one
+    - Write a short note on each failure
+    - Group the notes into a short list of failure types with counts
+  - This is **error analysis**; the two steps are **open coding** (free notes) and **axial coding** (grouping)
+  - **Result on the 60 test replies** — replies that pass: **34 of 60**
+
+    | Failure type | Count |
+    |---|---|
+    | `missing_required_fact` | 15 |
+    | `unsupported_claim` | 12 |
+    | `wrong_section_retrieved` | 8 |
+    | `did_not_answer` | 5 |
+    | `wrong_value` | 2 |
+    | `over_promise` | 1 |
+
+  - Barely half the replies pass
+    - The two biggest problems: a missing fact and an invented claim
+    - Nobody would have guessed that from the demo
+  - **This list is the specification for every grader built next**: one grader per failure type, in order of frequency
+  - **Important: the failure list comes from reading outputs, not from imagining them**
+    - What it means for us: the first week of any eval effort is people reading transcripts in a purpose-built viewer, not engineers wiring up a framework
+    - Why it matters: a grader built for failures that do not occur gives a reassuring number and misses the ones that do
+    - Teams whose eval effort stalls almost always skipped this step (Husain, 2025)
+  - **Criteria drift** (Shankar et al., 2024): your criteria change as you grade
+    - Grading examples sharpens the rubric; a sharper rubric changes earlier grades
+    - Expect two or three rounds — it is not a process failure
+  - **Carry forward from Level 2**
+    - The failure taxonomy is the plan. Build graders for the top failure types first
+    - Reading outputs is the highest-value activity and the most often skipped
+    - Expect the rubric to change while you grade
+- **Level 3: graders made of code**
+  - Zooms into: one kind of grader. Question: what can a plain rule measure, and what can it not?
+  - **A code grader is a rule written in ordinary code**
+    - Free, instant, gives the same answer every time
+    - Use it for everything it can measure
+  - **Exact answers** — triage has a single right label, so count matches
+    - **accuracy: 0.700 · macro F1: 0.697**
+    - Seven tickets in ten are sorted correctly
+    - Macro F1 averages the score over all 12 categories equally, so rare categories count as much as common ones
+    - The two numbers being close → mistakes are spread out, not concentrated in one category
+  - **Rule checks on free text** — no single right reply text, but there are rules a reply must obey
+
+    | Rule | Pass rate |
+    |---|---|
+    | `nonempty` | 100% |
+    | `max_words_150` | 17% |
+    | `no_banned_promises` | 92% |
+
+    - Only 17% of replies fit in 150 words — the app is far too chatty, and no judge was needed to find that
+    - Public benchmarks like **IFEval** (Zhou et al., 2023) are built entirely from such verifiable rules ("answer in exactly three bullet points")
+  - **Required facts** — check whether each gold fact appears in the reply
+    - Catches the top failure type, missing facts, at zero cost
+  - **Similarity scores** — overlap measures (ROUGE, BLEU) and embedding similarity compare the reply to a reference text
+    - On these replies, embedding similarity separates good from bad with an **AUC of 0.709** (0.5 = coin flip, 1.0 = perfect)
+    - Useful for noticing that something changed between versions
+    - Useless for saying whether a reply is correct
+  - **Important: similarity notices change, it does not grade quality**
+    - What it means for us: use it as a cheap drift alarm, never as the headline number
+    - Why it matters: a wrong reply that uses the same words as a right one scores high
+    - Eugene Yan's survey (2024) and the original ROUGE/BLEU literature document this limit at length
+  - **The limit of code graders, in one number**
+    - Only **11.7%** of replies pass all code checks — but code checks caught **none** of the invented claims
+    - The Level 0 reply passed every rule while inventing a 15-day allowance
+    - **Rules see form; they do not see meaning**
+  - **Carry forward from Level 3**
+    - Use code graders for everything with a definite answer: labels, formats, required facts, forbidden phrases
+    - Similarity measures drift, not quality
+    - Rules cannot see an invented claim. That needs a reader
+
+<details><summary>原文</summary>
+
 > An article for everyone who ships, buys, or signs off on software built on large language models (LLMs): engineers, product managers, and the CEO. Written in plain language, from the big picture down to the details.
 >
 > 《Evals: how to know whether an AI system actually works》
@@ -356,6 +527,8 @@
 > Zheng et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv:2306.05685.
 > Zhou et al. (2023). IFEval. arXiv:2311.07911.
 > 2026 audits: When AI Benchmarks Plateau (arXiv:2602.16763); When the Judge Changes, So Does the Measurement (arXiv:2607.08535); Reliability without Validity (arXiv:2606.19544); AgentLens (arXiv:2605.12925).
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HTugan9WEAAxt2d?format=jpg&name=large)
 
@@ -712,6 +885,26 @@
 
 **正文**
 
+- **Google DeepMind + Meta + Amazon released a 100-page roadmap on what AI agents actually are**
+  - Analyzed every major agentic reasoning framework across planning, tool use, memory, and multi-agent coordination
+- **Core finding**
+  - Single-agent in stable environments: works great
+  - Multi-agent in dynamic environments: falls apart
+  - The problem isn't intelligence — it's **how agents reason under uncertainty**
+- **Three layers that matter**
+  - **Foundational reasoning** — planning + tool use in stable settings
+  - **Self-evolving reasoning** — agents adapting through feedback and memory
+  - **Collective reasoning** — multiple agents coordinating toward shared goals
+- **Where things break**
+  - Even the best models struggle in open-ended environments; closed-world benchmarks are misleading
+  - RL helps post-training, but in-context reasoning at test time is still broken for long-horizon tasks
+  - Most agent tutorials are built on single-task, static benchmarks
+  - Real-world deployment (robotics, healthcare, autonomous research) breaks every framework on the market, and almost nobody is building for that gap
+- **Takeaway**: the future isn't smarter models — it's agents that plan, act, and learn across dynamic environments without falling apart mid-task
+  - The survey is the closest thing to a unified blueprint for that; free on arXiv
+
+<details><summary>原文</summary>
+
 > 🚨 Google DeepMind + Meta + Amazon just dropped a 100 page roadmap that redefines what AI agents actually are.
 >
 > They analyzed every major agentic reasoning framework across planning, tool use, memory, and multi-agent coordination.
@@ -745,6 +938,8 @@
 > 100% free on arXiv.
 >
 > [2] Paper Link:
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HBjVZZnbUAAKjGd?format=jpg&name=large)
 

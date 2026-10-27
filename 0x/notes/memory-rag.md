@@ -22,6 +22,22 @@
 
 **正文**
 
+- **Agent memory, in 13 pages** — the fix that took one setup from 26,000 tokens per query to 1,800
+- **The problem**: your agent reads the same 12 files every morning, reaches the same conclusions, and bills you again for both
+- **The 5 layers that stop it**
+  - **Working memory** — what it sees right now; gone once the window fills
+  - **Episodic memory** — a timestamped log, so the deploy that died at 3am gets explained once
+  - **Semantic memory** — facts in a knowledge graph, e.g. "this user prefers TypeScript"
+  - **Procedural memory** — three approaches tried, the one that worked saved as a skill
+  - **Forgetting** — what to delete before contradictions pile up
+- **The numbers**
+  - **Mem0** — 1,800 tokens per query instead of 26,000, with 91% lower latency
+  - **Snowflake** — one ontology layer, 20% more accuracy, 39% fewer tool calls
+- **The forgetting engine is the layer almost nobody builds** — and it decides whether the other four stay trustworthy
+- Memory cuts what your agent reads; **Jev** cuts what it pays to decide — on the decision side it took one Claude bill from $765 to $3 a month
+
+<details><summary>原文</summary>
+
 > agent memory, in 13 pages
 >
 > the fix that took one setup from 26,000 tokens per query down to 1,800
@@ -42,6 +58,8 @@
 > the forgetting engine is the layer almost nobody builds, and it decides whether the other four stay worth trusting
 >
 > memory cuts what your agent reads. Jev cuts what it pays to decide, and on the decision side that took one Claude bill from $765 to $3 a month 👇
+
+</details>
 
 - 含视频（未转写）
 

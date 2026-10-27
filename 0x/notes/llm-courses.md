@@ -21,6 +21,23 @@
 
 **正文**
 
+- **斯坦福大学课程 CS329A: Self-Improving AI Agents**
+  - 由 @achowdhery 和 @Azaliamirh 两位老师主讲
+  - 两人在 Google Brain / DeepMind 有过合作，现已连续两年合作讲授 AI Agents 课程
+- 之前分享这门课获得 5K+ 点赞和收藏，作者把 9 个视频剪成一个预告视频，方便快速直观了解课程
+- **为什么还值得学**
+  - 虽然很多人觉得 AI Agent 已强大到什么都能直接问、不需要再学
+  - 但跟着顶级大学的基础课程系统学一遍，对全局认知的提升仍然很有收获
+- 课程主页：https://cs329a.stanford.edu
+- 视频列表：https://youtube.com/playlist?list=PLangBM27OtEA&si=khxaTCYv_ARHBgBl
+- 补充：斯坦福 CS329Z「Engineering AI Agents」第二讲 **LLMs for Builders** —— Agent 工程师必修的大模型底层原理
+- **引用 / Quoted:** @shao__meng
+  - CS329A 共 9 讲视频都已发布在 YouTube
+  - 第 1 讲 52 万观看，第 9 讲 1.5 万
+  - 趁假期看完 9 讲，就超过了中间 50 多万人
+
+<details><summary>原文</summary>
+
 > 斯坦福大学课程 CS329A: Self-Improving AI Agents  
 >
 > 斯坦福大学 @achowdhery @Azaliamirh 两位老师主讲，他们在 Google Brain / Deepmind 有过合作经历，现在合作连续两年讲授 AI Agents 课程。
@@ -34,12 +51,8 @@
 >
 > [2] 斯坦福大学 CS329Z「Engineering AI Agents」第二讲 LLMs for Builders：Agent 工程师必修的大模型底层原理
 
-- 引用 meng shao @shao__meng · Sep 27:
-  > 斯坦福大学课程 CS329A: Self-Improving AI Agents
-  >
-  > 课程 9 讲视频都已发布在 Youtube，第 1 讲 52 万观看，第 9 讲 1.5 万。趁假期坚持看完 9 讲视频，你就超过了中间的 50 多万人，和连第 1 讲都没看过的无数人 😂
-  >
-  > 开玩笑，虽然 AI Agent  x.com/shao__meng/sta…
+</details>
+
 - 含视频（未转写）
 
 [↑ 回到本页目录](#part-1--index)
@@ -53,6 +66,18 @@
 - **总结**：推荐 Karpathy 的 3 小时 LLM 课程：LLM 简介、训练流水线、工具与插件、Transformer 架构、scaling。包装成「靠这个视频拿到 Anthropic offer」的故事，营销味重，但课程本身是公认的 LLM 原理入门材料。
 
 **正文**
+
+- **Anecdote**: the author's friend applied to 300 tech jobs over two years, no MIT or Stanford background, and was offered $750,000 by Anthropic
+  - The video he credits: **Andrej Karpathy's 3-hour course on building a full LLM from scratch**
+  - Shows how LLMs like ChatGPT and Claude are actually built
+- **Course timestamps**
+  - 00:00 — intro to LLMs
+  - 12:41 — LLM training pipeline
+  - 31:58 — LLM tools & plugins
+  - 41:14 — LLM transformer architecture
+  - 2:19:02 — scaling the LLM
+
+<details><summary>原文</summary>
 
 > My friend applied to 300 tech jobs in two years. No MIT. No Stanford.
 >
@@ -75,6 +100,8 @@
 > • 31:58 - LLM tools & plugins
 > • 41:14 - LLM transformer architecture
 > • 2:19:02 - scaling the LLM
+
+</details>
 
 - 含视频（未转写）
 
