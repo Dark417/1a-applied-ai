@@ -109,6 +109,20 @@
 
 **Roc (@AIStarsGo)** · 发帖 2026-10-26 · [原帖](https://x.com/AIStarsGo/status/2114629460930740466)
 
+- **几条教训**
+  1. **不要依赖 agent 读论文或高质量博文**
+     - 后果：思维深度大幅下降，灵感触发时机大幅减少
+     - 还会浪费大量时间去理解 agent 的垃圾表达
+  2. **不要把搞科研/技术学习和英语学习混在一起**
+     - 后果：效率低、推进慢，失去耐心后放弃
+     - 灵感和思考需要时间积累，混着学英语会大幅延迟思考，让脑子在两个任务间来回切换
+  3. **不要因为 token 用不完就 background 跑点东西，想着"用掉不影响主线"**
+     - 后果：除非你已编好稳定的 workflow，否则即时奖励更强的 vibe coding 一定会吸引注意力，打断深度思考
+- **总结：要感受自己在 agent 时代的认知提升速度** —— 是加快了、不变，还是退步了
+  - 否则会沉迷 shallow work，最终认知退化，对读长文字、深度思考都没耐心
+
+<details><summary>原文</summary>
+
 > 几条教训
 >
 > 1. 不要依赖 agent 读论文或者高质量博文，
@@ -121,6 +135,8 @@
 > 后果：除非你编了稳定的 workflow，否则即时奖励更强的 vibe coding 一定会吸引你的注意力，打断你的深度思考。
 >
 > 总结，一定要感受自己在 agent 时代下的认知水平的提高速度，到底是加快了，还是不变，还是退步了。如若不然会沉迷于 shallow work，最后认知退化，导致阅读长文字、深度思考都没耐心，人就废了。
+
+</details>
 
 
 [↑ 回到目录](#part-1--keywords)
@@ -285,12 +301,9 @@
   - "Find the three most cited papers on this topic, pull the key claims from each, cross-check them against each other, and write me a one-page briefing" — done with no touch from you in between — **that is an agent**
   - **The difference is not the model. It is the structure around it.**
   - An agent has three things a regular chat does not:
-    - **Tools it can call on its own** — search, file systems, code execution, external APIs
-      - It doesn't wait for you to get the information; it goes and gets it
-    - **Memory that carries across tasks**, not just within one session
-      - It knows what it already tried, what worked, what it decided earlier
-    - **A loop that keeps running until the task is finished**, not until it generates one response
-      - It does not hand the work back to you at every step
+    - **Tools it can call on its own** — search, file systems, code execution, external APIs. It doesn't wait for you to get the information; it goes and gets it
+    - **Memory that carries across tasks**, not just within one session. It knows what it already tried, what worked, what it decided earlier
+    - **A loop that keeps running until the task is finished**, not until it generates one response. It does not hand the work back to you at every step
   - With all three in place, Claude stops being something you talk to and starts being something that works
 - **2 - The levels of agentic work**
   - You don't need a fully autonomous agent on day one
@@ -366,13 +379,9 @@
   ```
 - **4 - The memory problem and how to fix it**
   - The most common place agents break down — in three specific ways:
-    - **Task runs too long and the agent loses the beginning**
-      - The original goal, decisions made, constraints you set all fall out of the context window
-      - The agent keeps working but has quietly forgotten what it was working toward
-    - **You close the session and open a new one**
-      - The agent starts from zero; everything from the previous run is gone
-    - **The agent gets interrupted mid-task**
-      - When you come back, it has no record of where it stopped, what it tried, or what failed
+    - **Task runs too long and the agent loses the beginning** — the original goal, decisions made, constraints you set all fall out of the context window. The agent keeps working but has quietly forgotten what it was working toward
+    - **You close the session and open a new one** — the agent starts from zero; everything from the previous run is gone
+    - **The agent gets interrupted mid-task** — when you come back, it has no record of where it stopped, what it tried, or what failed
   - **All three have the same fix: make the agent write its own memory**
   - Paste this **mid-task** to create a progress record:
   ```text
@@ -500,11 +509,9 @@
   - **A graph in AI work is a map of which jobs need to happen and what each one depends on**
   - Two things make up the whole structure:
     - **Node** — one unit of work: one agent, one task, one defined input, one defined output
-      - Not "research this topic, summarize it, then write a draft" — just one of those
-      - The smaller and more bounded the job, the more useful the node
-    - **Edge** — a dependency
-      - Connects two nodes when the second genuinely needs what the first produced
-      - Not just when one happens to come after the other — this distinction matters more than it sounds
+    - Not "research this topic, summarize it, then write a draft" — just one of those. The smaller and more bounded the job, the more useful the node
+    - **Edge** — a dependency: connects two nodes when the second genuinely needs what the first produced
+    - Not just when one happens to come after the other — this distinction matters more than it sounds
   - Everything else in graph engineering is applying those two ideas at different scales
   - **What makes a node usable: a defined output shape**
     - A node that returns free text is only readable by a human
@@ -1049,6 +1056,14 @@
 
 **Movez (@0xMovez)** · 发帖 2026-06-21 · [原帖](https://x.com/0xMovez/status/2068763235587694769)
 
+- **Quote attributed to Andrew Ng**
+  - "100% of my tasks are now done by AI agents — hype has exceeded my expectations"
+  - **Loops** are the next step
+  - In 3–6 months everyone will use self-improving loops; no more prompting
+- In a 30-minute talk he explains how to build self-improving agentic systems from scratch
+
+<details><summary>原文</summary>
+
 > Andrew Ng:
 >
 > "100% of my tasks are now done by AI agents - hype has exceeded my expectations. Loops is next step.
@@ -1058,6 +1073,8 @@
 > In a 30-minute talk, Andrew Ng explains how to build self-improving agentic systems from scratch.
 >
 > Worth more than a $500 agentic course.
+
+</details>
 
 - 含视频（未转写）
 
@@ -1732,6 +1749,264 @@
 
 **Codez (@0xCodez)** · 发帖 2026-06-16 · [原帖](https://x.com/0xCodez/status/2066867539305459732)
 
+- **Everyone's talking about loops; almost no one is talking about what the loop runs on**
+  - 9 out of 10 builders run Claude Code on the **default harness** — no rules, no subagents, no hooks, no memory
+  - Then they wonder why their loop produces slop
+  - **A loop is only as good as the harness underneath it**
+- This is a 14-step roadmap to the harness — from one agent to a system that improves itself
+- **Loop engineering vs. harness engineering**
+  - **Loop engineering** — building a system that prompts your agent on a schedule — got all the attention this month
+  - **Addy Osmani**, who wrote the long-form piece on loops, pointed at what sits below it:
+    - > "Loop engineering sits one floor above the harness. The harness is the environment one single agent runs inside. The loop is the harness, but it runs on a timer, spawns helpers, and feeds itself."
+  - **Harness engineering** = designing that environment: the model, the tools, the permissions, the context, the memory
+  - The unglamorous layer — and the one that decides whether everything above it works
+  - **A great loop on a bad harness is a fast way to produce garbage at scale**
+  - 14 steps, 3 tiers — the foundation everything else stands on
+- **Part 1 · What a Harness Is**
+- **01. A harness is the environment one agent runs inside**
+  - Strip away the jargon and a harness is **four things**
+    - The **model** doing the thinking
+    - The **tools** it can reach
+    - The **permissions** on those tools
+    - The **context** it reads at the start of every run
+  - That's the whole surface — subagents, hooks, memory are all ways of shaping one of those four
+  - **Why harness matters more than people think**
+    - The agent is a `while True` loop: pick a tool → run it → look at the result → decide the next move
+    - The harness defines what tools exist, what the agent may do, and what it knows when it starts
+    - **Same model, different harness, completely different agent**
+- **02. The whole harness lives in one folder: `.claude/`**
+  - Everything that shapes your agent sits in one directory at your project root
+  - Learn this layout and you can read anyone's harness at a glance
+  ```text
+  .claude/
+  ├─ CLAUDE.md          # standing facts — read every session
+  ├─ settings.json      # permissions, model, hooks
+  ├─ .mcp.json          # external tool connections
+  ├─ rules/             # path-scoped behaviors
+  │  ├─ tests.md
+  │  └─ python-types.md
+  ├─ agents/            # subagent definitions (~30 lines each)
+  │  ├─ reviewer.md
+  │  └─ eval-runner.md
+  ├─ skills/            # reusable workflows
+  │  └─ pr-checklist/
+  │     └─ SKILL.md
+  └─ agent-memory/      # what survives between runs
+     └─ STATE.md
+  ```
+  - **The rule that separates a clean harness from a mess: keep it small enough that you can explain why every file exists**
+    - If you can't say what a rule, hook, or subagent is for, delete it
+- **03. Harness vs loop vs system — three floors, don't mix them**
+  - Most "my agent setup is a mess" problems come from confusing the three floors
+  - **Harness** — the runtime one agent lives in
+    - Static configuration: model, tools, permissions, context (this issue)
+  - **Loop** — prompts the agent on a timer, spawns helpers, feeds itself
+    - Runs on top of the harness
+  - **Self-improving system** — a loop plus memory that compounds
+    - Every run leaves the next run sharper
+  - **The practical version**
+    - Standing facts → **context**
+    - Enforcement → **hooks**
+    - Procedures → **skills**
+    - Isolation → **subagents**
+  - Mixing these up (enforcement in `CLAUDE.md`, procedures bloating context) is the root cause of inconsistent, expensive agents
+- **04. The default harness — what you get out of the box**
+  - Install Claude Code, open a folder, and you already have a harness — just an empty one
+  - **The default gives you**
+    - A capable model
+    - Built-in tools (read, write, bash, search)
+    - Approval prompts on everything risky
+  - **It lacks** project context, custom subagents, memory
+  - For a one-off task, the default is fine
+  - **For anything you do more than once**, the default leaves the agent:
+    - Re-deriving your project from scratch every session
+    - Asking permission for safe operations
+    - Forgetting everything when you close the terminal
+  - The next ten steps close that gap
+- **05. `CLAUDE.md`: standing facts, kept short**
+  - Read at the start of every session
+  - The agent's standing knowledge of your project: conventions, architecture, the "we don't do it this way because of that incident"
+  - **Most common mistake**: letting it grow into a giant procedures document that bloats every session
+  - **Rule from practitioners running this daily: keep the main memory file under ~500 tokens**
+    - Standing facts go here
+    - Multi-step procedures go in **skills** (Step 8)
+    - Path-specific behaviors go in **`rules/`** files scoped to where they apply
+    - If a section has become a procedure rather than a fact, it belongs somewhere else
+  - **Read your `CLAUDE.md` out loud**
+    - Every line should be a fact the agent needs in every session ("we use pnpm, not npm")
+    - A procedure ("to add a feature, first…") → move it to a skill
+    - A rule for one folder → move it to `rules/`
+- **06. `settings.json`: permissions and model, set once**
+  - The default harness asks before every risky action
+    - Right when you're watching; wrong when you're not
+  - `settings.json` is where you pre-approve the safe stuff, deny the dangerous stuff, and pick which model runs
+  ```json
+  {
+    "model": "claude-sonnet-4-6",
+    "permissions": {
+      "autoApprove": [
+        "Read(*)", "Grep(*)",
+        "Bash(npm test)", "Bash(git status)"
+      ],
+      "deny": [
+        "Bash(rm -rf*)", "Bash(git push*)",
+        "Edit(.env*)", "Edit(secrets/*)"
+      ]
+    }
+  }
+  ```
+  - **The test for what to auto-approve: if this goes wrong, how hard is it to undo?**
+    - Cheap to undo → auto-approve
+    - Expensive to undo (force-push, deleting files, touching secrets) → always deny or prompt
+    - The middle ground is fine to auto-approve if you log it
+- **07. Subagents: isolated context for the dirty work**
+  - A **subagent** is an independent Claude session launched from the main one — its own context window, its own tool list
+  - **The point isn't parallelism for its own sake — it's keeping noise out of the main context**
+    - A research task that reads 40 files
+    - A review pass that needs a fresh perspective
+    - An eval run that produces a wall of logs
+    - These belong in a subagent so they don't pollute the main thread
+  - **The most valuable subagent: the one that checks the main agent's work**
+    - A model reviewing its own output is too easy on itself
+    - A separate reviewer with a fresh context window catches what the writer talked itself into
+    - This **writer-vs-checker split** makes every loop above the harness trustworthy
+- **08. Skills: procedures the agent reuses**
+  - A **Skill** is a `SKILL.md` file the agent runs
+    - When you call it with `/skill-name`, or automatically when the task matches its description
+  - Unlike a subagent, it runs **in the same context window** — just reusable instructions that become part of the session
+  - **Trigger to create one**: you notice yourself pasting the same instructions into every new conversation
+    - A PR checklist, an eval procedure, a release process — written once, invoked forever
+  - **Skills are what make the harness improve over time**
+    - Each time the procedure fails in a new way, add the lesson to the skill; the next run inherits it
+- **09. Hooks: deterministic rules the model can't hallucinate**
+  - Everything so far depends on the model understanding your instructions — **hooks don't**
+  - A **hook** is a shell command that fires at a fixed point in the agent lifecycle
+    - Before a tool runs, after a file changes, when the session ends
+    - Its exit code can block the action
+  - **Hooks are enforcement; `CLAUDE.md` is suggestion**
+  - **Two hooks earn their place in almost every harness**
+    - **`PreToolUse` gate** — blocks dangerous commands deterministically: `rm -rf`, reading `.env`, pushing to main
+      - **Exit code 2** stops the call before it happens; the model can't talk its way past it
+    - **`PostToolUse` formatter** — runs your linter/formatter after every edit
+      - The agent never ships unformatted code because the harness formats it automatically
+  ```jsonc
+  "hooks": {
+    "PreToolUse": [{
+      "matcher": "Bash",
+      "command": "./.claude/hooks/block-dangerous.sh"
+      // exit 2 = block the call before it runs
+    }],
+    "PostToolUse": [{
+      "matcher": "Edit|Write",
+      "command": "prettier --write \"$CLAUDE_FILE_PATH\""
+    }]
+  }
+  ```
+  - **Use hooks for anything that must happen or must never happen** — safety, formatting, audit logging
+  - Don't use them for judgment calls — that's what the model is for
+  - A good harness has one or two sharp hooks, not twenty
+- **Part 3 · Make It Compound**
+- **10. Add a loop — now the harness runs on a timer**
+  - A configured harness still waits for you to type; a loop makes it run on its own
+  - Simplest version: **`/loop`** in Claude Code — a recurring prompt on a cadence
+  - Pair it with **`/goal`** and the loop keeps going until an objective condition is true
+    - Checked by an **independent grader**, not the agent grading itself
+  ```text
+  > /loop 30m /goal All tests pass and lint is clean.
+    Triage new failures, draft fixes in claude/ branches.
+
+  ▲ Claude uses the harness you built:
+    - rules/ for conventions
+    - reviewer subagent to check each fix
+    - PreToolUse hook blocks pushes to main
+  ✓ Looping. Independent grader decides "done."
+  ```
+  - **The loop didn't add intelligence** — it re-used everything in the harness: the rules, the reviewer subagent, the safety hook
+  - **A good harness makes a loop trivial** — that's why you build the foundation first
+- **11. Add dynamic workflows — the harness writes its own orchestration**
+  - For tasks too complex for a single loop (massively parallel, highly structured, adversarial), Claude can write its own JavaScript harness on the fly
+  - **Dynamic workflow** primitives
+    - `agent()` to spawn
+    - `parallel()` to fan out
+    - `pipeline()` to stream
+  - It composes the subagents your harness defines into patterns like **fan-out-and-synthesize** or **adversarial verification**
+  - **A dynamic workflow is only as good as the subagents and skills it can call**
+    - Sharp reviewer subagent + well-written eval skill → the workflow has good pieces to orchestrate
+    - Empty harness → the workflow has nothing to work with
+  - **The workflow is the conductor; your harness is the orchestra**
+- **12. Add memory — what the agent forgets, the harness remembers**
+  - **The step that turns a configured harness into a system that actually improves**
+  - The agent forgets everything between runs; the harness doesn't have to
+  - A **state file** — a markdown file in `agent-memory/`, or a Linear board — records what was tried, what worked, what failed, what rules survived
+  - **The pattern that makes memory compound** (from how the strongest agents use it)
+    - **Write before walking away** — every run ends by updating the state file: lessons learned, verified facts, what's next
+    - **Read at the start** — every run begins by reading the state file and relevant skills, so it resumes instead of restarting
+    - **Distill into skills** — when a lesson is general ("Windows runners need bash, not PowerShell"), it graduates from the state file into a skill, applying to every future project
+  ```markdown
+  # Project memory
+
+  ## Verified facts # stop guessing about these
+  - prc is in dollars, not cents (checked via SELECT MIN/MAX)
+  - auth middleware order: rate_limit -> jwt -> rbac
+
+  ## Lessons learned # distill the general ones into skills
+  - Windows CI runners fail TLS 1.2 in PowerShell — use bash
+  - Migrations on tables >1M rows must batch in 10k chunks
+
+  ## Last session # resume, don't restart
+  2026-06-11 · 3 fixes merged, 2 escalated. Next: verify rate-limit fix.
+  ```
+- **13. Close the loop: output → lesson → skill → better output**
+  - Here the three floors lock together into something that improves itself
+    1. Each run produces output
+    2. The reviewer subagent (Step 7) checks it
+    3. The result — what passed, what failed, what was learned — is written to memory (Step 12)
+    4. General lessons get distilled into skills (Step 8)
+    5. The next run inherits sharper skills and richer memory
+  - **Built entirely from harness parts**
+    - **Subagent** grades the work — objective check, fresh context
+    - **Memory** records the verdict — survives between runs
+    - **Skills** carry the distilled lessons forward
+    - **The loop** runs it again — now with everything the last run learned
+  - **The model never changed. The harness around it got sharper.**
+  - That's what "self-improving" honestly means — not a model that learns, but **a harness that accumulates**
+- **14. Ship the harness — package it, share it, reuse it**
+  - A harness that works on one project is an asset
+  - Bundle the skills, subagents, and rules into a **plugin** → your whole team installs the same setup in one step
+    - Same conventions, same safety hooks, same reviewer
+  - The harness stops being your personal setup and becomes **shared infrastructure**
+  - **The order to build — because order is the lesson**
+    1. Get one manual run reliable on a clean harness
+    2. Add the context and permissions
+    3. Add a reviewer subagent
+    4. Add memory
+    5. Then, and only then, wrap it in a loop
+  - **A loop on a good harness compounds. A loop on a bad harness just bleeds faster.**
+- **The harness mistakes that make every loop worse**
+  - **Running on the default** — no context, no rules, no memory; the agent re-derives your project every session
+  - **A bloated `CLAUDE.md`** — procedures stuffed into standing context, bloating every run; move them to skills
+  - **Enforcement in `CLAUDE.md` instead of hooks** — the model can ignore a suggestion; it can't ignore a hook that exits 2
+  - **One agent writing and grading its own work** — add a reviewer subagent with a fresh context window
+  - **No memory** — every run restarts from zero; the state file is what makes tomorrow resume
+  - **Wrapping a loop around a bad harness** — the loop just produces slop faster; build the foundation first
+  - **Twenty hooks** — one or two sharp ones beat a pile nobody understands
+  - **Shipping a harness without scanning it** — leaked secrets and over-broad permissions spread to everyone who installs it
+- **Conclusion: The loop gets the glory. The harness does the work.**
+  - Loop engineering is the exciting part — the agent prompting itself, running while you sleep
+  - But **a loop is just a harness on a timer**
+  - Everything that decides good vs. garbage output lives one floor down
+    - The model you picked, the tools you allowed, the context you wrote, the reviewer you added, the memory you kept
+  - **Build that floor well and everything above it compounds**
+    - The loop re-uses your subagents
+    - The workflow orchestrates your skills
+    - The memory makes each run sharper than the last
+  - **Self-improvement was never a property of the model — it's a property of the harness you build around it**
+  - **Action**: pick one thing you're not doing — probably a reviewer subagent, a safety hook, or a state file — and add it today
+    - Keep the harness small enough to explain
+    - Then put a loop on top and watch the foundation do the work
+
+<details><summary>原文</summary>
+
 > 《Agent harness engineering with Claude: 14-step roadmap from one agent to a self-improving system.》
 >
 > Everyone’s talking about loops. Almost no one is talking about what the loop runs on. 9 out of 10 builders run Claude Code on the default harness - no rules, no subagents, no hooks, no memory.
@@ -1938,6 +2213,8 @@
 > Build that floor well and everything above it compounds: the loop re-uses your subagents, the workflow orchestrates your skills, the memory makes each run sharper than the last. 
 > Self-improvement was never a property of the model. It’s a property of the harness you build around it.
 > Pick one thing you’re not doing - probably a reviewer subagent, a safety hook, or a state file — and add it today. Keep the harness small enough to explain. Then put a loop on top, and watch the foundation do the work.
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HK76bIrX0AAnTdk?format=jpg&name=large) [img2](https://pbs.twimg.com/media/HK7ibrqWQAAUsd1?format=png&name=large) [img3](https://pbs.twimg.com/media/HK7jHWqXMAAi6sq?format=png&name=large) [img4](https://pbs.twimg.com/media/HK7kUzmWMAAb5GK?format=jpg&name=large) [img5](https://pbs.twimg.com/media/HK7tZ_EXYAA2pLb?format=png&name=large) [img6](https://pbs.twimg.com/media/HK7u0eHWYAEFfJk?format=jpg&name=large) [img7](https://pbs.twimg.com/media/HK7wfs1XQAA2nvW?format=jpg&name=large) [img8](https://pbs.twimg.com/media/HK7xHsDXsAAjaCv?format=jpg&name=large) [img9](https://pbs.twimg.com/media/HK7x3lgWAAAokpJ?format=jpg&name=large) [img10](https://pbs.twimg.com/media/HK7yLY4XMAA9831?format=jpg&name=large) [img11](https://pbs.twimg.com/media/HK70cTeWkAA7m0E?format=png&name=large)
 - 含视频（未转写）

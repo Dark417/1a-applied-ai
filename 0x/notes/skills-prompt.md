@@ -25,6 +25,19 @@
 
 **正文**
 
+- **痛点**：用 AI 写技术文档时，流程图、架构图等可视化内容往往要切到其他画图工具
+- **Markdown Viewer 技能**：让 AI 编程助手直接在 Markdown 里生成专业图表
+  - GitHub：http://github.com/markdown-viewer/skills
+- **能力**
+  - 内置 **14 个专业绘图技能**
+  - 可生成架构图、流程图、工作流图、状态图、部署图、类图、用例图等上百种图表
+  - 支持 **PlantUML**、**Vega** 等五大主流渲染引擎
+  - 能直接输出排版精美的 HTML 信息卡片
+  - 提供一键安装指令，支持 Claude Code、Codex、Cursor 等
+- 适合经常写技术文档、或想让 AI 自动生成高质量配图的开发者
+
+<details><summary>原文</summary>
+
 > 用 AI 写技术文档，当需要生成流程图、架构图等这些可视化内容，往往需要用切换到其他的画图工具来制作。
 >
 > 偶然看到 Markdown Viewer 这个技能，可以让 AI 编程助手直接在 Markdown 里生成各种专业图表。
@@ -38,6 +51,8 @@
 > 提供了一键安装指令，支持 Claude Code、Codex、Cursor 等主流 AI 编程工具。
 >
 > 适合经常需要编写技术文档，或者想让 AI 帮我们自动生成高质量配图的开发者收藏备用。
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HGpGBCfaQAA9RzW?format=jpg&name=large)
 
@@ -251,6 +266,16 @@
 
 **正文**
 
+- **以前**：GitHub 上的牛逼开源项目对编程小白来说"看得到用不了"
+  - 例：**yt-dlp**，143k star 的视频下载神器，但部署、命令行、环境配置就很劝退
+- **现在有了 Skills**：直接跟 Claude Code 说"帮我把 yt-dlp 打包成 Skill"
+  - 它会自己分析项目、写封装、处理依赖
+  - 几分钟后就有一个能用的视频下载工具，以后下载 YouTube 视频直接扔链接
+- **不只是视频下载**：格式转换、网页转 APP、密码破译……经过无数人验证的 GitHub 项目都能变成 Skill
+- 这些开源项目的稳定性和成功率，远超 AI 临时写的代码
+
+<details><summary>原文</summary>
+
 > AI时代，真的不一样了。
 >
 > 以前 GitHub 上那些牛逼的开源项目，对编程小白来说就是“看得到用不了”。
@@ -266,6 +291,8 @@
 > 而且，不只是视频下载。格式转化、网页转 APP、密码破译……GitHub 上那些经过无数人验证的项目，现在都能变成一个Skill。
 >
 > 这些开源项目，稳定性和成功率，也远超 AI 临时写的代码。
+
+</details>
 
 
 [↑ 回到本页目录](#part-1--index)

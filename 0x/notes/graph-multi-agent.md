@@ -28,6 +28,15 @@
 
 **正文**
 
+- **Google released a 1-hour course on Graph Engineering**: from agents to loops to full automation
+  - 00:00 — build your first AI agent
+  - 08:24 — build agent memory
+  - 28:34 — agentic loops
+  - 40:04 — how to build MCP
+  - 1:00:22 — graph engineering
+
+<details><summary>原文</summary>
+
 > Google just dropped a 1-hour course on Graph Engineering: from agents to Loops to full automation
 >
 > 00:00 – Build your first AI agent 
@@ -39,6 +48,8 @@
 > This 1-hour watch replaces any $500 course you could pay for.
 >
 > Watch it, then try your first graph with the step-by-step guide below
+
+</details>
 
 - 含视频（未转写）
 
@@ -956,6 +967,17 @@
 
 **正文**
 
+- **OpenAI 低调开源 Symphony** —— 把 Linear 看板变成全自动研发流水线
+- **核心逻辑**：监控 Issue → 分配 Agent → 写代码 → 提 PR → 循环
+- **技术栈**：**Elixir**，OTP 架构，天然支持多 Agent 并发
+  - 每个 Issue 对应一个独立 Workspace，互不干扰
+- **最有意思的设计：`WORKFLOW.md`**
+  - 把 Agent 的行为策略写进项目仓库，随代码一起提交、review、回滚
+  - Agent 怎么干活，由团队说了算
+- 开源地址：http://github.com/openai/symphony
+
+<details><summary>原文</summary>
+
 > OpenAI 昨天低调开源了一个框架，叫 Symphony 🎵
 >
 > 它能把你的 Linear 看板变成一条全自动的研发流水线。
@@ -974,6 +996,8 @@
 > 4/ 开源地址：http://github.com/openai/symphony
 >
 > 你们团队用 Linear 吗？这东西值得试试。
+
+</details>
 
 - 链接卡片：[GitHub - openai/symphony: Symphony turns project work into isolated, autonomous ](https://t.co/kSf9Ns9eUz)
 
@@ -1007,6 +1031,21 @@
 
 **正文**
 
+- **痛点**：AI 写代码虽快，但要一直盯着防止跑偏出错，反而增加管理负担
+- **OpenAI 开源 Symphony**：让 AI 自主完成整个开发流程，人只管理工作本身
+  - GitHub：http://github.com/openai/symphony
+- **工作方式**
+  - 监控项目看板上的任务，自动派出智能体处理
+  - 完成后提供**工作证明**：CI 状态、代码审查反馈、复杂度分析、演示视频
+  - 通过后智能体安全合并代码
+  - 无需人工盯着 Codex 写代码，工程师在更高层面管理任务
+- **实现**
+  - 提供完整技术规范文档，可让 AI 用你喜欢的语言实现
+  - 也有可直接部署的 **Elixir** 参考实现
+- 适合想把 AI 编程助手升级为能自主完成任务的团队成员的人
+
+<details><summary>原文</summary>
+
 > 用 AI 写代码虽然快，但需要一直盯着它，生怕它跑偏或者出错，反而增加了管理负担。
 >
 > OpenAI 最新开源项目 Symphony，换了个思路：让 AI 自主完成整个开发流程，我们只需要管理工作本身。
@@ -1020,6 +1059,8 @@
 > 项目提供了完整的技术规范文档，可以让 AI 用我们喜欢的语言实现，也提供了 Elixir 参考实现可以直接部署使用。
 >
 > 如果我们想把 AI 编程助手，升级为能自主完成任务的团队成员，这个项目值得尝试一下。
+
+</details>
 
 - 含视频（未转写）
 

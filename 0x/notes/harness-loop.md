@@ -922,6 +922,14 @@
 
 **正文**
 
+- **Quote attributed to an Anthropic engineer**: "You're not supposed to prompt Claude. You're supposed to build a system that prompts itself."
+- In a 45-minute talk she shows how Anthropic builds agents that:
+  - Remember
+  - Fix their own mistakes
+  - Get smarter with every run
+
+<details><summary>原文</summary>
+
 > Anthropic engineer:
 >
 > "You're not supposed to prompt Claude. You're supposed to build a system that prompts itself."
@@ -931,6 +939,8 @@
 > This beats any paid course on agents I've seen.
 >
 > Watch it, then read the guide on building loops below.
+
+</details>
 
 - 含视频（未转写）
 
@@ -982,6 +992,13 @@
 
 **正文**
 
+- **An ex-Google engineer explains AI agent loops, harness, and evals in 20 minutes**
+- **The self-improvement loop**: trace every run → judge it with an LLM → diagnose → fix → ship
+  - This loop is how agents self-improve over time
+- **The stack**: agent loops + memory + harness + evals
+
+<details><summary>原文</summary>
+
 > Ex-Google engineer explained AI agent loops, harness, evals in 20 minutes - better than 500$ courses.
 >
 > trace every run → judge it with an LLM → diagnose → fix → ship.
@@ -993,6 +1010,8 @@
 > Watch it, then save the framework below.
 >
 > [2] Original video:
+
+</details>
 
 - 含视频（未转写）
 

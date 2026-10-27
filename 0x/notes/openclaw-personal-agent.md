@@ -500,14 +500,14 @@
 
 **正文**
 
-> 大佬动作真快。
->
-> 昨天我还在说，要给 Agent 增加经济驱动模块让其具备「生存意识」，今天就看到了 ClawWork。
->
-> 看起来 ClawWork 是加了一个内部经济激励模型。
+- 作者昨天刚提到要给 Agent 增加**经济驱动模块**，让它具备"生存意识"，今天就看到了 **ClawWork**
+- ClawWork 看起来是加了一个内部经济激励模型
+- **引用 / Quoted:** @huang_chao4969 发布 ClawWork
+  - 把 openclaw/nanobot 从 AI 助手变成能赚钱的 AI 同事
+  - 演示中 7 小时内通过完成真实专业任务赚了 $10K+
+  - 覆盖 44+ 行业，从技术工程到商业金融、医疗等
 
-- 引用 Chao Huang @huang_chao4969 · Feb 16:
-  > Introducing ClawWork 🚀: Transform your openclaw/nanobot from AI assistant into a money-earning AI coworker. Watch it earn 💰$10K+ in just 7 hours by completing real professional tasks across 44+ industries — from Technology & Engineering to Business & Finance, Healthcare &
+
 
 [↑ 回到本页目录](#part-1--index)
 
