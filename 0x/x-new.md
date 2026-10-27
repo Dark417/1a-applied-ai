@@ -129,6 +129,14 @@
 
 **smerkzz (@0xsmerkzz)** · 发帖 2026-10-24 · [原帖](https://x.com/0xsmerkzz/status/2114099234001600931)
 
+- **Quote attributed to SpaceXAI engineer Lauren Tan**
+  - Runs 35+ GrokBot agents with `/loop` and `/goal` inside **pstack**; the bots ship code even while she sleeps
+  - At SpaceXAI, 85% of engineers run 11+ GrokBot agents as a team
+  - She has a **Chief of Staff agent** that knows the other agents and manages everything
+- A 1-hour workshop shows how to build a team of GrokBot agents from scratch
+
+<details><summary>原文</summary>
+
 > holy sh*t . SpaceXAI engineer, Lauren Tan:
 >
 > "I'm running 35+ GrokBot agents with /loop, /goal, inside pstack. My bots shipping code even when I sleep
@@ -140,6 +148,8 @@
 > worth more than a $800 agentic engineering course
 >
 > watch today, then read the article on how to build a team of GrokBot agents from scratch
+
+</details>
 
 - 含视频（未转写）
 
@@ -1057,6 +1067,16 @@
 
 **GREG ISENBERG (@gregisenberg)** · 发帖 2026-06-20 · [原帖](https://x.com/gregisenberg/status/2068325550603559402)
 
+- **The most valuable skill sets right now**
+  1. People who can set up agents properly, manage them, and run local AI models
+  2. Marketers who know how to build distribution
+  3. Robotics engineers who can do all three: build the hardware, wire in the AI, source manufacturing
+  4. Curators who are good at talking and can do short-form video in their sleep
+  5. **The builder-distributor** — one person who can both ship the product and get it in front of people
+  6. IRL community builders
+
+<details><summary>原文</summary>
+
 > The most valuable skill sets on the planet right now:
 >
 > 1. people who can set up agents properly, manage them, and run local AI models
@@ -1066,12 +1086,24 @@
 > 5. the builder-distributor. The one person who can both ship the product AND get it in front of people
 > 6. IRL community builders
 
+</details>
+
 
 [↑ 回到目录](#part-1--keywords)
 
 ### x-2066827221537333611
 
 **Khairallah AL-Awady (@eng_khairallah1)** · 发帖 2026-06-16 · [原帖](https://x.com/eng_khairallah1/status/2066827221537333611)
+
+- **Claim**: Anthropic pays $750,000+ a year for engineers who can **build LLMs from scratch**
+  - Not prompting, not fine-tuning, not building RAG pipelines
+- **A free 2-hour Stanford lecture covers the theory**
+  - Scaling laws
+  - Data collection
+  - Architecture design
+  - Post-training alignment
+
+<details><summary>原文</summary>
 
 > Anthropic pays $750,000+ a year for engineers who can build LLMs from scratch.
 >
@@ -1095,6 +1127,8 @@
 > The lecture is the theory.
 >
 > full guide in the article below
+
+</details>
 
 - 含视频（未转写）
 
@@ -4267,6 +4301,17 @@
 
 **Julian Goldie SEO (@JulianGoldieSEO)** · 发帖 2026-01-11 · [原帖](https://x.com/JulianGoldieSEO/status/2010178642752704850)
 
+- **Things you can do with AntiGravity that most users miss**
+  - Switch between free APIs (Opus, Sonnet, Claude)
+  - Generate images with Google's Nano Banana
+  - Connect MCP servers directly to your projects
+  - Use Claude Code inside the terminal for better UI
+  - Deploy apps to Netlify in one click
+  - Pull NotebookLM content into your builds
+- **Approach**: no paid APIs, no limits — just stack free tools
+
+<details><summary>原文</summary>
+
 > AntiGravity just became 10x more powerful.
 >
 > And 99% of users have no idea.
@@ -4285,6 +4330,8 @@
 > Save this video, you'll never use it the same way again.
 >
 > Want the SOP? DM me. 💬
+
+</details>
 
 - 含视频（未转写）
 

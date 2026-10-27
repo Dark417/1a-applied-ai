@@ -47,6 +47,145 @@
 
 **正文**
 
+- **Most users treat Claude Code like a fancy autocomplete**
+  - Paste a bug → get a fix; paste a feature request → get some code
+  - One question, one answer, over and over — never building on anything
+  - Like buying a Ferrari and only driving it in first gear
+- **Claude Code is an autonomous engineering partner, not a code-suggestion tool**
+  - It can read your entire codebase, understand your architecture, execute multi-step plans, run tests, debug failures, and ship features end to end
+  - Only if you know how to use it properly
+- **The gap between casual and power user isn't talent — it's configuration and workflow**
+  - Knowing the 20% of features that deliver 80% of the results
+  - This course: everything learned from months of daily use
+- **Level 1: The foundation most people skip**
+  - **`CLAUDE.md` is your secret weapon** — the most important file in your project, and most people never create it
+    - Sits in the project root and tells Claude Code how your codebase works: conventions, patterns, rules, preferences
+    - **Without it, Claude Code is guessing.** It doesn't know that:
+      - Your team uses camelCase
+      - You prefer functional components over class components
+      - Your API naming convention is verb-first
+      - You never use any-typed variables
+    - **With a good one, it follows your team's standards automatically** — every file, function, and test it writes
+  - **What belongs in `CLAUDE.md`**
+    - Tech stack and versions
+    - Coding conventions and naming patterns
+    - File structure and where things go
+    - Testing requirements and what makes a good test
+    - Preferred error-handling patterns
+    - Common pitfalls specific to your codebase
+    - Things Claude should never do in this project
+  - Spend 30 minutes writing it — saves thousands of corrections over the next year
+  - **The `CLAUDE.md` hierarchy — three levels**
+    - **User-level** — `~/.claude/CLAUDE.md`
+      - Personal: your preferences, shortcuts, style
+      - Not version-controlled; teammates never see it
+    - **Project-level** — `.claude/CLAUDE.md` in your repo root
+      - Shared with the whole team via git
+      - Team standards, architectural decisions, universal rules
+    - **Directory-level** — inside specific directories
+      - Applies only when Claude Code works on files in that directory
+      - Good for sub-projects or modules with different conventions
+    - **Most common mistake**: putting team-wide rules in user-level config
+      - Then the new developer's Claude Code doesn't follow the same standards
+      - **Fix: move shared rules to project-level**
+- **Level 2: Think in modes, not messages**
+  - **Plan mode vs direct execution**
+    - **Direct execution** — clear, limited scope
+      - Fix this bug, add this validation, rename this variable across the codebase
+      - Claude Code handles these immediately, no planning needed
+    - **Plan mode** — everything bigger
+      - Refactoring a module, a feature touching multiple files, migrating patterns, restructuring the test suite
+      - Claude Code first outlines which files it will touch, what changes, and in what order
+      - You review the plan before any code is written
+  - **Rule: if the task touches more than 2 files or needs architectural decisions, use plan mode**
+    - Skipping planning on complex tasks means more time undoing damage than you saved
+- **Level 3: Tools that make Claude Code dangerous**
+  - **Built-in tools most people never discover**
+    - **Grep vs Glob**
+      - **Grep** searches file contents → use it to find where a function is called
+      - **Glob** matches file paths → use it to find all test files
+      - Most people use the wrong one and waste time
+      - The Claude Certified Architect exam literally tests this distinction
+    - **Read, Write, Edit**
+      - **Edit** — targeted modifications via unique text matching; fast and precise
+      - When Edit fails because the match isn't unique → fall back to **Read + Write**: read the full file, write the complete modified version
+    - **The `/memory` command**
+      - Shows which memory files Claude Code has loaded
+      - Your debugging tool when behavior is inconsistent — check the right context is actually loaded
+  - **Custom slash commands** — for tasks you run repeatedly
+    - Shared team commands: `.claude/commands/`
+    - Personal commands: `~/.claude/commands/`
+    - Examples:
+      - `/review` — runs your team's code review checklist
+      - `/test` — generates tests following your patterns
+      - `/deploy-check` — verifies everything is ready for deployment
+    - 10 minutes to create; saves hours of repetitive prompting
+- **Level 4: Skills and context engineering**
+  - **Skills vs `CLAUDE.md`**
+    - **`CLAUDE.md` is always loaded** — every session, every task → universal standards
+    - **Skills are on-demand** — activate when invoked → task-specific workflows
+    - Common mistake: putting task-specific procedures in `CLAUDE.md`
+      - The file bloats
+      - Claude Code gets confused by irrelevant context
+      - You burn tokens on instructions that don't apply
+    - **Rule: applies to every task → `CLAUDE.md`; applies to a specific type of work → make it a skill**
+  - **Path-specific rules** — teams discover this and wonder how they lived without it
+    - Create rule files in `.claude/rules/` with YAML frontmatter specifying glob patterns:
+    ```yaml
+    ---
+    paths: ["**/*.test.tsx"]
+    ---
+    All tests must use the arrange-act-assert pattern.
+    Never mock the database layer directly.
+    ```
+    - Rules load only when Claude Code edits files matching the pattern
+    - Every test file in the codebase, in any directory, gets the same testing conventions automatically
+    - **Far more powerful than directory-level `CLAUDE.md`** because it works across the whole project structure
+- **Level 5: CI/CD integration**
+  - **The `-p` flag runs Claude Code in non-interactive mode**
+    - Without it, your CI job hangs forever waiting for input
+    - Described as the single most tested concept in the Claude Certified Architect exam
+  - Use `--output-format json` with `--json-schema` for machine-parseable structured output
+    - CI can then post findings as inline PR comments automatically
+  - **Critical insight: the session that generated code is worse at reviewing its own changes**
+    - It keeps reasoning context that biases it toward its own decisions
+    - **Always use an independent review instance for code review in CI**
+- **Level 6: The power-user workflow** — a typical day
+  - **Morning**
+    - Open terminal; Claude Code auto-loads `CLAUDE.md` and relevant path-specific rules
+    - Describe the first feature in plain language → Claude Code creates a plan
+    - You review, adjust one step, approve
+    - It executes across 8 files, writes tests, runs them, fixes two failures, and commits
+  - **Afternoon**
+    - Reviewing a PR: run your custom `/review` command instead of reading every line
+    - Claude Code checks against team standards, flags 3 issues, explains why each matters
+    - You fix the one real issue and approve the rest
+  - **End of day**
+    - CI runs Claude Code with `-p` on every new PR
+    - Automated security review, test generation for uncovered paths, documentation updates
+    - All posted as PR comments
+  - This is what power users do now, not the future
+- **The certification path**
+  - Anthropic offers the **Claude Certified Architect Foundations** exam
+  - Tests everything here: `CLAUDE.md` hierarchy, tool usage, plan mode, path-specific rules, CI/CD integration, prompt engineering, MCP configuration
+  - **Format**: scenario-based multiple choice
+    - Wrong answers are designed to sound like good engineering
+    - Right answers require knowing exactly which technique fits which problem
+  - If you've built real projects with Claude Code and understand these concepts, you're ready
+- **The bottom line**
+  - Claude Code is the most powerful developer tool most developers barely use
+  - Going from casual to power user takes **a few days of intentional setup and practice**, not months
+  - **The five things to do**:
+    1. Configure your `CLAUDE.md`
+    2. Learn plan mode
+    3. Build custom commands
+    4. Use path-specific rules
+    5. Integrate it into CI
+  - Do those and you'll ship more code in a week than most developers ship in a month
+  - Most people will keep getting one-off answers to one-off questions; those who build a real system around it will be at a different level within 30 days
+
+<details><summary>原文</summary>
+
 > 《How to Become a Claude Code Power User (Full Course)》
 >
 > Most users are using Claude Code like a fancy autocomplete.
@@ -138,6 +277,8 @@
 > Follow me @eng_khairallah1 for more agent architecture guides, orchestration patterns, and building systems.
 > hope this was useful for you, Khairallah ❤️
 
+</details>
+
 - 图片：[img1](https://pbs.twimg.com/media/HGiv5cPbUAEfC8E?format=jpg&name=large)
 
 [↑ 回到本页目录](#part-1--index)
@@ -151,6 +292,13 @@
 - **总结**：推荐 Anthropic 团队 30 分钟的 Claude Code workshop，提到 Claude Code 负责人已经好几个月没手写代码。thread 里附了另一篇《40 个 Claude Cowork 命令、工作流和自动化》的链接。帖子本身没有技术细节，价值在视频。
 
 **正文**
+
+- **Anthropic's team showed how they actually use Claude Code** in a free 30-minute workshop
+  - The head of Claude Code hasn't written code by hand in months
+- If one feature takes you 3 hours in Claude Code, it's likely because nobody taught you to use it properly
+- Related: 40 Claude Cowork commands, workflows & automations most users don't know — https://x.com/eng_khairallah1/status/2047609433489035739?s=46
+
+<details><summary>原文</summary>
 
 > 🚨 Anthropic's own team just showed how they actually use Claude Code.
 >
@@ -168,6 +316,8 @@
 >
 > [2] 40 Claude Cowork Commands, Workflows & Automations Most Users Don't Know:
 > https://x.com/eng_khairallah1/status/2047609433489035739?s=46
+
+</details>
 
 - 含视频（未转写）
 
@@ -219,6 +369,21 @@
 
 **正文**
 
+- **OpenAI 公开了用 Codex 维护 Agents SDK 的完整方案**
+- **核心结构只有四层**
+  1. **`AGENTS.md`** —— 强制触发规则，用 if/then 写清楚什么情况必须调用哪个 workflow
+  2. **`.agents/skills/`** —— 封装具体工作流；每个 skill 一件事、一个触发条件、一个输出
+  3. **`scripts/`** —— 固定顺序的 shell 操作放这里，不让模型每次重新猜
+  4. **Codex GitHub Action** —— 本地跑稳定了就搬进 CI，逻辑完全复用
+- **容易忽视的细节：skill 的 `description` 字段是路由信号，不是注释**
+  - 写模糊了，agent 就不知道该用哪个 skill
+  - 建议：路由不准先改 description，别加代码
+- **推广开来**：任何项目，只要把工程规范显式编码进仓库，agent 的行为就会稳定得多
+- 示例仓库：https://github.com/openai/openai-agents-python
+- 原文：https://developers.openai.com/blog/skills-agents-sdk
+
+<details><summary>原文</summary>
+
 > OpenAI 公开了他们用 Codex 维护 Agents SDK 的完整方案，值得每个 AI agent 用户学一遍。
 >
 > 核心结构只有四层：
@@ -235,6 +400,8 @@
 > 示例仓库：https://github.com/openai/openai-agents-python
 > 原文：https://developers.openai.com/blog/skills-agents-sdk
 
+</details>
+
 - 链接卡片：[GitHub - openai/openai-agents-python: A lightweight, powerful framework for mult](https://t.co/OhaQYxkm93)
 
 [↑ 回到本页目录](#part-1--index)
@@ -248,6 +415,20 @@
 - **总结**：GitNexus 解决「AI 修一个 bug 引出三个新 bug」的问题：给代码库建知识图谱，让 AI 理解架构、依赖和调用链；通过 MCP 接入 Cursor 或 Claude Code，改代码前先查上下游；能生成架构图，也能在 Web 端可视化。支持 TS、Python、Java，索引完全本地。属于给 coding agent 补上下文的工具。
 
 **正文**
+
+- **痛点**：用 AI 写代码最怕修好一个 Bug，却在不知名的地方引爆三个新 Bug
+  - 多数 AI 编程助手只是指哪改哪，无法理解代码间的深层依赖
+- **GitNexus**：给项目代码建立**知识图谱**，让 AI 理解整个项目的架构、依赖和调用链
+  - GitHub：http://github.com/abhigyanpatwari/GitNexus
+- **功能**
+  - 通过 **MCP** 接入 Cursor 或 Claude Code，让 AI 改代码前先看清函数间的上下游关系
+  - 可生成架构图，或在 Web 端可视化查看整个代码库的逻辑脉络
+  - 提供 **CLI** 和 **Web** 两种模式
+  - 支持 TypeScript、Python、Java 等主流语言
+  - 所有索引和分析都在本地完成，数据不上传服务器，隐私性好
+- 适合担心 AI 改动破坏原有代码的人，作为增强上下文的工具整合进工作流
+
+<details><summary>原文</summary>
 
 > 用 AI 写代码最怕的情况，就是修好了一个 Bug，却在不知名的地方引爆了三个新 Bug。
 >
@@ -266,6 +447,8 @@
 > 所有索引和分析都在本地完成，数据不上传服务器，隐私性做得不错。
 >
 > 如果你习惯用 AI 辅助编程，又担心它的改动破外原代码，这个增强上下文的工具值得试下整合进工作流。
+
+</details>
 
 - 含视频（未转写）
 

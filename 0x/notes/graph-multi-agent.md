@@ -901,6 +901,17 @@
 
 **正文**
 
+- **Google released a free 2-hour course on graph engineering**: 1 prompt → 100 agents → loops → graphs
+- **Course map**
+  - 10% → 17:44 — build your first agent
+  - 30% → 39:30 — **loop engineering**: iterate, check, break
+  - 60% → 1:12:38 — **graph engineering**
+  - 75% → 1:34:26 — agents that throttle themselves
+  - 100% → 1:55:05 — full graph for multi-agent systems
+- **Point**: most people build one agent and call it done; this covers the full system where agents wire themselves into a graph
+
+<details><summary>原文</summary>
+
 > Google just released free 2-hour course on full Graph engineering: 1 prompt → 100 agents → loops → graphs from 0% to 100%:
 >
 > 10% → 17:44 - build your first agent
@@ -912,6 +923,8 @@
 > everyone builds one agent and calls it done - this is the full system where agents wire themselves into a graph
 >
 > watch the course, build the graph - then read the full architecture below ↓
+
+</details>
 
 - 含视频（未转写）
 

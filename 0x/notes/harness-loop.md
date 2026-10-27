@@ -946,6 +946,14 @@
 
 **正文**
 
+- **Spotify Chief Architect Niklas Gustavsson**: after implementing **loops** in their workflow, agent success rate went from 20–30% to **80%**
+- 26-minute talk with Claude Code creator **Boris Cherny** on how Spotify runs AI agents across 20 million lines of code
+  - 73% of Spotify's code is now written by AI
+  - Most is merged without a human ever seeing it
+- **Takeaway**: the model matters less than the loop you build around it
+
+<details><summary>原文</summary>
+
 > Spotify Chief Architect, Niklas Gustavsson:
 >
 > "Once we implemented loops in our workflow, our agent success rate went from 20-30% to 80%."
@@ -957,6 +965,8 @@
 > The model matters less than the loop you build around it.
 >
 > Watch it, then read the full guide on building loops below.
+
+</details>
 
 - 含视频（未转写）
 

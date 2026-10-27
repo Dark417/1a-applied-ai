@@ -53,6 +53,24 @@
 
 **正文**
 
+- **Google Gemini 团队主管 Addy Osmani 开源了 Agent Skills 项目**，短时间在 GitHub 拿到 18000+ Star
+- **做的事**：把资深工程师多年积累的工作流程和开发规范，整理成标准化技能库
+  - 让 AI 编程助手在写代码的每个环节都按统一的高标准执行
+  - 相当于给 AI 配了一本老工程师的操作手册
+- **围绕软件开发完整生命周期设计**
+  - 六个阶段：需求定义 → 规划 → 构建 → 验证 → 评审 → 发布上线
+  - 共 **20 个核心技能**，每个阶段该做什么、注意什么都有规范
+- **7 个触发命令**，每个命令自动调用相关技能组合，无需手动配置，例如：
+  - `/spec` —— 开始写需求文档
+  - `/plan` —— 自动拆解任务
+  - `/build` —— 进入编码阶段
+  - `/test` —— 跑测试
+  - `/ship` —— 走部署流程
+- **兼容性**：支持 Claude Code、Gemini CLI、Codex、Cursor 等主流 AI 编程工具
+- 已在用 AI 辅助开发的话，可以接入这套 Skills，看交付质量能否再上一个台阶
+
+<details><summary>原文</summary>
+
 > 谷歌 Gemini 团队主管 Addy Osmani 最近开源了一个叫 Agent Skills 的项目，短时间内在 GitHub 上拿到了 18000 多个 Star，热度很高。
 >
 > 这个项目做的事情说起来也不复杂：把资深工程师多年积累的工作流程和开发规范，整理成一套标准化的技能库，让 AI 编程助手在写代码的每个环节都能按照统一的高标准来执行。你可以理解为，它给 AI 配了一本老工程师的操作手册。
@@ -67,6 +85,8 @@
 >
 > 传送门：
 
+</details>
+
 - 链接卡片：[GitHub - addyosmani/agent-skills: Production-grade engineering skills for AI cod](https://t.co/8pMhW2Xjod)
 
 [↑ 回到本页目录](#part-1--index)
@@ -80,6 +100,20 @@
 - **总结**：推荐 obra/superpowers 里的 brainstorming SKILL.md：先理解项目上下文，每次只问一个问题，逐步把想法细化成设计和规格，确认后再动手。作者的体会：英文原版不用翻译，更准也更省 token；原版里「每次生成计划都 git commit」建议去掉。是「好 skill 的写法」的范例，可以对照学习。
 
 **正文**
+
+- **推荐一个很强的头脑风暴 SKILL**：https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md
+  - 同事用过都说好，用了才体会到 Prompt Engineering 和 SKILL 的重要性
+  - 看着都是大白话，但一般人总结不出来；这些话像咒语一样让 Agent 更高效地工作
+- **SKILL 内容概要：将想法头脑风暴成设计**
+  - 通过自然的协作式对话，把想法转化为完整的设计和规格说明
+  - 先理解当前项目上下文，然后**一次只提一个问题**，逐步细化想法
+  - 清楚要构建什么之后，提出设计方案并获得用户批准
+- **使用心得**
+  - 作者现在没有它就拒绝 Vibe Coding
+  - SKILL 是纯英文的，没必要翻译成中文：英文更准确还省 Token；你用中文聊，它一样用中文回复
+  - **坑**：原版要求每次生成计划都 `git commit`，建议去掉
+
+<details><summary>原文</summary>
 
 > 这个头脑风暴的 SKILL 非常强，身边的同事用过都说好。用了这个才知道 Prompt Engineering 的厉害，也才知道 SKILL 的重要性，鸟枪换炮的感觉。看着都是大白话，但一般人就是总结不出来。这些话就像咒语一样让 Agent 以更高效的方式为人类工作。
 > https://github.com/obra/superpowers/blob/main/skills/brainstorming/SKILL.md
@@ -99,6 +133,8 @@
 > 不多说了看效果吧👇
 >
 > [4] 勘误：「这个 Plan」应是「这个 SKILL」
+
+</details>
 
 - 图片：[img1](https://pbs.twimg.com/media/HCfv2rnbgAAjlMA?format=jpg&name=large)
 
