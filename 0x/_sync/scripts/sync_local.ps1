@@ -31,7 +31,8 @@ if ($autocrlf -eq "true") {
   $utf8 = New-Object System.Text.UTF8Encoding($false)
   Get-ChildItem $src0x -Recurse -File -Include *.md, *.json, *.py, *.js, *.ps1, *.txt, .gitignore | ForEach-Object {
     $t = [System.IO.File]::ReadAllText($_.FullName, $utf8)
-    [System.IO.File]::WriteAllText($_.FullName, ($t -replace "`r`n", "`n") -replace "`n", "`r`n", $utf8)
+    $crlf = (($t -replace "`r`n", "`n") -replace "`n", "`r`n")
+    [System.IO.File]::WriteAllText($_.FullName, $crlf, $utf8)
   }
 }
 
