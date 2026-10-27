@@ -27,11 +27,10 @@
 
 **正文**
 
-> Want to see what happens behind each prompt?
->
-> 🔍 Agent Debug Logs lets you inspect chat interactions, tool calls, model requests, prompt discovery, agent flows, and more.
->
-> https://code.visualstudio.com/docs/copilot/chat/chat-debug-view
+- **Agent Debug Logs** (VS Code Copilot Chat) show what happens behind each prompt
+  - Inspect chat interactions, tool calls, model requests, prompt discovery, agent flows, and more
+- Docs: https://code.visualstudio.com/docs/copilot/chat/chat-debug-view
+
 
 - 含视频（未转写）
 
@@ -333,9 +332,9 @@
 
 **正文**
 
-> 谷歌王炸！大部分后端码农也要失业了！
->
-> 谷歌刚刚发布了自己的全栈氛围编码系统！
+- **谷歌发布了自己的全栈氛围编码（vibe coding）系统**
+- 作者认为大部分后端程序员也将受到冲击
+
 
 - 含视频（未转写）
 
@@ -351,9 +350,9 @@
 
 **正文**
 
-> Claude Code创始人Boris Cherny 用30min分享了Claude Code的使用技巧和工作流~
->
-> 看完这个视频，胜过你看100个Youtube 的视频教程
+- **Claude Code 创始人 Boris Cherny** 用 30 分钟分享了 Claude Code 的使用技巧和工作流
+- 作者认为看这一个视频胜过看 100 个 YouTube 教程
+
 
 - 含视频（未转写）
 

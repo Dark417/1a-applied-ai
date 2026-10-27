@@ -22,13 +22,9 @@
 
 **正文**
 
-> Your GitHub stars won't save you if you're behind on AI.
->
-> 2026 is the year this gap becomes impossible to close. 
->
-> Here's everything you need to master AI and ship code 5X faster.
->
-> Join The Code newsletter and get the access
+- GitHub stars won't help if you're behind on AI; the post argues 2026 is the year that gap becomes impossible to close
+- Promotes a newsletter (The Code) as a resource for mastering AI and shipping code faster
+
 
 - 链接卡片：[Join 300k+ Devs](https://codenewsletter.ai/subscribe?utm_source=twitter_ads_flal_1_cc_tutorials)
 - 图片：[img1](https://pbs.twimg.com/media/HG52YoMaEAAL1Oa?format=jpg&name=large)
@@ -45,12 +41,14 @@
 
 **正文**
 
-> 这篇NotebookLM深度解析，强烈推荐
->
-> 这玩意儿才是真·3分钟自动出PPT、生成播客解说、通勤听资料、做思维导图、测验……商务人看完直接跪了。
->
-> 文章超长但值回票价，Prompt全放文末可抄作业。
-> 我前几天差点因为AI胡说八道在会上翻车，结果刷到@boniusex彻底救命！
+- **推荐 @boniusex 的一篇 NotebookLM 深度解析**
+- **NotebookLM 能做的事**
+  - 3 分钟自动出 PPT
+  - 生成播客解说，通勤时听资料
+  - 做思维导图、测验
+- 文章很长，Prompt 全部放在文末可以直接照抄
+- 作者前几天差点因为 AI 胡说八道在会上翻车，这篇文章帮了大忙
+
 
 
 [↑ 回到本页目录](#part-1--index)
@@ -65,12 +63,12 @@
 
 **正文**
 
-> OpenClaw 现在可以抓取任何网站而不被屏蔽——零机器人检测，原生绕过 Cloudflare，比 BeautifulSoup 快 774 倍。
->
-> 无需维护选择器。无需变通方案。只需数据。
->
-> 这是不公平的优势，而且完全开源。
-> https://github.com/D4Vinci/Scrapling
+- **OpenClaw 搭配 Scrapling 可以抓取任何网站而不被屏蔽**
+  - 零机器人检测，原生绕过 Cloudflare
+  - 比 BeautifulSoup 快 774 倍
+  - 无需维护选择器，无需变通方案
+- 完全开源：https://github.com/D4Vinci/Scrapling
+
 
 - 图片：[img1](https://pbs.twimg.com/media/HCoWkW3a4AAEiMM?format=jpg&name=large)
 

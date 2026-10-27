@@ -521,8 +521,11 @@
 
 **正文**
 
-> openclaw的mac桌面版发布了，桌面版可以聊天，做权限管理、skill管理、channel管理、定时任务管理等，越来越方便了，下载地址：https://github.com/openclaw/openclaw/releases/tag/v2026.2.12
-> #openclaw
+- **OpenClaw 发布了 Mac 桌面版**
+  - 可以聊天
+  - 支持权限管理、skill 管理、channel 管理、定时任务管理
+- 下载地址：https://github.com/openclaw/openclaw/releases/tag/v2026.2.12
+
 
 - 图片：[img1](https://pbs.twimg.com/media/HBDRFLgacAA-fSf?format=jpg&name=large) [img2](https://pbs.twimg.com/media/HBDRHUdaYAARGvI?format=jpg&name=large) [img3](https://pbs.twimg.com/media/HBDRP4nbEAAhjHT?format=jpg&name=large)
 

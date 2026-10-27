@@ -951,7 +951,12 @@
 
 **正文**
 
-> 刚看到一个硬核案例：用30个AI Agent替换30个工程师，12天交付完整代码库（44K行TS、175 PR、1500+测试、CI挂了还能自己修。。。）。
+- **硬核案例：用 30 个 AI Agent 替换 30 个工程师，12 天交付完整代码库**
+  - 44K 行 TypeScript
+  - 175 个 PR
+  - 1500+ 个测试
+  - CI 挂了还能自己修
+
 
 - 含视频（未转写）
 
@@ -1013,7 +1018,8 @@
 
 **正文**
 
-> 地址在这：
+- 地址在这（原帖仅此一句，链接未随文本保留）
+
 
 - 上文（作者原帖 @sodawhite_dev）：
   > 刚看到一个硬核案例：用30个AI Agent替换30个工程师，12天交付完整代码库（44K行TS、175 PR、1500+测试、CI挂了还能自己修。。。）。
@@ -1076,11 +1082,10 @@
 
 **正文**
 
-> How I built the AI Agent Team that runs 24/7
->
-> No hot takes. No theory. No fluff.
->
-> Entire Agent team blueprint available for FREE
+- **How I built the AI Agent Team that runs 24/7**
+  - A practical write-up (no hot takes, no theory)
+  - The entire agent team blueprint is available for free
+
 
 - 图片：[img1](https://pbs.twimg.com/media/HA8BVhPaIAAWkft?format=jpg&name=large)
 

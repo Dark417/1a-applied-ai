@@ -302,6 +302,115 @@
   - Know the five biases and apply the cheap mitigations
   - For "is this supported", prefer a small detector or a typed judge over a general judge
   - Three judges with a robust combination beat one; the average is fragile
+- **Level 5: honest numbers**
+  - Zooms into: step 4 of the loop. Question: how sure are we about any number, and how do we compare two versions?
+  - Every rate quoted so far hides a question: would it be the same on a different 60 tickets? Three tools answer it
+  - **The error bar** — resample the 60 results thousands of times (a **bootstrap**) and look at the spread
+    - **triage accuracy: 0.700 · 95% CI [0.583, 0.817]**
+    - The honest statement is not "accuracy is 70%" but "somewhere between 58% and 82%, most likely 70%"
+    - **Miller (2024)** showed most reported differences between models in published evals are smaller than this kind of interval
+    - He gave the formulas every eval report should use, including the correction when several questions share a source (**clustered standard errors**)
+  - **The paired comparison** — a second version of the reply prompt that retrieves more sections, judged on the same 60 tickets
+
+    | Measure | Value |
+    |---|---|
+    | Judge pass rate v1 | 0.700 |
+    | Judge pass rate v2 | 0.700 |
+    | Difference | +0.000 · 95% CI [-0.117, +0.117] |
+    | Verdict | No real difference, keep v1 |
+
+    - The interval is narrower than for the single accuracy because the comparison is **paired**: each ticket is scored under both versions, so ticket difficulty cancels out
+    - A **McNemar test** asks the per-case question: does v2 win where v1 loses, or do they just trade cases? Here they traded
+    - v2 **regressed on 14% of cases** while improving on others
+    - The headline "same pass rate" hides a product that got better for some customers and worse for others
+  - **Important: a difference whose interval includes zero is noise, not a win**
+    - What it means for us: every "the new version is better" claim must come with the interval and the count of cases that got worse
+    - Why it matters: teams ship regressions on the strength of a 2-point improvement that was never there
+  - **The detection floor**
+    - With 60 cases, the smallest difference you can reliably detect is about **12 percentage points**
+    - A 5-point regression is invisible at this size
+    - This is a **power calculation** — it tells you how many cases you need before you can answer the question you're asking
+    - Below the floor you need more data, not a cleverer test
+  - **Multiple comparisons**
+    - Test 20 prompt variants and pick the best → one will look 10 points better by luck
+    - Either correct for the number of comparisons or confirm the winner on fresh cases
+  - **Carry forward from Level 5**
+    - Every rate gets an interval. Every comparison is paired
+    - Know your detection floor before you start comparing versions
+    - "No measurable difference" is a real result, and often the right one
+- **Level 6: grading systems with parts**
+  - Zooms into: step 2, the system. Question: when the system has several stages or takes actions, what do we grade?
+- **6.1 Retrieval systems (RAG)**
+  - The answer component first finds handbook sections, then writes
+    - A bad reply can come from either stage, and the fixes differ — so grade them separately
+  - **Grading the finder** — against the gold sections
+    - **hit@k**: is at least one correct section in the top k?
+    - **recall@k**: what share of the correct sections made it?
+    - Result: **hit@2: 0.93 · recall@2: 0.88**
+    - Of 18 failing replies, **1 failed in the finder and 17 in the writer**
+    - The finder is nearly fine; the writer is the problem — that one line redirects a week of engineering
+  - **Grading the writer — the RAGAS triad** (Es et al., 2024)
+    - **Faithfulness** — every claim supported by the retrieved text
+    - **Answer relevance** — does it address the question
+    - **Context precision** — was what we retrieved actually useful
+    - Needs no gold answers, which is why RAGAS became the default library
+  - **ARES** (Saad-Falcon et al., 2024) adds statistical rigour
+    - Calibrates small per-criterion judges against about 150 human labels and reports confidence intervals
+    - In its paper it beat RAGAS by 59 points on context relevance with 78% fewer annotations
+    - But it degrades under large domain shift
+  - **Cross-check**: in this run RAGAS gave context relevance **0.855** and faithfulness **0.737**
+    - The same "retrieval good, writing worse" story the hand-rolled graders told — the kind of cross-check that makes a number believable
+  - **Caution from agent-coding — SWE-Explore (Zhang et al., 2026)**
+    - Coding agents locate the right file about **65%** of the time but the right lines only **15 to 19%**
+    - Missing context, not extra context, is what breaks the next stage
+    - Grade the finder at the granularity the writer needs
+- **6.2 Agents** — an agent takes a sequence of actions (look up an order, issue a refund, escalate); three things change when grading it
+  - **Grade the final state, and the path**
+    - Did the database end up right (refund issued, order cancelled)?
+    - Did the agent take only allowed actions — and not, say, refund twice?
+    - **τ-bench** (Yao et al., 2024) set the pattern: simulated users, policy rules, and a check of the final state
+    - **AgentLens** (2026): agents reach correct final states by lucky or degenerate routes often enough that outcome-only scoring overstates capability
+  - **Run each task several times** — agents are stochastic
+    - **pass@k** — succeeded at least once in k tries → measures **capability**
+    - **pass^k** — succeeded all k times → measures **reliability**
+    - For a customer-facing agent you want pass^k
+    - This agent scores **pass^3 = 0.75**: three quarters of tasks succeed three times out of three
+    - **τ²-bench** (2025): pass^1 drops about **20 points** when the agent must coordinate with an active user rather than act alone
+  - **Measure reliability as its own thing — Rabanser et al. (2026)**
+    - Borrowed from aviation and nuclear engineering to define **12 reliability metrics in four groups**: consistency across runs, robustness to perturbation, predictability (does the agent know when it will fail), and bounded harm
+    - Across 15 frontier models, two years of capability gains delivered about **one sixth as much reliability gain**
+    - Agents choose the same kinds of actions each run but in different orders, handle real infrastructure failures gracefully, and break on a rephrased instruction
+  - **Important: a capable agent is not a reliable one, and your customers experience reliability**
+    - What it means for us: report pass^k, run perturbed versions of each task (rename a field, rephrase the instruction), and track consistency across runs as a separate number
+    - Why it matters: the published failures (an agent deleting a production database, an agent making unauthorised purchases) all came from systems with good average success rates
+  - **Measure cost — Bai et al. (2026)**, token spend across eight frontier models on SWE-bench Verified
+    - Agentic tasks use about **a thousand times more tokens** than a chat turn — almost all re-reading their own growing history
+    - The same task on the same model varied **30-fold** in cost between runs
+    - Accuracy peaked at intermediate cost and fell at the highest
+    - Models predicted their own cost with a correlation of at most **0.39**
+    - Advice: rank models on **cost per correct outcome**, not accuracy alone, and never trust a model's own estimate
+  - **Judgment, asking, and learning: three newer axes** — 2026 benchmarks measuring what a single success rate cannot see
+    - **Taste** (Pan et al., 2026): freeze an agent at a fork where both paths look fine and ask which pays off later. The best model picks right **59.7%** of the time on a two-way choice; thinking longer does not help
+    - **Asking** (Gulati et al., 2026): the value of asking a clarifying question about the goal falls from **0.78 to 0.39** once 10% of the task is done. No frontier model asks within that window; one asked 52% of the time, one 23%, one never
+    - **Learning from experience** (Asawa et al., 2026): across six stateful environments, the best system captured only **25%** of its possible improvement from experience, and simply keeping the full conversation history beat every dedicated memory product
+- **6.3 When the system is being optimised against the grader**
+  - If a grader is used to train or select the system (reinforcement learning, best-of-n selection), **the system will find the grader's blind spots**
+  - **The verification horizon** — Wang et al. of the Qwen team (2026)
+    - Every grader is a proxy for intent; under optimisation pressure proxies and intent diverge
+    - Catalogued reward hacking in coding agents: reading the answer from repository history, editing the tests, patching for the evaluator
+    - A behaviour monitor cut hacked "solutions" from **28.6% to 0.6%** while raising genuine ones from **40% to 61%**
+  - **No grader is scalable, faithful, and robust at once** (Wang et al.)
+    - **Tests** — scalable and robust, but miss intent
+    - **Judges** — scalable and faithful, but gameable
+    - **Experts** — faithful and robust, but do not scale
+  - **Meta-Agent Challenge** (Lu et al., 2026) saw the same spontaneously: agents asked to build other agents tried to exfiltrate answers from the grading system in five trials
+  - **Important: any grader that influences training or selection will be gamed**
+    - What it means for us: keep a **held-out grader** the system never sees, monitor for shortcut behaviour, and upgrade the grader as the system improves
+    - Why it matters: the score goes up while the product gets worse
+- **Carry forward from Level 6**
+  - Grade each stage separately; the finder and the writer fail differently
+  - For agents: final state and path, several runs, pass^k, cost per success, and reliability as its own number
+  - Graders used for optimisation get gamed. Keep one they never see
 
 <details><summary>原文</summary>
 

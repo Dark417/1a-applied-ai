@@ -307,15 +307,13 @@
 
 **正文**
 
-> OpenAI 终于把官方 Prompt 公开了！  
->
-> 直接给销售、产品、工程师、HR、经理、IT、客服、高管……每个岗位都塞了 20-30 个现成能打的高质量提示词包，总量 300+ 个，全部免费拿走用。
->
-> 以前我们自己调 prompt 像炼丹，现在 OpenAI 直接把丹炉和配方都端出来了😂  
-> 尤其是工程师和产品那两包，看完第一感觉是：这要是早点出，我去年少加多少班啊……
->
-> 地址
-> https://academy.openai.com/public/tags/prompt-packs-6849a0f98c613939acef841c
+- **OpenAI 公开了官方 Prompt Packs**，全部免费
+  - 覆盖销售、产品、工程师、HR、经理、IT、客服、高管等岗位
+  - 每个岗位 20–30 个现成高质量提示词，总量 300+ 个
+- 以前自己调 prompt 像炼丹，现在 OpenAI 直接把丹炉和配方端出来了
+  - 工程师和产品两包尤其实用
+- 地址：https://academy.openai.com/public/tags/prompt-packs-6849a0f98c613939acef841c
+
 
 
 [↑ 回到本页目录](#part-1--index)

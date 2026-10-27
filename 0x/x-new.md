@@ -1046,7 +1046,8 @@
 
 **gxjo (@gxjo_dev)** · 发帖 2026-06-24 · [原帖](https://x.com/gxjo_dev/status/2069734857626833371)
 
-> Somebody built traffic lights for Claude Code 😭
+- Somebody built **traffic lights for Claude Code**
+
 
 - 图片：[img1](https://pbs.twimg.com/media/HLks4Q_X0AAKXK2?format=jpg&name=large)
 
@@ -2225,11 +2226,11 @@
 
 **OpenAI (@OpenAI)** · 发帖 2026-05-07 · [原帖](https://x.com/OpenAI/status/2052480800004956323)
 
-> Codex now works directly in Chrome on macOS and Windows.
->
-> It’s even better at working with apps and sites in Chrome, and now works in parallel across tabs in the background without taking over your browser.
->
-> To get started, install the Chrome plugin in the Codex app.
+- **Codex now works directly in Chrome** on macOS and Windows
+  - Better at working with apps and sites in Chrome
+  - Works in parallel across tabs in the background without taking over your browser
+- To start: install the Chrome plugin in the Codex app
+
 
 - 含视频（未转写）
 
@@ -2239,7 +2240,8 @@
 
 **unusual_whales (@unusual_whales)** · 发帖 2026-05-06 · [原帖](https://x.com/unusual_whales/status/2052068619635589466)
 
-> BREAKING: Anthropic has released a feature called "dreaming" which allows AI agents to self-improve
+- **Anthropic released a feature called "dreaming"** that allows AI agents to self-improve
+
 
 
 [↑ 回到目录](#part-1--keywords)
@@ -2248,13 +2250,14 @@
 
 **Sebastian Raschka (@rasbt)** · 发帖 2026-05-03 · [原帖](https://x.com/rasbt/status/2050988005817499827)
 
-> Here is a 2nd batch of April architecture drops. What a month!
-> - Ant Ling 2.6 1T
-> - Minimax M2.7
-> - Xiaomi MiMo V2.5
-> - Poolside Laguna XS.2
-> - Tencent Hy3-preview
-> - IBM Granite 4.1
+- **Second batch of April model architecture releases**
+  - Ant Ling 2.6 1T
+  - Minimax M2.7
+  - Xiaomi MiMo V2.5
+  - Poolside Laguna XS.2
+  - Tencent Hy3-preview
+  - IBM Granite 4.1
+
 
 - 图片：[img1](https://pbs.twimg.com/media/HHaStq6WgAAM7mg?format=jpg&name=large)
 
@@ -2567,9 +2570,9 @@
 
 **OpenAI Developers (@OpenAIDevs)** · 发帖 2026-02-12 · [原帖](https://x.com/OpenAIDevs/status/2022009906329739681)
 
-> Introducing GPT-5.3-Codex-Spark, our ultra-fast model purpose built for real-time coding.
->
-> We’re rolling it out as a research preview for ChatGPT Pro users in the Codex app, Codex CLI, and IDE extension.
+- **OpenAI introduced GPT-5.3-Codex-Spark** — an ultra-fast model built for real-time coding
+- Rolling out as a research preview for **ChatGPT Pro** users in the Codex app, Codex CLI, and IDE extension
+
 
 - 含视频（未转写）
 
@@ -2603,15 +2606,13 @@
 
 **OpenClaw (@openclaw)** · 发帖 2026-02-16 · [原帖](https://x.com/openclaw/status/2023257934017294806)
 
-> 🦞 OpenClaw 2026.2.15 is here!
->
-> ✨ Telegram message streaming — replies flow live
-> 💬 Discord Components v2 — buttons, selects, modals
-> 🔧 Nested sub-agents
-> 🔒 Major security hardening pass
-> 🐛 40+ bug fixes
->
-> Big day. Huge day. Maybe the biggest day.🏛️
+- **OpenClaw 2026.2.15 release**
+  - Telegram message streaming — replies flow live
+  - Discord Components v2 — buttons, selects, modals
+  - Nested sub-agents
+  - Major security hardening pass
+  - 40+ bug fixes
+
 
 - 链接卡片：[Releases · openclaw/openclaw](https://t.co/CywtGDbYpk)
 
@@ -2621,16 +2622,14 @@
 
 **OpenClaw (@openclaw)** · 发帖 2026-02-14 · [原帖](https://x.com/openclaw/status/2022530044434825310)
 
-> 🦞 OpenClaw 2026.2.13
->
-> 🤗 HuggingFace support
-> ✉️ Messages survive crashes (write-ahead queue)
-> 🎙️ Discord voice messages + custom presence
-> 🧵 Threading that actually works
-> 🔒 Massive security hardening pass
-> 🤖 gpt-5.3-codex-spark support
->
-> 337 commits. The community never sleeps 🫡
+- **OpenClaw 2026.2.13 release** (337 commits)
+  - HuggingFace support
+  - Messages survive crashes (write-ahead queue)
+  - Discord voice messages + custom presence
+  - Threading that actually works
+  - Massive security hardening pass
+  - `gpt-5.3-codex-spark` support
+
 
 - 链接卡片：[Release openclaw 2026.2.13 · openclaw/openclaw](https://t.co/EdqQRoYorZ)
 
@@ -4410,11 +4409,9 @@
 
 **David Ondrej (@DavidOndrej1)** · 发帖 2026-01-20 · [原帖](https://x.com/DavidOndrej1/status/2013725989952467308)
 
-> Anthropic dropped a 7 hour Claude Code masterclass
->
-> I went through the entire course
->
-> And compiled everything into a 27 min video, enjoy
+- **Anthropic released a 7-hour Claude Code masterclass**
+- The author went through the entire course and condensed it into a 27-minute video
+
 
 - 含视频（未转写）
 
@@ -4424,9 +4421,10 @@
 
 **Dilum Sanjaya (@DilumSanjaya)** · 发帖 2026-01-19 · [原帖](https://x.com/DilumSanjaya/status/2013293638768562325)
 
-> Vibe Coding Robotics Part 7
->
-> Implemented an ornithopter mechanism with Gemini Pro, and generated a Leonardo da Vinci style UI using Nano Banana to go with it.
+- **Vibe Coding Robotics, Part 7**
+  - Implemented an **ornithopter** mechanism with Gemini Pro
+  - Generated a Leonardo da Vinci–style UI for it with Nano Banana
+
 
 - 含视频（未转写）
 
@@ -4436,11 +4434,9 @@
 
 **Matthew Berman (@MatthewBerman)** · 发帖 2026-01-18 · [原帖](https://x.com/MatthewBerman/status/2012701592756383893)
 
-> MIT Researchers destroyed context window limits.
->
-> 10m+ token prompts are now possible by moving context out of the model and into code environments. 
->
-> Full breakdown below.
+- **MIT researchers sidestepped context window limits**
+  - 10M+ token prompts become possible by moving context **out of the model and into code environments**
+
 
 - 含视频（未转写）
 
@@ -4450,11 +4446,11 @@
 
 **KK.aWSB (@KKaWSB)** · 发帖 2026-01-13 · [原帖](https://x.com/KKaWSB/status/2011149280468484157)
 
-> 别再说人工智能不能设计了。  
->
-> Cursor + Opus 4.5 可以在不到 10 分钟的时间内创建了一个带有滚动叙事动画的着陆页，而设计师制作这样的页面通常要收取数千美元。  
->
-> 如果你的落地页看起来还像2010年的应用，那不是人工智能的问题，而是工作流程的问题。
+- **别再说 AI 不能做设计**
+  - **Cursor + Opus 4.5** 不到 10 分钟就做出一个带滚动叙事动画的落地页
+  - 设计师做这样的页面通常要收几千美元
+- 落地页如果还像 2010 年的应用，不是 AI 的问题，而是**工作流程**的问题
+
 
 - 含视频（未转写）
 
@@ -4464,9 +4460,11 @@
 
 **KK.aWSB (@KKaWSB)** · 发帖 2026-01-09 · [原帖](https://x.com/KKaWSB/status/2009518503532089506)
 
-> 字节跳动发布的 UI-TARS-desktop，是本地运行的桌面自动化代理。
->
-> 它可以使用任何桌面应用程序，打开文件，浏览网站，并自动执行任务，无需云连接。100% 开源。
+- **字节跳动发布 UI-TARS-desktop** —— 本地运行的桌面自动化代理
+  - 可以使用任何桌面应用、打开文件、浏览网站、自动执行任务
+  - 无需云连接
+  - 100% 开源
+
 
 - 含视频（未转写）
 
@@ -4564,11 +4562,12 @@
 
 **大梦想家迪士尼 (@discountifu)** · 发帖 2026-01-12 · [原帖](https://x.com/discountifu/status/2010579279789387929)
 
-> 周末 Vibe 了一个 Multi-Agent AI Trading 终端
-> 还用 Textual 加了一套 TUI，这方面 Python 的生态建设真的是太好了
-> 我把我毕生所学都“传功”给了 AI
-> 支持 K线走势/技术指标/订单流/资金费率/开仓量 多因子分析
-> 如果朋友们喜欢的话，点赞过100，我就直接把它开源了
+- 周末 vibe coding 了一个 **Multi-Agent AI Trading 终端**
+  - 用 **Textual** 加了一套 TUI，Python 在这方面生态很好
+  - 把自己毕生的交易经验"传功"给了 AI
+- **支持多因子分析**：K 线走势、技术指标、订单流、资金费率、开仓量
+- 作者表示点赞过 100 就开源
+
 
 - 含视频（未转写）
 
@@ -4618,9 +4617,9 @@
 
 **Md Ismail Šojal  (@0x0SojalSec)** · 发帖 2026-01-09 · [原帖](https://x.com/0x0SojalSec/status/2009709579903643768)
 
-> Open-sourced 42 n8n agent templates from the full AI Agents A to Z✨
->
-> - http://github.com/gyoridavid/ai_agents_az
+- **Open-sourced 42 n8n agent templates** from the "AI Agents A to Z" course
+- Repo: http://github.com/gyoridavid/ai_agents_az
+
 
 - 图片：[img1](https://pbs.twimg.com/media/G-Pr2R5bUAAchy8?format=png&name=large)
 
@@ -4630,11 +4629,11 @@
 
 **James Zou (@james_y_zou)** · 发帖 2026-01-06 · [原帖](https://x.com/james_y_zou/status/2008576712695836685)
 
-> Today in @NatureMedicine we report that AI can predict 130 diseases from 1 night of sleep🛌
->
-> We trained a foundation model (#SleepFM) on 585K hours of sleep recordings from 65K people—brain, heart, muscle & breathing signals combined.
->
-> AI learns the language of sleep🧵
+- **Published in Nature Medicine: AI can predict 130 diseases from one night of sleep**
+- **SleepFM** — a foundation model trained on 585K hours of sleep recordings from 65K people
+  - Combines brain, heart, muscle, and breathing signals
+  - The AI learns the "language of sleep"
+
 
 - 图片：[img1](https://pbs.twimg.com/media/G9_ldwnWkAAevjh?format=jpg&name=large) [img2](https://pbs.twimg.com/media/G9_le27W0AElCBV?format=jpg&name=large)
 
