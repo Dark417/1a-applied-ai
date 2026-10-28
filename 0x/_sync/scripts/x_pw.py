@@ -9,7 +9,7 @@ Why Playwright instead of the Claude browser pane:
 
 Usage (Windows, from any dir; uv pulls playwright into a cached env):
   uv run --with playwright python x_pw.py login              # one-time: log in by hand
-  uv run --with playwright python x_pw.py check              # headless: is the saved session still logged in?
+  uv run --with playwright python x_pw.py check              # is the saved session still logged in?
   uv run --with playwright python x_pw.py pull               # what Cowork does nightly, no AI: new likes/bookmarks
   uv run --with playwright python x_pw.py pull --all         # full history (ignore the watermark)
   uv run --with playwright python x_pw.py count [--headless] # scroll both lists to the end, count
@@ -22,6 +22,8 @@ Profile (cookies) lives OUTSIDE the repo: D:\\1AL\\x-tw-profile  (never commit i
     plus api/*.json: the raw GraphQL responses X sent (Likes / Bookmarks / TweetDetail), for debugging
   - reads the watermark from ../state.json but never writes it: build.py apply does that after the
     AI step (summaries + readable versions), so running `pull` twice is harmless
+Runs with a visible Chrome window: x.com answers headless Chrome with error pages. Playwright's
+launch flags keep a covered or minimized window loading, so it can run in the background.
 Exit codes: 0 ok · 3 not logged in (run `login` again) · 4 X page layout changed (x_dom.js finds no posts)
 """
 from __future__ import annotations
@@ -73,6 +75,11 @@ def ctx(p, headless: bool):
     )
 
 
+def on_login_page(url: str) -> bool:
+    # X moved login from /i/flow/login to /i/jf/onboarding/web?mode=login (2026-10)
+    return "/login" in url or "/i/flow" in url or "/onboarding" in url or "mode=login" in url
+
+
 def logged_in(page) -> bool:
     return page.evaluate("""() => !!document.querySelector('a[href="/compose/post"], a[aria-label*="Profile" i], [data-testid="SideNav_AccountSwitcher_Button"]')
                                  || /\\/home$/.test(location.pathname)""")
@@ -104,7 +111,7 @@ def cmd_login(_args) -> int:
 def scroll_all(page, name: str, url: str, max_idle: int = 15) -> list[dict]:
     page.goto(url, wait_until="domcontentloaded")
     page.wait_for_timeout(4000)
-    if "login" in page.url or "/i/flow" in page.url:
+    if on_login_page(page.url):
         raise SystemExit("NOT_LOGGED_IN: run `x_pw.py login` first")
     seen: dict[str, dict] = {}
     idle, rounds = 0, 0
@@ -195,7 +202,7 @@ def open_history(page) -> None:
             except Exception:
                 page.wait_for_timeout(2000)
         print(f"  check: {page.url} signed_in={signed_in}", flush=True)
-        if "/login" in page.url or "/i/flow" in page.url or not signed_in:
+        if on_login_page(page.url) or not signed_in:
             print("NOT_LOGGED_IN: run `x_pw.py login` first", flush=True)
             raise NotLoggedIn()
         page.goto(BASE + "/i/history", wait_until="domcontentloaded")
@@ -235,7 +242,7 @@ def cmd_pull(args) -> int:
 
     t0 = time.time()
     with sync_playwright() as p:
-        c = ctx(p, headless=not args.headed)
+        c = ctx(p, headless=args.headless)
         c.on("response", on_response)
         page = c.pages[0] if c.pages else c.new_page()
         try:
@@ -271,7 +278,7 @@ def cmd_pull(args) -> int:
 
 def cmd_check(args) -> int:
     with sync_playwright() as p:
-        c = ctx(p, headless=True)
+        c = ctx(p, headless=args.headless)
         page = c.pages[0] if c.pages else c.new_page()
         try:
             open_history(page)
@@ -287,11 +294,13 @@ def main() -> int:
     sub.add_parser("login")
     c = sub.add_parser("count")
     c.add_argument("--headless", action="store_true")
-    sub.add_parser("check")
+    ck = sub.add_parser("check")
+    ck.add_argument("--headless", action="store_true", help="tests only (see pull --headless)")
     pl = sub.add_parser("pull")
     pl.add_argument("--all", action="store_true", help="full history, ignore the state.json watermark")
     pl.add_argument("--max", type=int, default=50, help="max new items per list (default 50)")
-    pl.add_argument("--headed", action="store_true", help="show the Chrome window")
+    pl.add_argument("--headless", action="store_true",
+                    help="no window; x.com currently rejects headless Chrome, so this is for tests only")
     pl.add_argument("--out", default=str(OUT))
     pl.add_argument("--run", default="", help="run folder name (default <UTC time>-pw)")
     for sp in sub.choices.values():  # test hooks: point at a mock site / bundled Chromium / temp profile

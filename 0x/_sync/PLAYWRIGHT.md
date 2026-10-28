@@ -29,10 +29,12 @@
 ```powershell
 cd D:\1AL\1a-applied-ai\0x\_sync\scripts
 uv run --with playwright python x_pw.py login     # 弹出 Chrome，手动登录 X（含 2FA），10 分钟内
-uv run --with playwright python x_pw.py check     # 无界面检查：输出 LOGGED_IN 即可
+uv run --with playwright python x_pw.py check     # 检查登录状态：输出 LOGGED_IN 即可
 uv run --with playwright python x_pw.py pull      # 拉新的 ❤️ / 🔖
-uv run --with playwright python x_pw.py pull --all --headed   # 全量，并显示窗口看它干活
+uv run --with playwright python x_pw.py pull --all             # 全量（两个列表滚到底）
 ```
+
+会弹出一个 Chrome 窗口（不能用无界面模式，见下文），可以最小化，不影响加载。
 
 退出码：`0` 成功 · `3` 未登录（重新 `login`）· `4` X 改版了，`x_dom.js` 找不到帖子
 
@@ -55,10 +57,13 @@ uv run --with playwright python x_pw.py pull --all --headed   # 全量，并显�
   - 同一个 profile 目录同一时间只能被一个 Chrome 进程打开（会锁目录）
   - 不要直接用你日常 Chrome 的 profile：Chrome 开着时目录是锁住的，新版 Chrome 也禁止对默认 profile 做自动化
   - 会话会过期，或者 X 让你重新验证 → `pull` 退出码 3 → 重新 `login`
-  - `channel="chrome"` 用本机安装的 Chrome，不下载 Playwright 自带浏览器；
-    `--disable-blink-features=AutomationControlled` 去掉最明显的自动化标记
+  - `channel="chrome"` 用本机安装的 Chrome，不下载 Playwright 自带浏览器
   - 节奏放慢（每次滚动 1.2s、每个状态页之间 0.6s），每天跑一次，别高频刷，避免账号被风控
-  - 无界面（headless）模式下不会有「窗口被遮挡就停止加载」的问题，这是比内置浏览器稳的地方
+  - **x.com 拒绝无界面（headless）Chrome**：它的 User-Agent 里写着 `HeadlessChrome`，X 对每个页面都返回错误
+    （2026-10-28 在你电脑上实测）。所以脚本默认开窗口运行；`--headless` 只用于本地模拟站点的测试
+  - 窗口被遮挡或最小化也会继续加载：Playwright 启动 Chrome 时默认关掉了后台节流
+    （`--disable-backgrounding-occluded-windows` 等），这是比内置浏览器面板稳的地方
+  - X 的登录页 2026-10 起变成 `/i/jf/onboarding/web?mode=login`，脚本两种都认
 
 ## 每天自动跑（可选，Windows 任务计划）
 
@@ -69,7 +74,7 @@ $t = New-ScheduledTaskTrigger -Daily -At 7:30pm
 Register-ScheduledTask -TaskName "x-pull" -Action $a -Trigger $t
 ```
 
-在 Cowork 夜间任务之前跑（比如 19:30），夜间任务看到当天的 `*-pw` 目录就直接用，不再开内置浏览器。
+因为要开窗口，任务计划里选「只在用户登录时运行」。在 Cowork 夜间任务之前跑（比如 19:30），夜间任务看到当天的 `*-pw` 目录就直接用，不再开内置浏览器。
 
 ## watermark
 
