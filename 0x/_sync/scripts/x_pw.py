@@ -174,14 +174,24 @@ class NotLoggedIn(SystemExit):
 
 def open_history(page) -> None:
     """Land on Bookmarks (renders reliably; Likes sometimes stays blank on a cold load), inject x_dom.js."""
-    page.goto(BASE + "/i/history", wait_until="domcontentloaded")
-    try:
+    try:  # logged out, X may answer /i/history with an error status instead of a redirect
+        page.goto(BASE + "/i/history", wait_until="domcontentloaded")
         page.wait_for_selector('article[data-testid="tweet"]', timeout=20000)
+        ok = True
     except Exception:
-        pass
-    if "/login" in page.url or "/i/flow" in page.url:
-        print("NOT_LOGGED_IN: run `x_pw.py login` first", flush=True)
-        raise NotLoggedIn()
+        ok = False
+    if not ok:
+        try:
+            page.goto(BASE + "/home", wait_until="domcontentloaded")
+            page.wait_for_timeout(5000)
+        except Exception:
+            pass
+        signed_in = page.evaluate("""() => !!document.querySelector('a[href="/compose/post"], [data-testid="SideNav_AccountSwitcher_Button"], [data-testid="AppTabBar_Profile_Link"]')""")
+        if "/login" in page.url or "/i/flow" in page.url or not signed_in:
+            print("NOT_LOGGED_IN: run `x_pw.py login` first", flush=True)
+            raise NotLoggedIn()
+        page.goto(BASE + "/i/history", wait_until="domcontentloaded")
+        page.wait_for_timeout(5000)
     print(page.evaluate(X_DOM.read_text(encoding="utf-8")), flush=True)  # -> "x_dom ready"
 
 
