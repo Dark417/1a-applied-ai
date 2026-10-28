@@ -9,10 +9,20 @@ Why Playwright instead of the Claude browser pane:
 
 Usage (Windows, from any dir; uv pulls playwright into a cached env):
   uv run --with playwright python x_pw.py login              # one-time: log in by hand
+  uv run --with playwright python x_pw.py check              # headless: is the saved session still logged in?
+  uv run --with playwright python x_pw.py pull               # what Cowork does nightly, no AI: new likes/bookmarks
+  uv run --with playwright python x_pw.py pull --all         # full history (ignore the watermark)
   uv run --with playwright python x_pw.py count [--headless] # scroll both lists to the end, count
 
 Profile (cookies) lives OUTSIDE the repo: D:\\1AL\\x-tw-profile  (never commit it).
-Output: <out>/<run>/counts.json, ids_<list>.json, net_log.jsonl, api_*.json (sample bodies)
+
+`pull` = RUNBOOK steps 2–4 without the Claude browser pane or the Save-As dialog:
+  - injects the same x_dom.js the Cowork run pastes into the browser pane (one source of truth)
+  - writes <out>/<RUN>-pw/{likes,bookmarks,details}.json in exactly the format build.py reads,
+    plus api/*.json: the raw GraphQL responses X sent (Likes / Bookmarks / TweetDetail), for debugging
+  - reads the watermark from ../state.json but never writes it: build.py apply does that after the
+    AI step (summaries + readable versions), so running `pull` twice is harmless
+Exit codes: 0 ok · 3 not logged in (run `login` again) · 4 X page layout changed (x_dom.js finds no posts)
 """
 from __future__ import annotations
 
@@ -46,10 +56,16 @@ JS_VISIBLE = """
 """
 
 
+BASE = "https://x.com"
+CHANNEL = "chrome"                        # the installed Chrome; "" = Playwright's own Chromium (tests)
+X_DOM = Path(__file__).with_name("x_dom.js")
+STATE = Path(__file__).resolve().parent.parent / "state.json"
+
+
 def ctx(p, headless: bool):
     return p.chromium.launch_persistent_context(
         str(PROFILE),
-        channel="chrome",                 # the installed Chrome; no browser download
+        channel=CHANNEL or None,
         headless=headless,
         viewport={"width": 1280, "height": 1000},
         service_workers="block",          # force data requests through the page so we can see them
@@ -150,14 +166,128 @@ def cmd_count(args) -> int:
     return 0
 
 
+# ---------------------------------------------------------------- pull
+class NotLoggedIn(SystemExit):
+    def __init__(self):
+        super().__init__(3)
+
+
+def open_history(page) -> None:
+    """Land on Bookmarks (renders reliably; Likes sometimes stays blank on a cold load), inject x_dom.js."""
+    page.goto(BASE + "/i/history", wait_until="domcontentloaded")
+    try:
+        page.wait_for_selector('article[data-testid="tweet"]', timeout=20000)
+    except Exception:
+        pass
+    if "/login" in page.url or "/i/flow" in page.url:
+        print("NOT_LOGGED_IN: run `x_pw.py login` first", flush=True)
+        raise NotLoggedIn()
+    print(page.evaluate(X_DOM.read_text(encoding="utf-8")), flush=True)  # -> "x_dom ready"
+
+
+def collect(page, path: str, max_n: int, stop_ids: list[str]) -> dict:
+    """SPA-navigate to a list and scroll it; same call the Cowork run makes."""
+    if not page.evaluate("p => __xdom.go(p)", path):
+        # blank list: bounce through the other tab once (what fixed it by hand in the pane)
+        other = "/i/history" if path != "/i/history" else "/i/history/likes"
+        page.evaluate("p => __xdom.go(p)", other)
+        if not page.evaluate("p => __xdom.go(p)", path):
+            print(f"LAYOUT_CHANGED: no posts on {path}", flush=True)
+            raise SystemExit(4)
+    return page.evaluate("([n, s]) => __xdom.collectList(n, s)", [max_n, stop_ids])
+
+
+def cmd_pull(args) -> int:
+    run = args.run or datetime.now(timezone.utc).strftime("%Y-%m-%dT%H-%M") + "-pw"
+    out = Path(args.out) / run
+    (out / "api").mkdir(parents=True, exist_ok=True)
+    state = json.loads(STATE.read_text(encoding="utf-8")) if STATE.exists() and not args.all else {}
+    max_n = 5000 if args.all else args.max
+
+    n_api = {"n": 0}
+
+    def on_response(r):
+        op = r.url.split("?")[0].rsplit("/", 1)[-1]
+        if "/graphql/" in r.url and op in ("Likes", "Bookmarks", "TweetDetail"):
+            try:
+                n_api["n"] += 1
+                (out / "api" / f"{n_api['n']:03d}_{op}.json").write_text(r.text(), encoding="utf-8")
+            except Exception:
+                pass
+
+    t0 = time.time()
+    with sync_playwright() as p:
+        c = ctx(p, headless=not args.headed)
+        c.on("response", on_response)
+        page = c.pages[0] if c.pages else c.new_page()
+        try:
+            open_history(page)
+            bm = collect(page, "/i/history", max_n, state.get("bookmarks", []))
+            print(f"bookmarks: {len(bm['items'])} new (stopped at {bm['hitWatermark']})", flush=True)
+            lk = collect(page, "/i/history/likes", max_n, state.get("likes", []))
+            print(f"likes: {len(lk['items'])} new (stopped at {lk['hitWatermark']})", flush=True)
+            # status pages: every new bookmark + likes that are replies / cut off / text-less (RUNBOOK §3)
+            tasks, seen = [], set()
+            for t in bm["items"] + [x for x in lk["items"] if x["is_reply"] or x["truncated"] or not x["text"]]:
+                if t["id"] not in seen:
+                    seen.add(t["id"])
+                    tasks.append([t["handle"], t["id"]])
+            print(f"details: {len(tasks)} status pages", flush=True)
+            page.evaluate("t => __xdom.job('detail', t)", tasks)
+            det = page.evaluate("() => window.__job")
+        finally:
+            c.close()
+
+    w = lambda name, obj: (out / name).write_text(json.dumps(obj, ensure_ascii=False), encoding="utf-8")
+    w("likes.json", lk["items"])
+    w("bookmarks.json", bm["items"])
+    w("details.json", det["out"])
+    meta = {"run": run, "likes": len(lk["items"]), "bookmarks": len(bm["items"]), "details": len(det["out"]),
+            "detail_errors": det["errors"], "watermark": {"likes": lk["hitWatermark"], "bookmarks": bm["hitWatermark"]},
+            "all": args.all, "seconds": round(time.time() - t0)}
+    w("meta.json", meta)
+    print("RESULT " + json.dumps(meta, ensure_ascii=False), flush=True)
+    print("OUT " + str(out), flush=True)
+    return 0
+
+
+def cmd_check(args) -> int:
+    with sync_playwright() as p:
+        c = ctx(p, headless=True)
+        page = c.pages[0] if c.pages else c.new_page()
+        try:
+            open_history(page)
+        finally:
+            c.close()
+    print("LOGGED_IN", flush=True)
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("login")
     c = sub.add_parser("count")
     c.add_argument("--headless", action="store_true")
+    sub.add_parser("check")
+    pl = sub.add_parser("pull")
+    pl.add_argument("--all", action="store_true", help="full history, ignore the state.json watermark")
+    pl.add_argument("--max", type=int, default=50, help="max new items per list (default 50)")
+    pl.add_argument("--headed", action="store_true", help="show the Chrome window")
+    pl.add_argument("--out", default=str(OUT))
+    pl.add_argument("--run", default="", help="run folder name (default <UTC time>-pw)")
+    for sp in sub.choices.values():  # test hooks: point at a mock site / bundled Chromium / temp profile
+        sp.add_argument("--base", default=None, help=argparse.SUPPRESS)
+        sp.add_argument("--channel", default=None, help=argparse.SUPPRESS)
+        sp.add_argument("--profile", default=None, help=argparse.SUPPRESS)
+        sp.add_argument("--state", default=None, help=argparse.SUPPRESS)
     a = ap.parse_args()
-    return {"login": cmd_login, "count": cmd_count}[a.cmd](a)
+    global BASE, CHANNEL, PROFILE, STATE
+    BASE = a.base or BASE
+    CHANNEL = CHANNEL if a.channel is None else a.channel
+    PROFILE = Path(a.profile) if a.profile else PROFILE
+    STATE = Path(a.state) if a.state else STATE
+    return {"login": cmd_login, "count": cmd_count, "check": cmd_check, "pull": cmd_pull}[a.cmd](a)
 
 
 if __name__ == "__main__":

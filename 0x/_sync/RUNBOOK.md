@@ -10,7 +10,7 @@
 - 内置浏览器里 X 已登录（账号 `@whoheremains`）
 - 仓库：`Dark417/1a-applied-ai`，目录 `0x/`
   - `0x/` 下只放阅读内容：`NN-<主题>.md`、`x-new.md`、`x-note.md`、`x-log.md`、`README.md`
-  - 流水线（脚本、数据、本文件）放在 `0x/_sync/`
+  - 流水线（脚本、数据、本文件、`PLAYWRIGHT.md`）放在 `0x/_sync/`
 - 本地 repo clone：`D:\1AL\1a-applied-ai`；它的 `0x\` 是用户看的本地副本
   - 只用 `sync_local.ps1` 同步 `0x\`，**不要对这个 repo 做 git pull**（用户要求时才 pull）
 - 原始抓取数据：`D:\2Alfred\x-twitter\raw\`（device_bash 里是 `$HOME/mnt/x-twitter/raw`；不进 git）
@@ -27,6 +27,11 @@
 3. 运行 ID：`RUN=$(date -u +%Y-%m-%dT%H-%M)`
 
 ## 2. 拉列表（内置浏览器）
+
+0. 先看本地 Playwright 有没有已经拉好今天的数据（见 `PLAYWRIGHT.md`）：
+   - PowerShell：`Get-ChildItem D:\2Alfred\x-twitter\raw -Directory -Filter *-pw | Sort Name -Desc | Select -First 1`，再读它的 `meta.json`
+   - 如果是今天（美西时间）的，并且 `meta.json` 存在：直接 stage 它的三个 json 到 `/home/claude/work/raw/<那个目录名>/`，用目录名当 `<RUN>`，跳到第 5 步
+   - 否则照常用内置浏览器走第 2–4 步
 
 1. 用 `Claude_Browser__navigate` 打开 `https://x.com/i/history/likes`（完整加载）
    - 如果跳到登录页：停止，告诉用户「X 登录已失效，请在 Claude 桌面 app 的浏览器面板里重新登录」
