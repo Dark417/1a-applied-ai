@@ -186,7 +186,15 @@ def open_history(page) -> None:
             page.wait_for_timeout(5000)
         except Exception:
             pass
-        signed_in = page.evaluate("""() => !!document.querySelector('a[href="/compose/post"], [data-testid="SideNav_AccountSwitcher_Button"], [data-testid="AppTabBar_Profile_Link"]')""")
+        signed_in = False
+        for _ in range(4):  # X may still be redirecting (/home -> / or /i/flow/login)
+            try:
+                page.wait_for_load_state("domcontentloaded")
+                signed_in = page.evaluate("""() => !!document.querySelector('a[href="/compose/post"], [data-testid="SideNav_AccountSwitcher_Button"], [data-testid="AppTabBar_Profile_Link"]')""")
+                break
+            except Exception:
+                page.wait_for_timeout(2000)
+        print(f"  check: {page.url} signed_in={signed_in}", flush=True)
         if "/login" in page.url or "/i/flow" in page.url or not signed_in:
             print("NOT_LOGGED_IN: run `x_pw.py login` first", flush=True)
             raise NotLoggedIn()
