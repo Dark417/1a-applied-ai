@@ -1,11 +1,15 @@
 # X Likes · 关键词速览
 
-- 共 48 条，按点赞顺序倒序（最新在上）
+- 共 50 条，按点赞顺序倒序（最新在上）
 - Part 1：关键词 + 简述；Part 2：正文（同时在 Notes 里的帖子只给链接，不重复全文）
 - 自动生成，勿手改
 
 ## Part 1 · Keywords
 
+- [2026-10-27 · @Kay2289123](#x-2115125125163233473)：`Agent Evaluation`, `Hugging Face`, `RL for Agents`, `GRPO`, `OpenEnv`
+  - 推荐 Hugging Face 公开的 Training Agent 课程，作为入门 Agent Evaluation 的学习资料。六节依次覆盖 Agent 评测、Agent 强化学习难点、基于 agent traces 的 SFT、蒸馏、GRPO 训练，以及用 OpenEnv/TRL 在真实环境中训练 coding agent（OpenCode）。作者认为 Agent Eval 是较难被 AI 取代的方向。
+- [2026-10-27 · @miles_mazy](#x-2115072333832749202)：`Miles Ma`, `社群`, `截图`
+  - 一条配图的短帖，作者说群里有人叫他删帖，问该怎么办；文字本身信息量很低，主要内容在图片里。
 - [2026-10-26 · @AIStarsGo](#x-2114629460930740466)：`agent 时代的学习`, `deep work`, `shallow work`, `认知退化`
   - 个人教训：别让 agent 替你读论文，别把技术学习和英语学习混在一起，别为了用掉 token 去跑后台任务；要持续检查自己的认知是在进步还是在退化。
 - [2026-10-24 · @0xsmerkzz](#x-2114099234001600931)：`SpaceXAI`, `GrokBot`, `multi-agent team`, `Chief of Staff agent`, `/loop`
@@ -104,6 +108,87 @@
   - Nature Medicine 论文：SleepFM 用 58.5 万小时的睡眠数据训练基础模型，能从一晚的睡眠记录预测 130 种疾病。
 
 ## Part 2 · 正文
+
+### x-2115125125163233473
+
+**美研芒格君 (@Kay2289123)** · 发帖 2026-10-27 · [原帖](https://x.com/Kay2289123/status/2115125125163233473)
+
+- **Agent Evaluation 是少数仍需要人做判断、将来很难被 AI 彻底取代的职业方向**
+  - 入门资料推荐：**Hugging Face 的公开 Training Agent 课程**
+  - 学完后会更有 sense：判断 AI 时代下哪些工作更适合人来做
+- **资料完全公开**
+  - 视频都在 Hugging Face 的 YouTube 频道
+  - 代码全部开源
+  - 共六节
+- **1、Agentic Evaluations Workshop：怎么评价一个 Agent**
+  - 为什么 **benchmark 分数和真实使用体验对不上**？
+  - 目前 Agent Eval 做到了哪一步，还有哪些问题没解决
+  - 先把"怎样才算一个好 Agent"等问题都 cover 到
+- **2、RL for Agents Workshop：给 Agent 做强化学习，难在哪**
+  - 从 LLM 的 RL 走到 Agent 的 RL，会多出哪些难点
+  - 环境怎么搭、**rollout** 怎么跑、**reward** 怎么设计
+  - 训练过程中**推理为什么会成为 bottleneck**
+- **3、SFT on agent traces：用 Agent 的执行轨迹做微调**
+  - 拿公开的 coding-agent traces（执行轨迹）整理成训练数据
+  - 用 **TRL + LoRA** 做 SFT，在 **Hugging Face Jobs** 上跑
+  - 用 **Trackio** 看指标
+  - 基本带着走了一遍小型的微调流程
+- **4、Distillation：把大模型的能力蒸馏给小 Agent**
+  - 怎么把 teacher model 的能力转移给更小的 coding agent
+  - 讲 **off-policy、on-policy、self-distillation** 三种蒸馏方式分别怎么做
+- **5、Reinforcement Learning：SFT 之后，怎么继续用 RL 训练**
+  - 用 **GRPO** 接着训练
+  - 讲 group sampling、可验证的 reward
+  - reward、KL、输出长度这些曲线怎么看
+  - 看 Agent 怎么 **reward hacking**
+- **6、From reward functions to environments：让 Agent 在真实环境里学习**
+  - 从 `reset()` / `step()` 接口讲起
+  - 用 **OpenEnv** 搭环境、上传到 Hub，再接入 TRL 的 `GRPOTrainer`
+  - 最后通过 **Harbor** 和 Hugging Face sandboxes，用 `AsyncGRPOTrainer` 训练真正的 coding agent：**OpenCode**
+  - 让 Agent 在环境里采取动作、拿到反馈，再继续训练
+
+<details><summary>原文</summary>
+
+> Agent Evaluation 是我觉得为数不多还需要人力去做判断、将来很难被AI 彻底取代的职业方向。我给大家找了一个非常好的学习资料入门：Hugging Face 的公开 Training Agent 课程
+>
+> 学完了，你应该会有更强的 sense，判断 AI 时代下哪些工作更适合人来做
+>
+> 这个资料是公开的，视频都在 Hugging Face 的 YouTube 频道，代码全部开源，下面有这六节：
+> 1、Agentic Evaluations Workshop：怎么评价一个 Agent。
+> 这一章节去看：为什么 benchmark 分数和真实使用体验对不上？目前 Agent Eval 做到了哪一步，还有哪些问题没解决。先把“怎样才算一个好 Agent”，等等都有 cover
+>
+> 2、RL for Agents Workshop：给 Agent 做强化学习，难在哪
+> 这一章节去关注：从 LLM 的 RL 走到 Agent 的 RL，会多出哪些难点？环境怎么搭、rollout 怎么跑、reward 怎么设计，以及训练过程中推理为什么会成为 bottleneck
+>
+> 3、SFT on agent traces：用 Agent 的执行轨迹做微调
+> 这一章节去关注：拿公开的 coding-agent traces（执行轨迹）整理成训练数据，用 TRL + LoRA 做 SFT，在 Hugging Face Jobs 上跑，用 Trackio 看指标。基本带着走了一遍小型的微调流程
+>
+> 4、Distillation：把大模型的能力蒸馏给小 Agent
+> 这一章节去关注：怎么把 teacher model 的能力转移给更小的 coding agent。off-policy、on-policy、self-distillation 都会讲，看看这几种蒸馏方式分别怎么做
+>
+> 5、Reinforcement Learning：SFT 之后，怎么继续用 RL 训练
+> 这一章节去关注：用 GRPO 接着训练，讲 group sampling、可验证的 reward，以及 reward、KL、输出长度这些曲线怎么看。看 Agent 怎么 reward hacking
+>
+> 6、From reward functions to environments：让 Agent 在真实环境里学习
+> 这一章节去动手：从 reset()/step() 接口讲起，用 OpenEnv 搭环境、上传到 Hub，再接入 TRL 的 GRPOTrainer。最后通过 Harbor 和 Hugging Face sandboxes，用 AsyncGRPOTrainer 训练真正的 coding agent：OpenCode。让 Agent 在环境里采取动作、拿到反馈，再继续训练
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/HVpu11PaAAA6U8_?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2115072333832749202
+
+**Miles Ma (@miles_mazy)** · 发帖 2026-10-27 · [原帖](https://x.com/miles_mazy/status/2115072333832749202)
+
+- 群里有人叫我删了，咋办啊？
+  - 正文只有这一句，主要内容在配图里
+
+
+- 图片：[img1](https://pbs.twimg.com/media/HVo_CthWUAAYOzd?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
 
 ### x-2114629460930740466
 
