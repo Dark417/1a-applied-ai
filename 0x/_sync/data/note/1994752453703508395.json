@@ -1,0 +1,20 @@
+{
+ "id": "1994752453703508395",
+ "handle": "bibryam",
+ "name": "Bilgin Ibryam",
+ "url": "https://x.com/bibryam/status/1994752453703508395",
+ "created_at": "2025-11-29T12:57:00.000Z",
+ "text": "🚨 Anthropic just introduced advanced tool use for Claude! Claude can now:\n- Discover tools on-demand\n- Run tools through Python code\n- Learn from  usage examples\n\nThis is a big leap for building scalable AI agents.\n👉https://anthropic.com/engineering/advanced-tool-use",
+ "media": [
+  "https://pbs.twimg.com/media/G63fbx7XwAAiEJW?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 79,
+ "thread": [],
+ "title": "Anthropic 推出 Claude 高级工具调用",
+ "category": "Harness & Loop Engineering",
+ "kind": "工具发布",
+ "summary": "介绍 Anthropic 的 advanced tool use：Claude 可以按需发现工具（tool search）、通过 Python 代码调用工具（programmatic tool calling）、从使用示例中学习用法。作者认为这是构建可扩展 agent 的一大步，附 Anthropic 工程博客链接。"
+}

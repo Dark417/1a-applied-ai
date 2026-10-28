@@ -1,0 +1,20 @@
+{
+ "id": "2010522921022672896",
+ "handle": "binghe",
+ "name": "冰河",
+ "url": "https://x.com/binghe/status/2010522921022672896",
+ "created_at": "2026-01-12T01:23:12.000Z",
+ "text": "非常火的项目agent-skills-sor-context-engineering\n\n两周就6.4K星了！\n\n一套全面的智能体技能集，专为上下文工程、多智能体架构及生产级智能体系统设计。\n\n适用于构建、优化或调试需要高效上下文管理的智能体系统。\n\n它第一次把大家长期隐约感到的痛点说清楚了。\n\n更像一份整理得很好的经验总结和方法论，把上下文拆解、压缩、隔离这些实践系统化，缓解了 Agent“又慢又乱”的表层问题。",
+ "media": [
+  "https://pbs.twimg.com/media/G-bPLiWbgAAVN2Z?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 64,
+ "thread": [],
+ "title": "agent-skills-for-context-engineering：上下文工程技能集",
+ "category": "Harness & Loop Engineering",
+ "kind": "项目分享",
+ "summary": "推荐两周 6.4K 星的开源项目：一套面向上下文工程、多 agent 架构和生产级 agent 系统的 skills。作者认为它把上下文拆解、压缩、隔离等实践系统化，像一份整理好的方法论，能缓解 agent“又慢又乱”的问题。"
+}

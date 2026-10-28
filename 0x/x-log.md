@@ -1,0 +1,165 @@
+# X 同步日志
+
+- 每天一条，最新在上；日期按美西时间（America/Los_Angeles）
+- 每条列出当天处理的帖子 = 自上次同步以来新增的 ❤️ / 🔖
+- 累计：❤️ 65 条 · 🔖 83 篇
+- 自动生成，勿手改
+
+## 2026-10-28
+
+- 合计：❤️ +15 · 🔖 +31
+- **09:26 批次** `2026-10-28T16-26` · ❤️ +15 · 🔖 +31 — 全量补录：两个列表滚到底，补上之前漏掉的历史收藏
+  - ❤️ [@lucathunderhawk](x-new.md#x-2072842886891376872)：Honen 产品发布：把公司内部资料自动变成会自我改进的互动课程，并与 NVIDIA 合作为 25 万学习者做 AI 素…
+  - ❤️ [@HowToPrompt__](x-new.md#x-2114979460495872355)：介绍 IBM 一篇论文：新的检索架构在生成前先过滤、校验检索到的内容，号称幻觉比微调过的 RAG 低 65 倍。作者认为…
+  - ❤️ [@AiBreakfast](x-new.md#x-2007833514239250463)：演示用 Hugging Face SmolVLM + llama.cpp 和普通摄像头做的实时视觉模型 demo，说明开…
+  - ❤️ [@swapnakpanda](x-new.md#x-2007869846957310169)：整理斯坦福免费 AI/ML 课程：CS221、CS229、CS230、CS234、CS336（LLM from Scra…
+  - ❤️ [@xiaoying_eth](x-new.md#x-2008010575306211772)：推荐 GitHub 开源合集 awesome-llm-apps（Shubhamsaboo），收录大量 LLM 智能体应用…
+  - ❤️ [@simplifyinAI](x-new.md#x-2008117170879041729)：VS Code 可以直接连接 Google Colab，在本地编辑器里用免费 T4 GPU：文件在本地，算力在 Cola…
+  - ❤️ [@wanerfu](x-new.md#x-2006563537779568867)：推荐 Google 发布的 46 页 AI agent 手册 PDF，作者称是内部级方法论而非科普，附下载链接。
+  - ❤️ [@dair_ai](x-new.md#x-2000219246601920671)：DAIR.AI 每周论文精选（12/8–14）：ProAgent、Selective Gradient Masking、…
+  - ❤️ [@PawelHuryn](x-new.md#x-1990807058451419185)：Google 推出 Gemini File Search API（托管式 RAG），作者用它 31 分钟零代码搭了一个 …
+  - ❤️ [@caffeineai](x-new.md#x-1986898954752303297)：Caffeine 产品广告：通过聊天把想法变成可上线的 app，不需要开发团队。
+  - ❤️ [@OpenAI](x-new.md#x-1988747732614517233)：OpenAI 预告：次日下午 2 点（PT）在 Reddit 就 GPT-5.1 和个性化更新做 AMA。
+  - ❤️ [@RightScopee](x-new.md#x-1886480522404048945)：政治帖：号召大家在评论区点赞，表态支持 Kash Patel 出任 FBI 局长。与 AI 无关。
+  - ❤️ [@liz_churchill10](x-new.md#x-1884054373430706187)：搞笑配图/视频帖，主题是“Trump 的行政令”；文字只有一句标题，内容在媒体里。与 AI 无关。
+  - ❤️ [@realDonaldTrump](x-new.md#x-1878969190335590889)：没有正文的帖子，内容只在图片或视频里，无法从文字判断主题。
+  - ❤️ [@ylecun](x-new.md#x-1769768065712177615)：LeCun 引用 MIT 文章：中风破坏语言能力后人依然能思考，说明思维、记忆和推理不依赖语言；语言系统和规划、推理、共…
+  - 🔖 [用 Grok Bot 赚到第一个 $10,000](10-misc.md#x-2115116885570183303) · @Argona0x · 其他
+  - 🔖 [一人指挥 50+ AI Agent：SpaceXAI 工程师的自动化工作流](02-graph-multi-agent.md#x-2115133828650213693) · @AndyL5cc · Graph & Multi-Agent
+  - 🔖 [Anthropic 7 小时 Claude Code 课程的 27 分钟浓缩版](05-coding-agent.md#x-2013725989952467308) · @DavidOndrej1 · Coding Agent 实践
+  - 🔖 [Vibe Coding Robotics 第 7 篇：扑翼机构 + 达芬奇风格 UI](09-other-applications.md#x-2013293638768562325) · @DilumSanjaya · 其他应用
+  - 🔖 [「牛逼！」（内容在媒体里）](10-misc.md#x-2011919709764263936) · @yuyy614893671 · 其他
+  - 🔖 [Agent Skills Marketplace：最全的 skills 收集站](06-skills-prompt.md#x-2011793571343712393) · @vikingmute · Skills & Prompt
+  - 🔖 [我在用的 Claude Skills 清单](06-skills-prompt.md#x-2011309102279114802) · @bozhou_ai · Skills & Prompt
+  - 🔖 [GitHub 最热门的 Claude Skills 开源项目排行](06-skills-prompt.md#x-2011355230336918009) · @zstmfhy · Skills & Prompt
+  - 🔖 [Cursor + Opus 4.5 十分钟做出滚动叙事落地页](05-coding-agent.md#x-2011149280468484157) · @KKaWSB · Coding Agent 实践
+  - 🔖 [Peter Thiel：竞争是为失败者准备的](10-misc.md#x-2010905397025186276) · @starzq · 其他
+  - 🔖 [Anthropic 发布 Cowork：面向所有人的 Claude 自主助理](07-openclaw-personal-agent.md#x-2010804702313652647) · @ChrisGPT · OpenClaw & 个人 Agent
+  - 🔖 [SimpleMem：基于语义无损压缩的高效 Agent 长期记忆](03-memory-rag.md#x-2010720188686348593) · @dair_ai · Agent Memory & RAG
+  - 🔖 [2026 FAANG+ AI 实习汇总仓库](10-misc.md#x-2010354876568789348) · @_vmlops · 其他
+  - 🔖 [学 Claude Agent Skills 就看官方中文文档](06-skills-prompt.md#x-2010630204641951839) · @PandaTalk8 · Skills & Prompt
+  - 🔖 [agent-skills-for-context-engineering：上下文工程技能集](01-harness-loop.md#x-2010522921022672896) · @binghe · Harness & Loop Engineering
+  - 🔖 [skillsmp：收录上千 Skills 的仓库](06-skills-prompt.md#x-2010599347566854330) · @Jackywine · Skills & Prompt
+  - 🔖 [MIT 700 页免费书《Algorithms for Decision Making》](08-llm-courses.md#x-2010559739164586439) · @techwith_ram · LLM 基础 & 课程
+  - 🔖 [AntiGravity 的隐藏用法](05-coding-agent.md#x-2010178642752704850) · @JulianGoldieSEO · Coding Agent 实践
+  - 🔖 [42 个开源 n8n Agent 模板（AI Agents A to Z）](02-graph-multi-agent.md#x-2009709579903643768) · @0x0SojalSec · Graph & Multi-Agent
+  - 🔖 [斯坦福免费书《Algorithms for AI & ML》](08-llm-courses.md#x-2008925848552829345) · @DanKornas · LLM 基础 & 课程
+  - 🔖 [Agent-R1：一天内训练自己的 deep research agent](04-evals-research.md#x-2008555154019172592) · @askalphaxiv · Evals & 研究
+  - 🔖 [Automate Faceless Content：AI 自动化无露脸视频教程](09-other-applications.md#x-2008501335705178231) · @GitHub_Daily · 其他应用
+  - 🔖 [SmolVLM + llama.cpp 实时视觉 demo](09-other-applications.md#x-2007833514239250463) · @AiBreakfast · 其他应用
+  - 🔖 [给 Claude Code 写一份“入职手册”：CLAUDE.md 配置教学](05-coding-agent.md#x-2007743053231190177) · @YukerX · Coding Agent 实践
+  - 🔖 [斯坦福免费 AI/ML 课程合集](08-llm-courses.md#x-2007869846957310169) · @swapnakpanda · LLM 基础 & 课程
+  - 🔖 [awesome-llm-apps：85K 星的 LLM 应用合集](02-graph-multi-agent.md#x-2008010575306211772) · @xiaoying_eth · Graph & Multi-Agent
+  - 🔖 [VS Code 直连 Google Colab，免费用 T4 GPU](09-other-applications.md#x-2008117170879041729) · @simplifyinAI · 其他应用
+  - 🔖 [ytDownloader：开源多平台视频下载工具](10-misc.md#x-2007085732826169640) · @fhwofjow51260 · 其他
+  - 🔖 [Agentic AI 综述：符号派与神经派双范式](04-evals-research.md#x-1995494108295782895) · @dair_ai · Evals & 研究
+  - 🔖 [Anthropic 推出 Claude 高级工具调用](01-harness-loop.md#x-1994752453703508395) · @bibryam · Harness & Loop Engineering
+  - 🔖 [AI Agent 完整指南（图片）](10-misc.md#x-1985691141896118539) · @BharukaShraddha · 其他
+
+## 2026-10-27
+
+- 合计：❤️ +50 · 🔖 +52
+- **19:55 批次** `2026-10-28T02-55` · ❤️ +2 · 🔖 +0
+  - ❤️ [@Kay2289123](x-new.md#x-2115125125163233473)：推荐 Hugging Face 公开的 Training Agent 课程，作为入门 Agent Evaluation …
+  - ❤️ [@miles_mazy](x-new.md#x-2115072333832749202)：一条配图的短帖，作者说群里有人叫他删帖，问该怎么办；文字本身信息量很低，主要内容在图片里。
+- **10:30 批次** `2026-10-27T17-30` · ❤️ +48 · 🔖 +52 — 首次导入（当时只取了两个列表最新的 ~50 条）
+  - ❤️ [@AIStarsGo](x-new.md#x-2114629460930740466)：个人教训：别让 agent 替你读论文，别把技术学习和英语学习混在一起，别为了用掉 token 去跑后台任务；要持续检查…
+  - ❤️ [@0xsmerkzz](x-new.md#x-2114099234001600931)：SpaceXAI 工程师分享：同时跑 35+ 个 GrokBot agent，由一个 Chief of Staff ag…
+  - ❤️ [@Sumanth_077](x-new.md#x-2113948384113598588)：Google 开源 Harness²：模型权重不动，递归改进 agent 外围的 harness。任务内用 Propos…
+  - ❤️ [@AnnatarXBT](x-new.md#x-2113634548378374458)：Wavestone 读了 11 个 coding agent 的源码，总结出共同的 7 部分 harness：loop、…
+  - ❤️ [@sermakarevich](x-new.md#x-2106453816757354947)：长文：用通俗语言讲清楚怎么判断一个 LLM 系统是否真的可用，从 eval 的定义一直讲到落地细节，面向工程师、PM 和…
+  - ❤️ [@shao__meng](x-new.md#x-2104453599367770287)：推荐斯坦福 CS329A《Self-Improving AI Agents》，9 讲视频已全部上线，附课程主页和 You…
+  - ❤️ [@0xMortyx](x-new.md#x-2101308432305254889)：Jev 被定位为 LLM 推理和 agent 执行之间的「决策层」：用 Choice / Score / Noul 显式…
+  - ❤️ [@eng_khairallah1](x-new.md#x-2083131009986396282)：长文课程：零基础成为 graph architect 的路线，涵盖节点设计、校验门、恢复路径、checkpoint、可观…
+  - ❤️ [@CodeNewsletter](x-new.md#x-2082413202353406091)：The Code newsletter 的订阅推广，内容空泛。
+  - ❤️ [@AnatoliKopadze](x-new.md#x-2085421662447468758)：Anthropic 工程师 45 分钟演讲：不要手动 prompt Claude，而要搭一个能自我 prompt、自我纠…
+  - ❤️ [@0xCarnagee](x-new.md#x-2079636027736457707)：长文：分 12 步从单个 loop 扩展到能自我验证的 agent 集群；核心是拆分上下文，而不是换更大的模型。
+  - ❤️ [@Mahaximus_](x-new.md#x-2085024744387092973)：长文汇总：agent（自主规划）、loop（跑到达标为止）、graph（并行 worker）三层是什么，以及怎么在 Cl…
+  - ❤️ [@0xCodila](x-new.md#x-2083602508807569560)：Google 免费 2 小时课程：从第一个 agent 到 loop engineering，再到 multi-agen…
+  - ❤️ [@AnatoliKopadze](x-new.md#x-2071649423042412597)：Spotify 首席架构师：引入 loop 后 agent 成功率从 20–30% 提到 80%；Spotify 73%…
+  - ❤️ [@0xMovez](x-new.md#x-2071214176526049739)：前 Google 工程师 20 分钟讲 agent 自我改进的循环：trace → LLM judge → diagno…
+  - ❤️ [@gxjo_dev](x-new.md#x-2069734857626833371)：有人给 Claude Code 做了个「红绿灯」状态指示器，图片梗。
+  - ❤️ [@0xMovez](x-new.md#x-2068763235587694769)：Andrew Ng 30 分钟演讲：他的任务已全部交给 agent，下一步是 self-improving loops。
+  - ❤️ [@gregisenberg](x-new.md#x-2068325550603559402)：Greg Isenberg 列出当下最值钱的技能：会搭建和管理 agent、会做分发、做机器人、做短视频、既能做产品又能…
+  - ❤️ [@eng_khairallah1](x-new.md#x-2066827221537333611)：推荐斯坦福 2 小时讲座：从零构建 LLM，覆盖 scaling laws、数据、架构和后训练对齐。
+  - ❤️ [@AnatoliKopadze](x-new.md#x-2063985608381362576)：长文：agent 是一个光谱而不是一个类别；讲清 LLM 对话和 agentic workflow 的区别，并一步步用 …
+  - ❤️ [@0xCodez](x-new.md#x-2066867539305459732)：长文：14 步 harness 路线图，从默认 Claude Code 到规则、subagent、hook、memory…
+  - ❤️ [@OpenAI](x-new.md#x-2052480800004956323)：OpenAI：Codex 现在能直接在 Chrome 里工作，可以在后台多标签页并行操作，不会抢占你的浏览器。
+  - ❤️ [@unusual_whales](x-new.md#x-2052068619635589466)：快讯：Anthropic 发布「dreaming」功能，让 agent 能自我改进。
+  - ❤️ [@rasbt](x-new.md#x-2050988005817499827)：Sebastian Raschka 整理的 4 月第二批开源模型架构：Ling 2.6 1T、MiniMax M2.7、…
+  - ❤️ [@dair_ai](x-new.md#x-2050956647909015788)：DAIR.AI 每周论文精选（4/26–5/3），头条是 Agentic Harness Engineering：把 h…
+  - ❤️ [@Suryanshti777](x-new.md#x-2050228936270037068)：观点：RAG 每次都从零开始、不积累任何东西；Karpathy 的 LLM Wiki 让 LLM 持续维护一份知识库，才…
+  - ❤️ [@nopinduoduo](x-new.md#x-2029858356916277757)：解读 Google 的 SkillsBench 论文：4 万多个 skills 里只有约 1k 个可用，LLM 写的 s…
+  - ❤️ [@EHuanglu](x-new.md#x-2029562218048541087)：Nano Banana 2 能把手绘户型图变成 4K 3D 渲染，还能一键换家具；附 OpenArt 教程。
+  - ❤️ [@shao__meng](x-new.md#x-2028833958230933729)：如何成为顶级 agentic engineer：工具越精简越好；上下文只给刚好够用的信息；调研和实现用不同的 agent…
+  - ❤️ [@heyrimsha](x-new.md#x-2027350587533332748)：解读 Anthropic 的《The Complete Guide to Building Skills for Cla…
+  - ❤️ [@OpenAIDevs](x-new.md#x-2022009906329739681)：OpenAI 发布 GPT-5.3-Codex-Spark，主打超快实时编码，Pro 用户可以预览。
+  - ❤️ [@GitHub_Daily](x-new.md#x-2026178278055403843)：GitNexus 开源：给代码库建知识图谱，通过 MCP 接入 Cursor / Claude Code，让 AI 改代…
+  - ❤️ [@elvissun](x-new.md#x-2025920521871716562)：长文：作者用 OpenClaw 做编排层，编排器 Zoe 负责派生 Codex / Claude Code agent、…
+  - ❤️ [@AYi_AInotes](x-new.md#x-2026224275192193465)：推荐上面那篇 OpenClaw 文章：单个 agent 的上下文是零和的，真正的杠杆是个人 AI Orchestrato…
+  - ❤️ [@openclaw](x-new.md#x-2023257934017294806)：OpenClaw 2026.2.15 发布：Telegram 流式回复、Discord Components v2、嵌套…
+  - ❤️ [@openclaw](x-new.md#x-2022530044434825310)：OpenClaw 2026.2.13 发布：支持 HuggingFace，消息崩溃后可恢复（write-ahead qu…
+  - ❤️ [@dabit3](x-new.md#x-2021387483364151451)：长文教程：从消息 API 加一个 LLM 出发，一步步推导出 OpenClaw 的架构，讲清常驻 AI 助手是怎么工作的…
+  - ❤️ [@DavidOndrej1](x-new.md#x-2013725989952467308)：把 Anthropic 7 小时的 Claude Code 课程浓缩成 27 分钟视频。
+  - ❤️ [@DilumSanjaya](x-new.md#x-2013293638768562325)：Vibe coding 机器人第 7 集：用 Gemini 实现扑翼机构，并用 Nano Banana 生成达芬奇风格的…
+  - ❤️ [@MatthewBerman](x-new.md#x-2012701592756383893)：MIT 研究：把上下文从模型里搬到代码环境中，让 1000 万以上 token 的输入成为可能。
+  - ❤️ [@KKaWSB](x-new.md#x-2011149280468484157)：Cursor + Opus 4.5 不到 10 分钟就做出带滚动叙事动画的落地页。观点：做得丑是工作流的问题，不是 AI…
+  - ❤️ [@KKaWSB](x-new.md#x-2009518503532089506)：字节开源 UI-TARS-desktop：本地运行的桌面自动化 agent，能操作任意桌面应用，不需要联网。
+  - ❤️ [@ChrisGPT](x-new.md#x-2010804702313652647)：快讯：Anthropic 推出 Cowork，把 Claude Code 的 agent 能力带给普通用户，可授权访问文…
+  - ❤️ [@dair_ai](x-new.md#x-2010720188686348593)：SimpleMem 论文：用语义无损压缩做 agent 长期记忆，三阶段流水线，在提高信息密度的同时降低 token 消…
+  - ❤️ [@discountifu](x-new.md#x-2010579279789387929)：周末 vibe 出来的多 agent 交易终端，用 Textual 做 TUI，支持多因子分析。
+  - ❤️ [@JulianGoldieSEO](x-new.md#x-2010178642752704850)：Antigravity 的用法合集：切换免费模型、生成图片、接入 MCP、一键部署到 Netlify。偏营销。
+  - ❤️ [@0x0SojalSec](x-new.md#x-2009709579903643768)：开源 42 个 n8n agent 模板（AI Agents A to Z）。
+  - ❤️ [@james_y_zou](x-new.md#x-2008576712695836685)：Nature Medicine 论文：SleepFM 用 58.5 万小时的睡眠数据训练基础模型，能从一晚的睡眠记录预测…
+  - 🔖 [Agent 记忆的 5 层架构（13 页）](03-memory-rag.md#x-2114319310005150101) · @AnnatarXBT · Agent Memory & RAG
+  - 🔖 [Google 开源 Harness²：递归改进 agent harness](01-harness-loop.md#x-2113948384113598588) · @Sumanth_077 · Harness & Loop Engineering
+  - 🔖 [Anthropic 工程师：用 harness 搭会自我改进的 agent](01-harness-loop.md#x-2113719510985269442) · @hayatomaruu · Harness & Loop Engineering
+  - 🔖 [Wavestone：11 个 coding agent 共有的 7 部分 harness](01-harness-loop.md#x-2113634548378374458) · @AnnatarXBT · Harness & Loop Engineering
+  - 🔖 [Evals：如何判断一个 AI 系统真的可用](04-evals-research.md#x-2106453816757354947) · @sermakarevich · Evals & 研究
+  - 🔖 [Stanford CS329A：Self-Improving AI Agents 课程](08-llm-courses.md#x-2104453599367770287) · @shao__meng · LLM 基础 & 课程
+  - 🔖 [Stanford 3.5 小时课程：从零构建 self-improving agent](01-harness-loop.md#x-2085710100468060328) · @hanakoxbt · Harness & Loop Engineering
+  - 🔖 [Google 1 小时课程：从 agent 到 loop 到 graph](02-graph-multi-agent.md#x-2085433401562308987) · @Mahaximus_ · Graph & Multi-Agent
+  - 🔖 [How to Become a Graph Architect With Zero Experience (Full Course)](02-graph-multi-agent.md#x-2083131009986396282) · @eng_khairallah1 · Graph & Multi-Agent
+  - 🔖 [Harness vs Loop vs Graph Engineering：三层别混](01-harness-loop.md#x-2082076425465762082) · @LunarResearcher · Harness & Loop Engineering
+  - 🔖 [The Code newsletter 推广](10-misc.md#x-2082413202353406091) · @CodeNewsletter · 其他
+  - 🔖 [Anthropic：让系统自己 prompt 自己](01-harness-loop.md#x-2085421662447468758) · @AnatoliKopadze · Harness & Loop Engineering
+  - 🔖 [Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](02-graph-multi-agent.md#x-2079636027736457707) · @0xCarnagee · Graph & Multi-Agent
+  - 🔖 [Graph Engineering for Quants：GNN 量化大师课](09-other-applications.md#x-2081656879886012676) · @RitOnchain · 其他应用
+  - 🔖 [Google 2 小时课程：1 prompt → 100 agents → loops → graphs](02-graph-multi-agent.md#x-2083602508807569560) · @0xCodila · Graph & Multi-Agent
+  - 🔖 [Karpathy 3 小时：从零构建 LLM](08-llm-courses.md#x-2078533887383556335) · @RohOnChain · LLM 基础 & 课程
+  - 🔖 [Spotify：引入 loop 后 agent 成功率 20–30% → 80%](01-harness-loop.md#x-2071649423042412597) · @AnatoliKopadze · Harness & Loop Engineering
+  - 🔖 [前 Google 工程师：agent loop + harness + evals 技术栈](01-harness-loop.md#x-2071214176526049739) · @0xMovez · Harness & Loop Engineering
+  - 🔖 [Google Nexus：把预测变成推理问题](04-evals-research.md#x-2055978135246807138) · @rohanpaul_ai · Evals & 研究
+  - 🔖 [DAIR.AI 每周论文（4/26–5/3）](04-evals-research.md#x-2050956647909015788) · @dair_ai · Evals & 研究
+  - 🔖 [论文：Recursive Multi-Agent Systems](04-evals-research.md#x-2050261909690097671) · @dair_ai · Evals & 研究
+  - 🔖 [VS Code Agent Debug Logs：看清每次 prompt 背后发生了什么](05-coding-agent.md#x-2050341770609750297) · @code · Coding Agent 实践
+  - 🔖 [RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](03-memory-rag.md#x-2050228936270037068) · @Suryanshti777 · Agent Memory & RAG
+  - 🔖 [How to Master RAG and Build AI Agents That Remember Everything](03-memory-rag.md#x-2050145400204783631) · @eng_khairallah1 · Agent Memory & RAG
+  - 🔖 [How to Become a Claude Code Power User (Full Course)](05-coding-agent.md#x-2047245243503050997) · @eng_khairallah1 · Coding Agent 实践
+  - 🔖 [Anthropic 团队演示他们如何用 Claude Code](05-coding-agent.md#x-2047331926143619428) · @eng_khairallah1 · Coding Agent 实践
+  - 🔖 [Google 发布全栈 vibe coding 系统](05-coding-agent.md#x-2034718045550051489) · @__Inty__ · Coding Agent 实践
+  - 🔖 [Markdown Viewer Skills：让 AI 在 Markdown 里直接画图](06-skills-prompt.md#x-2047525971742597195) · @GitHub_Daily · Skills & Prompt
+  - 🔖 [Boris Cherny 30 分钟分享 Claude Code 技巧](05-coding-agent.md#x-2046264877703102753) · @cnyzgkc · Coding Agent 实践
+  - 🔖 [30 个 Agent 替代 30 个工程师，12 天交付完整代码库](02-graph-multi-agent.md#x-2029350130261082429) · @sodawhite_dev · Graph & Multi-Agent
+  - 🔖 [Addy Osmani 开源 Agent Skills：老工程师的操作手册](06-skills-prompt.md#x-2046454424806343139) · @KengGuangLong · Skills & Prompt
+  - 🔖 [OpenAI 用 Codex 维护 Agents SDK 的四层结构](05-coding-agent.md#x-2031347640630165525) · @chenchengpro · Coding Agent 实践
+  - 🔖 [OpenAI Symphony：把 Linear 看板变成自动研发流水线](02-graph-multi-agent.md#x-2029741601975849132) · @chenchengpro · Graph & Multi-Agent
+  - 🔖 [NotebookLM 深度解析推荐](10-misc.md#x-2029598376321585332) · @nicebabycat · 其他
+  - 🔖 [30 个 agent 案例的开源地址：agent-orchestrator](02-graph-multi-agent.md#x-2029350223575920769) · @sodawhite_dev · Graph & Multi-Agent
+  - 🔖 [Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](09-other-applications.md#x-2029562218048541087) · @EHuanglu · 其他应用
+  - 🔖 [OpenAI Symphony：让 agent 自主完成整个开发流程](02-graph-multi-agent.md#x-2029497156554342760) · @GitHub_Daily · Graph & Multi-Agent
+  - 🔖 [Scrapling：绕过反爬的开源抓取库](10-misc.md#x-2029459404710658307) · @NextBullReady · 其他
+  - 🔖 [obra/superpowers 的 brainstorming SKILL](06-skills-prompt.md#x-2028854979805790269) · @cholf5 · Skills & Prompt
+  - 🔖 [Anthropic《The Complete Guide to Building Skills for Claude》解读](06-skills-prompt.md#x-2027350587533332748) · @heyrimsha · Skills & Prompt
+  - 🔖 [GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](05-coding-agent.md#x-2026178278055403843) · @GitHub_Daily · Coding Agent 实践
+  - 🔖 [OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](07-openclaw-personal-agent.md#x-2025920521871716562) · @elvissun · OpenClaw & 个人 Agent
+  - 🔖 [OpenClaw 编排文章的要点总结](07-openclaw-personal-agent.md#x-2026224275192193465) · @AYi_AInotes · OpenClaw & 个人 Agent
+  - 🔖 [DeepMind + Meta + Amazon：100 页 agentic reasoning 路线图](04-evals-research.md#x-2024602668258517440) · @hasantoxr · Evals & 研究
+  - 🔖 [ClawWork：给 agent 加经济激励](07-openclaw-personal-agent.md#x-2023308910883664070) · @blackanger · OpenClaw & 个人 Agent
+  - 🔖 [OpenClaw Mac 桌面版发布](07-openclaw-personal-agent.md#x-2022346776679006516) · @aigclink · OpenClaw & 个人 Agent
+  - 🔖 [爆肝 2 天，开发 OpenClaw 接入微信 bot，已开源](07-openclaw-personal-agent.md#x-2022356917948166506) · @canghe · OpenClaw & 个人 Agent
+  - 🔖 [离不开 Claude Code 的三个场景](05-coding-agent.md#x-2022157972613300368) · @yanhua1010 · Coding Agent 实践
+  - 🔖 [Shubham Saboo：7×24 运行的 AI Agent 团队蓝图](02-graph-multi-agent.md#x-2022374455989932409) · @Saboo_Shubham_ · Graph & Multi-Agent
+  - 🔖 [OpenClaw agent Larry 一周拿下百万 TikTok 播放](07-openclaw-personal-agent.md#x-2022011925903667547) · @oliverhenry · OpenClaw & 个人 Agent
+  - 🔖 [把 GitHub 开源项目打包成 Skill](06-skills-prompt.md#x-2014100945416888444) · @gkxspace · Skills & Prompt
+  - 🔖 [OpenAI 官方 Prompt Packs：300+ 岗位提示词](06-skills-prompt.md#x-2014252422806536614) · @zstmfhy · Skills & Prompt

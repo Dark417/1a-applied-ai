@@ -1,0 +1,20 @@
+{
+ "id": "2008501335705178231",
+ "handle": "GitHub_Daily",
+ "name": "GitHubDaily",
+ "url": "https://x.com/GitHub_Daily/status/2008501335705178231",
+ "created_at": "2026-01-06T11:30:09.000Z",
+ "text": "好多朋友想做短视频，吐槽说每天拍视频、剪辑、想选题就耗掉大半天，还没开始赚钱就先累趴了。\n\n于是，在 GitHub 上找到了 Automate Faceless Content 这份开源教程，系统性地教你如何用 AI 工具自动化生成无露脸视频内容，并在各大平台变现。\n\n整套教程分为 11 个模块，从基础概念到平台变现，涵盖视频生成、批量调度、内容策略、多平台运营等完整流程，配合 http://Syllaby.io 工具使用。\n\nGitHub：http://github.com/cporter202/automate-faceless-content\n\n提供了详细的工作流程指南，比如每天 5 分钟创作一条视频，或者 2 小时批量生成 60 条视频内容，还有内容复用策略，让一条视频变成 6-11 条不同平台的素材。\n\n教程还包括高收益领域选择、快速变现路径(2-3 周内通过平台审核)、联盟营销策略等实战内容。\n\n如果你想尝试无露脸视频创作，或者正在寻找系统化的自媒体变现方法，这份教程值得收藏学习。",
+ "media": [
+  "https://pbs.twimg.com/media/G9-hUCbaoAA6XDt?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 71,
+ "thread": [],
+ "title": "Automate Faceless Content：AI 自动化无露脸视频教程",
+ "category": "其他应用",
+ "kind": "搭建教程",
+ "summary": "推荐开源教程 automate-faceless-content：11 个模块，从基础到变现，讲如何用 AI 工具（配合 Syllaby.io）自动生成无露脸短视频，包括批量生成（2 小时 60 条）、一条内容复用到 6–11 个平台、选高收益领域、联盟营销等。偏内容变现流程，不是 agent 技术。"
+}

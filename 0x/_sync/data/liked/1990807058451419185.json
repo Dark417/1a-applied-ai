@@ -1,0 +1,20 @@
+{
+ "id": "1990807058451419185",
+ "handle": "PawelHuryn",
+ "name": "Paweł Huryn",
+ "url": "https://x.com/PawelHuryn/status/1990807058451419185",
+ "created_at": "2025-11-18T15:39:24.000Z",
+ "text": "Google just dropped the Gemini File Search API (RAG-as-a-Service).\n\nIt allowed me to build a RAG chatbot in 31 min 🤯\nNo coding.\n\nHere’s how it works:",
+ "media": [
+  "https://pbs.twimg.com/media/G6DB8YMWsAAy3Gq?format=png&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 60,
+ "keywords": [
+  "Gemini File Search API",
+  "RAG-as-a-Service",
+  "no-code"
+ ],
+ "gist": "Google 推出 Gemini File Search API（托管式 RAG），作者用它 31 分钟零代码搭了一个 RAG 聊天机器人；具体步骤在后续帖里，这里没有抓到。"
+}

@@ -1,0 +1,24 @@
+{
+ "id": "2010630204641951839",
+ "handle": "PandaTalk8",
+ "name": "Mr Panda",
+ "url": "https://x.com/PandaTalk8/status/2010630204641951839",
+ "created_at": "2026-01-12T08:29:31.000Z",
+ "text": "了解  Claude Agent Skills ， 就看他们的官方文档， 已经写的不能再好了。 尤其是中文版本。  \n\n入门指南\nhttps://code.claude.com/docs/zh-CN/skills\n\n最佳实践\n\nhttps://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/best-practices\n\nAgent Skills： How to Work\nhttps://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/overview#how-skills-work",
+ "quote": {
+  "name": "Mr Panda @PandaTalk8 · Jan 12",
+  "text": "claude skills 的渐近式披露\n目的是合理使用skill，避免算力浪费，无意义的消耗token。  \n\n因此设定三种加载级别， \n第1级：元数据， 必须被加载。  \n第2级： 指令，触发时加载。\n第3级：资源和代码， 按需加载。  \n\n---\n说的直白一点， 所谓的渐近式批露就是在控制LLM 上下文的大小，skills"
+ },
+ "media": [
+  "https://pbs.twimg.com/media/G-cxf0oagAAK03-?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 63,
+ "thread": [],
+ "title": "学 Claude Agent Skills 就看官方中文文档",
+ "category": "Skills & Prompt",
+ "kind": "资源推荐",
+ "summary": "作者推荐直接看 Anthropic 官方的 Agent Skills 文档（中文版质量很高），给出三个入口：Claude Code 的 skills 入门指南、Agent Skills 最佳实践、Skills 工作原理概览。是一份精简的官方学习路径。"
+}

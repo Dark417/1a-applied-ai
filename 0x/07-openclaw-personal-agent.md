@@ -2,10 +2,11 @@
 
 - [← 返回总目录](x-note.md)
 - OpenClaw 生态、常驻个人助理、一人公司
-- 共 6 篇，按收藏顺序倒序（最新在上）
+- 共 7 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [Anthropic 发布 Cowork：面向所有人的 Claude 自主助理](#x-2010804702313652647) · @ChrisGPT · 2026-01-12 · 工具发布
 - [OpenClaw + Codex/Claude Code Agent Swarm：一人开发团队](#x-2025920521871716562) · @elvissun · 2026-02-23 · 搭建教程（长文）
 - [OpenClaw 编排文章的要点总结](#x-2026224275192193465) · @AYi_AInotes · 2026-02-24 · 文章解读
 - [ClawWork：给 agent 加经济激励](#x-2023308910883664070) · @blackanger · 2026-02-16 · 观点 / 项目发现
@@ -14,6 +15,46 @@
 - [OpenClaw agent Larry 一周拿下百万 TikTok 播放](#x-2022011925903667547) · @oliverhenry · 2026-02-12 · 案例 + 搭建教程
 
 ## Part 2 · Details
+
+### x-2010804702313652647
+
+**Anthropic 发布 Cowork：面向所有人的 Claude 自主助理**
+
+- 作者：Chris (@ChrisGPT) · 发帖 2026-01-12 · [原帖](https://x.com/ChrisGPT/status/2010804702313652647)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具发布
+- **总结**：介绍 Anthropic 发布的 Cowork：把 Claude Code 的 agent 能力带给普通用户，授权文件夹后 Claude 能在电脑上管理文件、做调研、独立完成多步任务。起因是发现开发者在用 Claude Code 处理日常行政工作。首发为 Max 订阅的研究预览。重点是“会动手的数字员工”定位。
+
+**正文**
+
+- **Anthropic unveiled "Cowork"** — turns Claude into an autonomous virtual assistant for everyone
+  - Brings agentic capabilities previously reserved for coders to general users
+  - Claude performs complex tasks directly on your computer
+- **Origin**: Anthropic noticed developers using **Claude Code** for everyday admin tasks
+- **What it does**
+  - Grant Claude access to folders to manage files, research, and complete multi-step workflows independently
+  - Acts as a digital employee that "does" instead of just chats
+- **Availability**: research preview for **Claude Max** subscribers on the **macOS app**
+- **Competitive gap (per the author)**
+  - Claude is shipping coding/desktop agents faster than competitors
+  - Google still lacks a consumer browser agent; xAI has no native CLI or agentic interface
+  - OpenAI has "Operator", Google has the developer-focused "Antigravity"
+  - Anthropic is now the only other major lab with a true "do-it-for-me" experience for general users
+
+<details><summary>原文</summary>
+
+> BREAKING 🚨 Anthropic just unveiled "Cowork," a major feature that turns Claude into a fully autonomous virtual assistant for everyone. It brings the deep agentic capabilities previously reserved for coders to general users, allowing Claude to perform complex tasks directly on your computer.
+>
+> The tool was built after Anthropic noticed developers using "Claude Code" for everyday admin tasks. Cowork now lets anyone grant Claude access to folders to manage files, research, and complete multi-step workflows independently acting as a digital employee that "does" instead of just chats.
+>
+> Cowork is available today as a research preview for Claude Max subscribers on the macOS app 😡. Claude is releasing new coding/desktop agents much faster than all of there competitors. 
+>
+> This launch exposes a massive gap in the current AI landscape: in 2026, Google still explicitly lacks a consumer browser agent, and xAI has yet to release a native CLI or agentic interface. While OpenAI has "Operator" and Google has the developer-focused "Antigravity," Anthropic is now the only other major lab providing a true "do-it-for-me" experience for general users.
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2025920521871716562
 

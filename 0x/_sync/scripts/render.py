@@ -6,6 +6,7 @@ views are written one level up, straight into 0x/:
   x-new.md              ❤️ Likes: Part 1 keywords, Part 2 content
   x-note.md             🔖 Notes master index only: topic → NN-<slug>.md, title → NN-<slug>.md#x-<id>
   NN-<slug>.md          one file per topic, NN = importance order in categories.json
+  x-log.md              daily sync log from runs.json: one entry per day, newest first
 
 Content source per post
   data/readable/<id>.md  bulleted readable version (LLM-written, see RUNBOOK §5)
@@ -26,12 +27,15 @@ from __future__ import annotations
 import json
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent   # 0x/_sync
 DATA = ROOT / "data"
 OUT = ROOT.parent                                # 0x
 TOPIC_FILE = re.compile(r"^\d{2}-[\w-]+\.md$")
+TZ = ZoneInfo("America/Los_Angeles")  # the user's day; run names are UTC
 
 
 def load(kind: str) -> list[dict]:
@@ -216,6 +220,50 @@ def render_new(items: list[dict], note_loc: dict[str, tuple[str, str]]) -> str:
     return "\n".join(L).rstrip() + "\n"
 
 
+# ---------------------------------------------------------------- x-log.md
+def run_local(run: str) -> datetime:
+    return datetime.strptime(run[:16], "%Y-%m-%dT%H-%M").replace(tzinfo=timezone.utc).astimezone(TZ)
+
+
+def render_log(runs: list[dict], liked: dict[str, dict], notes: dict[str, dict],
+               note_loc: dict[str, tuple[str, str]]) -> str:
+    days: dict[str, list[dict]] = {}
+    for r in runs:
+        days.setdefault(run_local(r["run"]).strftime("%Y-%m-%d"), []).append(r)
+    L = [
+        "# X 同步日志",
+        "",
+        "- 每天一条，最新在上；日期按美西时间（America/Los_Angeles）",
+        "- 每条列出当天处理的帖子 = 自上次同步以来新增的 ❤️ / 🔖",
+        f"- 累计：❤️ {len(liked)} 条 · 🔖 {len(notes)} 篇",
+        "- 自动生成，勿手改",
+        "",
+    ]
+    for d in sorted(days, reverse=True):
+        rs = days[d]
+        nl, nn = sum(len(r["liked"]) for r in rs), sum(len(r["notes"]) for r in rs)
+        L += [f"## {d}", "", f"- 合计：❤️ +{nl} · 🔖 +{nn}"]
+        for r in sorted(rs, key=lambda r: r["run"], reverse=True):
+            t = run_local(r["run"]).strftime("%H:%M")
+            L.append(f"- **{t} 批次** `{r['run']}` · ❤️ +{len(r['liked'])} · 🔖 +{len(r['notes'])}"
+                     + (f" — {r['note']}" if r.get("note") else ""))
+            for i in r["liked"]:
+                x = liked.get(i)
+                if not x:
+                    continue
+                gist = (x.get("gist") or x.get("text") or "").replace("\n", " ")
+                gist = gist if len(gist) <= 60 else gist[:60] + "…"
+                L.append(f"  - ❤️ [@{x['handle']}](x-new.md#x-{i})：{gist}")
+            for i in r["notes"]:
+                x = notes.get(i)
+                if not x or i not in note_loc:
+                    continue
+                fname, title = note_loc[i]
+                L.append(f"  - 🔖 [{title}]({fname}#x-{i}) · @{x['handle']} · {x.get('category', '')}")
+        L.append("")
+    return "\n".join(L).rstrip() + "\n"
+
+
 def main() -> int:
     cats = load_categories()
     liked, notes = load("liked"), load("note")
@@ -236,6 +284,10 @@ def main() -> int:
             stale.unlink()
     (OUT / "x-note.md").write_text(render_note_index(names, groups, cats), encoding="utf-8")
     (OUT / "x-new.md").write_text(render_new(liked, note_loc), encoding="utf-8")
+    runs_p = ROOT / "runs.json"
+    runs = json.loads(runs_p.read_text(encoding="utf-8")) if runs_p.exists() else []
+    (OUT / "x-log.md").write_text(render_log(runs, {t["id"]: t for t in liked},
+                                             {t["id"]: t for t in notes}, note_loc), encoding="utf-8")
     missing = [t["id"] for t in liked + notes if not readable(t)]
     print(f"x-new.md: {len(liked)} · notes: {len(notes)} in {len(names)} topic files · readable missing: {len(set(missing))}")
     return 0

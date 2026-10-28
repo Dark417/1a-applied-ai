@@ -1,11 +1,41 @@
 # X Likes · 关键词速览
 
-- 共 50 条，按点赞顺序倒序（最新在上）
+- 共 65 条，按点赞顺序倒序（最新在上）
 - Part 1：关键词 + 简述；Part 2：正文（同时在 Notes 里的帖子只给链接，不重复全文）
 - 自动生成，勿手改
 
 ## Part 1 · Keywords
 
+- [2026-07-03 · @lucathunderhawk](#x-2072842886891376872)：`Honen`, `NVIDIA`, `AI literacy`, `interactive courses`
+  - Honen 产品发布：把公司内部资料自动变成会自我改进的互动课程，并与 NVIDIA 合作为 25 万学习者做 AI 素养培训。偏产品推广。
+- [2026-10-27 · @HowToPrompt__](#x-2114979460495872355)：`RAG`, `IBM`, `hallucination`, `retrieval`
+  - 介绍 IBM 一篇论文：新的检索架构在生成前先过滤、校验检索到的内容，号称幻觉比微调过的 RAG 低 65 倍。作者认为标准 RAG 盲目按向量相似度塞文档是结构性缺陷，这类方法能让企业放心让 agent 处理敏感数据。
+- [2026-01-04 · @AiBreakfast](#x-2007833514239250463) 🔖：`SmolVLM`, `llama.cpp`, `Hugging Face`, `real-time vision`
+  - 演示用 Hugging Face SmolVLM + llama.cpp 和普通摄像头做的实时视觉模型 demo，说明开源视觉模型已经又快又便宜。
+- [2026-01-04 · @swapnakpanda](#x-2007869846957310169) 🔖：`Stanford`, `CS229`, `CS336`, `CS224N`, `free courses`
+  - 整理斯坦福免费 AI/ML 课程：CS221、CS229、CS230、CS234、CS336（LLM from Scratch）、CS224N，thread 里附 YouTube 播放列表链接。
+- [2026-01-05 · @xiaoying_eth](#x-2008010575306211772) 🔖：`awesome-llm-apps`, `GitHub`, `LLM agents`, `open source`
+  - 推荐 GitHub 开源合集 awesome-llm-apps（Shubhamsaboo），收录大量 LLM 智能体应用示例，已超 85K 星。
+- [2026-01-05 · @simplifyinAI](#x-2008117170879041729) 🔖：`VS Code`, `Google Colab`, `T4 GPU`
+  - VS Code 可以直接连接 Google Colab，在本地编辑器里用免费 T4 GPU：文件在本地，算力在 Colab。
+- [2026-01-01 · @wanerfu](#x-2006563537779568867)：`Google`, `AI agents handbook`, `PDF`
+  - 推荐 Google 发布的 46 页 AI agent 手册 PDF，作者称是内部级方法论而非科普，附下载链接。
+- [2025-12-14 · @dair_ai](#x-2000219246601920671)：`DAIR.AI`, `ProAgent`, `Agentic AI Adaptation`, `scaling agent systems`
+  - DAIR.AI 每周论文精选（12/8–14）：ProAgent、Selective Gradient Masking、Agentic AI 适配综述、推理模型考 CFA、预训练/中训练/RL 的关系、Agent 系统的 scaling 科学等。
+- [2025-11-18 · @PawelHuryn](#x-1990807058451419185)：`Gemini File Search API`, `RAG-as-a-Service`, `no-code`
+  - Google 推出 Gemini File Search API（托管式 RAG），作者用它 31 分钟零代码搭了一个 RAG 聊天机器人；具体步骤在后续帖里，这里没有抓到。
+- [2025-11-07 · @caffeineai](#x-1986898954752303297)：`Caffeine`, `app builder`, `chat-to-app`
+  - Caffeine 产品广告：通过聊天把想法变成可上线的 app，不需要开发团队。
+- [2025-11-12 · @OpenAI](#x-1988747732614517233)：`OpenAI`, `GPT-5.1`, `Reddit AMA`
+  - OpenAI 预告：次日下午 2 点（PT）在 Reddit 就 GPT-5.1 和个性化更新做 AMA。
+- [2025-02-03 · @RightScopee](#x-1886480522404048945)：`Kash Patel`, `FBI Director`, `Senate`
+  - 政治帖：号召大家在评论区点赞，表态支持 Kash Patel 出任 FBI 局长。与 AI 无关。
+- [2025-01-28 · @liz_churchill10](#x-1884054373430706187)：`Trump`, `Executive Orders`, `meme`
+  - 搞笑配图/视频帖，主题是“Trump 的行政令”；文字只有一句标题，内容在媒体里。与 AI 无关。
+- [2025-01-14 · @realDonaldTrump](#x-1878969190335590889)：`Donald Trump`, `media-only`
+  - 没有正文的帖子，内容只在图片或视频里，无法从文字判断主题。
+- [2024-03-18 · @ylecun](#x-1769768065712177615)：`Yann LeCun`, `language vs thought`, `MIT`, `neuroscience`
+  - LeCun 引用 MIT 文章：中风破坏语言能力后人依然能思考，说明思维、记忆和推理不依赖语言；语言系统和规划、推理、共情等脑区是分开的。
 - [2026-10-27 · @Kay2289123](#x-2115125125163233473)：`Agent Evaluation`, `Hugging Face`, `RL for Agents`, `GRPO`, `OpenEnv`
   - 推荐 Hugging Face 公开的 Training Agent 课程，作为入门 Agent Evaluation 的学习资料。六节依次覆盖 Agent 评测、Agent 强化学习难点、基于 agent traces 的 SFT、蒸馏、GRPO 训练，以及用 OpenEnv/TRL 在真实环境中训练 coding agent（OpenCode）。作者认为 Agent Eval 是较难被 AI 取代的方向。
 - [2026-10-27 · @miles_mazy](#x-2115072333832749202)：`Miles Ma`, `社群`, `截图`
@@ -84,30 +114,282 @@
   - OpenClaw 2026.2.13 发布：支持 HuggingFace，消息崩溃后可恢复（write-ahead queue），线程功能修好，支持 codex-spark。
 - [2026-02-11 · @dabit3](#x-2021387483364151451)：`OpenClaw 架构`, `first principles`, `persistent AI assistant`, `教程`
   - 长文教程：从消息 API 加一个 LLM 出发，一步步推导出 OpenClaw 的架构，讲清常驻 AI 助手是怎么工作的。
-- [2026-01-20 · @DavidOndrej1](#x-2013725989952467308)：`Anthropic`, `Claude Code masterclass`, `课程浓缩`
+- [2026-01-20 · @DavidOndrej1](#x-2013725989952467308) 🔖：`Anthropic`, `Claude Code masterclass`, `课程浓缩`
   - 把 Anthropic 7 小时的 Claude Code 课程浓缩成 27 分钟视频。
-- [2026-01-19 · @DilumSanjaya](#x-2013293638768562325)：`vibe coding`, `robotics`, `Gemini`, `Nano Banana`
+- [2026-01-19 · @DilumSanjaya](#x-2013293638768562325) 🔖：`vibe coding`, `robotics`, `Gemini`, `Nano Banana`
   - Vibe coding 机器人第 7 集：用 Gemini 实现扑翼机构，并用 Nano Banana 生成达芬奇风格的 UI。
 - [2026-01-18 · @MatthewBerman](#x-2012701592756383893)：`MIT`, `Recursive Language Models`, `长上下文`, `context in code env`
   - MIT 研究：把上下文从模型里搬到代码环境中，让 1000 万以上 token 的输入成为可能。
-- [2026-01-13 · @KKaWSB](#x-2011149280468484157)：`Cursor`, `Opus 4.5`, `landing page`, `AI 设计`
+- [2026-01-13 · @KKaWSB](#x-2011149280468484157) 🔖：`Cursor`, `Opus 4.5`, `landing page`, `AI 设计`
   - Cursor + Opus 4.5 不到 10 分钟就做出带滚动叙事动画的落地页。观点：做得丑是工作流的问题，不是 AI 的问题。
 - [2026-01-09 · @KKaWSB](#x-2009518503532089506)：`字节跳动`, `UI-TARS-desktop`, `computer use`, `开源`
   - 字节开源 UI-TARS-desktop：本地运行的桌面自动化 agent，能操作任意桌面应用，不需要联网。
-- [2026-01-12 · @ChrisGPT](#x-2010804702313652647)：`Anthropic`, `Cowork`, `Claude`, `新闻`
+- [2026-01-12 · @ChrisGPT](#x-2010804702313652647) 🔖：`Anthropic`, `Cowork`, `Claude`, `新闻`
   - 快讯：Anthropic 推出 Cowork，把 Claude Code 的 agent 能力带给普通用户，可授权访问文件夹并完成多步任务（研究预览）。
-- [2026-01-12 · @dair_ai](#x-2010720188686348593)：`SimpleMem`, `agent memory`, `语义无损压缩`, `论文`
+- [2026-01-12 · @dair_ai](#x-2010720188686348593) 🔖：`SimpleMem`, `agent memory`, `语义无损压缩`, `论文`
   - SimpleMem 论文：用语义无损压缩做 agent 长期记忆，三阶段流水线，在提高信息密度的同时降低 token 消耗。
 - [2026-01-12 · @discountifu](#x-2010579279789387929)：`multi-agent`, `trading terminal`, `Textual TUI`, `Python`
   - 周末 vibe 出来的多 agent 交易终端，用 Textual 做 TUI，支持多因子分析。
-- [2026-01-11 · @JulianGoldieSEO](#x-2010178642752704850)：`Antigravity`, `免费工具组合`, `MCP`, `Nano Banana`
+- [2026-01-11 · @JulianGoldieSEO](#x-2010178642752704850) 🔖：`Antigravity`, `免费工具组合`, `MCP`, `Nano Banana`
   - Antigravity 的用法合集：切换免费模型、生成图片、接入 MCP、一键部署到 Netlify。偏营销。
-- [2026-01-09 · @0x0SojalSec](#x-2009709579903643768)：`n8n`, `agent templates`, `开源`
+- [2026-01-09 · @0x0SojalSec](#x-2009709579903643768) 🔖：`n8n`, `agent templates`, `开源`
   - 开源 42 个 n8n agent 模板（AI Agents A to Z）。
 - [2026-01-06 · @james_y_zou](#x-2008576712695836685)：`SleepFM`, `Nature Medicine`, `foundation model`, `医疗 AI`
   - Nature Medicine 论文：SleepFM 用 58.5 万小时的睡眠数据训练基础模型，能从一晚的睡眠记录预测 130 种疾病。
 
 ## Part 2 · 正文
+
+### x-2072842886891376872
+
+**Lucas Thunderhawk (@lucathunderhawk)** · 发帖 2026-07-03 · [原帖](https://x.com/lucathunderhawk/status/2072842886891376872)
+
+- **Introducing Honen**
+  - Turns your company context into **interactive courses that self-improve over time**
+- **Partnered with NVIDIA** to bring AI literacy to **250,000 learners**
+- Goal: no person or company gets left behind
+- Get started: http://honen.com/contact
+
+
+- 含视频（未转写）
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2114979460495872355
+
+**How To Prompt (@HowToPrompt__)** · 发帖 2026-10-27 · [原帖](https://x.com/HowToPrompt__/status/2114979460495872355)
+
+- **Claim: IBM built a retriever that hallucinates 65x less than fine-tuned RAG systems**
+- **Why RAG is used**
+  - Companies use Retrieval-Augmented Generation (RAG) to stop AI from hallucinating
+  - Idea: give the AI a private database to read so it doesn't make things up
+- **The structural flaw in standard RAG**
+  - It grabs documents based on **vector similarity** and forces the model to read them
+  - If the retriever pulls irrelevant documents, the AI doesn't stop
+  - It just **hallucinates with citations**
+- **IBM's new paper**
+  - A new retrieval architecture: **65x fewer hallucinations** than state-of-the-art fine-tuned RAG systems
+  - Instead of dumping context into the model, it **actively filters and validates retrieved data before generation**
+  - Cuts out noise, forces precision
+  - Author's framing: 65x is the difference between a prototype and a production-grade enterprise system
+- **Claimed business impact**
+  - Fewer hallucinations → less liability
+  - Autonomous agents could be trusted with sensitive company data without a human checking every output
+- Note: the post names no paper title or link
+
+<details><summary>原文</summary>
+
+> RAG is officially cooked.
+>
+> IBM built a retriever that hallucinates 65x less than fine-tuned RAG systems.
+>
+> Right now, every company is using Retrieval-Augmented Generation (RAG) to stop their AI from hallucinating.
+>
+> The idea is to give the AI a private database to read so it doesn't make things up.
+>
+> But there is a massive structural flaw.
+>
+> Standard RAG blindly grabs documents based on vector similarity and forces the AI to read them. If the retriever pulls irrelevant garbage, the AI doesn't stop.
+>
+> It just hallucinates with citations.
+>
+> IBM just dropped a paper that changes the math entirely.
+>
+> They built a new retrieval architecture that hallucinates 65x less than state-of-the-art fine-tuned RAG systems.
+>
+> 65x is the difference between a fun prototype and a production-grade enterprise system.
+>
+> Instead of blindly dumping context into the model and hoping for the best, their system actively filters and validates the retrieved data before the generation step even begins.
+>
+> It cuts out the noise. It forces absolute precision.
+>
+> For businesses, this is the holy grail.
+>
+> Zero hallucinations means zero liability. It means autonomous agents can finally be trusted with sensitive company data without a human babysitting every output.
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/HVnqmRGbkAAI8U7?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2007833514239250463
+
+**AI Breakfast (@AiBreakfast)** · 发帖 2026-01-04 · [原帖](https://x.com/AiBreakfast/status/2007833514239250463)
+
+- 🔖 也在 Notes 里，全文见：[SmolVLM + llama.cpp 实时视觉 demo](09-other-applications.md#x-2007833514239250463)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2007869846957310169
+
+**Swapna Kumar Panda (@swapnakpanda)** · 发帖 2026-01-04 · [原帖](https://x.com/swapnakpanda/status/2007869846957310169)
+
+- 🔖 也在 Notes 里，全文见：[斯坦福免费 AI/ML 课程合集](08-llm-courses.md#x-2007869846957310169)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2008010575306211772
+
+**小樱｜实用工具分享 (@xiaoying_eth)** · 发帖 2026-01-05 · [原帖](https://x.com/xiaoying_eth/status/2008010575306211772)
+
+- 🔖 也在 Notes 里，全文见：[awesome-llm-apps：85K 星的 LLM 应用合集](02-graph-multi-agent.md#x-2008010575306211772)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2008117170879041729
+
+**Simplifying AI (@simplifyinAI)** · 发帖 2026-01-05 · [原帖](https://x.com/simplifyinAI/status/2008117170879041729)
+
+- 🔖 也在 Notes 里，全文见：[VS Code 直连 Google Colab，免费用 T4 GPU](09-other-applications.md#x-2008117170879041729)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2006563537779568867
+
+**摆烂程序媛 (@wanerfu)** · 发帖 2026-01-01 · [原帖](https://x.com/wanerfu/status/2006563537779568867)
+
+- **谷歌发布 46 页 AI 代理（Agent）手册 PDF**
+  - 作者评价：不是科普，而是内部级方法论
+  - 适合想搞懂 Agent 发展方向的人
+  - 🔗 https://services.google.com/fh/files/misc/ai_agents_handbook.pdf
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G9i-5imaMAERVBE?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-2000219246601920671
+
+**DAIR.AI (@dair_ai)** · 发帖 2025-12-14 · [原帖](https://x.com/dair_ai/status/2000219246601920671)
+
+- **Top AI Papers of the Week (Dec 8 - 14)**
+  - ProAgent
+  - Selective Gradient Masking
+  - Agentic AI Adaptation Survey
+  - AI and Human Co-Improvement
+  - Reasoning Models Ace the CFA Exams
+  - Pre-Training, Mid-Training, and RL Interplay
+  - Towards a Science of Scaling Agent Systems
+- Details were in the follow-up thread, which is not in the source
+
+<details><summary>原文</summary>
+
+> Top AI Papers of the Week (Dec 8 - 14):
+>
+> - ProAgent
+> - Selective Gradient Masking
+> - Agentic AI Adaptation Survey
+> - AI and Human Co-Improvement
+> - Reasoning Models Ace the CFA Exams
+> - Pre-Training, Mid-Training, and RL Interplay
+> - Towards a Science of Scaling Agent Systems
+>
+> Read on for more:
+
+</details>
+
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1990807058451419185
+
+**Paweł Huryn (@PawelHuryn)** · 发帖 2025-11-18 · [原帖](https://x.com/PawelHuryn/status/1990807058451419185)
+
+- **Google released the Gemini File Search API** — RAG-as-a-Service
+- The author built a **RAG chatbot in 31 minutes**, with no coding
+- The post says "here's how it works", but the walkthrough (thread/media) is not in the source text
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G6DB8YMWsAAy3Gq?format=png&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1986898954752303297
+
+**caffeine (@caffeineai)** · 发帖 2025-11-07 · [原帖](https://x.com/caffeineai/status/1986898954752303297)
+
+- **Caffeine** — turns your ideas into launch-ready apps just by chatting
+  - Pitched at people without a dev team
+  - Free to start
+
+
+- 链接卡片：[Chat → App](https://caffeine.ai/?utm_source=X-Caffeine&utm_medium=paid-social&utm_campaign=X_US_XTeam_FollowerLookAlike&utm_content=No-dev-team-image)
+- 图片：[img1](https://pbs.twimg.com/media/G4AVrHPWwAE6Gst?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1988747732614517233
+
+**OpenAI (@OpenAI)** · 发帖 2025-11-12 · [原帖](https://x.com/OpenAI/status/1988747732614517233)
+
+- **OpenAI Reddit AMA** on **GPT-5.1** and customization updates
+- Time: tomorrow (relative to the post), **2PM PT**
+
+
+- 链接卡片：[From the OpenAI community on Reddit](https://t.co/9WfAa5GVXw)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1886480522404048945
+
+**Right Scope  (@RightScopee)** · 发帖 2025-02-03 · [原帖](https://x.com/RightScopee/status/1886480522404048945)
+
+- Political post: calls on people to show Senators support for **Kash Patel** as **FBI Director**
+- Asks readers to reply with a "👍" if they agree
+
+
+- 图片：[img1](https://pbs.twimg.com/media/Gi4gCQiWwAAFX4n?format=jpg&name=large)
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1884054373430706187
+
+**Liz Churchill (@liz_churchill10)** · 发帖 2025-01-28 · [原帖](https://x.com/liz_churchill10/status/1884054373430706187)
+
+- Captioned "Comedy Gold" about **'Trump's Executive Orders'**
+- The actual content is in an image/video, not the text
+
+
+- 含视频（未转写）
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1878969190335590889
+
+**Donald J. Trump (@realDonaldTrump)** · 发帖 2025-01-14 · [原帖](https://x.com/realDonaldTrump/status/1878969190335590889)
+
+- 正文为空，内容在图片/视频里
+
+
+- 含视频（未转写）
+
+[↑ 回到目录](#part-1--keywords)
+
+### x-1769768065712177615
+
+**Yann LeCun (@ylecun)** · 发帖 2024-03-18 · [原帖](https://x.com/ylecun/status/1769768065712177615)
+
+- **We can think even if language abilities are destroyed by a stroke**
+  - Language is a way to **express** thoughts
+  - Thoughts, memories, and reasoning **exist without language**
+- **Favorite quote from an MIT piece**
+  - "This language system seems to be distinct from regions that are linked to our ability to plan, remember, reminisce on past and future, reason in social situations, experience empathy, make moral decisions, and construct one's self-image. Thus, vast portions of our everyday cognitive experiences appear to be unrelated to language per se."
+- **引用 / Quoted:** Kostas Daniilidis (@KostasPenn), Mar 17, 2024
+  - "Damage to the language system within an adult human brain leaves most other cognitive functions intact."
+  - There is ample evidence that reasoning can happen after language ability disappears
+  - https://mcgovern.mit.edu/2019/05/02/ask-the-brain-can-we-think-without-language/
+
+<details><summary>原文</summary>
+
+> We can think, even if our language abilities are destroyed by a stroke.
+> Language is a way to express thoughts, but thoughts, memories, and reasoning exist without language.
+>
+> Favorite quote from this MIT piece: "This language system seems to be distinct from regions that are linked to our ability to plan, remember, reminisce on past and future, reason in social situations, experience empathy, make moral decisions, and construct one’s self-image. Thus, vast portions of our everyday cognitive experiences appear to be unrelated to language per se."
+
+</details>
+
+
+[↑ 回到目录](#part-1--keywords)
 
 ### x-2115125125163233473
 
@@ -4494,11 +4776,7 @@
 
 **David Ondrej (@DavidOndrej1)** · 发帖 2026-01-20 · [原帖](https://x.com/DavidOndrej1/status/2013725989952467308)
 
-- **Anthropic released a 7-hour Claude Code masterclass**
-- The author went through the entire course and condensed it into a 27-minute video
-
-
-- 含视频（未转写）
+- 🔖 也在 Notes 里，全文见：[Anthropic 7 小时 Claude Code 课程的 27 分钟浓缩版](05-coding-agent.md#x-2013725989952467308)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4506,12 +4784,7 @@
 
 **Dilum Sanjaya (@DilumSanjaya)** · 发帖 2026-01-19 · [原帖](https://x.com/DilumSanjaya/status/2013293638768562325)
 
-- **Vibe Coding Robotics, Part 7**
-  - Implemented an **ornithopter** mechanism with Gemini Pro
-  - Generated a Leonardo da Vinci–style UI for it with Nano Banana
-
-
-- 含视频（未转写）
+- 🔖 也在 Notes 里，全文见：[Vibe Coding Robotics 第 7 篇：扑翼机构 + 达芬奇风格 UI](09-other-applications.md#x-2013293638768562325)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4531,13 +4804,7 @@
 
 **KK.aWSB (@KKaWSB)** · 发帖 2026-01-13 · [原帖](https://x.com/KKaWSB/status/2011149280468484157)
 
-- **别再说 AI 不能做设计**
-  - **Cursor + Opus 4.5** 不到 10 分钟就做出一个带滚动叙事动画的落地页
-  - 设计师做这样的页面通常要收几千美元
-- 落地页如果还像 2010 年的应用，不是 AI 的问题，而是**工作流程**的问题
-
-
-- 含视频（未转写）
+- 🔖 也在 Notes 里，全文见：[Cursor + Opus 4.5 十分钟做出滚动叙事落地页](05-coding-agent.md#x-2011149280468484157)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4559,33 +4826,7 @@
 
 **Chris (@ChrisGPT)** · 发帖 2026-01-12 · [原帖](https://x.com/ChrisGPT/status/2010804702313652647)
 
-- **Anthropic unveiled "Cowork"** — turns Claude into an autonomous virtual assistant for everyone
-  - Brings agentic capabilities previously reserved for coders to general users
-  - Claude performs complex tasks directly on your computer
-- **Origin**: Anthropic noticed developers using **Claude Code** for everyday admin tasks
-- **What it does**
-  - Grant Claude access to folders to manage files, research, and complete multi-step workflows independently
-  - Acts as a digital employee that "does" instead of just chats
-- **Availability**: research preview for **Claude Max** subscribers on the **macOS app**
-- **Competitive gap (per the author)**
-  - Claude is shipping coding/desktop agents faster than competitors
-  - Google still lacks a consumer browser agent; xAI has no native CLI or agentic interface
-  - OpenAI has "Operator", Google has the developer-focused "Antigravity"
-  - Anthropic is now the only other major lab with a true "do-it-for-me" experience for general users
-
-<details><summary>原文</summary>
-
-> BREAKING 🚨 Anthropic just unveiled "Cowork," a major feature that turns Claude into a fully autonomous virtual assistant for everyone. It brings the deep agentic capabilities previously reserved for coders to general users, allowing Claude to perform complex tasks directly on your computer.
->
-> The tool was built after Anthropic noticed developers using "Claude Code" for everyday admin tasks. Cowork now lets anyone grant Claude access to folders to manage files, research, and complete multi-step workflows independently acting as a digital employee that "does" instead of just chats.
->
-> Cowork is available today as a research preview for Claude Max subscribers on the macOS app 😡. Claude is releasing new coding/desktop agents much faster than all of there competitors. 
->
-> This launch exposes a massive gap in the current AI landscape: in 2026, Google still explicitly lacks a consumer browser agent, and xAI has yet to release a native CLI or agentic interface. While OpenAI has "Operator" and Google has the developer-focused "Antigravity," Anthropic is now the only other major lab providing a true "do-it-for-me" experience for general users.
-
-</details>
-
-- 含视频（未转写）
+- 🔖 也在 Notes 里，全文见：[Anthropic 发布 Cowork：面向所有人的 Claude 自主助理](07-openclaw-personal-agent.md#x-2010804702313652647)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4593,53 +4834,7 @@
 
 **DAIR.AI (@dair_ai)** · 发帖 2026-01-12 · [原帖](https://x.com/dair_ai/status/2010720188686348593)
 
-- **Problem: LLM agents need memory for long conversations, and today's approaches are wasteful**
-  - Retaining full interaction histories → massive redundancy
-  - Iterative reasoning to filter noise → excessive token consumption
-- **SimpleMem**: an efficient memory framework based on **semantic lossless compression**
-  - Maximizes information density while minimizing token consumption
-- **Three-stage pipeline**
-  1. **Semantic Structured Compression**
-     - Entropy-aware filtering distills raw dialogue into compact memory units
-     - Resolves coreferences
-     - Converts relative time ("last Friday") into absolute timestamps
-  2. **Recursive Memory Consolidation**
-     - Incrementally integrates related memories into higher-level abstractions
-     - e.g. repeated "ordered a latte at 8 AM" → "regularly drinks coffee in the morning"
-  3. **Adaptive Query-Aware Retrieval**
-     - Dynamically adjusts retrieval scope based on query complexity
-- **Results (LoCoMo benchmark, GPT-4.1-mini)**
-  - **43.24 F1** vs strongest baseline Mem0 at 34.20 — a **26.4%** improvement
-  - **531 tokens per query** vs 16,910 for full-context approaches — a **30x** reduction
-  - Memory construction **14x faster than Mem0** (92.6s vs 1350.9s per sample) and **50x faster than A-Mem**
-  - Even a 3B model with SimpleMem outperforms larger models using inferior memory strategies
-- **Takeaway**: structured semantic compression + adaptive retrieval let agents keep reliable long-term memory without drowning in tokens or losing accuracy
-
-<details><summary>原文</summary>
-
-> Efficient Lifelong Memory for LLM Agents
->
-> LLM agents need memory to handle long conversations. The way this is handled today is that memory either retains full interaction histories, leading to massive redundancy, or relies on iterative reasoning to filter noise, consuming excessive tokens.
->
-> This new research introduces SimpleMem, an efficient memory framework based on semantic lossless compression that maximizes information density while minimizing token consumption.
->
-> The framework operates through a three-stage pipeline.
->
-> 1) First, Semantic Structured Compression applies entropy-aware filtering to distill raw dialogue into compact memory units, resolving coreferences and converting relative time expressions ("last Friday") into absolute timestamps.
->
-> 2) Second, Recursive Memory Consolidation incrementally integrates related memories into higher-level abstractions, turning repetitive entries like "ordered a latte at 8 AM" into patterns like "regularly drinks coffee in the morning."
->
-> 3) Third, Adaptive Query-Aware Retrieval dynamically adjusts the retrieval scope based on query complexity.
->
-> The results: On the LoCoMo benchmark with GPT-4.1-mini, SimpleMem achieves 43.24 F1, outperforming the strongest baseline Mem0 (34.20) by 26.4%, while reducing token consumption to just 531 tokens per query compared to 16,910 for full-context approaches, a 30x reduction.
->
-> They claim that memory construction is 14x faster than Mem0 (92.6s vs 1350.9s per sample) and 50x faster than A-Mem. Even a 3B parameter model with SimpleMem outperforms larger models using inferior memory strategies.
->
-> This work shows that structured semantic compression and adaptive retrieval enable LLM agents to maintain reliable long-term memory without drowning in tokens or sacrificing accuracy.
-
-</details>
-
-- 图片：[img1](https://pbs.twimg.com/media/G-eDWs3bQAEMAzs?format=jpg&name=large)
+- 🔖 也在 Notes 里，全文见：[SimpleMem：基于语义无损压缩的高效 Agent 长期记忆](03-memory-rag.md#x-2010720188686348593)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4662,39 +4857,7 @@
 
 **Julian Goldie SEO (@JulianGoldieSEO)** · 发帖 2026-01-11 · [原帖](https://x.com/JulianGoldieSEO/status/2010178642752704850)
 
-- **Things you can do with AntiGravity that most users miss**
-  - Switch between free APIs (Opus, Sonnet, Claude)
-  - Generate images with Google's Nano Banana
-  - Connect MCP servers directly to your projects
-  - Use Claude Code inside the terminal for better UI
-  - Deploy apps to Netlify in one click
-  - Pull NotebookLM content into your builds
-- **Approach**: no paid APIs, no limits — just stack free tools
-
-<details><summary>原文</summary>
-
-> AntiGravity just became 10x more powerful.
->
-> And 99% of users have no idea.
->
-> Here's what you can actually do with it:
->
-> → Switch between free APIs (Opus, Sonnet, Claude)
-> → Generate images with Google's Nano Banana
-> → Connect MCP servers directly to your projects
-> → Use Claude Code inside the terminal for better UI
-> → Deploy apps to Netlify in one click
-> → Pull NotebookLM content into your builds
->
-> No paid APIs. No limits. Just stack free tools.
->
-> Save this video, you'll never use it the same way again.
->
-> Want the SOP? DM me. 💬
-
-</details>
-
-- 含视频（未转写）
+- 🔖 也在 Notes 里，全文见：[AntiGravity 的隐藏用法](05-coding-agent.md#x-2010178642752704850)
 
 [↑ 回到目录](#part-1--keywords)
 
@@ -4702,11 +4865,7 @@
 
 **Md Ismail Šojal  (@0x0SojalSec)** · 发帖 2026-01-09 · [原帖](https://x.com/0x0SojalSec/status/2009709579903643768)
 
-- **Open-sourced 42 n8n agent templates** from the "AI Agents A to Z" course
-- Repo: http://github.com/gyoridavid/ai_agents_az
-
-
-- 图片：[img1](https://pbs.twimg.com/media/G-Pr2R5bUAAchy8?format=png&name=large)
+- 🔖 也在 Notes 里，全文见：[42 个开源 n8n Agent 模板（AI Agents A to Z）](02-graph-multi-agent.md#x-2009709579903643768)
 
 [↑ 回到目录](#part-1--keywords)
 

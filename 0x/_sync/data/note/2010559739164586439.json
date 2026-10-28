@@ -1,0 +1,20 @@
+{
+ "id": "2010559739164586439",
+ "handle": "techwith_ram",
+ "name": "𝗿𝗮𝗺𝗮𝗸𝗿𝘂𝘀𝗵𝗻𝗮— 𝗲/𝗮𝗰𝗰",
+ "url": "https://x.com/techwith_ram/status/2010559739164586439",
+ "created_at": "2026-01-12T03:49:30.000Z",
+ "text": "MIT just released a 700-page book that actually teaches machines how to think.\n\nPdf: https://algorithmsbook.com/files/dm.pdf",
+ "media": [
+  "https://pbs.twimg.com/media/G-bxEt6bUAE9FbV?format=png&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 66,
+ "thread": [],
+ "title": "MIT 700 页免费书《Algorithms for Decision Making》",
+ "category": "LLM 基础 & 课程",
+ "kind": "课程推荐",
+ "summary": "推荐一本约 700 页的免费书，讲让机器学会决策的算法，附 PDF 链接（algorithmsbook.com 的 dm.pdf，即《Algorithms for Decision Making》）。适合系统学习决策、规划与强化学习基础。"
+}

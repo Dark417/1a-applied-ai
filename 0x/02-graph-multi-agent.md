@@ -2,10 +2,13 @@
 
 - [← 返回总目录](x-note.md)
 - graph engineering、多 agent 编排与流水线
-- 共 9 篇，按收藏顺序倒序（最新在上）
+- 共 12 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [一人指挥 50+ AI Agent：SpaceXAI 工程师的自动化工作流](#x-2115133828650213693) · @AndyL5cc · 2026-10-27 · 案例分享
+- [42 个开源 n8n Agent 模板（AI Agents A to Z）](#x-2009709579903643768) · @0x0SojalSec · 2026-01-09 · 资源推荐
+- [awesome-llm-apps：85K 星的 LLM 应用合集](#x-2008010575306211772) · @xiaoying_eth · 2026-01-05 · 资源推荐
 - [Google 1 小时课程：从 agent 到 loop 到 graph](#x-2085433401562308987) · @Mahaximus_ · 2026-08-06 · 课程推荐
 - [How to Become a Graph Architect With Zero Experience (Full Course)](#x-2083131009986396282) · @eng_khairallah1 · 2026-07-31 · 学习路线（长文教程）
 - [Graph Engineering with Claude: 12 steps from a single loop to a self-verifying fleet](#x-2079636027736457707) · @0xCarnagee · 2026-07-21 · 搭建教程（带代码）
@@ -17,6 +20,96 @@
 - [Shubham Saboo：7×24 运行的 AI Agent 团队蓝图](#x-2022374455989932409) · @Saboo_Shubham_ · 2026-02-13 · 蓝图分享
 
 ## Part 2 · Details
+
+### x-2115133828650213693
+
+**一人指挥 50+ AI Agent：SpaceXAI 工程师的自动化工作流**
+
+- 作者：Andy L (@AndyL5cc) · 发帖 2026-10-27 · [原帖](https://x.com/AndyL5cc/status/2115133828650213693)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：案例分享
+- **总结**：转述一位前 Cursor、现 SpaceXAI 高级工程师的工作流：1 个 AI 总管统筹、3 个 AI 项目经理分配协调、40 多个 AI 员工通宵执行，号称一人干 20 个工程师的活，并称 97% 的同事在用类似方式。原作者有 60 分钟从零搭建教程。帖子本身是转述和推荐，层级式多 agent 编排是重点，具体做法需看原教程。
+
+**正文**
+
+- **一个人指挥 50 多个 AI Agent，干了 20 个工程师的活**
+- 分享者：一位曾在 Cursor 工作的 SpaceXAI 高级工程师
+  - 每天早上喝杯咖啡，就能管理整个 AI 团队
+- **她的配置**
+  - **1 个 AI 总管**：统筹所有工作
+  - **3 个 AI 项目经理**：分配任务、协调进度
+  - **40 多个 AI 员工**：通宵自动执行任务
+- 她声称 **97% 的 SpaceXAI 工程师**已在使用类似的工作方式
+- 她做了一场 **60 分钟教程**，从零教你搭建整套系统
+  - 帖子称以前有人收费 5000 美元教同类内容
+- 作者观点：以后一个人就是一家软件公司
+- 帖子中没有教程链接
+
+<details><summary>原文</summary>
+
+> 太夸张了！一个人指挥 50 多个 AI Agent，干了 20 个工程师的活！😱
+>
+> 一位曾在 Cursor 工作的 SpaceXAI 高级工程师，分享了她的 AI 自动化工作流：
+>
+> 每天早上喝杯咖啡，就能管理整个 AI 团队。
+>
+> 她的配置是：
+>
+> 1 个 AI 总管：统筹所有工作
+> 3 个 AI 项目经理：分配任务、协调进度
+> 40 多个 AI 员工：通宵自动执行任务
+>
+> 她还声称，97% 的 SpaceXAI 工程师已经在使用类似的工作方式。
+>
+> 她用一场 60 分钟的教程，从零教你搭建整套系统。
+>
+> 以前有人收费 5000 美元教的东西，现在直接公开了。
+>
+> 以后一个人就是一家软件公司，真不是开玩笑！🤣
+>
+> 建议收藏！
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2009709579903643768
+
+**42 个开源 n8n Agent 模板（AI Agents A to Z）**
+
+- 作者：Md Ismail Šojal  (@0x0SojalSec) · 发帖 2026-01-09 · [原帖](https://x.com/0x0SojalSec/status/2009709579903643768)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：资源推荐
+- **总结**：推荐开源仓库 gyoridavid/ai_agents_az，提供完整课程《AI Agents A to Z》里的 42 个 n8n agent 工作流模板。适合用 n8n 拼装 agent 流水线时直接拿来改。
+
+**正文**
+
+- **Open-sourced 42 n8n agent templates** from the "AI Agents A to Z" course
+- Repo: http://github.com/gyoridavid/ai_agents_az
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G-Pr2R5bUAAchy8?format=png&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2008010575306211772
+
+**awesome-llm-apps：85K 星的 LLM 应用合集**
+
+- 作者：小樱｜实用工具分享 (@xiaoying_eth) · 发帖 2026-01-05 · [原帖](https://x.com/xiaoying_eth/status/2008010575306211772)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：资源推荐
+- **总结**：推荐 GitHub 上的 awesome-llm-apps（Shubhamsaboo），收录大量开源 LLM agent / RAG 应用示例，已超 85K 星，完全免费。适合找可直接运行的 agent 范例。帖子只有推荐语和链接。
+
+**正文**
+
+- **awesome-llm-apps**：GitHub 上的 LLM 智能体合集，已突破 **85K+ 星标**
+  - 完全免费且开源
+  - https://github.com/Shubhamsaboo/awesome-llm-apps
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G93i-MCagAAsanm?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2085433401562308987
 

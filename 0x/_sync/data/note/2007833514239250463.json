@@ -1,0 +1,38 @@
+{
+ "id": "2007833514239250463",
+ "handle": "AiBreakfast",
+ "name": "AI Breakfast",
+ "url": "https://x.com/AiBreakfast/status/2007833514239250463",
+ "created_at": "2026-01-04T15:16:28.000Z",
+ "text": "Near-instantaneous open-source vision models are here, and they’re cheap:\n\nThis is a real-time demo built with HuggingFace SmolVLM and llama.cpp using only a webcam\n\n(Github link below)",
+ "has_video": true,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 72,
+ "thread": [
+  {
+   "id": "2007833516487360738",
+   "handle": "AiBreakfast",
+   "name": "AI Breakfast",
+   "url": "https://x.com/AiBreakfast/status/2007833516487360738",
+   "created_at": "2026-01-04T15:16:28.000Z",
+   "text": "GitHub:",
+   "quote": {
+    "name": "Simplifying AI @simplifyinAI · Jan 3",
+    "text": "Repo: https://github.com/ngxson/smolvlm-realtime-webcam…"
+   },
+   "has_video": false
+  }
+ ],
+ "keywords": [
+  "SmolVLM",
+  "llama.cpp",
+  "Hugging Face",
+  "real-time vision"
+ ],
+ "gist": "演示用 Hugging Face SmolVLM + llama.cpp 和普通摄像头做的实时视觉模型 demo，说明开源视觉模型已经又快又便宜。",
+ "title": "SmolVLM + llama.cpp 实时视觉 demo",
+ "category": "其他应用",
+ "kind": "案例分享",
+ "summary": "展示用 Hugging Face SmolVLM 和 llama.cpp 搭的实时视觉 demo，只用一个摄像头就能近乎即时地识别画面，说明开源小视觉模型已经足够快且便宜。帖子说附 GitHub 链接，但抓到的内容里链接缺失。"
+}

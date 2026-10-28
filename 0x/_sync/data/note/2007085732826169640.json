@@ -1,0 +1,21 @@
+{
+ "id": "2007085732826169640",
+ "handle": "fhwofjow51260",
+ "name": "娜美知识库",
+ "url": "https://x.com/fhwofjow51260/status/2007085732826169640",
+ "created_at": "2026-01-02T13:45:03.000Z",
+ "text": "推荐在 GitHub 上发现一个很好用的视频下载工具：ytDownloader。\n\n完全开源免费，支持 YouTube、Facebook、Instagram、TikTok、Twitter 等主流平台，可下载视频或音频，支持批量下载播放列表、字幕获取、时间范围裁剪，并内置硬件加速和视频压缩。提供 Windows、macOS、Linux 的开箱即用安装包，部署和使用都很省心。\nGitHub：",
+ "card": {
+  "text": "GitHub - aandrew-me/ytDownloader: Desktop app to download audio/video from hundreds of sites",
+  "href": "https://t.co/gZoKhFhptV"
+ },
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 77,
+ "thread": [],
+ "title": "ytDownloader：开源多平台视频下载工具",
+ "category": "其他",
+ "kind": "工具推荐",
+ "summary": "推荐开源免费的视频下载工具 ytDownloader：支持 YouTube、Facebook、Instagram、TikTok、Twitter 等，可下视频或音频，支持批量下载播放列表、字幕、时间段裁剪、硬件加速和压缩，提供 Windows/macOS/Linux 安装包。帖子里的 GitHub 链接没有显示出来。"
+}

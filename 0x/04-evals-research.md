@@ -2,10 +2,12 @@
 
 - [← 返回总目录](x-note.md)
 - 评测方法、论文与综述
-- 共 5 篇，按收藏顺序倒序（最新在上）
+- 共 7 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [Agent-R1：一天内训练自己的 deep research agent](#x-2008555154019172592) · @askalphaxiv · 2026-01-06 · 论文解读
+- [Agentic AI 综述：符号派与神经派双范式](#x-1995494108295782895) · @dair_ai · 2025-12-01 · 综述解读
 - [Evals：如何判断一个 AI 系统真的可用](#x-2106453816757354947) · @sermakarevich · 2026-10-03 · 概念 + 方法（长文教程）
 - [Google Nexus：把预测变成推理问题](#x-2055978135246807138) · @rohanpaul_ai · 2026-05-17 · 论文解读
 - [DAIR.AI 每周论文（4/26–5/3）](#x-2050956647909015788) · @dair_ai · 2026-05-03 · 论文汇总
@@ -13,6 +15,66 @@
 - [DeepMind + Meta + Amazon：100 页 agentic reasoning 路线图](#x-2024602668258517440) · @hasantoxr · 2026-02-19 · 综述解读
 
 ## Part 2 · Details
+
+### x-2008555154019172592
+
+**Agent-R1：一天内训练自己的 deep research agent**
+
+- 作者：alphaXiv (@askalphaxiv) · 发帖 2026-01-06 · [原帖](https://x.com/askalphaxiv/status/2008555154019172592)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：论文解读
+- **总结**：alphaXiv 介绍 Agent-R1：用强化学习教 agent 在多轮交互中正确使用工具，效果比 RAG 好 3 倍，并提供分步教程（MDP 扩展、action masking 等）。重点是用 RL 训练工具调用型研究 agent 的方法。
+
+**正文**
+
+- **Train your own deep research agent in under a day**
+- **Agent-R1** uses **RL** to teach agents proper tool use over multi-turn interactions
+  - Achieves **3x better performance than RAG**
+- alphaXiv provides a step-by-step tutorial of the work
+  - Covers MDP extensions, action masking, and more
+  - The tutorial itself is in the follow-up/media, not in this post's text
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G996ACPbcAEx-qc?format=png&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-1995494108295782895
+
+**Agentic AI 综述：符号派与神经派双范式**
+
+- 作者：DAIR.AI (@dair_ai) · 发帖 2025-12-01 · [原帖](https://x.com/dair_ai/status/1995494108295782895)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：综述解读
+- **总结**：DAIR.AI 推荐一篇 Agentic AI 综述，覆盖架构、应用和未来方向。核心是提出双范式框架：符号/经典派（算法规划 + 持久状态）与神经/生成派（随机生成 + prompt 驱动编排），并按这两条脉络梳理现有 agent 系统。适合建立整体概念地图。
+
+**正文**
+
+- **Agentic AI Overview** — a comprehensive report on architectures, applications, and future directions
+  - Paper: https://link.springer.com/article/10.1007/s10462-025-11422-4
+- **New dual-paradigm framework** that categorizes agentic systems into two lineages:
+  - **Symbolic / classical** — relies on algorithmic planning and persistent state
+  - **Neural / generative** — leverages stochastic generation and prompt-driven orchestration
+- Good read for AI devs and enthusiasts
+- DAIR.AI academy on building AI agents: https://dair-ai.thinkific.com
+
+<details><summary>原文</summary>
+
+> Agentic AI Overview
+>
+> This report provides a comprehensive overview of architectures, applications, and future directions.
+>
+> Great read for AI devs and enthusiasts.
+>
+> It introduces a new dual-paradigm framework that categorizes
+> agentic systems into two distinct lineages: the symbolic/classical (relying on algorithmic planning and persistent state) and the neural/generative (leveraging stochastic generation and prompt-driven orchestration).
+>
+> Paper: https://link.springer.com/article/10.1007/s10462-025-11422-4
+> Learn how to build AI Agents in our academy: https://dair-ai.thinkific.com
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G7FrUKCbkAAEOqV?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2106453816757354947
 

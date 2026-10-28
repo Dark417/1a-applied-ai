@@ -2,10 +2,12 @@
 
 - [← 返回总目录](x-note.md)
 - agent 外壳（工具/上下文/权限/记忆）、循环与自我改进
-- 共 8 篇，按收藏顺序倒序（最新在上）
+- 共 10 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [agent-skills-for-context-engineering：上下文工程技能集](#x-2010522921022672896) · @binghe · 2026-01-12 · 项目分享
+- [Anthropic 推出 Claude 高级工具调用](#x-1994752453703508395) · @bibryam · 2025-11-29 · 工具发布
 - [Google 开源 Harness²：递归改进 agent harness](#x-2113948384113598588) · @Sumanth_077 · 2026-10-24 · 工具发布 / 方法介绍
 - [Anthropic 工程师：用 harness 搭会自我改进的 agent](#x-2113719510985269442) · @hayatomaruu · 2026-10-23 · 搭建思路 / 视频推荐
 - [Wavestone：11 个 coding agent 共有的 7 部分 harness](#x-2113634548378374458) · @AnnatarXBT · 2026-10-23 · 论文解读 / 方法对比
@@ -16,6 +18,55 @@
 - [前 Google 工程师：agent loop + harness + evals 技术栈](#x-2071214176526049739) · @0xMovez · 2026-06-28 · 视频推荐 / 框架
 
 ## Part 2 · Details
+
+### x-2010522921022672896
+
+**agent-skills-for-context-engineering：上下文工程技能集**
+
+- 作者：冰河 (@binghe) · 发帖 2026-01-12 · [原帖](https://x.com/binghe/status/2010522921022672896)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：项目分享
+- **总结**：推荐两周 6.4K 星的开源项目：一套面向上下文工程、多 agent 架构和生产级 agent 系统的 skills。作者认为它把上下文拆解、压缩、隔离等实践系统化，像一份整理好的方法论，能缓解 agent“又慢又乱”的问题。
+
+**正文**
+
+- **agent-skills-sor-context-engineering**：很火的项目，两周就 **6.4K 星**
+- 一套全面的智能体技能集，专为以下场景设计：
+  - **上下文工程**
+  - **多智能体架构**
+  - **生产级智能体系统**
+- 适用于构建、优化或调试需要高效上下文管理的智能体系统
+- **为什么火**：第一次把大家长期隐约感到的痛点说清楚了
+  - 更像一份整理得很好的经验总结和方法论
+  - 把上下文的**拆解、压缩、隔离**等实践系统化
+  - 缓解了 Agent "又慢又乱"的表层问题
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G-bPLiWbgAAVN2Z?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-1994752453703508395
+
+**Anthropic 推出 Claude 高级工具调用**
+
+- 作者：Bilgin Ibryam (@bibryam) · 发帖 2025-11-29 · [原帖](https://x.com/bibryam/status/1994752453703508395)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具发布
+- **总结**：介绍 Anthropic 的 advanced tool use：Claude 可以按需发现工具（tool search）、通过 Python 代码调用工具（programmatic tool calling）、从使用示例中学习用法。作者认为这是构建可扩展 agent 的一大步，附 Anthropic 工程博客链接。
+
+**正文**
+
+- **Anthropic introduced advanced tool use for Claude**
+  - https://anthropic.com/engineering/advanced-tool-use
+- Claude can now:
+  - **Discover tools on-demand**
+  - **Run tools through Python code**
+  - **Learn from usage examples**
+- A big step for building **scalable AI agents**
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G63fbx7XwAAiEJW?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2113948384113598588
 

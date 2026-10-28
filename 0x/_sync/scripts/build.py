@@ -17,8 +17,12 @@ Routing rules (from the spec):
   Liked AND bookmarked          -> both (two independent tasks)
 
 Usage:
-  build.py plan   <run_dir>   -> prints the items that need enrichment (JSON)
-  build.py apply  <run_dir>   -> writes data/*.json + state.json
+  build.py plan   <run_dir>          -> prints the items that need enrichment (JSON)
+  build.py apply  <run_dir> [note]   -> writes data/*.json + state.json, appends runs.json
+  build.py empty  <RUN> [note]       -> appends a "nothing new" entry to runs.json
+
+runs.json (one entry per run, rendered into 0x/x-log.md by render.py):
+  {run, liked: [new ids], notes: [new ids], seen: {likes, bookmarks}, note}
 """
 from __future__ import annotations
 
@@ -29,6 +33,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 STATE = ROOT / "state.json"
+RUNS = ROOT / "runs.json"
 KEEP = ("id", "handle", "name", "url", "created_at", "text", "quote", "media", "card", "has_video", "x_article")
 
 
@@ -89,9 +94,18 @@ def plan(run: Path) -> None:
     print(json.dumps(out, ensure_ascii=False, indent=1))
 
 
-def apply(run: Path) -> None:
+def record(run: str, new: dict, seen: dict, note: str = "") -> None:
+    runs = [r for r in rd(RUNS, []) if r["run"] != run]
+    runs.append({"run": run, "liked": new.get("liked", []), "notes": new.get("note", []),
+                 "seen": seen, "note": note})
+    runs.sort(key=lambda r: r["run"])
+    RUNS.write_text(json.dumps(runs, ensure_ascii=False, indent=1), encoding="utf-8")
+
+
+def apply(run: Path, note: str = "") -> None:
     liked, notes = route(run)
     enrich = rd(run / "enrich.json", {})
+    new = {"liked": [], "note": []}
     for kind, items in (("liked", liked), ("note", notes)):
         (DATA / kind).mkdir(parents=True, exist_ok=True)
         for i, t in items.items():
@@ -100,6 +114,9 @@ def apply(run: Path) -> None:
                 continue  # already processed in an earlier run; keep its original order
             t.update(enrich.get(i, {}))
             p.write_text(json.dumps(t, ensure_ascii=False, indent=1), encoding="utf-8")
+            new[kind].append(i)
+    record(run.name, new, {"likes": len(rd(run / "likes.json", [])),
+                           "bookmarks": len(rd(run / "bookmarks.json", []))}, note)
     # watermark: remember the top 30 ids of each list (robust to un-like / un-bookmark)
     state = rd(STATE, {})
     for key, f in (("likes", "likes.json"), ("bookmarks", "bookmarks.json")):
@@ -107,9 +124,17 @@ def apply(run: Path) -> None:
         state[key] = (ids + [x for x in state.get(key, []) if x not in ids])[:30]
     state["last_run"] = run.name
     STATE.write_text(json.dumps(state, indent=1), encoding="utf-8")
-    print(f"liked {len(liked)} · note {len(notes)} · state updated")
+    print(f"liked +{len(new['liked'])} · note +{len(new['note'])} · state + runs.json updated")
 
 
 if __name__ == "__main__":
-    cmd, run = sys.argv[1], Path(sys.argv[2])
-    {"plan": plan, "apply": apply}[cmd](run)
+    cmd, arg, note = sys.argv[1], sys.argv[2], (sys.argv[3] if len(sys.argv) > 3 else "")
+    if cmd == "plan":
+        plan(Path(arg))
+    elif cmd == "apply":
+        apply(Path(arg), note)
+    elif cmd == "empty":
+        record(arg, {}, {"likes": 0, "bookmarks": 0}, note or "没有新收藏")
+        print("runs.json: empty run recorded")
+    else:
+        sys.exit(f"unknown command {cmd}")

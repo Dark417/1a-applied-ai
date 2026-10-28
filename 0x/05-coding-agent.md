@@ -2,10 +2,14 @@
 
 - [← 返回总目录](x-note.md)
 - Claude Code / Codex 的用法、工作流与配套工具
-- 共 8 篇，按收藏顺序倒序（最新在上）
+- 共 12 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [Anthropic 7 小时 Claude Code 课程的 27 分钟浓缩版](#x-2013725989952467308) · @DavidOndrej1 · 2026-01-20 · 视频推荐
+- [Cursor + Opus 4.5 十分钟做出滚动叙事落地页](#x-2011149280468484157) · @KKaWSB · 2026-01-13 · 案例分享
+- [AntiGravity 的隐藏用法](#x-2010178642752704850) · @JulianGoldieSEO · 2026-01-11 · 工具介绍
+- [给 Claude Code 写一份“入职手册”：CLAUDE.md 配置教学](#x-2007743053231190177) · @YukerX · 2026-01-04 · 搭建教程（长文）
 - [VS Code Agent Debug Logs：看清每次 prompt 背后发生了什么](#x-2050341770609750297) · @code · 2026-05-01 · 工具发布
 - [How to Become a Claude Code Power User (Full Course)](#x-2047245243503050997) · @eng_khairallah1 · 2026-04-23 · 使用教程（长文）
 - [Anthropic 团队演示他们如何用 Claude Code](#x-2047331926143619428) · @eng_khairallah1 · 2026-04-23 · 视频推荐
@@ -16,6 +20,254 @@
 - [离不开 Claude Code 的三个场景](#x-2022157972613300368) · @yanhua1010 · 2026-02-13 · 工作流分享
 
 ## Part 2 · Details
+
+### x-2013725989952467308
+
+**Anthropic 7 小时 Claude Code 课程的 27 分钟浓缩版**
+
+- 作者：David Ondrej (@DavidOndrej1) · 发帖 2026-01-20 · [原帖](https://x.com/DavidOndrej1/status/2013725989952467308)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：视频推荐
+- **总结**：作者看完 Anthropic 发布的 7 小时 Claude Code 官方课程，压缩成 27 分钟视频分享。帖子只有推荐语，没有展开课程要点，适合想快速过一遍官方课程的人。
+
+**正文**
+
+- **Anthropic released a 7-hour Claude Code masterclass**
+- The author went through the entire course and condensed it into a 27-minute video
+
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2011149280468484157
+
+**Cursor + Opus 4.5 十分钟做出滚动叙事落地页**
+
+- 作者：KK.aWSB (@KKaWSB) · 发帖 2026-01-13 · [原帖](https://x.com/KKaWSB/status/2011149280468484157)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：案例分享
+- **总结**：作者认为 AI 已经能做设计：用 Cursor + Opus 4.5 不到 10 分钟就做出带滚动叙事动画的落地页，而设计师通常要收几千美元。观点是落地页难看是工作流问题而不是 AI 问题。偏观点和效果展示，没有具体步骤。
+
+**正文**
+
+- **别再说 AI 不能做设计**
+  - **Cursor + Opus 4.5** 不到 10 分钟就做出一个带滚动叙事动画的落地页
+  - 设计师做这样的页面通常要收几千美元
+- 落地页如果还像 2010 年的应用，不是 AI 的问题，而是**工作流程**的问题
+
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2010178642752704850
+
+**AntiGravity 的隐藏用法**
+
+- 作者：Julian Goldie SEO (@JulianGoldieSEO) · 发帖 2026-01-11 · [原帖](https://x.com/JulianGoldieSEO/status/2010178642752704850)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具介绍
+- **总结**：列举 Google AntiGravity 的进阶用法：切换免费模型 API（Opus、Sonnet 等）、用 Nano Banana 生成图片、直接接 MCP server、在终端里用 Claude Code、一键部署到 Netlify、导入 NotebookLM 内容。thread 后半是付费社群推广。偏功能清单，未给具体配置步骤。
+
+**正文**
+
+- **Things you can do with AntiGravity that most users miss**
+  - Switch between free APIs (Opus, Sonnet, Claude)
+  - Generate images with Google's Nano Banana
+  - Connect MCP servers directly to your projects
+  - Use Claude Code inside the terminal for better UI
+  - Deploy apps to Netlify in one click
+  - Pull NotebookLM content into your builds
+- **Approach**: no paid APIs, no limits — just stack free tools
+
+<details><summary>原文</summary>
+
+> AntiGravity just became 10x more powerful.
+>
+> And 99% of users have no idea.
+>
+> Here's what you can actually do with it:
+>
+> → Switch between free APIs (Opus, Sonnet, Claude)
+> → Generate images with Google's Nano Banana
+> → Connect MCP servers directly to your projects
+> → Use Claude Code inside the terminal for better UI
+> → Deploy apps to Netlify in one click
+> → Pull NotebookLM content into your builds
+>
+> No paid APIs. No limits. Just stack free tools.
+>
+> Save this video, you'll never use it the same way again.
+>
+> Want the SOP? DM me. 💬
+>
+> [2] Want to make money and save time with AI? Get AI Coaching, Support & Courses 
+> 👉 https://skool.com/ai-profit-lab-7462/about
+>
+> Get a FREE AI Course + 1000 NEW AI Agents
+> 👉 https://skool.com/ai-seo-with-julian-goldie-1553/about
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2007743053231190177
+
+**给 Claude Code 写一份“入职手册”：CLAUDE.md 配置教学**
+
+- 作者：Yuker (@YukerX) · 发帖 2026-01-04 · [原帖](https://x.com/YukerX/status/2007743053231190177)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：搭建教程（长文）
+- **总结**：面向新手的 CLAUDE.md 长文教程。先讲痛点：没有 CLAUDE.md，每次会话都像跟失忆的新同事重复交代技术栈；再讲它是什么：每次启动自动读取、注入系统提示的“入职手册”，用来记录项目架构、团队规范和个人偏好；后面给出写法和配置示例。重点是把 CLAUDE.md 当作 Claude Code 的记忆系统来用。
+
+**正文**
+
+- **《我给 Claude Code 写了一份"入职手册"，让它记住了我是谁（内含配置教学）》**
+- **为什么写这篇**：一篇关于 `CLAUDE.md` 的小白入门指南
+  - Claude Code 相比其他 IDE，除了能力和效果是 T0，最重要的是：**拥有效果较好的记忆系统和 Skills**
+- **痛点：每次启动都像跟一个失忆的新同事说话**
+  - 你必须不厌其烦地重复：
+    - "我们用的是 Python..."
+    - "数据库是 Pinestone 的，记得用..."
+  - 日复一日，像陷入时间循环
+  - 没有 `CLAUDE.md` 的 Claude Code，每次会话都是一个**聪明但失忆的天才**
+  - `CLAUDE.md` 就是解决这个痛点的**"记忆系统"**
+- 作者用它来定义项目架构、同步团队规范、记录个人编码偏好
+  - 认为这是 Claude Code **最重要、也最被低估的功能**
+- **1. CLAUDE.md 到底是什么？**
+  - 一句话定义：一个特殊的 Markdown 文件，是 Claude Code **每次启动时自动读取的"入职手册"**
+  - 写进去的内容会被注入 Claude 的**系统提示（System Prompt）**，成为它思考的底层背景
+  - **没有 CLAUDE.md 时**：
+    - 你：帮我写一个自动爬取热门推特的功能
+    - Claude：你打算用什么编程语言？→ 你：Python
+    - Claude：用 Tweepy、Selenium 还是官方 API？→ 你：官方 API
+    - Claude：你有 API key 吗？还是用免费版？
+    - 10 分钟后，你还在回答基础问题
+  - **有了 CLAUDE.md 后**（文件里写着：Python + Twitter API v2 + MySQL...）：
+    - 你：帮我写一个自动爬取热门推特的功能
+    - Claude：好的，我来用 Python 写一个调用官方 Twitter API 的...
+  - 效率差距一目了然
+- **2. 基础入门：三步给 Claude 装上记忆**
+  - `CLAUDE.md` **不会自行创建**，需要用户手动创建；也可以让 Claude 自己帮你完成
+  - **2.1 创建与编辑的三种方式**
+    1. **初始化文件**：在项目根目录对 Claude 说 `/init`，它会自动分析项目并创建包含基本信息的 `CLAUDE.md`
+    2. **快速添加记忆**：对话中在输入前加 `#`，如 `# 记住我的服务器地址是XXX`，然后选择存入 `CLAUDE.md`
+    3. **直接编辑**：随时输入 `/memory`，在编辑器里打开 `CLAUDE.md` 做更详细的编辑和整理
+- **3. 进阶玩法：像专业玩家一样组织"记忆"**
+  - `CLAUDE.md` 不只是一个文件，有一套完整的设计哲学
+  - **3.1 记忆分层：个人、项目、企业**（像洋葱一样层层包裹）
+    - **用户内存** `~/.claude/CLAUDE.md` — 个人偏好（如"我喜欢用 Python 而不是 Java"），在所有项目中生效
+    - **项目内存** `<项目根目录>/CLAUDE.md` — 项目专属信息（技术栈、构建命令）
+      - 团队协作利器：可以提交到 Git，让每个成员拥有一致的上下文
+    - **企业策略** `/Library/Application Support/ClaudeCode/Claude.md` — 公司级安全、合规要求，由管理员配置
+    - **加载顺序：企业 → 项目 → 用户**，后面的覆盖前面的
+      - 即**个人偏好拥有最高优先级**
+  - **3.2 模块化记忆：用 `@` 语法引用一切**
+    - 问题：项目复杂时 `CLAUDE.md` 会不会臃肿？答案是不会
+    - 用 `@` 导入语法把其他文件内容引入 `CLAUDE.md`，实现记忆的模块化管理
+    - 示例：
+
+  ```markdown
+  # 项目核心上下文 (Project Context)
+
+  ## 1. 项目全貌
+  > 这里的 @README.md 是项目的灵魂，包含业务目标与架构概览。
+  - 项目简介: 详见 @README.md
+
+  ## 2. 工程规范 (Engineering Standards)
+  > 强制 AI 遵守团队既定的代码风格与协作流程。
+  - API 接口规范: 参考 @docs/api-guide.md
+  - Git 提交与分支策略: 严格遵循 @docs/git.md
+
+  ## 3. 开发者偏好 (Personal Preferences)
+  > 这是一个巧妙的技巧：引用本地的全局配置文件，让 AI 记住你的个人编码习惯（如命名喜好、注释风格）。
+
+  - **我的专属配置**: @~/.claude/my-project-notes.md
+  ```
+
+    - 这样 `CLAUDE.md` 保持简洁，同时能链接到一个庞大的知识网络
+- **最后**
+  - 它改变了与 AI 协作的模式：让 Claude 从"一次性"的问答机器，变成**真正懂你、有长期记忆的 Agent**
+  - **花 10 分钟配置好 `CLAUDE.md`，将来能省下成百上千次重复沟通**
+
+<details><summary>原文</summary>
+
+> 《我给 Claude Code写了一份“入职手册”，让它记住了我是谁（内含配置教学）》
+>
+> 两个月以来，我一直想写一篇关于 CLAUDE.md 的小白入门指南，感谢马斯克的激励计划让我终于可以动笔了。
+> Claude Code对比于其他的IDE来说，除了能力和效果是T0这个原因以外，最重要的是：Claude Code拥有效果较好的记忆系统和Skills。
+> 你有没有遇到过这种情况？每次启动 Claude Code，都感觉像在跟一个新来的、完全失忆的同事说话。你必须不厌其烦地重复：
+> - “我们用的是Python...”
+> - “数据库是Pinestone的，记得用...”
+> 日复一日，就像陷入了时间的循环。这太疯狂了！
+> 这就是没有 CLAUDE.md 的 Claude Code。每次会话，它都是一个聪明但失忆的天才。而 CLAUDE.md，就是解决这个核心痛点的“记忆系统”。
+> 我用它来定义项目架构、同步团队规范、甚至是个人的编码偏好。这段时间为了这个功能，我还专门研究了它的所有机制。可以毫不夸张地说，这是 Claude Code 最重要，也最被低估的功能，没有之一。
+> 而这篇指南，将会把小白需要配置 CLAUDE.md 的所有必备知识点整理出来。
+> 1. CLAUDE.md 到底是什么？
+> 一句话定义：
+> 它是一个特殊的Markdown 文件，是Claude Code 每次启动时都会自动读取的“入职手册”。
+> 写进去的内容，都会被注入到 Claude 的系统提示（System Prompt）里，成为它思考的底层背景。这意味着，你不用再废话了。
+> 没有 CLAUDE.md 的对话是这样的：
+> 你：帮我写一个自动爬取热门推特的功能。
+> Claude：好的，你打算用什么编程语言？ 
+> 你：Python。 
+> Claude：用的是Tweepy，Selenium还是官方的API？ 
+> 你：官方API。 
+> Claude：你有API key了嘛？还是要用免费版的？
+> 你：...（10分钟后，你还在回答基础问题）
+> 而有了 CLAUDE.md 之后：
+> CLAUDE.md 文件里面写着：Python + Twitter API v2 + MySQL...)
+> 你：帮我写一个自动爬取热门推特的功能。
+>  Claude：好的，我来用Python写一个调取官方Twitter API的...
+> 效率的差距，一目了然。
+> 2. 基础入门：三步给Claude装上记忆
+> CLAUDE.md 不会自行创建，需要用户手动进行创建。
+> 上手 CLAUDE.md 非常简单，你甚至可以让 Claude 自己来帮你完成。
+> 2.1 创建与编辑的三种方式
+> 1 初始化文件：在你的项目根目录，直接对 Claude 说：/init。它会自动分析你的项目，并创建一个包含基本信息的 CLAUDE.md 文件。
+> 2 快速添加记忆：在对话中，想让 Claude 记住任何事，只要在输入内容前加上 # 号，比如：# 记住我的服务器地址是XXX。然后选择存入 CLAUDE.md 就行了。
+> 随后会保存到 Claude.md 文件中（18岁骗人的，随手记录的）
+> 3 直接编辑：任何时候，你都可以输入 /memory 命令，它会直接在编辑器里打开 CLAUDE.md 文件，让你进行更详细的编辑和整理。
+>
+>
+> 3. 进阶玩法：像专业玩家一样组织你的“记忆”
+> CLAUDE.md 不仅仅是一个文件，它有一套完整的设计哲学。
+> 3.1 记忆分层：个人，项目，企业
+> Claude Code 支持三种层级的 CLAUDE.md，就像洋葱一样层层包裹：
+> 用户内存 (~/.claude/CLAUDE.md)：存放你的个人偏好，比如“我喜欢用 Python 而不是 Java”，它在所有项目中都生效。
+> 项目内存 (<项目根目录>/CLAUDE.md)：存放项目专属信息，比如技术栈、构建命令。这是团队协作的利器，可以提交到 Git，让每个成员都拥有一致的上下文。
+> 企业策略（/Library/Application Support/ClaudeCode/Claude.md）：公司级的安全、合规要求，由管理员配置。
+> 加载顺序是“企业 → 项目 → 用户”，后面的会覆盖前面的。这意味着，你的个人偏好拥有最高优先级！
+> 3.2 模块化记忆：用@语法引用一切
+> 这里大家可能会有一个问题，如果项目太复杂，CLAUDE.md 会不会变得臃肿？答案是并不会！
+> 你可以使用 @ 导入语法，将其他文件内容引入 CLAUDE.md，实现记忆的模块化管理。
+> markdown
+> # 项目核心上下文 (Project Context)
+>
+> ## 1. 项目全貌
+> > 这里的 @README.md 是项目的灵魂，包含业务目标与架构概览。
+> - 项目简介: 详见 @README.md
+>
+> ## 2. 工程规范 (Engineering Standards)
+> > 强制 AI 遵守团队既定的代码风格与协作流程。
+> - API 接口规范: 参考 @docs/api-guide.md
+> - Git 提交与分支策略: 严格遵循 @docs/git.md
+>
+> ## 3. 开发者偏好 (Personal Preferences)
+> > 这是一个巧妙的技巧：引用本地的全局配置文件，让 AI 记住你的个人编码习惯（如命名喜好、注释风格）。
+>
+> - **我的专属配置**: @~/.claude/my-project-notes.md
+> 这样，你的 CLAUDE.md 可以保持简洁，同时又能链接到一个庞大的知识网络。这非常优雅！
+> 最后
+> 到这里，CLAUDE.md 的核心小白入门就介绍完了。
+> 这不仅仅是一个提效工具，它改变了我们与 AI 协作的模式。它让 Claude 从一个“一次性”的问答机器，变成了一个真正懂你的、有长期记忆的 Agent。
+> 花 10 分钟，为你的项目配置好 CLAUDE.md，你将在未来节省下成百上千次的重复沟通。
+> 如果你觉得这篇文章对你有帮助，请帮忙分享和关注，十分感谢🙏
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G9zqWBsXoAAkFHg?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2050341770609750297
 

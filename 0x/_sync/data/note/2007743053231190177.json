@@ -1,0 +1,23 @@
+{
+ "id": "2007743053231190177",
+ "handle": "YukerX",
+ "name": "Yuker",
+ "url": "https://x.com/YukerX/status/2007743053231190177",
+ "created_at": "2026-01-04T09:17:00.000Z",
+ "media": [
+  "https://pbs.twimg.com/media/G9zqWBsXoAAkFHg?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "x_article": {
+  "title": "我给 Claude Code写了一份“入职手册”，让它记住了我是谁（内含配置教学）",
+  "body": "两个月以来，我一直想写一篇关于 CLAUDE.md 的小白入门指南，感谢马斯克的激励计划让我终于可以动笔了。\nClaude Code对比于其他的IDE来说，除了能力和效果是T0这个原因以外，最重要的是：Claude Code拥有效果较好的记忆系统和Skills。\n你有没有遇到过这种情况？每次启动 Claude Code，都感觉像在跟一个新来的、完全失忆的同事说话。你必须不厌其烦地重复：\n- “我们用的是Python...”\n- “数据库是Pinestone的，记得用...”\n日复一日，就像陷入了时间的循环。这太疯狂了！\n这就是没有 CLAUDE.md 的 Claude Code。每次会话，它都是一个聪明但失忆的天才。而 CLAUDE.md，就是解决这个核心痛点的“记忆系统”。\n我用它来定义项目架构、同步团队规范、甚至是个人的编码偏好。这段时间为了这个功能，我还专门研究了它的所有机制。可以毫不夸张地说，这是 Claude Code 最重要，也最被低估的功能，没有之一。\n而这篇指南，将会把小白需要配置 CLAUDE.md 的所有必备知识点整理出来。\n1. CLAUDE.md 到底是什么？\n一句话定义：\n它是一个特殊的Markdown 文件，是Claude Code 每次启动时都会自动读取的“入职手册”。\n写进去的内容，都会被注入到 Claude 的系统提示（System Prompt）里，成为它思考的底层背景。这意味着，你不用再废话了。\n没有 CLAUDE.md 的对话是这样的：\n你：帮我写一个自动爬取热门推特的功能。\nClaude：好的，你打算用什么编程语言？ \n你：Python。 \nClaude：用的是Tweepy，Selenium还是官方的API？ \n你：官方API。 \nClaude：你有API key了嘛？还是要用免费版的？\n你：...（10分钟后，你还在回答基础问题）\n而有了 CLAUDE.md 之后：\nCLAUDE.md 文件里面写着：Python + Twitter API v2 + MySQL...)\n你：帮我写一个自动爬取热门推特的功能。\n Claude：好的，我来用Python写一个调取官方Twitter API的...\n效率的差距，一目了然。\n2. 基础入门：三步给Claude装上记忆\nCLAUDE.md 不会自行创建，需要用户手动进行创建。\n上手 CLAUDE.md 非常简单，你甚至可以让 Claude 自己来帮你完成。\n2.1 创建与编辑的三种方式\n1 初始化文件：在你的项目根目录，直接对 Claude 说：/init。它会自动分析你的项目，并创建一个包含基本信息的 CLAUDE.md 文件。\n2 快速添加记忆：在对话中，想让 Claude 记住任何事，只要在输入内容前加上 # 号，比如：# 记住我的服务器地址是XXX。然后选择存入 CLAUDE.md 就行了。\n随后会保存到 Claude.md 文件中（18岁骗人的，随手记录的）\n3 直接编辑：任何时候，你都可以输入 /memory 命令，它会直接在编辑器里打开 CLAUDE.md 文件，让你进行更详细的编辑和整理。\n\n\n3. 进阶玩法：像专业玩家一样组织你的“记忆”\nCLAUDE.md 不仅仅是一个文件，它有一套完整的设计哲学。\n3.1 记忆分层：个人，项目，企业\nClaude Code 支持三种层级的 CLAUDE.md，就像洋葱一样层层包裹：\n用户内存 (~/.claude/CLAUDE.md)：存放你的个人偏好，比如“我喜欢用 Python 而不是 Java”，它在所有项目中都生效。\n项目内存 (<项目根目录>/CLAUDE.md)：存放项目专属信息，比如技术栈、构建命令。这是团队协作的利器，可以提交到 Git，让每个成员都拥有一致的上下文。\n企业策略（/Library/Application Support/ClaudeCode/Claude.md）：公司级的安全、合规要求，由管理员配置。\n加载顺序是“企业 → 项目 → 用户”，后面的会覆盖前面的。这意味着，你的个人偏好拥有最高优先级！\n3.2 模块化记忆：用@语法引用一切\n这里大家可能会有一个问题，如果项目太复杂，CLAUDE.md 会不会变得臃肿？答案是并不会！\n你可以使用 @ 导入语法，将其他文件内容引入 CLAUDE.md，实现记忆的模块化管理。\nmarkdown\n# 项目核心上下文 (Project Context)\n\n## 1. 项目全貌\n> 这里的 @README.md 是项目的灵魂，包含业务目标与架构概览。\n- 项目简介: 详见 @README.md\n\n## 2. 工程规范 (Engineering Standards)\n> 强制 AI 遵守团队既定的代码风格与协作流程。\n- API 接口规范: 参考 @docs/api-guide.md\n- Git 提交与分支策略: 严格遵循 @docs/git.md\n\n## 3. 开发者偏好 (Personal Preferences)\n> 这是一个巧妙的技巧：引用本地的全局配置文件，让 AI 记住你的个人编码习惯（如命名喜好、注释风格）。\n\n- **我的专属配置**: @~/.claude/my-project-notes.md\n这样，你的 CLAUDE.md 可以保持简洁，同时又能链接到一个庞大的知识网络。这非常优雅！\n最后\n到这里，CLAUDE.md 的核心小白入门就介绍完了。\n这不仅仅是一个提效工具，它改变了我们与 AI 协作的模式。它让 Claude 从一个“一次性”的问答机器，变成了一个真正懂你的、有长期记忆的 Agent。\n花 10 分钟，为你的项目配置好 CLAUDE.md，你将在未来节省下成百上千次的重复沟通。\n如果你觉得这篇文章对你有帮助，请帮忙分享和关注，十分感谢🙏"
+ },
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 73,
+ "thread": [],
+ "title": "给 Claude Code 写一份“入职手册”：CLAUDE.md 配置教学",
+ "category": "Coding Agent 实践",
+ "kind": "搭建教程（长文）",
+ "summary": "面向新手的 CLAUDE.md 长文教程。先讲痛点：没有 CLAUDE.md，每次会话都像跟失忆的新同事重复交代技术栈；再讲它是什么：每次启动自动读取、注入系统提示的“入职手册”，用来记录项目架构、团队规范和个人偏好；后面给出写法和配置示例。重点是把 CLAUDE.md 当作 Claude Code 的记忆系统来用。"
+}

@@ -9,7 +9,7 @@
   - Windows PowerShell：`mcp__remote-devices__Windows-MCP__PowerShell`
 - 内置浏览器里 X 已登录（账号 `@whoheremains`）
 - 仓库：`Dark417/1a-applied-ai`，目录 `0x/`
-  - `0x/` 下只放阅读内容：`NN-<主题>.md`、`x-new.md`、`x-note.md`、`README.md`
+  - `0x/` 下只放阅读内容：`NN-<主题>.md`、`x-new.md`、`x-note.md`、`x-log.md`、`README.md`
   - 流水线（脚本、数据、本文件）放在 `0x/_sync/`
 - 本地 repo clone：`D:\1AL\1a-applied-ai`；它的 `0x\` 是用户看的本地副本
   - 只用 `sync_local.ps1` 同步 `0x\`，**不要对这个 repo 做 git pull**（用户要求时才 pull）
@@ -37,7 +37,11 @@
 4. Bookmarks：
    - 执行 `await __xdom.go('/i/history')`（SPA 跳转，脚本不会丢）
    - 然后 `__xdom.collectList(50, <state.bookmarks>).then(r => window.__bm = r)`，同样轮询
-5. 两个列表都是 0 条新内容：直接跳到第 8 步，汇报「今天没有新收藏」
+5. 两个列表都是 0 条新内容：
+   - `python3 0x/_sync/scripts/build.py empty <RUN>` 记一条空批次，再 `python3 0x/_sync/scripts/render.py`
+   - 做第 6、7 步（只推 `runs.json` 和 `x-log.md`），然后第 8 步汇报「今天没有新收藏」
+6. 定期全量核对（每周日，或者用户要求时）：`collectList(3000, [])` 不带 watermark 把两个列表滚到底，
+   和 `data/liked`、`data/note` 对比，漏掉的帖子一起走第 3–5 步（`build.py plan` 只会列出没处理过的）
 
 ## 3. 补全详情
 
@@ -77,19 +81,20 @@
      - `kind`：概念介绍 / 搭建教程 / 方法对比 / 工具发布 / 课程推荐 / 案例分享 / 论文解读 / 观点 / 推广
      - `summary`：中文 100–200 字，说清这篇是在讲概念、讲怎么搭建，还是在比较或评价方法，再写特点和重点
    - 原文中英文都保留原样，只有总结用中文
-3. `python3 0x/_sync/scripts/build.py apply /home/claude/work/raw/<RUN>`（写 `data/`，更新 `state.json`）
+3. `python3 0x/_sync/scripts/build.py apply /home/claude/work/raw/<RUN> [备注]`（写 `data/`，更新 `state.json`，在 `runs.json` 追加本批次）
 4. **可读版正文**：每篇新帖子（liked 和 note 去重后按 id 算）都要按 `0x/_sync/STYLE.md` 写一份 `0x/_sync/data/readable/<id>.md`
    - 使用 strong bullet style，保留原语言；不是摘要，是重新排版
    - 已经存在的不要重写
    - 新的长文超过 3 篇时，按篇拆给并行 subagent，每个 subagent 都先读 `STYLE.md`
 5. `python3 0x/_sync/scripts/render.py`
-   - 输出到 `0x/`：`x-new.md`、`x-note.md`（只有总目录）、`NN-<slug>.md`（每个主题一个文件）
+   - 输出到 `0x/`：`x-new.md`、`x-note.md`（只有总目录）、`NN-<slug>.md`（每个主题一个文件）、`x-log.md`（每日日志）
      - `NN` 是 `categories.json` 里的重要性顺序；新分类要按重要性插到合适的位置
    - 结尾打印的 `readable missing` 应该是 0
 6. 自检：
    - `x-new.md` 和每个 `NN-*.md` 里的每个 `](#x-<id>)` 都有对应的 `### x-<id>` 标题
    - `x-note.md` 里的每个 `NN-<slug>.md#x-<id>` 都能在对应文件里找到
    - 新增条数和第 2 步拉到的条数一致
+   - `x-log.md` 顶部是今天的日期，本批次的条数正确
 
 ## 6. 推送 GitHub
 

@@ -1,0 +1,20 @@
+{
+ "id": "2008555154019172592",
+ "handle": "askalphaxiv",
+ "name": "alphaXiv",
+ "url": "https://x.com/askalphaxiv/status/2008555154019172592",
+ "created_at": "2026-01-06T15:04:00.000Z",
+ "text": "Train your own deep research agent in under a day\n\nAgent-R1 uses RL to teach agents proper tool use over multi-turn interactions, achieving 3x better performance than RAG\n\nWe provide a step-by-step tutorial of the work: MDP extensions, action masking, and more. See below!",
+ "media": [
+  "https://pbs.twimg.com/media/G996ACPbcAEx-qc?format=png&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 70,
+ "thread": [],
+ "title": "Agent-R1：一天内训练自己的 deep research agent",
+ "category": "Evals & 研究",
+ "kind": "论文解读",
+ "summary": "alphaXiv 介绍 Agent-R1：用强化学习教 agent 在多轮交互中正确使用工具，效果比 RAG 好 3 倍，并提供分步教程（MDP 扩展、action masking 等）。重点是用 RL 训练工具调用型研究 agent 的方法。"
+}

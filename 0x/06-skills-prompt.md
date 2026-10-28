@@ -2,10 +2,15 @@
 
 - [← 返回总目录](x-note.md)
 - Skills 设计、可复用 prompt 与技能库
-- 共 6 篇，按收藏顺序倒序（最新在上）
+- 共 11 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [Agent Skills Marketplace：最全的 skills 收集站](#x-2011793571343712393) · @vikingmute · 2026-01-15 · 工具推荐
+- [我在用的 Claude Skills 清单](#x-2011309102279114802) · @bozhou_ai · 2026-01-14 · 工具推荐 + 使用心得
+- [GitHub 最热门的 Claude Skills 开源项目排行](#x-2011355230336918009) · @zstmfhy · 2026-01-14 · 资源推荐
+- [学 Claude Agent Skills 就看官方中文文档](#x-2010630204641951839) · @PandaTalk8 · 2026-01-12 · 资源推荐
+- [skillsmp：收录上千 Skills 的仓库](#x-2010599347566854330) · @Jackywine · 2026-01-12 · 工具推荐
 - [Markdown Viewer Skills：让 AI 在 Markdown 里直接画图](#x-2047525971742597195) · @GitHub_Daily · 2026-04-24 · 工具推荐
 - [Addy Osmani 开源 Agent Skills：老工程师的操作手册](#x-2046454424806343139) · @KengGuangLong · 2026-04-21 · 工具介绍
 - [obra/superpowers 的 brainstorming SKILL](#x-2028854979805790269) · @cholf5 · 2026-03-03 · 工具推荐 + 使用心得
@@ -14,6 +19,244 @@
 - [OpenAI 官方 Prompt Packs：300+ 岗位提示词](#x-2014252422806536614) · @zstmfhy · 2026-01-22 · 资源推荐
 
 ## Part 2 · Details
+
+### x-2011793571343712393
+
+**Agent Skills Marketplace：最全的 skills 收集站**
+
+- 作者：Viking (@vikingmute) · 发帖 2026-01-15 · [原帖](https://x.com/vikingmute/status/2011793571343712393)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具推荐
+- **总结**：推荐 skillsmp.com（Agent Skills Marketplace），收录 6.5 万多个 skills，爬虫每天更新，分类较全。适合按需找热门 skill 直接试用，是 skills 的检索入口而不是教程。
+
+**正文**
+
+- **Agent Skills Marketplace**：可能是目前搜集 skills 最全的网站
+  - https://skillsmp.com
+- 现在已有 **65635 个 skills**，爬虫每天都还在更新，几乎包罗万象
+- 分类整理得也比较全
+- 建议挑几个最火的试用一下
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G-tTjCzbAAAJ2ZC?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2011309102279114802
+
+**我在用的 Claude Skills 清单**
+
+- 作者：泊舟 (@bozhou_ai) · 发帖 2026-01-14 · [原帖](https://x.com/bozhou_ai/status/2011309102279114802)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具推荐 + 使用心得
+- **总结**：作者分享自己实际安装的 skills：官方仓库里只装了 skill-creator，前端用 UI UX Pro Max，SEO 审查用 seo-review，写 SEO 博客用 content-creator 等，每个附 GitHub 链接和用途。特点是“实际在用”的精简清单，偏网站开发和 SEO 场景。
+
+**正文**
+
+- **作者自己在用的 Skills**
+  1. **Anthropic 官方 Skills** — 只安装了其中的 `skill-creator`
+     - https://github.com/anthropics/skills
+  2. **UI UX Pro Max** — 用来写前端 UI，非常好用
+     - https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+  3. **seo-review** — 用来做 AI 网站的 SEO 审查
+     - https://github.com/leonardomso/33-js-concepts/tree/master/.opencode/skill/seo-review
+  4. **content-creator** — 根据关键词创建博客文章，也用于 SEO
+     - https://github.com/davila7/claude-code-templates/tree/main/cli-tool/components/skills/business-marketing/content-creator
+  5. **ai-image-generator** — 自己写的
+     - 调用 API 生成图片 → 压缩为 webp → 上传到 R2
+     - 很实用，用于博客配图和示例图
+  6. **skill-prompt-generator** — 黄总的提示词生成，主要搭配生图，强烈推荐
+     - https://github.com/huangserva/skill-prompt-generator
+  7. **Planning-with-files** — 参考 Manus 的 Agent 方法写的 Skill，很适合多步骤任务
+     - https://github.com/OthmanAdi/planning-with-files
+- **移除了 Superpowers**
+  - 很好，但太磨叽
+  - 想法模糊时一般直接在网页里聊
+- **没用 NotebookLM**：习惯在网页里用，还没想到用 Skills 能干啥
+- **强烈建议多搭建自己的 Skills，从日常工作流开始**
+  - 先用 Claude Code 把某个流程实现一次
+  - 完成后让 CC 总结成一个 Skill
+  - 基于**第一性原理**打分，迭代调优
+  - 嫌麻烦可以先用官方 `skill-creator` 沟通创建
+  - **自己沉淀的 Skill 才是最好的**
+- **引用 / Quoted:** Yanhua (@yanhua1010) 推荐的 Claude Skills
+  - Anthropic 官方 Skills：https://github.com/anthropics/skills…
+  - **Superpowers**：1.6 万 Star 的 Skill 精选，从脑暴、写需求文档、开发到测试全包含，口碑很好
+    - https://github.com/obra/superpowers…
+  - Planning-with-files（原文截断）
+
+<details><summary>原文</summary>
+
+> 我也分享一下我自己用的Skills
+>
+> 1.Anthropic官方Skills，这里面我只安装了 skill-creator
+> https://github.com/anthropics/skills
+>
+> 2.UI UX Pro Max，用来写前端的UI，非常好用
+> https://github.com/nextlevelbuilder/ui-ux-pro-max-skill
+>
+> 3.seo-review，我用来做AI网站SEO审查的
+> https://github.com/leonardomso/33-js-concepts/tree/master/.opencode/skill/seo-review
+>
+> 4.content-creator   这是根据关键词，然后进行创建博客文章的，也是用于SEO
+> https://github.com/davila7/claude-code-templates/tree/main/cli-tool/components/skills/business-marketing/content-creator
+>
+> 5.ai-image-generator  这是自己写的，调用api然后生成图片，接着压缩为webp格式，最后上传到R2，非常实用，用于博客还有示例图创建
+>
+> 6.skill-prompt-generator  黄总的提示词生成，主要搭配生成图片的，也是强烈推荐
+> https://github.com/huangserva/skill-prompt-generator
+>
+> 7.Planning-with-files 参考Manus的Agent方法写的Skill。很适合多步骤任务。 https://github.com/OthmanAdi/planning-with-files 
+>
+> Superpowers 这个很好，但是属实有点太磨叽，然后我想法模糊一般都是直接在网页里面聊，所以移除这个
+>
+> 没有用NotebookLM是因为习惯了在网页里面使用，现在还没有想到用Skills能干点啥
+>
+> 最后我强烈建议各位，一定要多多搭建自己的Skills，从日常的一些工作流开始。
+>
+> 比如说我们有一些流程，我们可以先用claude code来实现一次，当实现完了，我们让cc总结成一个Skill，然后基于第一性原理进行打分，迭代调优
+>
+> 如果觉得麻烦，可以直接先用官方的skill-creator进行沟通，来创建一个自己的Skill，要知道，自己沉淀Skill才是最好的
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G-mZcudbQAkZME-?format=png&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2011355230336918009
+
+**GitHub 最热门的 Claude Skills 开源项目排行**
+
+- 作者：AI奶爸 (@zstmfhy) · 发帖 2026-01-14 · [原帖](https://x.com/zstmfhy/status/2011355230336918009)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：资源推荐
+- **总结**：按 Stars 排序整理 2026 年 1 月 GitHub 上最热门的 Claude Skills 项目：官方 anthropics/skills（约 39.4k）居首，其后有 obra/superpowers（20+ 实战技能，含 TDD、debug）等，每项附简介、星数和链接。适合当作选 skill 的地图。
+
+**正文**
+
+- **GitHub 上最热门的 Claude Skills 开源项目**（按 Stars 降序，数据基于 2026 年 1 月公开信息，以 GitHub 实时为准；官方项目放首位）
+  1. **anthropics/skills**（官方 Anthropic 出品）— ⭐ 约 39.4k
+     - 官方 Agent Skills 公共仓库，大量高质量示例技能：文档处理、web artifacts、MCP builder 等
+     - 最权威的起点
+     - https://github.com/anthropics/skills
+  2. **obra/superpowers** — ⭐ 约 21.1k
+     - Claude Code 核心技能库，内置 20+ 实战技能（TDD、debug、协作模式等），社区公认最强之一
+     - https://github.com/obra/superpowers
+  3. **ComposioHQ/awesome-claude-skills** — ⭐ 约 18.9k
+     - 最受欢迎的 Awesome 列表之一，汇集官方 + 社区技能，覆盖开发、数据分析、商业等
+     - https://github.com/ComposioHQ/awesome-claude-skills
+  4. **travisvn/awesome-claude-skills** — ⭐ 约 4.8k+（Awesome 列表星数波动较大）
+     - 精选列表，专注 Claude Code 工作流定制，适合快速发现新技能
+     - https://github.com/travisvn/awesome-claude-skills
+  5. **K-Dense-AI/claude-scientific-skills** — ⭐ 约 5.8k
+     - 专为科学研究打造，140+ 科学领域技能（生物、化学、数据分析、数据库整合等）
+     - https://github.com/K-Dense-AI/claude-scientific-skills
+- **怎么选**
+  - 官方 `anthropics/skills` 质量最稳定，适合入门
+  - Awesome 列表是探索海量新技能的最佳入口
+- **使用方法**：把技能文件夹复制到以下位置，Claude 会自动发现并按需加载
+  - `~/.claude/skills/`（个人全局）
+  - 项目内的 `.claude/skills/`
+- 推荐先从官方仓库开始试用
+
+<details><summary>原文</summary>
+
+> 目前 GitHub 上最热门的 Claude Skills 相关开源项目（按 Stars 数降序排列，数据基于 2026 年 1 月最新公开信息，实际数字以 GitHub 实时为准），官方项目放在首位：
+>
+> 1. 官方 Anthropic 出品
+>    anthropics/skills （官方 Agent Skills 公共仓库，包含大量高质量示例技能，如文档处理、web artifacts、MCP builder 等，是最权威的起点）  
+>    ⭐ 约 39.4k  
+>    https://github.com/anthropics/skills
+>
+> 2. obra/superpowers
+>    Claude Code 超强核心技能库，内置 20+ 实战技能（TDD、debug、协作模式等），社区公认最强之一  
+>    ⭐ 约 21.1k  
+>    https://github.com/obra/superpowers
+>
+> 3. ComposioHQ/awesome-claude-skills
+>    最受欢迎的 Awesome 列表之一，汇集大量官方+社区技能，覆盖开发、数据分析、商业等领域  
+>    ⭐ 约 18.9k  
+>    https://github.com/ComposioHQ/awesome-claude-skills
+>
+> 4. travisvn/awesome-claude-skills
+>    优质精选列表，专注 Claude Code 工作流定制，资源丰富，适合快速发现新技能  
+>    ⭐ 约 4.8k+（部分 Awesome 列表星数波动较大）  
+>    https://github.com/travisvn/awesome-claude-skills
+>
+> 5. K-Dense-AI/claude-scientific-skills  
+>    专为科学研究打造，140+ 科学领域技能（生物、化学、数据分析、数据库整合等），研究人员必备  
+>    ⭐ 约 5.8k  
+>    https://github.com/K-Dense-AI/claude-scientific-skills
+>
+> 这些都是目前收藏数最高的实用项目！官方的 anthropics/skills 质量最稳定，适合作为入门起点；Awesome 列表则是快速探索海量新技能的最佳入口。
+>
+> 使用方法超简单：把技能文件夹复制到 `~/.claude/skills/`（个人全局）或项目内的 `.claude/skills/`，Claude 就会自动发现并按需加载～
+>
+> 推荐先从官方仓库开始试用！
+
+</details>
+
+- 链接卡片：[GitHub - anthropics/skills: Public repository for Agent Skills](https://t.co/oF3P2dwlMX)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2010630204641951839
+
+**学 Claude Agent Skills 就看官方中文文档**
+
+- 作者：Mr Panda (@PandaTalk8) · 发帖 2026-01-12 · [原帖](https://x.com/PandaTalk8/status/2010630204641951839)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：资源推荐
+- **总结**：作者推荐直接看 Anthropic 官方的 Agent Skills 文档（中文版质量很高），给出三个入口：Claude Code 的 skills 入门指南、Agent Skills 最佳实践、Skills 工作原理概览。是一份精简的官方学习路径。
+
+**正文**
+
+- **了解 Claude Agent Skills，看官方文档就够了** — 写得非常好，尤其是中文版
+  - **入门指南**：https://code.claude.com/docs/zh-CN/skills
+  - **最佳实践**：https://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/best-practices
+  - **Agent Skills: How to Work**：https://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/overview#how-skills-work
+- **引用 / Quoted:** Mr Panda (@PandaTalk8) — Claude Skills 的**渐进式披露**
+  - 目的：合理使用 skill，避免算力浪费和无意义的 token 消耗
+  - 三种加载级别：
+    - **第 1 级：元数据** — 必须被加载
+    - **第 2 级：指令** — 触发时加载
+    - **第 3 级：资源和代码** — 按需加载
+  - 说白了，渐进式披露就是在**控制 LLM 上下文的大小**（原文截断）
+
+<details><summary>原文</summary>
+
+> 了解  Claude Agent Skills ， 就看他们的官方文档， 已经写的不能再好了。 尤其是中文版本。  
+>
+> 入门指南
+> https://code.claude.com/docs/zh-CN/skills
+>
+> 最佳实践
+>
+> https://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/best-practices
+>
+> Agent Skills： How to Work
+> https://platform.claude.com/docs/zh-CN/agents-and-tools/agent-skills/overview#how-skills-work
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G-cxf0oagAAK03-?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2010599347566854330
+
+**skillsmp：收录上千 Skills 的仓库**
+
+- 作者：Jackywine (@Jackywine) · 发帖 2026-01-12 · [原帖](https://x.com/Jackywine/status/2010599347566854330)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具推荐
+- **总结**：推荐 skillsmp.com，称已收录上千个 skills、包罗万象。与另一条 Agent Skills Marketplace 推荐指向同一网站，信息量较低，主要是入口链接。
+
+**正文**
+
+- **SkillsMP**：一个已收录**上千个 Skills** 的站点，包罗万象、应有尽有
+  - https://skillsmp.com
+
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2047525971742597195
 

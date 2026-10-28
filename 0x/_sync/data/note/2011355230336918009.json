@@ -1,0 +1,21 @@
+{
+ "id": "2011355230336918009",
+ "handle": "zstmfhy",
+ "name": "AI奶爸",
+ "url": "https://x.com/zstmfhy/status/2011355230336918009",
+ "created_at": "2026-01-14T08:30:30.000Z",
+ "text": "目前 GitHub 上最热门的 Claude Skills 相关开源项目（按 Stars 数降序排列，数据基于 2026 年 1 月最新公开信息，实际数字以 GitHub 实时为准），官方项目放在首位：\n\n1. 官方 Anthropic 出品\n   anthropics/skills （官方 Agent Skills 公共仓库，包含大量高质量示例技能，如文档处理、web artifacts、MCP builder 等，是最权威的起点）  \n   ⭐ 约 39.4k  \n   https://github.com/anthropics/skills\n\n2. obra/superpowers\n   Claude Code 超强核心技能库，内置 20+ 实战技能（TDD、debug、协作模式等），社区公认最强之一  \n   ⭐ 约 21.1k  \n   https://github.com/obra/superpowers\n\n3. ComposioHQ/awesome-claude-skills\n   最受欢迎的 Awesome 列表之一，汇集大量官方+社区技能，覆盖开发、数据分析、商业等领域  \n   ⭐ 约 18.9k  \n   https://github.com/ComposioHQ/awesome-claude-skills\n\n4. travisvn/awesome-claude-skills\n   优质精选列表，专注 Claude Code 工作流定制，资源丰富，适合快速发现新技能  \n   ⭐ 约 4.8k+（部分 Awesome 列表星数波动较大）  \n   https://github.com/travisvn/awesome-claude-skills\n\n5. K-Dense-AI/claude-scientific-skills  \n   专为科学研究打造，140+ 科学领域技能（生物、化学、数据分析、数据库整合等），研究人员必备  \n   ⭐ 约 5.8k  \n   https://github.com/K-Dense-AI/claude-scientific-skills\n\n这些都是目前收藏数最高的实用项目！官方的 anthropics/skills 质量最稳定，适合作为入门起点；Awesome 列表则是快速探索海量新技能的最佳入口。\n\n使用方法超简单：把技能文件夹复制到 `~/.claude/skills/`（个人全局）或项目内的 `.claude/skills/`，Claude 就会自动发现并按需加载～\n\n推荐先从官方仓库开始试用！",
+ "card": {
+  "text": "GitHub - anthropics/skills: Public repository for Agent Skills",
+  "href": "https://t.co/oF3P2dwlMX"
+ },
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 57,
+ "thread": [],
+ "title": "GitHub 最热门的 Claude Skills 开源项目排行",
+ "category": "Skills & Prompt",
+ "kind": "资源推荐",
+ "summary": "按 Stars 排序整理 2026 年 1 月 GitHub 上最热门的 Claude Skills 项目：官方 anthropics/skills（约 39.4k）居首，其后有 obra/superpowers（20+ 实战技能，含 TDD、debug）等，每项附简介、星数和链接。适合当作选 skill 的地图。"
+}

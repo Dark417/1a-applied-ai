@@ -2,15 +2,80 @@
 
 - [← 返回总目录](x-note.md)
 - agent 记忆分层、RAG、知识库
-- 共 3 篇，按收藏顺序倒序（最新在上）
+- 共 4 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [SimpleMem：基于语义无损压缩的高效 Agent 长期记忆](#x-2010720188686348593) · @dair_ai · 2026-01-12 · 论文解读
 - [Agent 记忆的 5 层架构（13 页）](#x-2114319310005150101) · @AnnatarXBT · 2026-10-25 · 概念介绍 + 数据
 - [RAG Is a Lie We Tell Ourselves — Karpathy's LLM Wiki](#x-2050228936270037068) · @Suryanshti777 · 2026-05-01 · 概念对比
 - [How to Master RAG and Build AI Agents That Remember Everything](#x-2050145400204783631) · @eng_khairallah1 · 2026-05-01 · 入门教程（长文）
 
 ## Part 2 · Details
+
+### x-2010720188686348593
+
+**SimpleMem：基于语义无损压缩的高效 Agent 长期记忆**
+
+- 作者：DAIR.AI (@dair_ai) · 发帖 2026-01-12 · [原帖](https://x.com/dair_ai/status/2010720188686348593)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：论文解读
+- **总结**：DAIR.AI 解读论文 SimpleMem：现有 agent 记忆要么保存完整历史导致大量冗余，要么靠迭代推理过滤噪声、耗费大量 token。SimpleMem 用语义无损压缩最大化信息密度，在效果和 token 成本之间取得更好的平衡。附 arXiv 链接（2601.02553）。
+
+**正文**
+
+- **Problem: LLM agents need memory for long conversations, and today's approaches are wasteful**
+  - Retaining full interaction histories → massive redundancy
+  - Iterative reasoning to filter noise → excessive token consumption
+- **SimpleMem**: an efficient memory framework based on **semantic lossless compression**
+  - Maximizes information density while minimizing token consumption
+- **Three-stage pipeline**
+  1. **Semantic Structured Compression**
+     - Entropy-aware filtering distills raw dialogue into compact memory units
+     - Resolves coreferences
+     - Converts relative time ("last Friday") into absolute timestamps
+  2. **Recursive Memory Consolidation**
+     - Incrementally integrates related memories into higher-level abstractions
+     - e.g. repeated "ordered a latte at 8 AM" → "regularly drinks coffee in the morning"
+  3. **Adaptive Query-Aware Retrieval**
+     - Dynamically adjusts retrieval scope based on query complexity
+- **Results (LoCoMo benchmark, GPT-4.1-mini)**
+  - **43.24 F1** vs strongest baseline Mem0 at 34.20 — a **26.4%** improvement
+  - **531 tokens per query** vs 16,910 for full-context approaches — a **30x** reduction
+  - Memory construction **14x faster than Mem0** (92.6s vs 1350.9s per sample) and **50x faster than A-Mem**
+  - Even a 3B model with SimpleMem outperforms larger models using inferior memory strategies
+- **Takeaway**: structured semantic compression + adaptive retrieval let agents keep reliable long-term memory without drowning in tokens or losing accuracy
+
+<details><summary>原文</summary>
+
+> Efficient Lifelong Memory for LLM Agents
+>
+> LLM agents need memory to handle long conversations. The way this is handled today is that memory either retains full interaction histories, leading to massive redundancy, or relies on iterative reasoning to filter noise, consuming excessive tokens.
+>
+> This new research introduces SimpleMem, an efficient memory framework based on semantic lossless compression that maximizes information density while minimizing token consumption.
+>
+> The framework operates through a three-stage pipeline.
+>
+> 1) First, Semantic Structured Compression applies entropy-aware filtering to distill raw dialogue into compact memory units, resolving coreferences and converting relative time expressions ("last Friday") into absolute timestamps.
+>
+> 2) Second, Recursive Memory Consolidation incrementally integrates related memories into higher-level abstractions, turning repetitive entries like "ordered a latte at 8 AM" into patterns like "regularly drinks coffee in the morning."
+>
+> 3) Third, Adaptive Query-Aware Retrieval dynamically adjusts the retrieval scope based on query complexity.
+>
+> The results: On the LoCoMo benchmark with GPT-4.1-mini, SimpleMem achieves 43.24 F1, outperforming the strongest baseline Mem0 (34.20) by 26.4%, while reducing token consumption to just 531 tokens per query compared to 16,910 for full-context approaches, a 30x reduction.
+>
+> They claim that memory construction is 14x faster than Mem0 (92.6s vs 1350.9s per sample) and 50x faster than A-Mem. Even a 3B parameter model with SimpleMem outperforms larger models using inferior memory strategies.
+>
+> This work shows that structured semantic compression and adaptive retrieval enable LLM agents to maintain reliable long-term memory without drowning in tokens or sacrificing accuracy.
+>
+> [2] Learn to build effective AI agents in our academy: https://dair-ai.thinkific.com
+>
+> Paper: https://arxiv.org/abs/2601.02553
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G-eDWs3bQAEMAzs?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2114319310005150101
 

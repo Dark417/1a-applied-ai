@@ -1,0 +1,21 @@
+{
+ "id": "2008117170879041729",
+ "handle": "simplifyinAI",
+ "name": "Simplifying AI",
+ "url": "https://x.com/simplifyinAI/status/2008117170879041729",
+ "created_at": "2026-01-05T10:03:37.000Z",
+ "text": "\"I don't have a GPU\" is officially dead.\n\nVS Code now connects directly to Google Colab.\n\n→ You get a free T4 GPU inside your editor.\n→ Your local files. Their compute.",
+ "has_video": true,
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 57,
+ "keywords": [
+  "VS Code",
+  "Google Colab",
+  "T4 GPU"
+ ],
+ "gist": "VS Code 可以直接连接 Google Colab，在本地编辑器里用免费 T4 GPU：文件在本地，算力在 Colab。",
+ "title": "VS Code 直连 Google Colab，免费用 T4 GPU",
+ "category": "其他应用",
+ "kind": "工具介绍",
+ "summary": "介绍 VS Code 可以直接连接 Google Colab 运行时：在本地编辑器里写代码、用 Colab 的免费 T4 GPU 跑，文件在本地、算力在云端。适合没有 GPU 的人做实验。thread 其余部分是 newsletter 推广。"
+}

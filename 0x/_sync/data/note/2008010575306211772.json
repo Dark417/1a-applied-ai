@@ -1,0 +1,27 @@
+{
+ "id": "2008010575306211772",
+ "handle": "xiaoying_eth",
+ "name": "小樱｜实用工具分享",
+ "url": "https://x.com/xiaoying_eth/status/2008010575306211772",
+ "created_at": "2026-01-05T03:00:02.000Z",
+ "text": "超棒的LLM智能体在GitHub上已突破85K+星标！\n\n完全免费且开源。\n\n🌟https://github.com/Shubhamsaboo/awesome-llm-apps",
+ "media": [
+  "https://pbs.twimg.com/media/G93i-MCagAAsanm?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 75,
+ "thread": [],
+ "keywords": [
+  "awesome-llm-apps",
+  "GitHub",
+  "LLM agents",
+  "open source"
+ ],
+ "gist": "推荐 GitHub 开源合集 awesome-llm-apps（Shubhamsaboo），收录大量 LLM 智能体应用示例，已超 85K 星。",
+ "title": "awesome-llm-apps：85K 星的 LLM 应用合集",
+ "category": "Graph & Multi-Agent",
+ "kind": "资源推荐",
+ "summary": "推荐 GitHub 上的 awesome-llm-apps（Shubhamsaboo），收录大量开源 LLM agent / RAG 应用示例，已超 85K 星，完全免费。适合找可直接运行的 agent 范例。帖子只有推荐语和链接。"
+}

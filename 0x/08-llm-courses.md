@@ -2,14 +2,145 @@
 
 - [← 返回总目录](x-note.md)
 - LLM 原理与系统课程
-- 共 2 篇，按收藏顺序倒序（最新在上）
+- 共 5 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [MIT 700 页免费书《Algorithms for Decision Making》](#x-2010559739164586439) · @techwith_ram · 2026-01-12 · 课程推荐
+- [斯坦福免费书《Algorithms for AI & ML》](#x-2008925848552829345) · @DanKornas · 2026-01-07 · 课程推荐
+- [斯坦福免费 AI/ML 课程合集](#x-2007869846957310169) · @swapnakpanda · 2026-01-04 · 课程推荐
 - [Stanford CS329A：Self-Improving AI Agents 课程](#x-2104453599367770287) · @shao__meng · 2026-09-28 · 课程推荐
 - [Karpathy 3 小时：从零构建 LLM](#x-2078533887383556335) · @RohOnChain · 2026-07-18 · 课程推荐
 
 ## Part 2 · Details
+
+### x-2010559739164586439
+
+**MIT 700 页免费书《Algorithms for Decision Making》**
+
+- 作者：𝗿𝗮𝗺𝗮𝗸𝗿𝘂𝘀𝗵𝗻𝗮— 𝗲/𝗮𝗰𝗰 (@techwith_ram) · 发帖 2026-01-12 · [原帖](https://x.com/techwith_ram/status/2010559739164586439)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：课程推荐
+- **总结**：推荐一本约 700 页的免费书，讲让机器学会决策的算法，附 PDF 链接（algorithmsbook.com 的 dm.pdf，即《Algorithms for Decision Making》）。适合系统学习决策、规划与强化学习基础。
+
+**正文**
+
+- **MIT released a 700-page book** on teaching machines how to think  - PDF: https://algorithmsbook.com/files/dm.pdf
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G-bxEt6bUAE9FbV?format=png&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2008925848552829345
+
+**斯坦福免费书《Algorithms for AI & ML》**
+
+- 作者：Dan Kornas (@DanKornas) · 发帖 2026-01-07 · [原帖](https://x.com/DanKornas/status/2008925848552829345)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：课程推荐
+- **总结**：推荐斯坦福 69 页的《Algorithms for AI & ML》免费 PDF（GitHub 托管链接）。是基础算法读物推荐，帖子没有展开内容。
+
+**正文**
+
+- **Algorithms for AI & ML** — a 69-page book from Stanford University, now free
+  - https://github.com/AniruddhaChattopadhyay/Books/blob/main/4.alg4ai.pdf
+
+
+- 图片：[img1](https://pbs.twimg.com/media/G-EjadSWYAA1q8d?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2007869846957310169
+
+**斯坦福免费 AI/ML 课程合集**
+
+- 作者：Swapna Kumar Panda (@swapnakpanda) · 发帖 2026-01-04 · [原帖](https://x.com/swapnakpanda/status/2007869846957310169)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：课程推荐
+- **总结**：整理斯坦福免费公开的 AI/ML 课程：CS221 人工智能、CS229 机器学习、CS230 深度学习、CS234 强化学习、CS336 从零实现 LLM、CS224N NLP，thread 中逐一给出讲师（如 Andrew Ng）和 YouTube 播放列表链接。是一份系统学习路线的资源清单。
+
+**正文**
+
+- **Stanford's free AI & ML courses**
+  - **CS221** — Artificial Intelligence
+  - **CS229** — Machine Learning
+  - **CS230** — Deep Learning
+  - **CS234** — Reinforcement Learning
+  - **CS336** — LLM from Scratch
+  - **CS224N** — NLP with Deep Learning
+- The post says course links follow below, but they are not in the source text
+
+<details><summary>原文</summary>
+
+> Stanford's ALL FREE Courses (AI & ML):
+>
+> ❯ CS221   - Artificial Intelligence
+> ❯ CS229   - Machine Learning
+> ❯ CS230   - Deep Learning
+> ❯ CS234   - Reinforcement Learning
+> ❯ CS336    - LLM from Scratch
+> ❯ CS224N - NLP with Deep Learning
+>
+> Course links inside 👇
+>
+> [2] 1. CS229 - Machine Learning
+>
+>      - By Andrew Ng
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU
+>
+> [3] 2. CS230 - Deep Learning
+>
+>     - 2025 (Ongoing)
+>     - By Andrew Ng
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X
+>
+> [4] 3. CS229M - Machine Learning Theory
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh
+>
+> [5] 4. CS234 - Reinforcement Learning
+>
+>     - 2024
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
+>
+> [6] 5. CS224U - Natural Language Understanding
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ
+>
+> [7] 6. CS224N - NLP with DL
+>
+>     - 2024
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D
+>
+> [8] 7. CS231N - Deep Learning for CV
+>
+>     - 2025
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rOmsNzYBMe0gJY2XS8AQg16
+>
+> [9] 8. CME295 - Transformers & LLMs
+>
+>     - 2025
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05
+>
+> [10] 9. CS236 - Deep Generative Models
+>
+>     - 2023
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8
+>
+> [11] 10. CS221 - Artificial Intelligence
+>
+> 🖇 https://youtube.com/playlist?list=PLoROMvodv4rOca_Ovz1DvdtWuz8BfSWL2
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G91i-XYbYAAfCyU?format=jpg&name=large) [img2](https://pbs.twimg.com/media/G91i-XXbcAA-7Um?format=jpg&name=large) [img3](https://pbs.twimg.com/media/G91i-XbbAAABa73?format=jpg&name=large) [img4](https://pbs.twimg.com/media/G91i-XUbQAA05xc?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2104453599367770287
 

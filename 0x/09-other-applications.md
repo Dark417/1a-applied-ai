@@ -2,14 +2,153 @@
 
 - [← 返回总目录](x-note.md)
 - agent 之外的 AI 应用（GNN 量化、图像生成等）
-- 共 2 篇，按收藏顺序倒序（最新在上）
+- 共 6 篇，按收藏顺序倒序（最新在上）
 
 ## Part 1 · Index
 
+- [Vibe Coding Robotics 第 7 篇：扑翼机构 + 达芬奇风格 UI](#x-2013293638768562325) · @DilumSanjaya · 2026-01-19 · 案例分享
+- [Automate Faceless Content：AI 自动化无露脸视频教程](#x-2008501335705178231) · @GitHub_Daily · 2026-01-06 · 搭建教程
+- [SmolVLM + llama.cpp 实时视觉 demo](#x-2007833514239250463) · @AiBreakfast · 2026-01-04 · 案例分享
+- [VS Code 直连 Google Colab，免费用 T4 GPU](#x-2008117170879041729) · @simplifyinAI · 2026-01-05 · 工具介绍
 - [Graph Engineering for Quants：GNN 量化大师课](#x-2081656879886012676) · @RitOnchain · 2026-07-27 · 方法介绍 + 代码
 - [Nano Banana 2：手绘户型图 → 4K 3D 室内渲染](#x-2029562218048541087) · @EHuanglu · 2026-03-05 · 教程
 
 ## Part 2 · Details
+
+### x-2013293638768562325
+
+**Vibe Coding Robotics 第 7 篇：扑翼机构 + 达芬奇风格 UI**
+
+- 作者：Dilum Sanjaya (@DilumSanjaya) · 发帖 2026-01-19 · [原帖](https://x.com/DilumSanjaya/status/2013293638768562325)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：案例分享
+- **总结**：作者系列作品第 7 篇：用 Gemini Pro 实现扑翼机（ornithopter）机构模拟，用 Nano Banana 生成达芬奇手稿风格的 UI。thread 里说明工作流和之前的系列类似，但比 Strandbeest 模拟器耗时更久。是用 AI 做机械仿真可视化的案例。
+
+**正文**
+
+- **Vibe Coding Robotics, Part 7**
+  - Implemented an **ornithopter** mechanism with Gemini Pro
+  - Generated a Leonardo da Vinci–style UI for it with Nano Banana
+
+<details><summary>原文</summary>
+
+> Vibe Coding Robotics Part 7
+>
+> Implemented an ornithopter mechanism with Gemini Pro, and generated a Leonardo da Vinci style UI using Nano Banana to go with it.
+>
+> [2] The workflow isn't really that different from my other Vibe Coding Robotics posts. However, this one took even longer than it did to build Theo Jansen's Strandbeest simulator. When there are a lot of moving parts, LLMs struggle a lot.
+>
+> [3] Last part where I built a Theo Jansen's Strandbeest simulator
+>
+> [4] First part of the series where I walk through the process I use to create these.
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2008501335705178231
+
+**Automate Faceless Content：AI 自动化无露脸视频教程**
+
+- 作者：GitHubDaily (@GitHub_Daily) · 发帖 2026-01-06 · [原帖](https://x.com/GitHub_Daily/status/2008501335705178231)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：搭建教程
+- **总结**：推荐开源教程 automate-faceless-content：11 个模块，从基础到变现，讲如何用 AI 工具（配合 Syllaby.io）自动生成无露脸短视频，包括批量生成（2 小时 60 条）、一条内容复用到 6–11 个平台、选高收益领域、联盟营销等。偏内容变现流程，不是 agent 技术。
+
+**正文**
+
+- **痛点**：想做短视频，但拍摄、剪辑、想选题每天耗掉大半天，还没赚钱就先累趴了
+- **Automate Faceless Content**：GitHub 上的开源教程，系统地教你用 AI 工具自动化生成**无露脸视频**，并在各大平台变现
+  - GitHub：http://github.com/cporter202/automate-faceless-content
+  - 配合 http://Syllaby.io 工具使用
+- **11 个模块**，从基础概念到平台变现
+  - 视频生成、批量调度、内容策略、多平台运营等完整流程
+- **详细工作流程指南**
+  - 每天 **5 分钟**创作一条视频
+  - **2 小时**批量生成 **60 条**视频
+  - **内容复用策略**：一条视频变成 **6–11 条**不同平台的素材
+- **实战内容**
+  - 高收益领域选择
+  - 快速变现路径（**2–3 周**内通过平台审核）
+  - 联盟营销策略
+- 适合想尝试无露脸视频创作、或在找系统化自媒体变现方法的人
+
+<details><summary>原文</summary>
+
+> 好多朋友想做短视频，吐槽说每天拍视频、剪辑、想选题就耗掉大半天，还没开始赚钱就先累趴了。
+>
+> 于是，在 GitHub 上找到了 Automate Faceless Content 这份开源教程，系统性地教你如何用 AI 工具自动化生成无露脸视频内容，并在各大平台变现。
+>
+> 整套教程分为 11 个模块，从基础概念到平台变现，涵盖视频生成、批量调度、内容策略、多平台运营等完整流程，配合 http://Syllaby.io 工具使用。
+>
+> GitHub：http://github.com/cporter202/automate-faceless-content
+>
+> 提供了详细的工作流程指南，比如每天 5 分钟创作一条视频，或者 2 小时批量生成 60 条视频内容，还有内容复用策略，让一条视频变成 6-11 条不同平台的素材。
+>
+> 教程还包括高收益领域选择、快速变现路径(2-3 周内通过平台审核)、联盟营销策略等实战内容。
+>
+> 如果你想尝试无露脸视频创作，或者正在寻找系统化的自媒体变现方法，这份教程值得收藏学习。
+
+</details>
+
+- 图片：[img1](https://pbs.twimg.com/media/G9-hUCbaoAA6XDt?format=jpg&name=large)
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2007833514239250463
+
+**SmolVLM + llama.cpp 实时视觉 demo**
+
+- 作者：AI Breakfast (@AiBreakfast) · 发帖 2026-01-04 · [原帖](https://x.com/AiBreakfast/status/2007833514239250463)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：案例分享
+- **总结**：展示用 Hugging Face SmolVLM 和 llama.cpp 搭的实时视觉 demo，只用一个摄像头就能近乎即时地识别画面，说明开源小视觉模型已经足够快且便宜。帖子说附 GitHub 链接，但抓到的内容里链接缺失。
+
+**正文**
+
+- **Near-instantaneous, cheap open-source vision models are here**
+- Real-time demo built with **HuggingFace SmolVLM** + **llama.cpp**, using only a webcam
+- The post says a GitHub link follows below, but the link is not in the source text
+
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
+
+### x-2008117170879041729
+
+**VS Code 直连 Google Colab，免费用 T4 GPU**
+
+- 作者：Simplifying AI (@simplifyinAI) · 发帖 2026-01-05 · [原帖](https://x.com/simplifyinAI/status/2008117170879041729)
+- 来源：🔖 收藏 · 拉取 2026-10-28 · 类型：工具介绍
+- **总结**：介绍 VS Code 可以直接连接 Google Colab 运行时：在本地编辑器里写代码、用 Colab 的免费 T4 GPU 跑，文件在本地、算力在云端。适合没有 GPU 的人做实验。thread 其余部分是 newsletter 推广。
+
+**正文**
+
+- **VS Code now connects directly to Google Colab**
+  - You get a **free T4 GPU** inside your editor
+  - Your local files, Colab's compute
+- Takeaway: not having a local GPU is no longer a blocker
+
+<details><summary>原文</summary>
+
+> "I don't have a GPU" is officially dead.
+>
+> VS Code now connects directly to Google Colab.
+>
+> → You get a free T4 GPU inside your editor.
+> → Your local files. Their compute.
+>
+> [2] Link:
+>
+> [3] If you like this, you will enjoy our daily AI newsletter.
+>
+> Join thousands and learn about the latest breakthroughs in AI, plus step-by-step AI tutorials in just 5 minutes: https://simplifyingcomplexity.tech/subscribe
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到本页目录](#part-1--index)
 
 ### x-2081656879886012676
 

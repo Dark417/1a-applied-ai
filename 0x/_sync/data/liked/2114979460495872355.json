@@ -1,0 +1,21 @@
+{
+ "id": "2114979460495872355",
+ "handle": "HowToPrompt__",
+ "name": "How To Prompt",
+ "url": "https://x.com/HowToPrompt__/status/2114979460495872355",
+ "created_at": "2026-10-27T07:16:12.000Z",
+ "text": "RAG is officially cooked.\n\nIBM built a retriever that hallucinates 65x less than fine-tuned RAG systems.\n\nRight now, every company is using Retrieval-Augmented Generation (RAG) to stop their AI from hallucinating.\n\nThe idea is to give the AI a private database to read so it doesn't make things up.\n\nBut there is a massive structural flaw.\n\nStandard RAG blindly grabs documents based on vector similarity and forces the AI to read them. If the retriever pulls irrelevant garbage, the AI doesn't stop.\n\nIt just hallucinates with citations.\n\nIBM just dropped a paper that changes the math entirely.\n\nThey built a new retrieval architecture that hallucinates 65x less than state-of-the-art fine-tuned RAG systems.\n\n65x is the difference between a fun prototype and a production-grade enterprise system.\n\nInstead of blindly dumping context into the model and hoping for the best, their system actively filters and validates the retrieved data before the generation step even begins.\n\nIt cuts out the noise. It forces absolute precision.\n\nFor businesses, this is the holy grail.\n\nZero hallucinations means zero liability. It means autonomous agents can finally be trusted with sensitive company data without a human babysitting every output.",
+ "media": [
+  "https://pbs.twimg.com/media/HVnqmRGbkAAI8U7?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-28T16-26",
+ "rank": 1,
+ "keywords": [
+  "RAG",
+  "IBM",
+  "hallucination",
+  "retrieval"
+ ],
+ "gist": "介绍 IBM 一篇论文：新的检索架构在生成前先过滤、校验检索到的内容，号称幻觉比微调过的 RAG 低 65 倍。作者认为标准 RAG 盲目按向量相似度塞文档是结构性缺陷，这类方法能让企业放心让 agent 处理敏感数据。"
+}
