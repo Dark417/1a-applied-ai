@@ -1,0 +1,19 @@
+{
+ "id": "2115433483187478997",
+ "handle": "ChuckBass14291",
+ "name": "Chuck Bass",
+ "url": "https://x.com/ChuckBass14291/status/2115433483187478997",
+ "created_at": "2026-10-28T13:20:19.000Z",
+ "text": "Grokbot 的正确使用方式：\n\n可以同时指挥 Codex、Claude、Gemini 干活，且不消耗自身对话额度，充分利用AI 的闲置额度\n\n多 Agent+云端电脑实操\n\n① 主从分离架构：\n建立专属的「Codex工人」Bot，让主Agent负责调度、子 Agent专门干活，任务不搅和，上下文更干净。\n\n2 24h云端挂机 vs本地安全调用：\n走 ChatGPT 设备码（Device Code）一键授权给云电脑，电脑关机睡大觉，它在后台自己跑代码、做网页、调 GPTImage 画图。\n\n在意数据安全，也可以直接走本地授权，弹窗确认后再执行。\n\n白嫖算力\n接入 OpenCode，直接挂免费模型（如\nDeepSeek等 Flash 免费版），不花一分钱再白得一个24h打工仔。",
+ "has_video": true,
+ "pulled_at": "2026-10-30T02-58",
+ "rank": 0,
+ "keywords": [
+  "Grokbot",
+  "Codex",
+  "multi-agent",
+  "Device Code",
+  "OpenCode"
+ ],
+ "gist": "介绍用 Grokbot 同时调度 Codex、Claude、Gemini 干活：主 Agent 调度、专属「Codex 工人」Bot 执行，上下文分离。云电脑用 ChatGPT 设备码授权 24h 挂机，也可本地授权；再接 OpenCode 挂 DeepSeek Flash 等免费模型省算力。"
+}

@@ -1,11 +1,13 @@
 # X Likes · 关键词速览
 
-- 共 65 条，按点赞顺序倒序（最新在上）
+- 共 66 条，按点赞顺序倒序（最新在上）
 - Part 1：关键词 + 简述；Part 2：正文（同时在 Notes 里的帖子只给链接，不重复全文）
 - 自动生成，勿手改
 
 ## Part 1 · Keywords
 
+- [2026-10-28 · @ChuckBass14291](#x-2115433483187478997)：`Grokbot`, `Codex`, `multi-agent`, `Device Code`, `OpenCode`
+  - 介绍用 Grokbot 同时调度 Codex、Claude、Gemini 干活：主 Agent 调度、专属「Codex 工人」Bot 执行，上下文分离。云电脑用 ChatGPT 设备码授权 24h 挂机，也可本地授权；再接 OpenCode 挂 DeepSeek Flash 等免费模型省算力。
 - [2026-07-03 · @lucathunderhawk](#x-2072842886891376872)：`Honen`, `NVIDIA`, `AI literacy`, `interactive courses`
   - Honen 产品发布：把公司内部资料自动变成会自我改进的互动课程，并与 NVIDIA 合作为 25 万学习者做 AI 素养培训。偏产品推广。
 - [2026-10-27 · @HowToPrompt__](#x-2114979460495872355)：`RAG`, `IBM`, `hallucination`, `retrieval`
@@ -138,6 +140,53 @@
   - Nature Medicine 论文：SleepFM 用 58.5 万小时的睡眠数据训练基础模型，能从一晚的睡眠记录预测 130 种疾病。
 
 ## Part 2 · 正文
+
+### x-2115433483187478997
+
+**Chuck Bass (@ChuckBass14291)** · 发帖 2026-10-28 · [原帖](https://x.com/ChuckBass14291/status/2115433483187478997)
+
+- **Grokbot 的正确使用方式**：同时指挥 **Codex、Claude、Gemini** 干活
+  - 不消耗自身对话额度
+  - 充分利用 AI 的闲置额度
+- **多 Agent + 云端电脑实操**
+- **① 主从分离架构**
+  - 建立专属的「**Codex 工人**」Bot
+  - 主 Agent 负责调度，子 Agent 专门干活
+  - 任务不搅和，上下文更干净
+- **② 24h 云端挂机 vs 本地安全调用**
+  - **云端**：走 ChatGPT 设备码（**Device Code**）一键授权给云电脑
+    - 电脑关机睡大觉，它在后台自己跑代码、做网页、调 **GPTImage** 画图
+  - **本地**：在意数据安全，可以直接走本地授权
+    - 弹窗确认后再执行
+- **③ 白嫖算力**
+  - 接入 **OpenCode**，直接挂免费模型（如 DeepSeek 等 Flash 免费版）
+  - 不花一分钱，再白得一个 24h 打工仔
+
+<details><summary>原文</summary>
+
+> Grokbot 的正确使用方式：
+>
+> 可以同时指挥 Codex、Claude、Gemini 干活，且不消耗自身对话额度，充分利用AI 的闲置额度
+>
+> 多 Agent+云端电脑实操
+>
+> ① 主从分离架构：
+> 建立专属的「Codex工人」Bot，让主Agent负责调度、子 Agent专门干活，任务不搅和，上下文更干净。
+>
+> 2 24h云端挂机 vs本地安全调用：
+> 走 ChatGPT 设备码（Device Code）一键授权给云电脑，电脑关机睡大觉，它在后台自己跑代码、做网页、调 GPTImage 画图。
+>
+> 在意数据安全，也可以直接走本地授权，弹窗确认后再执行。
+>
+> 白嫖算力
+> 接入 OpenCode，直接挂免费模型（如
+> DeepSeek等 Flash 免费版），不花一分钱再白得一个24h打工仔。
+
+</details>
+
+- 含视频（未转写）
+
+[↑ 回到目录](#part-1--keywords)
 
 ### x-2072842886891376872
 

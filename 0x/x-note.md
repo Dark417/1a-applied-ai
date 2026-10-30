@@ -1,6 +1,6 @@
 # X Notes · 精读总目录
 
-- 共 83 篇，10 个主题；每个主题一个文件，主题内按收藏顺序倒序
+- 共 84 篇，10 个主题；每个主题一个文件，主题内按收藏顺序倒序
 - 点主题名 → 打开主题文件；点标题 → 直接跳到那篇的详情
 - 自动生成，勿手改
 
@@ -54,7 +54,8 @@
   - [OpenAI 用 Codex 维护 Agents SDK 的四层结构](05-coding-agent.md#x-2031347640630165525) · @chenchengpro · 2026-03-10
   - [GitNexus：给代码库建知识图谱，经 MCP 喂给 AI](05-coding-agent.md#x-2026178278055403843) · @GitHub_Daily · 2026-02-24
   - [离不开 Claude Code 的三个场景](05-coding-agent.md#x-2022157972613300368) · @yanhua1010 · 2026-02-13
-- **[06 · Skills & Prompt](06-skills-prompt.md)**（11） — Skills 设计、可复用 prompt 与技能库
+- **[06 · Skills & Prompt](06-skills-prompt.md)**（12） — Skills 设计、可复用 prompt 与技能库
+  - [别再过度提示 Claude：Addy Osmani 的四条减法原则](06-skills-prompt.md#x-2115721456076353868) · @KobinFlow · 2026-10-29
   - [Agent Skills Marketplace：最全的 skills 收集站](06-skills-prompt.md#x-2011793571343712393) · @vikingmute · 2026-01-15
   - [我在用的 Claude Skills 清单](06-skills-prompt.md#x-2011309102279114802) · @bozhou_ai · 2026-01-14
   - [GitHub 最热门的 Claude Skills 开源项目排行](06-skills-prompt.md#x-2011355230336918009) · @zstmfhy · 2026-01-14

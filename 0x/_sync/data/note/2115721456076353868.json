@@ -1,0 +1,31 @@
+{
+ "id": "2115721456076353868",
+ "handle": "KobinFlow",
+ "name": "Kobin",
+ "url": "https://x.com/KobinFlow/status/2115721456076353868",
+ "created_at": "2026-10-29T08:24:37.000Z",
+ "text": "现任 Anthropic Claude Code 核心成员、前 Google Chrome 工程总监 Addy Osmani刚发了篇长文，直接点破了很多人现在的 AI 编程误区：你大概率一直在“过度提示”（Overprompting）Claude。\n\n最扎心的一个事实是：Anthropic 官方把 Claude Code 的系统提示词直接砍掉了 80%，结果模型代码跑分一点都没掉！\n\n很多人还在用一两年前伺候老模型的那套“保姆式习惯”写 Prompt，字数越堆越多。面对 Opus 5.5 这代新模型，真正高手都在做减法：\n\n1. 别教它怎么走，只给两件事： 一句话说清「终极目标是什么」+「怎么验证做对了」。只要你给它一个能跑出 Pass/Fail 的单测或判定脚本，它自己就能死磕闭环到底，根本不用你寸步不离地盯着。\n\n2. 别迷信复杂的多 Agent 架构： 很多人喜欢无脑堆 Subagents，但 Addy 直言：子智能体不仅不会让事情变聪明，还会让延迟和账单成倍暴涨。从实测来看，「单个带 Skills 的 Agent」在代码质量和性价比上往往完胜多 Agent 编排。\n\n3. 不知道怎么做，就让它反向面试你： 需求不明确时，别硬憋 Prompt。让 Claude 提问面试你，直到它能整理出一份完整的需求 Spec；然后开个新会话，拿着这份 Spec 丢给它直接开工。\n\n4. 别当人肉代码扫描机： 代码写完，先调一个没看过聊天记录的独立 Agent 去把 Diff 审一遍、改一轮。把低级问题全甩给机器，人类只留着精力给核心业务风险做最终裁判。\n\n一句话总结： 模型每升级一代，你最该做的第一件事不是拼命加规则，而是赶紧去提示词里“删代码”。每隔几个月给你的 Prompt 瘦一次身，别用伺候老模型的旧习惯，束缚了新模型的发挥。",
+ "has_video": false,
+ "source": "bookmark",
+ "pulled_at": "2026-10-30T02-58",
+ "rank": 0,
+ "thread": [
+  {
+   "id": "2115722253136797775",
+   "handle": "KobinFlow",
+   "name": "Kobin",
+   "url": "https://x.com/KobinFlow/status/2115722253136797775",
+   "created_at": "2026-10-29T08:27:48.000Z",
+   "text": "附上我昨天写的长文，别让自己成了 Agent 的拖油瓶，虽然讲的是 Claude code，但是其他 Agent 也是万变不离其宗👇",
+   "quote": {
+    "name": "Kobin @KobinFlow · Oct 27",
+    "text": "这绝对是最干货的 Claude code避坑指南了——\n\n同一个 Claude Code，有人嫌它笨，有人让它通宵干活。\n\n差的往往不是模型，是用法：有些坑还不报错，比如你写的 AGENTS.md 可能从来没被读过。\n\n7 章，每章都能照着做。5 分钟版本在文章最前面。"
+   },
+   "has_video": false
+  }
+ ],
+ "title": "别再过度提示 Claude：Addy Osmani 的四条减法原则",
+ "category": "Skills & Prompt",
+ "kind": "观点",
+ "summary": "转述 Addy Osmani 的长文，讲的是新一代模型（Opus 5.5）下 prompt 应该做减法的观点：Anthropic 把 Claude Code 系统提示词砍掉 80% 而代码跑分不降。四条建议：只给「终极目标 + 验证方式」（如 Pass/Fail 单测），让模型自己闭环；不要无脑堆 Subagents，单个带 Skills 的 Agent 往往质量和性价比更好；需求不清时让 Claude 反向面试你，整理出 Spec 后开新会话执行；代码写完让一个没看过聊天记录的独立 Agent 审 Diff。结论：模型每升级一代就给 prompt 瘦身。作者在 thread 里附了自己写的 Claude Code 避坑长文。"
+}
