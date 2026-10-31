@@ -1,0 +1,22 @@
+{
+ "id": "2116220802970288295",
+ "handle": "0xMortyx",
+ "name": "Morty",
+ "url": "https://x.com/0xMortyx/status/2116220802970288295",
+ "created_at": "2026-10-30T17:28:51.000Z",
+ "text": "Lauren Tan’s Grok Bot setup looks like a real team.\n\nthe workflow is simple:\n\ngoal → delegate → specialists work → merge results → final answer\n\ninstead of asking one agent to do everything, she splits the work across specialists:\n\n→ Chief of Staff plans + delegates\n→ Researcher finds and compares information\n→ Engineer builds and tests\n→ Reviewer checks quality and edge cases\n→ Doc Writer turns work into reusable knowledge\n→ Operator keeps workflows running\n→ Memory Manager preserves context across sessions\n\nthat’s how Grok Bot starts feeling less like one assistant - and more like a small AI company working for you.\n\nfull playbook below ↓",
+ "media": [
+  "https://pbs.twimg.com/media/HV5RwEwW0AEp8xv?format=jpg&name=large"
+ ],
+ "has_video": false,
+ "pulled_at": "2026-10-31T04-25",
+ "rank": 3,
+ "keywords": [
+  "Grok Bot",
+  "multi-agent",
+  "Chief of Staff",
+  "Lauren Tan",
+  "specialist agents"
+ ],
+ "gist": "介绍 Lauren Tan 的 Grok Bot 多 agent 分工：目标 → 委派 → 专家并行 → 合并 → 答案，角色包括 Chief of Staff、Researcher、Engineer、Reviewer、Doc Writer、Operator、Memory Manager，像一个小型 AI 公司。"
+}

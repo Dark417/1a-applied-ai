@@ -1,0 +1,18 @@
+{
+ "id": "2115980498975551690",
+ "handle": "omarsar0",
+ "name": "elvis",
+ "url": "https://x.com/omarsar0/status/2115980498975551690",
+ "created_at": "2026-10-30T01:33:58.000Z",
+ "text": "Learn to build evals, folks!\n\nYou're not really doing recursive self-improvement (RSI) if you are not doing evals. And don't tell me your agents are generating the evals for you. They are pretty bad at it. \n\nI have found it really interesting and useful to give agents a concrete way to measure results and stay on track with a long-term goal. It's easier to hill climb when things are clearly measured and well defined. Probably one of the most important skills anyone in the space can have today. \n\nIt doesn't matter how many agents and intelligence you throw at a problem; you are not going too far without proper evals.",
+ "has_video": false,
+ "pulled_at": "2026-10-31T04-25",
+ "rank": 1,
+ "keywords": [
+  "evals",
+  "recursive self-improvement",
+  "hill climbing",
+  "DAIR.AI"
+ ],
+ "gist": "omarsar0 强调评测是最重要的技能之一：没有 evals 就谈不上递归自我改进，agent 自己生成的 evals 也很差；给 agent 明确可度量的目标才能持续爬坡。"
+}
