@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """ig_build.py — bookkeeping for the IG report pipeline (cloud side, no network).
 
-  python3 ig_build.py new <links.json>                    # print items not yet in state (dedup)
+  python3 ig_build.py new <links.json>                    # print URLs not yet in state (dedup by url_key)
+  python3 ig_build.py key <url>                           # the dedup key for a URL (use as --key)
   python3 ig_build.py mark <key> <status> [--landing U] [--org O]   # remember a link (seen / pending email)
   python3 ig_build.py add <pdf> --key K --title T --category C --org O --kind K --summary S [--url U] [--slug s]
         # dedup by sha256 → copy to 0x/ig/NN.<slug>.pdf, write data/NN.json, clear pending
@@ -61,11 +62,27 @@ def slugify(t):
     return (s[:60].rstrip("-")) or "report"
 
 
+TRACKING = re.compile(r"^(utm_|fbclid|igshid|igsh|gclid|mc_|_hs|hsa_|li_fat_id)", re.I)
+
+
+def url_key(u):
+    """dedup key: host + path + non-tracking query (ad links differ only by utm_* / fbclid)."""
+    from urllib.parse import parse_qsl, urlencode, urlparse
+    p = urlparse(u.strip())
+    q = urlencode(sorted((k, v) for k, v in parse_qsl(p.query) if not TRACKING.match(k)))
+    return f"url:{p.netloc.lower().removeprefix('www.')}{p.path.rstrip('/')}" + (f"?{q}" if q else "")
+
+
 def cmd_new(a):
     s = st()
-    items = json.loads(Path(a.links).read_text(encoding="utf-8")).get("items", [])
-    seen = set(s["seen"])
-    fresh = [i for i in items if i["key"] not in seen]
+    obj = json.loads(Path(a.links).read_text(encoding="utf-8"))
+    items = obj.get("items") or [{"key": url_key(u["url"]), "landing": u["url"], "text": u.get("text", "")}
+                                 for u in obj.get("urls", [])]
+    seen, fresh = set(s["seen"]), {}
+    for i in items:
+        if i["key"] not in seen:
+            fresh.setdefault(i["key"], i)
+    fresh = list(fresh.values())
     print(json.dumps(fresh, ensure_ascii=False, indent=1))
 
 
@@ -151,7 +168,7 @@ def cmd_render(_a):
         L += [f"### ig-{r['no']:02d}", "", f"**{r['title']}**", "",
               f"- 文件：[{r['file']}](ig/{r['file']}) · {r['bytes'] // 1024} KB",
               f"- 发布方：{r['org']} · 分类：{r['category']} · 类型：{r['kind']}",
-              f"- 来源：{'IG 私信链接' if r['key'].startswith(('ig:', 'url:')) else r['key']} · 获取方式：{r['via']} · 收录 {r['added'][:10]}"
+              f"- 来源：{'IG 私信链接' if r['key'].startswith('url:') else 'Gmail'} · 获取方式：{r['via']} · 收录 {r['added'][:10]}"
               + (f" · [落地页]({r['url']})" if r.get("url") else ""),
               f"- **总结**：{r['summary']}", ""]
     CATALOG.write_text("\n".join(L).rstrip() + "\n", encoding="utf-8")
@@ -168,10 +185,11 @@ def main():
     for f in ("key", "title", "category", "org", "kind", "summary"):
         x.add_argument(f"--{f}", required=f != "key", default="")
     x.add_argument("--url", default=""); x.add_argument("--slug", default=""); x.add_argument("--via", default="form")
+    x = sp.add_parser("key"); x.add_argument("url")
     x = sp.add_parser("gmail-done"); x.add_argument("message_id"); x.add_argument("--note", default="")
     sp.add_parser("pending"); sp.add_parser("render")
     a = ap.parse_args()
-    {"new": cmd_new, "mark": cmd_mark, "add": cmd_add, "gmail-done": cmd_gmail_done,
+    {"new": cmd_new, "key": lambda a: print(url_key(a.url)), "mark": cmd_mark, "add": cmd_add, "gmail-done": cmd_gmail_done,
      "pending": cmd_pending, "render": cmd_render}[a.cmd](a)
 
 

@@ -7,19 +7,21 @@
 - 仓库 `Dark417/1a-applied-ai`
   - 成品：`0x/ig/NN.<slug>.pdf`（PDF）和 `0x/ig-catalog.md`（目录：分组 index + details）
   - 流水线：`0x/_sync/ig/`
-    - `ig_pw.py`：本地读 IG 私信
+    - `ig_dom.js`：在内置浏览器里读 IG 私信里的 URL
     - `ig_fill.py`：云端填表
     - `ig_build.py`：去重、编号、渲染目录
-    - `config.json`：私信对话 id、填表身份
+    - `config.json`：私信对话 URL（`thread_url`）、填表身份
     - `state.json`：去重状态
     - `categories.json`：分类，按重要性排序
 - 用户电脑（Windows，Claude 桌面 app）
-  - IG 登录态在 `D:\1AL\ig-profile`（Playwright 用的本机 Chrome profile）
+  - IG 账号 `xlei___`，在**内置浏览器**（`mcp__remote-devices__Claude_Browser__*`）里保持登录
+  - 唯一检查的地方：xlei___ 自己给自己发的私信对话（`config.json` 的 `thread_url`）
   - 原始数据放 `D:\2Alfred\x-sync\ig\raw\`
   - 本地 repo 副本：`D:\1AL\1a-applied-ai\0x\`，只用 `sync_local.ps1` 同步
 - 邮箱
-  - 填表用 `ig-user@xiaoxiaolei.com`，Squarespace 会把它转发到 Gmail
-  - 用 Gmail connector 读（`mcp__Gmail__*`）
+  - 填表用 `ig-user@xiaoxiaolei.com`
+  - Squarespace 把它转发到 xiaoxiaoleijobapp@gmail.com
+  - 用 Gmail connector 读（`mcp__Gmail__*`，登录的就是这个账号）
 - 填表规则
   - 只填必填项，email 总是填
   - 不填电话、地址（有必填电话就记 `blocked`，跳过这篇）
@@ -38,31 +40,29 @@ pip list 2>/dev/null | grep -qi playwright || pip install playwright --break-sys
 RUN=$(date -u +%Y-%m-%dT%H-%M); W=/home/claude/work/ig/$RUN; mkdir -p $W
 ```
 
-## 2. 读 IG 私信（用户电脑，Playwright，不耗 token）
+## 2. 读 IG 私信（用户电脑，内置浏览器）
 
-- 电脑不在线（PowerShell 调用失败）：跳过第 2、3 步，只做第 4 步（邮件），然后在汇报里说明
-- 在线时，先用 `Windows-MCP__PowerShell`（`timeout` 给够；第一次 uv 安装可能要 1–2 分钟）：
-
-```powershell
-cd D:\1AL\1a-applied-ai\0x\_sync\ig; uv run --with playwright python ig_pw.py links 2>&1 | Select -Last 1
-```
-
-- 输出最后一行是 JSON：`{"run", "items": [{key, src, landing, caption, author, cta, text}], "out"}`
-- 如果输出 `NOT_LOGGED_IN`
-  - 停下这条线，继续第 4 步
-  - 汇报里写：「IG 登录失效，请运行 `ig_pw.py login` 重新登录」
-- 如果输出 `NO_THREAD`：用 `ig_pw.py threads` 列出对话，让用户选
-- 把 JSON 存到 `$W/links.json`，再执行 `python3 0x/_sync/ig/ig_build.py new $W/links.json`，只留下没处理过的条目
+- **只收消息文字里的 URL**
+  - 没有 URL 的消息跳过
+  - 分享的帖子、reel、story 也跳过（`ig_dom.js` 已经排除了）
+- 先打开对话：`Claude_Browser__navigate` 到 `config.json` 的 `thread_url`
+  - 调用失败（电脑不在线）：跳过第 2、3 步，只做第 4 步（邮件），然后在汇报里说明
+  - 跳到 `/accounts/login`：停下这条线，继续第 4 步；汇报和 PushNotification 里写「IG 登录失效，请在 Claude 桌面 app 的浏览器面板里重新登录 xlei___」
+- 等页面加载，然后用 `javascript_tool` 执行 `ig_dom.js` 的全部内容（应返回 `ig_dom ready`）
+- 再执行：`await __igdom.collect(8)`
+  - 返回 `{thread, urls: [{url, text}]}`
+  - 单次调用接近 45 秒会超时；超时就改成 `.then(r => window.__ig = r)`，再轮询 `window.__ig`
+- 把结果写到 `$W/links.json`，执行 `python3 0x/_sync/ig/ig_build.py new $W/links.json`
+  - 只留下没处理过的 URL（去掉 utm / fbclid 后按 host+path 去重），每条带 `key`
 
 ## 3. 打开链接，填表（云端 Playwright）
 
 逐条处理新条目：
 
-1. 判断它是不是报告 / 白皮书 / 电子书推广
-   - 看 `caption`、`text`、`cta` 和落地页标题
-   - 不是的话（普通商品广告、视频、自己的聊天内容）：`ig_build.py mark <key> skip`
-   - 没有 `landing`（帖子没有外链 CTA）：`mark <key> no_link`
-2. 执行 `python3 0x/_sync/ig/ig_fill.py "<landing>" $W/<n>`，读它输出的 JSON：
+1. 执行 `python3 0x/_sync/ig/ig_fill.py "<landing>" $W/<n>`，读它输出的 JSON：
+   - 先看落地页是不是报告 / 白皮书 / 电子书的领取页（看 `title` 和截图）
+     - 不是（普通商品页、文章、视频）：`ig_build.py mark <key> skip --landing <url>`
+     - `ig_fill.py` 只会在发现 email 表单时提交，所以不是表单的页面不会被误提交
    - `pdf`：用 Read 看 PDF 第 1–2 页，拿到标题、发布方、主题，然后走第 5 步收录
    - `email`、`submitted`：执行 `mark <key> email --landing <url> --org <公司>`，等邮件
    - `no_form` 但有 `pdf_url`：脚本已经下载好了，同 `pdf`
