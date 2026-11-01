@@ -13,7 +13,7 @@
   - 流水线（脚本、数据、本文件、`PLAYWRIGHT.md`）放在 `0x/_sync/`
 - 本地 repo clone：`D:\1AL\1a-applied-ai`；它的 `0x\` 是用户看的本地副本
   - 只用 `sync_local.ps1` 同步 `0x\`，**不要对这个 repo 做 git pull**（用户要求时才 pull）
-- 原始抓取数据：`D:\2Alfred\x-twitter\raw\`（device_bash 里是 `$HOME/mnt/x-twitter/raw`；不进 git）
+- 原始抓取数据：`D:\2Alfred\x-sync\raw\`（device_bash 里是 `$HOME/mnt/x-sync/raw`；不进 git）
 - 回复用户时用中文
 - 任意一步失败：
   - 不要重试超过 2 次
@@ -29,7 +29,7 @@
 ## 2. 拉列表（内置浏览器）
 
 0. 先看本地 Playwright 有没有已经拉好今天的数据（见 `PLAYWRIGHT.md`）：
-   - PowerShell：`Get-ChildItem D:\2Alfred\x-twitter\raw -Directory -Filter *-pw | Sort Name -Desc | Select -First 1`，再读它的 `meta.json`
+   - PowerShell：`Get-ChildItem D:\2Alfred\x-sync\raw -Directory -Filter *-pw | Sort Name -Desc | Select -First 1`，再读它的 `meta.json`
    - 如果是今天（美西时间）的，并且 `meta.json` 存在：直接 stage 它的三个 json 到 `/home/claude/work/raw/<那个目录名>/`，用目录名当 `<RUN>`，跳到第 5 步
    - 否则照常用内置浏览器走第 2–4 步
 
@@ -63,7 +63,7 @@
 1. 浏览器：`__xdom.download('<name>', <obj>)`
 2. 紧接着 PowerShell：
    ```powershell
-   powershell -NoProfile -ExecutionPolicy Bypass -File "D:\1AL\1a-applied-ai\0x\_sync\scripts\save_dialog.ps1" -Path "D:\2Alfred\x-twitter\raw\<RUN>\<name>"
+   powershell -NoProfile -ExecutionPolicy Bypass -File "D:\1AL\1a-applied-ai\0x\_sync\scripts\save_dialog.ps1" -Path "D:\2Alfred\x-sync\raw\<RUN>\<name>"
    ```
    - 应输出 `SAVED <bytes>`
    - 如果输出 `NO_DIALOG` / `NO_EDIT`：检查有没有残留的 `blob:` 对话框，关掉后重试一次

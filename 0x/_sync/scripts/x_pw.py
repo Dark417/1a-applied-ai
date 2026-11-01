@@ -39,7 +39,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 PROFILE = Path(r"D:\1AL\x-tw-profile")
-OUT = Path(r"D:\2Alfred\x-twitter\raw")
+OUT = Path(r"D:\2Alfred\x-sync\raw")
 LISTS = {"likes": "https://x.com/i/history/likes", "bookmarks": "https://x.com/i/history"}
 OWN_STATUS = re.compile(r"^/[^/]+/status/(\d+)$")
 

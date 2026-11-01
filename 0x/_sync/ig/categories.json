@@ -1,0 +1,8 @@
+[
+ {"name": "AI & Agents", "desc": "生成式 AI、agent、LLM 落地与平台"},
+ {"name": "Data & Analytics", "desc": "数据平台、数据工程、BI 与分析"},
+ {"name": "Cloud & Infra", "desc": "云、基础设施、DevOps、平台工程"},
+ {"name": "Security", "desc": "网络安全、身份、合规"},
+ {"name": "Industry & Market", "desc": "行业调研、市场趋势、CIO/CTO 调查"},
+ {"name": "Other", "desc": "暂时放不进上面分类的"}
+]

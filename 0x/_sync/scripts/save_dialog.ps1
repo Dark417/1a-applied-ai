@@ -1,6 +1,6 @@
 # save_dialog.ps1 — answer the built-in browser's "Save As" dialog for a blob: download
 # without touching the mouse/keyboard: WM_SETTEXT the filename box, then press Save (IDOK).
-# Usage: powershell -File save_dialog.ps1 -Path D:\2Alfred\x-twitter\raw\likes.json
+# Usage: powershell -File save_dialog.ps1 -Path D:\2Alfred\x-sync\raw\likes.json
 param([Parameter(Mandatory)][string]$Path, [int]$TimeoutSec = 15)
 
 Add-Type @"

@@ -1,0 +1,207 @@
+#!/usr/bin/env python3
+"""ig_fill.py — cloud Playwright: open a report landing page, fill ONLY the required fields
+with the persona from config.json, submit, and catch the PDF.
+
+  python3 ig_fill.py <url> <outdir>
+Prints one JSON line:
+  {"status": "pdf" | "email" | "submitted" | "no_form" | "blocked" | "error",
+   "pdf": "<path>", "pdf_url": "...", "title": "...", "final_url": "...",
+   "filled": [...], "skipped_required": [...], "shot": "<png>"}
+status meaning: pdf = got the file; email = page says it was emailed (check Gmail later);
+submitted = sent but no clear signal; blocked = a required field we will not fake (phone, …);
+no_form = page has no lead form (maybe the PDF is directly linked — see pdf_url).
+Rules: required fields only (+ email); required consent checkboxes only, never optional
+marketing ones; cookie banners → reject / necessary-only. Never types a phone number.
+"""
+from __future__ import annotations
+
+import json
+import re
+import sys
+from pathlib import Path
+
+from playwright.sync_api import sync_playwright
+
+CFG = json.loads((Path(__file__).with_name("config.json")).read_text(encoding="utf-8"))
+P = CFG["persona"]
+COUNTRY = CFG.get("country", "United States")
+
+FIELD_RULES = [  # (regex on name/id/label/placeholder/autocomplete, value)
+    (r"e-?mail", P["email"]),
+    (r"first.?name|given|fname|vorname", P["first_name"]),
+    (r"last.?name|surname|family|lname", P["last_name"]),
+    (r"^(full.?)?name$|your name|full name", f'{P["first_name"]} {P["last_name"]}'),
+    (r"company|organi[sz]ation|employer|business name|account", P["company"]),
+    (r"job.?title|title|role|position|designation", P["title"]),
+    (r"website|domain|url", "https://xiaoxiaolei.com"),
+]
+NEVER = r"phone|mobile|tel|cell|zip|postal|address|street|city"
+
+JS_FIELDS = r"""(root) => {
+  const vis = e => { const r = e.getBoundingClientRect(); const s = getComputedStyle(e);
+    return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none'; };
+  const labelOf = e => {
+    let t = '';
+    if (e.id) { const l = document.querySelector(`label[for="${CSS.escape(e.id)}"]`); if (l) t = l.innerText; }
+    if (!t) { const l = e.closest('label'); if (l) t = l.innerText; }
+    if (!t) { const w = e.closest('div, li, fieldset'); if (w) { const l = w.querySelector('label, legend'); if (l) t = l.innerText; } }
+    return (t || '').trim().slice(0, 120);
+  };
+  const out = [];
+  document.querySelectorAll('input, select, textarea').forEach((e, i) => {
+    const type = (e.getAttribute('type') || e.tagName).toLowerCase();
+    if (['hidden', 'submit', 'button', 'image', 'reset', 'search', 'password', 'file'].includes(type)) return;
+    if (!vis(e) && type !== 'checkbox') return;
+    e.setAttribute('data-igf', String(i));
+    const label = labelOf(e);
+    out.push({ i, tag: e.tagName.toLowerCase(), type, name: e.name || '', id: e.id || '',
+      ph: e.placeholder || '', ac: e.autocomplete || '', label,
+      req: e.required || e.getAttribute('aria-required') === 'true' || /\*\s*$|\*\s*:?$|required/i.test(label),
+      opts: e.tagName === 'SELECT' ? [...e.options].map(o => o.text.trim()).slice(0, 60) : null,
+      val: e.value || '' });
+  });
+  return out;
+}"""
+
+DONE_EMAIL = re.compile(r"check your (e-?mail|inbox)|sent (it )?to your (e-?mail|inbox)|on its way|we('|’)ve (sent|emailed)|email(ed)? you", re.I)
+DONE_OK = re.compile(r"thank(s| you)|success|download (now|the|your)|access (the|your)|here('|’)s your", re.I)
+
+
+def pick(f):
+    hay = " ".join([f["name"], f["id"], f["ph"], f["ac"], f["label"]]).lower()
+    if re.search(NEVER, hay):
+        return None
+    if f["type"] == "email":
+        return P["email"]
+    for rx, v in FIELD_RULES:
+        if re.search(rx, hay):
+            return v
+    return None
+
+
+def choose_option(f):
+    hay = (f["label"] + " " + f["name"]).lower()
+    opts = [o for o in (f["opts"] or []) if o and not re.match(r"^(select|choose|please|--|-)", o, re.I)]
+    if not opts:
+        return None
+    if "country" in hay:
+        return next((o for o in opts if o.lower() in ("united states", "usa", "us", "united states of america")), None)
+    if re.search(r"size|employees", hay):
+        return opts[0]
+    if re.search(r"industry", hay):
+        return next((o for o in opts if re.search(r"tech|software|it\b|computer", o, re.I)), opts[-1])
+    if re.search(r"role|title|function|department|level", hay):
+        return next((o for o in opts if re.search(r"architect|engineer|it|technical|developer", o, re.I)), opts[-1])
+    return next((o for o in opts if re.search(r"other", o, re.I)), opts[0])
+
+
+def dismiss_cookies(page):
+    for name in ["Reject all", "Reject All", "Decline", "Necessary only", "Only necessary", "Reject", "Deny"]:
+        try:
+            page.get_by_role("button", name=name, exact=True).first.click(timeout=800)
+            return
+        except Exception:
+            pass
+
+
+def main():
+    url, out = sys.argv[1], Path(sys.argv[2])
+    out.mkdir(parents=True, exist_ok=True)
+    res = {"status": "error", "pdf": "", "pdf_url": "", "filled": [], "skipped_required": []}
+    with sync_playwright() as p:
+        b = p.chromium.launch()
+        c = b.new_context(accept_downloads=True, viewport={"width": 1280, "height": 1100},
+                          user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36")
+        page = c.new_page()
+        pdf_hits: list[str] = []
+        c.on("response", lambda r: pdf_hits.append(r.url) if "application/pdf" in (r.headers.get("content-type") or "") else None)
+
+        def save_download(d):
+            path = out / (d.suggested_filename or "report.pdf")
+            d.save_as(path)
+            res["pdf"] = str(path)
+        page.on("download", save_download)
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=45000)
+            page.wait_for_timeout(5000)
+            dismiss_cookies(page)
+            res["title"] = page.title()
+            # the form may live in an iframe (HubSpot / Marketo / Pardot)
+            frame = None
+            for fr in page.frames:
+                try:
+                    fields = fr.evaluate(JS_FIELDS, None)
+                except Exception:
+                    continue
+                if any(f["type"] == "email" or re.search("mail", f["name"] + f["label"], re.I) for f in fields):
+                    frame = fr
+                    break
+            if not frame:
+                links = page.eval_on_selector_all("a[href]", "as => as.map(a => a.href).filter(h => /\\.pdf(\\?|$)/i.test(h))")
+                res.update(status="no_form", pdf_url=(links or pdf_hits or [""])[0])
+            else:
+                fields = frame.evaluate(JS_FIELDS, None)
+                for f in fields:
+                    sel = f'[data-igf="{f["i"]}"]'
+                    hay = f["name"] + " " + f["label"]
+                    is_email = f["type"] == "email" or re.search("e-?mail", hay, re.I)
+                    if not (f["req"] or is_email) and CFG.get("only_required", True):
+                        continue
+                    if f["type"] in ("checkbox", "radio"):
+                        if f["req"] and f["type"] == "checkbox":
+                            frame.check(sel, force=True); res["filled"].append(f"[x] {f['label'][:60]}")
+                        elif f["req"]:
+                            frame.check(sel, force=True); res["filled"].append(f"(o) {f['label'][:60]}")
+                        continue
+                    if f["tag"] == "select":
+                        o = choose_option(f)
+                        if o:
+                            frame.select_option(sel, label=o); res["filled"].append(f"{f['label'][:40] or f['name']}={o}")
+                        else:
+                            res["skipped_required"].append(f["label"] or f["name"])
+                        continue
+                    v = pick(f)
+                    if v is None:
+                        res["skipped_required"].append(f["label"] or f["name"] or f["ph"])
+                        continue
+                    frame.fill(sel, v); res["filled"].append(f"{(f['label'] or f['name'])[:40]}={v}")
+                if res["skipped_required"]:
+                    res["status"] = "blocked"
+                else:
+                    btn = frame.locator("button[type=submit], input[type=submit], form button:not([type=button])").first
+                    btn.click(timeout=8000)
+                    page.wait_for_timeout(9000)
+                    for pg in c.pages:      # popups / new tabs with the PDF
+                        if pg is not page and pg.url.lower().split("?")[0].endswith(".pdf"):
+                            pdf_hits.append(pg.url)
+                    txt = " ".join(fr.evaluate("() => document.body ? document.body.innerText : ''") for fr in page.frames if not fr.is_detached())[:20000]
+                    links = page.eval_on_selector_all("a[href]", "as => as.map(a => a.href).filter(h => /\\.pdf(\\?|$)/i.test(h))")
+                    res["pdf_url"] = (pdf_hits or links or [""])[0]
+                    if res["pdf"] or res["pdf_url"]:
+                        res["status"] = "pdf"
+                    elif DONE_EMAIL.search(txt):
+                        res["status"] = "email"
+                    elif DONE_OK.search(txt):
+                        res["status"] = "submitted"
+                    else:
+                        res["status"] = "submitted"
+            if res["pdf_url"] and not res["pdf"]:
+                r = c.request.get(res["pdf_url"], timeout=60000)
+                if r.ok and r.body()[:4] == b"%PDF":
+                    path = out / (Path(res["pdf_url"].split("?")[0]).name or "report.pdf")
+                    path.write_bytes(r.body()); res["pdf"] = str(path); res["status"] = "pdf"
+            res["final_url"] = page.url
+        except Exception as e:
+            res["error"] = str(e)[:300]
+        finally:
+            shot = out / "after.png"
+            try:
+                page.screenshot(path=str(shot), full_page=False); res["shot"] = str(shot)
+            except Exception:
+                pass
+            b.close()
+    print(json.dumps(res, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()
