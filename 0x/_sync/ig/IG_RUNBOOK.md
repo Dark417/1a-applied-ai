@@ -24,7 +24,8 @@
   - 用 Gmail connector 读（`mcp__Gmail__*`，登录的就是这个账号）
 - 填表规则
   - 只填必填项，email 总是填
-  - 不填电话、地址（有必填电话就记 `blocked`，跳过这篇）
+  - 不填地址；电话只在 `config.json` 的 `persona.phone` 有值时填（没有就记 `blocked`）
+  - 不注册账号、不填密码和付款信息
   - 只勾必填的同意框，不勾营销订阅
   - cookie 横幅选拒绝 / 仅必要
 - 失败处理
@@ -42,34 +43,53 @@ RUN=$(date -u +%Y-%m-%dT%H-%M); W=/home/claude/work/ig/$RUN; mkdir -p $W
 
 ## 2. 读 IG 私信（用户电脑，内置浏览器）
 
-- **只收消息文字里的 URL**
-  - 没有 URL 的消息跳过
-  - 分享的帖子、reel、story 也跳过（`ig_dom.js` 已经排除了）
+- **收两种消息**（用户 2026-11-01 定的规则：只有纯文字消息忽略）
+  - 文字里的 URL
+  - 分享的帖子 / reel（广告卡片）：`ig_dom.js` 返回 `posts: [{key, account, caption}]`，落地页要在第 3 步自己找
+  - 纯文字（没 URL、不是分享帖）和不可用的 story 跳过
+  - 用户给自己发的每一条都一定有 PDF：找不到就继续想办法，不要轻易放弃
 - 先打开对话：`Claude_Browser__navigate` 到 `config.json` 的 `thread_url`
   - 调用失败（电脑不在线）：跳过第 2、3 步，只做第 4 步（邮件），然后在汇报里说明
   - 跳到 `/accounts/login`：停下这条线，继续第 4 步；汇报和 PushNotification 里写「IG 登录失效，请在 Claude 桌面 app 的浏览器面板里重新登录 xlei___」
 - 等页面加载，然后用 `javascript_tool` 执行 `ig_dom.js` 的全部内容（应返回 `ig_dom ready`）
 - 再执行：`await __igdom.collect(8)`
-  - 返回 `{thread, urls: [{url, text}]}`
+  - 返回 `{thread, urls: [{url, text}], posts: [{key, account, caption}]}`
   - 单次调用接近 45 秒会超时；超时就改成 `.then(r => window.__ig = r)`，再轮询 `window.__ig`
 - 把结果写到 `$W/links.json`，执行 `python3 0x/_sync/ig/ig_build.py new $W/links.json`
-  - 只留下没处理过的 URL（去掉 utm / fbclid 后按 host+path 去重），每条带 `key`
+  - 输出没处理过的条目（URL 去掉 utm / fbclid 后按 host+path 去重；帖子按 `post:<账号>:<文案哈希>`），每条带 `key`
+  - 状态是 `blocked` / `failed` 的旧条目也会再出来（带 `retry` 和 `reason`），每次都重试
+  - `legacy`（流水线建立前的旧分享）和 `skip` 不再出来
 
-## 3. 打开链接，填表（云端 Playwright）
+## 3. 找落地页，拿 PDF（云端 Playwright）
 
-逐条处理新条目：
+逐条处理。**先用固定方法，不行再分析、补代码、再跑，直到拿到 PDF。**
+
+### 3a. 帖子条目：先找落地页
+
+1. 内置浏览器打开帖子（点私信里的卡片，或 `instagram.com/p/<code>/`），看有没有外链（网页版通常没有广告 CTA 链接）
+2. 用 WebSearch 搜「公司名 + 文案关键词 + ebook/guide/report/cheat sheet」，通常是 `<公司>.com/lp/...`、`/resources/...`、`/ebook/...`
+3. 再不行：看公司官网的 resources / resource-center 页面和 sitemap.xml
+4. 找到后 `mark <key> ... --landing <url>` 前先按 3b 跑
+5. 实在找不到：`mark <key> failed --reason "..."`，下次会重试；汇报里请用户在 IG App 里点广告，把落地页链接以文字发到对话里
+
+### 3b. 填表 / 下载
 
 1. 执行 `python3 0x/_sync/ig/ig_fill.py "<landing>" $W/<n>`，读它输出的 JSON：
-   - 先看落地页是不是报告 / 白皮书 / 电子书的领取页（看 `title` 和截图）
-     - 不是（普通商品页、文章、视频）：`ig_build.py mark <key> skip --landing <url>`
-     - `ig_fill.py` 只会在发现 email 表单时提交，所以不是表单的页面不会被误提交
+   - 直接是 PDF：`pdf`
+   - 多步表单（Next → 更多字段）脚本会在同一页跟着填；离开落地页后（感谢页）不再填任何表，也不填注册账号的表
    - `pdf`：用 Read 看 PDF 第 1–2 页，拿到标题、发布方、主题，然后走第 5 步收录
    - `email`、`submitted`：执行 `mark <key> email --landing <url> --org <公司>`，等邮件
    - `no_form` 但有 `pdf_url`：脚本已经下载好了，同 `pdf`
-   - `blocked`、`error`：
-     - 先看 `shot` 截图
-     - 能判断的话，可以写一小段 Playwright 补上（例如多步表单、"Next" 按钮），规则不变
-     - 还不行就 `mark <key> failed`，在汇报里列出原因
+   - 不是报告领取页（普通商品页、文章、视频）：再找一次真正的报告页（3a），还是没有就 `mark <key> skip --reason`
+2. `blocked`、`error`，或 `submitted` 但没拿到 PDF：
+   - 看 `shot` 截图和页面结构，分析原因
+   - 常见办法：
+     - Marketo 表单：页面源码里 `form.onSuccess` 常写着感谢页 URL，感谢页上有「Download」PDF 链接
+     - 提交按钮不是 `type=submit`、被横幅挡住、多步表单：改 `ig_fill.py`（通用改法，不要写死某个网站）
+     - 云端下载被 Cloudflare 等拦：在内置浏览器里打开感谢页，页面里 `fetch(pdfUrl)` 能拿到；目前还没有把字节从浏览器传回云端的办法，这种情况记 `blocked --reason` 并在汇报里给出 PDF 直链
+   - 改了代码要再跑，直到成功；改动随本次 commit 一起 push
+   - 必填电话：`config.json` 的 `persona.phone` 有值就填，没有就 `blocked --reason "必填电话"`
+   - 仍然不行：`mark <key> blocked|failed --reason "<具体原因>"`，下次自动重试
 
 ## 4. 读邮件（云端 Gmail connector）
 

@@ -11,7 +11,8 @@ status meaning: pdf = got the file; email = page says it was emailed (check Gmai
 submitted = sent but no clear signal; blocked = a required field we will not fake (phone, …);
 no_form = page has no lead form (maybe the PDF is directly linked — see pdf_url).
 Rules: required fields only (+ email); required consent checkboxes only, never optional
-marketing ones; cookie banners → reject / necessary-only. Never types a phone number.
+marketing ones; cookie banners → reject / necessary-only. Phone only if config.persona.phone is set.
+Multi-step forms (Next → more fields) are followed on the same page; account sign-up forms never.
 """
 from __future__ import annotations
 
@@ -57,7 +58,7 @@ JS_FIELDS = r"""(root) => {
     out.push({ i, tag: e.tagName.toLowerCase(), type, name: e.name || '', id: e.id || '',
       ph: e.placeholder || '', ac: e.autocomplete || '', label,
       req: e.required || e.getAttribute('aria-required') === 'true' || /\*\s*$|\*\s*:?$|required/i.test(label),
-      opts: e.tagName === 'SELECT' ? [...e.options].map(o => o.text.trim()).slice(0, 60) : null,
+      opts: e.tagName === 'SELECT' ? [...e.options].filter(o => o.value !== '' && !o.disabled).map(o => o.text.trim()).slice(0, 80) : null,
       val: e.value || '' });
   });
   return out;
@@ -69,10 +70,12 @@ DONE_OK = re.compile(r"thank(s| you)|success|download (now|the|your)|access (the
 
 def pick(f):
     hay = " ".join([f["name"], f["id"], f["ph"], f["ac"], f["label"]]).lower()
+    if f["type"] == "email" or re.search(r"e-?mail", hay):   # before NEVER: "Email Address"
+        return P["email"]
+    if P.get("phone") and (f["type"] == "tel" or re.search(r"phone|mobile|tel\b|cell", hay)):
+        return P["phone"]                   # only if the user put a phone in config.json
     if re.search(NEVER, hay):
         return None
-    if f["type"] == "email":
-        return P["email"]
     for rx, v in FIELD_RULES:
         if re.search(rx, hay):
             return v
@@ -102,6 +105,65 @@ def dismiss_cookies(page):
             return
         except Exception:
             pass
+
+
+SUBMIT_RX = re.compile(r"^next$|^continue$|download|submit|get (it|the|my|your|access|report|guide|ebook|cheat)|access|send|read|continue|unlock", re.I)
+
+
+def submit(frame, page):
+    """Click the form's submit button. Handles banners covering it, non-type=submit buttons,
+    and falls back to requestSubmit() on the form that holds the email field."""
+    dismiss_cookies(page)
+    cands = [frame.locator("button[type=submit], input[type=submit]").first,
+             frame.locator("form button:not([type=button])").first,
+             frame.get_by_role("button", name=SUBMIT_RX).first]
+    for loc in cands:
+        try:
+            if loc.count() == 0:
+                continue
+            loc.scroll_into_view_if_needed(timeout=3000)
+            try:
+                loc.click(timeout=5000)
+            except Exception:
+                loc.click(timeout=5000, force=True)
+            return
+        except Exception:
+            continue
+    frame.evaluate("""() => { const e = document.querySelector('input[type=email], input[name*=mail i]');
+      const f = e && e.closest('form'); if (f) { f.requestSubmit ? f.requestSubmit() : f.submit(); } }""")
+
+
+def fill_step(frame, res):
+    """Fill the currently visible required fields (+ email). Returns required fields we won't fill."""
+    skipped = []
+    for f in frame.evaluate(JS_FIELDS, None):
+        sel = f'[data-igf="{f["i"]}"]'
+        hay = f["name"] + " " + f["label"] + " " + f["ph"]
+        is_email = f["type"] == "email" or re.search("e-?mail", hay, re.I)
+        if not (f["req"] or is_email) and CFG.get("only_required", True):
+            continue
+        try:
+            if f["type"] in ("checkbox", "radio"):
+                if f["req"]:
+                    frame.check(sel, force=True); res["filled"].append(f"[x] {f['label'][:60]}")
+                continue
+            if f["tag"] == "select":
+                o = choose_option(f)
+                if o:
+                    frame.select_option(sel, label=o); res["filled"].append(f"{(f['label'] or f['name'])[:40]}={o}")
+                else:
+                    skipped.append(f["label"] or f["name"])
+                continue
+            if f["val"]:
+                continue
+            v = pick(f)
+            if v is None:
+                skipped.append(f["label"] or f["name"] or f["ph"])
+                continue
+            frame.fill(sel, v); res["filled"].append(f"{(f['name'] or f['label'])[:40]}={v}")
+        except Exception as e:
+            res.setdefault("warn", []).append(f"{f['name'] or f['label']}: {str(e)[:80]}")
+    return skipped
 
 
 def main():
@@ -146,49 +208,53 @@ def main():
                 links = page.eval_on_selector_all("a[href]", "as => as.map(a => a.href).filter(h => /\\.pdf(\\?|$)/i.test(h))")
                 res.update(status="no_form", pdf_url=(links or pdf_hits or [""])[0])
             else:
-                fields = frame.evaluate(JS_FIELDS, None)
-                for f in fields:
-                    sel = f'[data-igf="{f["i"]}"]'
-                    hay = f["name"] + " " + f["label"]
-                    is_email = f["type"] == "email" or re.search("e-?mail", hay, re.I)
-                    if not (f["req"] or is_email) and CFG.get("only_required", True):
-                        continue
-                    if f["type"] in ("checkbox", "radio"):
-                        if f["req"] and f["type"] == "checkbox":
-                            frame.check(sel, force=True); res["filled"].append(f"[x] {f['label'][:60]}")
-                        elif f["req"]:
-                            frame.check(sel, force=True); res["filled"].append(f"(o) {f['label'][:60]}")
-                        continue
-                    if f["tag"] == "select":
-                        o = choose_option(f)
-                        if o:
-                            frame.select_option(sel, label=o); res["filled"].append(f"{f['label'][:40] or f['name']}={o}")
-                        else:
-                            res["skipped_required"].append(f["label"] or f["name"])
-                        continue
-                    v = pick(f)
-                    if v is None:
-                        res["skipped_required"].append(f["label"] or f["name"] or f["ph"])
-                        continue
-                    frame.fill(sel, v); res["filled"].append(f"{(f['label'] or f['name'])[:40]}={v}")
+                # multi-step forms (Wiz: email → Next → more fields): fill visible required fields,
+                # submit, and repeat while a new unfilled step shows up (max 4 steps)
+                start_url = page.url.split("?")[0].rstrip("/")
+                for step in range(4):
+                    skipped = fill_step(frame, res)
+                    if skipped:
+                        res["skipped_required"] = skipped
+                        break
+                    submit(frame, page)
+                    page.wait_for_timeout(6000 if step < 3 else 9000)
+                    if res["pdf"] or pdf_hits:
+                        break
+                    nxt = None
+                    if page.url.split("?")[0].rstrip("/") != start_url:
+                        break                    # left the landing page (thank-you page): never fill a 2nd form there
+                    for fr in page.frames:
+                        try:
+                            fs = fr.evaluate(JS_FIELDS, None)
+                        except Exception:
+                            continue
+                        if any(f["type"] == "password" or re.search(r"signup|sign-up|register|password", f["name"] + f["id"], re.I) for f in fs):
+                            continue             # account sign-up / login forms are never filled
+                        if any(f["req"] and not f["val"] and f["type"] not in ("checkbox", "radio") for f in fs):
+                            nxt = fr
+                            break
+                    if not nxt:
+                        break
+                    frame = nxt
                 if res["skipped_required"]:
                     res["status"] = "blocked"
                 else:
-                    btn = frame.locator("button[type=submit], input[type=submit], form button:not([type=button])").first
-                    btn.click(timeout=8000)
-                    page.wait_for_timeout(9000)
+                    page.wait_for_timeout(3000)
                     for pg in c.pages:      # popups / new tabs with the PDF
                         if pg is not page and pg.url.lower().split("?")[0].endswith(".pdf"):
                             pdf_hits.append(pg.url)
                     txt = " ".join(fr.evaluate("() => document.body ? document.body.innerText : ''") for fr in page.frames if not fr.is_detached())[:20000]
-                    links = page.eval_on_selector_all("a[href]", "as => as.map(a => a.href).filter(h => /\\.pdf(\\?|$)/i.test(h))")
+                    links = []
+                    for fr in page.frames:
+                        try:
+                            links += fr.eval_on_selector_all("a[href]", "as => as.map(a => a.href).filter(h => /\\.pdf(\\?|$)/i.test(h))")
+                        except Exception:
+                            pass
                     res["pdf_url"] = (pdf_hits or links or [""])[0]
                     if res["pdf"] or res["pdf_url"]:
                         res["status"] = "pdf"
                     elif DONE_EMAIL.search(txt):
                         res["status"] = "email"
-                    elif DONE_OK.search(txt):
-                        res["status"] = "submitted"
                     else:
                         res["status"] = "submitted"
             if res["pdf_url"] and not res["pdf"]:

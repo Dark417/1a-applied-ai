@@ -1,0 +1,15 @@
+{
+ "no": 2,
+ "file": "02.confluent-rag-data-streaming.pdf",
+ "title": "The Developer's Guide to RAG with Data Streaming",
+ "category": "AI & Agents",
+ "org": "Confluent",
+ "kind": "技术指南",
+ "summary": "Confluent 电子书（22 页），讲怎么用数据流平台（Kafka + Flink）给生成式 AI 应用做实时 RAG。以虚构航空公司客服机器人 Conflyent 为例，指出 LLM 需要新鲜、可信、带上下文的数据。把 RAG 拆成四步：数据增强、推理、工作流、后处理，逐步讲 connector、Flink SQL、AI 模型推理、Table API/UDF 和流治理怎么用。最后给出商品推荐、实时情感分析、招聘门户三套参考架构和客户案例。偏厂商方案，但架构拆解清楚。",
+ "url": "https://www.confluent.io/resources/ebook/developers-guide-to-rag/",
+ "key": "post:confluent_inc:pyy0no",
+ "via": "form",
+ "added": "2026-11-01 17:38",
+ "bytes": 16180186,
+ "sha256": "002ed5ac1af8420d1599f6923d6c89a4fd84b777fb9f708d68fb5d3ff1d0b845"
+}

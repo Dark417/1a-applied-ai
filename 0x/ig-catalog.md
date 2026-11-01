@@ -1,16 +1,26 @@
 # IG Reports · 目录
 
-- 共 1 份 PDF，1 个分类；文件在 [`ig/`](ig/)，编号越大越新
+- 共 2 份 PDF，1 个分类；文件在 [`ig/`](ig/)，编号越大越新
 - 等邮件中：0 个链接
 - 点标题 → 跳到详情；点文件名 → 打开 PDF
 - 自动生成，勿手改
 
 ## Part 1 · Index
 
-- **01 · AI & Agents**（1） — 生成式 AI、agent、LLM 落地与平台
+- **01 · AI & Agents**（2） — 生成式 AI、agent、LLM 落地与平台
+  - [The Developer's Guide to RAG with Data Streaming](#ig-02) · Confluent · `02.confluent-rag-data-streaming.pdf`
   - [Evaluating Production-Grade AI Agents: Best Practices Guide](#ig-01) · Datadog · `01.datadog-evaluating-ai-agents.pdf`
 
 ## Part 2 · Details
+
+### ig-02
+
+**The Developer's Guide to RAG with Data Streaming**
+
+- 文件：[02.confluent-rag-data-streaming.pdf](ig/02.confluent-rag-data-streaming.pdf) · 15800 KB
+- 发布方：Confluent · 分类：AI & Agents · 类型：技术指南
+- 来源：IG 分享帖 · 获取方式：form · 收录 2026-11-01 · [落地页](https://www.confluent.io/resources/ebook/developers-guide-to-rag/)
+- **总结**：Confluent 电子书（22 页），讲怎么用数据流平台（Kafka + Flink）给生成式 AI 应用做实时 RAG。以虚构航空公司客服机器人 Conflyent 为例，指出 LLM 需要新鲜、可信、带上下文的数据。把 RAG 拆成四步：数据增强、推理、工作流、后处理，逐步讲 connector、Flink SQL、AI 模型推理、Table API/UDF 和流治理怎么用。最后给出商品推荐、实时情感分析、招聘门户三套参考架构和客户案例。偏厂商方案，但架构拆解清楚。
 
 ### ig-01
 

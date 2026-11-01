@@ -1,16 +1,93 @@
 {
  "seen": [
-  "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1"
+  "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1",
+  "post:confluent_inc:pyy0no",
+  "post:wiz.io:12gedac",
+  "url:snowflake.com/resource/a-practical-guide-to-ai-agents",
+  "post:airbytehq:3i1l2a",
+  "post:owll recorder:egtjaz",
+  "post:aiapply.co:1hox4y5",
+  "post:jas:lp0z1f",
+  "post:greatlearningofficial:udhoqs",
+  "post:confluent_inc:76pxdw",
+  "post:spacexpage:bykgv6"
  ],
  "links": {
   "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1": {
    "status": "pdf"
+  },
+  "post:confluent_inc:pyy0no": {
+   "status": "pdf"
+  },
+  "post:wiz.io:12gedac": {
+   "status": "blocked",
+   "landing": "https://www.wiz.io/lp/model-context-protocol-mcp-security-best-practices-cheat-sheet",
+   "org": "Wiz",
+   "at": "2026-11-01 17:38",
+   "reason": "第 2 步必填电话"
+  },
+  "url:snowflake.com/resource/a-practical-guide-to-ai-agents": {
+   "status": "blocked",
+   "landing": "https://www.snowflake.com/resource/a-practical-guide-to-ai-agents/",
+   "org": "Snowflake",
+   "at": "2026-11-01 17:38",
+   "reason": "必填电话；感谢页 PDF https://www.snowflake.com/wp-content/uploads/2025/03/ebook-the-practical-guide-to-ai-agents-dec25.pdf 云端下载被 Cloudflare 挡"
+  },
+  "post:airbytehq:3i1l2a": {
+   "status": "failed",
+   "landing": "",
+   "org": "Airbyte",
+   "at": "2026-11-01 17:38",
+   "reason": "网页版帖子没有广告落地链接，搜索也没找到对应页面"
+  },
+  "post:owll recorder:egtjaz": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:aiapply.co:1hox4y5": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:jas:lp0z1f": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:greatlearningofficial:udhoqs": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:confluent_inc:76pxdw": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:spacexpage:bykgv6": {
+   "status": "legacy",
+   "landing": "",
+   "org": "",
+   "at": "2026-11-01 17:38",
+   "reason": "Datadog 之前的旧分享，流水线建立前"
   }
  },
  "pending": {},
  "gmail_done": {},
  "pdf_sha": {
-  "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9": "01.datadog-evaluating-ai-agents.pdf"
+  "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9": "01.datadog-evaluating-ai-agents.pdf",
+  "002ed5ac1af8420d1599f6923d6c89a4fd84b777fb9f708d68fb5d3ff1d0b845": "02.confluent-rag-data-streaming.pdf"
  },
- "next_no": 2
+ "next_no": 3
 }

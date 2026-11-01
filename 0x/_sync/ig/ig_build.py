@@ -3,7 +3,8 @@
 
   python3 ig_build.py new <links.json>                    # print URLs not yet in state (dedup by url_key)
   python3 ig_build.py key <url>                           # the dedup key for a URL (use as --key)
-  python3 ig_build.py mark <key> <status> [--landing U] [--org O]   # remember a link (seen / pending email)
+  python3 ig_build.py mark <key> <status> [--landing U] [--org O] [--reason R]  # remember a link (seen / pending email)
+        # status: pdf | email | skip | legacy | blocked | failed — blocked/failed come back from `new` (retry)
   python3 ig_build.py add <pdf> --key K --title T --category C --org O --kind K --summary S [--url U] [--slug s]
         # dedup by sha256 → copy to 0x/ig/NN.<slug>.pdf, write data/NN.json, clear pending
   python3 ig_build.py gmail-done <message_id> [--note ...]  # an email we have handled (any outcome)
@@ -78,9 +79,16 @@ def cmd_new(a):
     obj = json.loads(Path(a.links).read_text(encoding="utf-8"))
     items = obj.get("items") or [{"key": url_key(u["url"]), "landing": u["url"], "text": u.get("text", "")}
                                  for u in obj.get("urls", [])]
+    # shared ad posts: no URL in the DM — the run finds the landing page (see IG_RUNBOOK step 3)
+    items += [{"key": p["key"], "landing": "", "account": p["account"], "text": p.get("caption", "")}
+              for p in obj.get("posts", [])]
     seen, fresh = set(s["seen"]), {}
     for i in items:
+        st_ = s["links"].get(i["key"], {})
         if i["key"] not in seen:
+            fresh.setdefault(i["key"], i)
+        elif st_.get("status") in ("blocked", "failed"):   # every link has a PDF: keep retrying
+            i = dict(i, retry=st_.get("status"), reason=st_.get("reason", ""), landing=st_.get("landing") or i["landing"])
             fresh.setdefault(i["key"], i)
     fresh = list(fresh.values())
     print(json.dumps(fresh, ensure_ascii=False, indent=1))
@@ -91,6 +99,8 @@ def cmd_mark(a):
     if a.key not in s["seen"]:
         s["seen"].append(a.key)
     s["links"][a.key] = {"status": a.status, "landing": a.landing, "org": a.org, "at": now()}
+    if a.reason:
+        s["links"][a.key]["reason"] = a.reason
     if a.status == "email":
         s["pending"][a.key] = {"landing": a.landing, "org": a.org, "since": now()}
     save(STATE, s)
@@ -168,7 +178,7 @@ def cmd_render(_a):
         L += [f"### ig-{r['no']:02d}", "", f"**{r['title']}**", "",
               f"- 文件：[{r['file']}](ig/{r['file']}) · {r['bytes'] // 1024} KB",
               f"- 发布方：{r['org']} · 分类：{r['category']} · 类型：{r['kind']}",
-              f"- 来源：{'IG 私信链接' if r['key'].startswith('url:') else 'Gmail'} · 获取方式：{r['via']} · 收录 {r['added'][:10]}"
+              f"- 来源：{'IG 私信链接' if r['key'].startswith('url:') else 'IG 分享帖' if r['key'].startswith('post:') else 'Gmail'} · 获取方式：{r['via']} · 收录 {r['added'][:10]}"
               + (f" · [落地页]({r['url']})" if r.get("url") else ""),
               f"- **总结**：{r['summary']}", ""]
     CATALOG.write_text("\n".join(L).rstrip() + "\n", encoding="utf-8")
@@ -180,7 +190,7 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     x = sp.add_parser("new"); x.add_argument("links")
     x = sp.add_parser("mark"); x.add_argument("key"); x.add_argument("status")
-    x.add_argument("--landing", default=""); x.add_argument("--org", default="")
+    x.add_argument("--landing", default=""); x.add_argument("--org", default=""); x.add_argument("--reason", default="")
     x = sp.add_parser("add"); x.add_argument("pdf")
     for f in ("key", "title", "category", "org", "kind", "summary"):
         x.add_argument(f"--{f}", required=f != "key", default="")
