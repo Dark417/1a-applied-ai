@@ -1,0 +1,15 @@
+{
+ "no": 1,
+ "file": "01.datadog-evaluating-ai-agents.pdf",
+ "title": "Evaluating Production-Grade AI Agents: Best Practices Guide",
+ "category": "AI & Agents",
+ "org": "Datadog",
+ "kind": "技术指南",
+ "summary": "Datadog「Best Practice Series」电子书（9 页），讲 LLM 应用和 agent 的离线评估（offline evaluation），重点是上线前怎么验证改动，偏方法指南。拆成三个部分：带标注的数据集（Data）、组装 prompt 和上下文的应用逻辑（Tasks）、给输出打分的评估器（Evaluators，确定性规则或 LLM-as-a-judge）。还讲了数据集要覆盖多轮对话、跑题和对抗性 prompt，以及用元数据给实验结果切片。全程以示例应用 Contract Redliner 演示，最后落到在 CI/CD 里做回归测试。",
+ "url": "https://lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1",
+ "key": "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1",
+ "via": "direct",
+ "added": "2026-11-01 16:43",
+ "bytes": 1864435,
+ "sha256": "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9"
+}

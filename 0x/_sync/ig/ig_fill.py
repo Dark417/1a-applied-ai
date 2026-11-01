@@ -122,6 +122,12 @@ def main():
             res["pdf"] = str(path)
         page.on("download", save_download)
         try:
+            r0 = c.request.get(url, timeout=60000)      # the link itself may be the PDF
+            if r0.ok and r0.body()[:4] == b"%PDF":
+                path = out / (Path(url.split("?")[0]).name or "report.pdf")
+                path.write_bytes(r0.body())
+                res.update(status="pdf", pdf=str(path), pdf_url=url, final_url=r0.url, via="direct")
+                print(json.dumps(res, ensure_ascii=False)); b.close(); return
             page.goto(url, wait_until="domcontentloaded", timeout=45000)
             page.wait_for_timeout(5000)
             dismiss_cookies(page)

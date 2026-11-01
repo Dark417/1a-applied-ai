@@ -1,1 +1,16 @@
-{"seen": [], "links": {}, "pending": {}, "gmail_done": {}, "pdf_sha": {}, "next_no": 1}
+{
+ "seen": [
+  "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1"
+ ],
+ "links": {
+  "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1": {
+   "status": "pdf"
+  }
+ },
+ "pending": {},
+ "gmail_done": {},
+ "pdf_sha": {
+  "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9": "01.datadog-evaluating-ai-agents.pdf"
+ },
+ "next_no": 2
+}

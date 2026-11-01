@@ -12,7 +12,8 @@
     } catch (e) {}
     return h;
   };
-  const isIgInternal = (h) => /^https?:\/\/(www\.)?instagram\.com\/(p|reel|reels|stories|direct|accounts)\b/i.test(h);
+  // anything on instagram / facebook (profiles, explore, shared posts) is not a report link
+  const isIgInternal = (h) => /^https?:\/\/([\w-]+\.)*(instagram|facebook|fb)\.com(\/|$)/i.test(h);
   const pane = () => {
     // the scrollable message list: the tallest scrollable element inside main
     const els = [...document.querySelectorAll('div[role="main"] div, main div')]
