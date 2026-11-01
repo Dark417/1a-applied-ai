@@ -20,14 +20,14 @@
    "status": "pdf"
   },
   "post:wiz.io:12gedac": {
-   "status": "blocked",
+   "status": "pdf",
    "landing": "https://www.wiz.io/lp/model-context-protocol-mcp-security-best-practices-cheat-sheet",
    "org": "Wiz",
    "at": "2026-11-01 17:38",
    "reason": "第 2 步必填电话"
   },
   "url:snowflake.com/resource/a-practical-guide-to-ai-agents": {
-   "status": "blocked",
+   "status": "pdf",
    "landing": "https://www.snowflake.com/resource/a-practical-guide-to-ai-agents/",
    "org": "Snowflake",
    "at": "2026-11-01 17:38",
@@ -87,7 +87,9 @@
  "gmail_done": {},
  "pdf_sha": {
   "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9": "01.datadog-evaluating-ai-agents.pdf",
-  "002ed5ac1af8420d1599f6923d6c89a4fd84b777fb9f708d68fb5d3ff1d0b845": "02.confluent-rag-data-streaming.pdf"
+  "002ed5ac1af8420d1599f6923d6c89a4fd84b777fb9f708d68fb5d3ff1d0b845": "02.confluent-rag-data-streaming.pdf",
+  "bb666298ab098f35c20e119872761bb0e21bf1dd6daeeb0bd94650a3352ca7c5": "03.snowflake-practical-guide-ai-agents.pdf",
+  "ee34ff3e23788c41ee187d9b0cae31c6cac8ab32709eace47e91e862ef1606d4": "04.wiz-mcp-security-best-practices.pdf"
  },
- "next_no": 3
+ "next_no": 5
 }

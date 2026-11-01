@@ -1,0 +1,15 @@
+{
+ "no": 4,
+ "file": "04.wiz-mcp-security-best-practices.pdf",
+ "title": "Model Context Protocol (MCP) Security Best Practices",
+ "category": "Security",
+ "org": "Wiz",
+ "kind": "技术指南",
+ "summary": "Wiz 的 MCP 安全 cheat sheet（6 页）。先说明 MCP 让 LLM agent 接入实时数据和工具的同时，也带来供应链攻击、prompt 注入导致远程代码执行、静默窃取数据等风险。给出 7 条实操建议：服务器和供应链安全、上下文和工具的最小权限（短期自动轮换、限定 audience 的 token）、人在回路和输出校验（写/执行操作前给出动作预览让用户确认）、隔离和沙箱（非 root 容器、出站白名单、系统调用过滤、资源配额）、用 MCP 网关集中管控、挑选安全的 MCP 服务器、用指标衡量效果。条目短、可直接照做。",
+ "url": "https://www.wiz.io/lp/model-context-protocol-mcp-security-best-practices-cheat-sheet",
+ "key": "post:wiz.io:12gedac",
+ "via": "form",
+ "added": "2026-11-01 17:47",
+ "bytes": 6654809,
+ "sha256": "ee34ff3e23788c41ee187d9b0cae31c6cac8ab32709eace47e91e862ef1606d4"
+}

@@ -1,0 +1,15 @@
+{
+ "no": 3,
+ "file": "03.snowflake-practical-guide-ai-agents.pdf",
+ "title": "A Practical Guide to AI Agents",
+ "category": "AI & Agents",
+ "org": "Snowflake",
+ "kind": "电子书",
+ "summary": "Snowflake 电子书（21 页），面向业务和技术决策者讲 AI agent 落地。先区分生成式 AI 和能处理多步交互的 agent，再分五章讲：agent 的商业价值、实现所需的平台（含可扩展性等五条 agentic AI 架构原则和 AI 应用框架图）、伦理和偏见、落地路线图（先评估数据基础、对齐业务目标、兼顾安全合规），最后介绍 Snowflake 的数据 agent。附客服、媒体、金融等行业用例，如某呼叫中心用 agent 每小时多解决 14% 的问题。偏入门和厂商视角。",
+ "url": "https://www.snowflake.com/resource/a-practical-guide-to-ai-agents/",
+ "key": "url:snowflake.com/resource/a-practical-guide-to-ai-agents",
+ "via": "form",
+ "added": "2026-11-01 17:47",
+ "bytes": 6346902,
+ "sha256": "bb666298ab098f35c20e119872761bb0e21bf1dd6daeeb0bd94650a3352ca7c5"
+}
