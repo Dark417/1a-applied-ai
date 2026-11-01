@@ -1,13 +1,14 @@
 # IG Reports · 目录
 
-- 共 4 份 PDF，2 个分类；文件在 [`ig/`](ig/)，编号越大越新
+- 共 5 份 PDF，2 个分类；文件在 [`ig/`](ig/)，编号越大越新
 - 等邮件中：0 个链接
 - 点标题 → 跳到详情；点文件名 → 打开 PDF
 - 自动生成，勿手改
 
 ## Part 1 · Index
 
-- **01 · AI & Agents**（3） — 生成式 AI、agent、LLM 落地与平台
+- **01 · AI & Agents**（4） — 生成式 AI、agent、LLM 落地与平台
+  - [The Agentic Performance Management Playbook](#ig-05) · Nominal · `05.nominal-apm-playbook.pdf`
   - [A Practical Guide to AI Agents](#ig-03) · Snowflake · `03.snowflake-practical-guide-ai-agents.pdf`
   - [The Developer's Guide to RAG with Data Streaming](#ig-02) · Confluent · `02.confluent-rag-data-streaming.pdf`
   - [Evaluating Production-Grade AI Agents: Best Practices Guide](#ig-01) · Datadog · `01.datadog-evaluating-ai-agents.pdf`
@@ -15,6 +16,15 @@
   - [Model Context Protocol (MCP) Security Best Practices](#ig-04) · Wiz · `04.wiz-mcp-security-best-practices.pdf`
 
 ## Part 2 · Details
+
+### ig-05
+
+**The Agentic Performance Management Playbook**
+
+- 文件：[05.nominal-apm-playbook.pdf](ig/05.nominal-apm-playbook.pdf) · 4881 KB
+- 发布方：Nominal · 分类：AI & Agents · 类型：技术指南
+- 来源：IG 分享帖 · 获取方式：form · 收录 2026-11-01 · [落地页](https://nominal.so/resources/the-agentic-performance-management-playbook/)
+- **总结**：Nominal 出的 39 页指南，讲如何在财务团队里用 AI agent 落地「Agentic Performance Management（APM）」：由多个专职 agent 协同完成结账、对账、合并报表等多步财务流程，并保留审计留痕和控制。内容包括财务团队面临的人才与复杂度压力、APM 的四条核心原则、按场景的应用和效果、护栏与治理，以及一套区分真正 agent 执行系统和「AI 加持」类工具的评估清单。
 
 ### ig-04
 

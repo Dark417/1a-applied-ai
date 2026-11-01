@@ -10,7 +10,9 @@
   "post:jas:lp0z1f",
   "post:greatlearningofficial:udhoqs",
   "post:confluent_inc:76pxdw",
-  "post:spacexpage:bykgv6"
+  "post:spacexpage:bykgv6",
+  "post:nominal_hq:1ky1dhm",
+  "post:trygumloop:1sgsltx"
  ],
  "links": {
   "url:lp.datadoghq.com/rs/875-UVY-685/images/eBook-2026AIAgentsBestPractices.pdf?version=1": {
@@ -37,8 +39,8 @@
    "status": "failed",
    "landing": "",
    "org": "Airbyte",
-   "at": "2026-11-01 17:38",
-   "reason": "网页版帖子没有广告落地链接，搜索也没找到对应页面"
+   "at": "2026-11-01 23:56",
+   "reason": "网页版帖子没有广告落地链接；再次搜索 airbyte.com 只找到不需填表的网页文章（GDPR/DORA/HIPAA 主权合规），没找到 9 页 PDF 指南"
   },
   "post:owll recorder:egtjaz": {
    "status": "legacy",
@@ -81,15 +83,28 @@
    "org": "",
    "at": "2026-11-01 17:38",
    "reason": "Datadog 之前的旧分享，流水线建立前"
+  },
+  "post:nominal_hq:1ky1dhm": {
+   "status": "pdf"
+  },
+  "post:trygumloop:1sgsltx": {
+   "status": "failed",
+   "landing": "",
+   "org": "Gumloop",
+   "at": "2026-11-01 23:56",
+   "reason": "广告文案只有「Keep control of your AI spend」，像是产品功能广告（credits 用量面板）；搜索没找到对应的报告/指南页面"
   }
  },
  "pending": {},
- "gmail_done": {},
+ "gmail_done": {
+  "1a1982e44fcd3ed4": "confluent RAG guide, dup of 02"
+ },
  "pdf_sha": {
   "b1806d403e676a5f59a4b57cab68b44014120032e9208a6bff7c6c83fbdc13a9": "01.datadog-evaluating-ai-agents.pdf",
   "002ed5ac1af8420d1599f6923d6c89a4fd84b777fb9f708d68fb5d3ff1d0b845": "02.confluent-rag-data-streaming.pdf",
   "bb666298ab098f35c20e119872761bb0e21bf1dd6daeeb0bd94650a3352ca7c5": "03.snowflake-practical-guide-ai-agents.pdf",
-  "ee34ff3e23788c41ee187d9b0cae31c6cac8ab32709eace47e91e862ef1606d4": "04.wiz-mcp-security-best-practices.pdf"
+  "ee34ff3e23788c41ee187d9b0cae31c6cac8ab32709eace47e91e862ef1606d4": "04.wiz-mcp-security-best-practices.pdf",
+  "4427651f5b71b5dc112ff760948dbbfccf5dfaac41e231219cc8989a527396bf": "05.nominal-apm-playbook.pdf"
  },
- "next_no": 5
+ "next_no": 6
 }

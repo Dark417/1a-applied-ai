@@ -1,0 +1,15 @@
+{
+ "no": 5,
+ "file": "05.nominal-apm-playbook.pdf",
+ "title": "The Agentic Performance Management Playbook",
+ "category": "AI & Agents",
+ "org": "Nominal",
+ "kind": "技术指南",
+ "summary": "Nominal 出的 39 页指南，讲如何在财务团队里用 AI agent 落地「Agentic Performance Management（APM）」：由多个专职 agent 协同完成结账、对账、合并报表等多步财务流程，并保留审计留痕和控制。内容包括财务团队面临的人才与复杂度压力、APM 的四条核心原则、按场景的应用和效果、护栏与治理，以及一套区分真正 agent 执行系统和「AI 加持」类工具的评估清单。",
+ "url": "https://nominal.so/resources/the-agentic-performance-management-playbook/",
+ "key": "post:nominal_hq:1ky1dhm",
+ "via": "form",
+ "added": "2026-11-01 23:56",
+ "bytes": 4998757,
+ "sha256": "4427651f5b71b5dc112ff760948dbbfccf5dfaac41e231219cc8989a527396bf"
+}
